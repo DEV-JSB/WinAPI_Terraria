@@ -2,8 +2,8 @@
 
 
 #define SINGLE(classname)private:\
-						classname() {}; \
-						~classname() {};\
+						classname(); \
+						~classname();\
 						public:			\
 							static classname* GetInstance()\
 							{							   \
@@ -20,6 +20,28 @@ enum class INPUTSTATE
 	INPUTSTATE_HOLD,
 	INPUTSTATE_AWAY,
 	INPUTSTATE_END
+};
+
+// Resource Enum
+enum class RESOURCE
+{
+	RESOURCE_TEXTURE,
+	RESOURCE_END
+};
+
+// Component
+enum class COMPONENT
+{
+	COMPONENT_TRANSFORM2D,
+	COMPONENT_ANIMATOR,
+	COMPONENT_END
+};
+// Object
+enum class OBJECT
+{
+	OBJECT_PLAYER,
+	OBJECT_BLOCK,
+	OBJECT_END
 };
 
 // Keyboard Input Type

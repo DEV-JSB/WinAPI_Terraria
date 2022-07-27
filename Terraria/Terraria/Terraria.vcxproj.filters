@@ -9,39 +9,63 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="02.Manager">
-      <UniqueIdentifier>{83cb2b6e-0a07-499c-92ce-68b389241ad8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Manager\InputManager">
-      <UniqueIdentifier>{9acc1b6f-db0d-4fbf-8edd-600839bf2196}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Manager\SceneManager">
-      <UniqueIdentifier>{49973472-2200-493a-a392-fa24279c1c64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.Scene">
-      <UniqueIdentifier>{bfc25e68-5094-45df-b0e1-a20126245f84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Component">
-      <UniqueIdentifier>{b6ea4fb6-8d7e-4301-9c20-bda2825da9e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Component\Animator">
-      <UniqueIdentifier>{3f21ea6d-d3fa-43e6-97e0-c3e938c3a729}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Component\Animator\Animation">
-      <UniqueIdentifier>{bef01982-7616-44d8-8c6a-4a210ecd1c08}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="03.Scene\Tool">
+    <Filter Include="Framework">
+      <UniqueIdentifier>{516bf2b0-25a5-485b-98f6-8879b5b43114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\03.Scene">
+      <UniqueIdentifier>{bfc25e68-5094-45df-b0e1-a20126245f84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\03.Scene\Tool">
       <UniqueIdentifier>{15f02bd7-81c4-4f3c-808c-8ab93b12fa8c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Scene\Tool\AnimationTool">
+    <Filter Include="Framework\03.Scene\Tool\AnimationTool">
       <UniqueIdentifier>{908fee7b-531f-4d14-a6ae-f60d19b67de1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Scene\Tool\AnimationMakerTool">
-      <UniqueIdentifier>{f4ea99a6-8974-4302-9428-d3099b020b2b}</UniqueIdentifier>
+    <Filter Include="Framework\02.Manager">
+      <UniqueIdentifier>{83cb2b6e-0a07-499c-92ce-68b389241ad8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\02.Manager\InputManager">
+      <UniqueIdentifier>{9acc1b6f-db0d-4fbf-8edd-600839bf2196}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\02.Manager\SceneManager">
+      <UniqueIdentifier>{49973472-2200-493a-a392-fa24279c1c64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\02.Manager\PathManager">
+      <UniqueIdentifier>{5568d24d-6b70-4c3e-9a57-3a93e92adb27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\04.Component">
+      <UniqueIdentifier>{b6ea4fb6-8d7e-4301-9c20-bda2825da9e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\04.Component\Animator">
+      <UniqueIdentifier>{3f21ea6d-d3fa-43e6-97e0-c3e938c3a729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\04.Component\Animator\Animation">
+      <UniqueIdentifier>{bef01982-7616-44d8-8c6a-4a210ecd1c08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\05.Resource">
+      <UniqueIdentifier>{8fc7d65d-da8e-4f6c-8d84-9981661d5492}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\05.Resource\CTexture">
+      <UniqueIdentifier>{afac9c0a-68e3-4bac-a1c4-1d523b7f729e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Factory">
+      <UniqueIdentifier>{364fada1-9abe-43a9-ae6b-ea1f47477be8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\06.Object">
+      <UniqueIdentifier>{a4df2d91-2bdc-4331-8b98-b7cfbe39972f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\06.Object\Player">
+      <UniqueIdentifier>{9243b94d-c34f-4399-a78b-24472b391b8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\02.Manager\ObjectManager">
+      <UniqueIdentifier>{e5f4d52e-55a3-4e42-9606-5d6d667f8763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\01.Engine">
+      <UniqueIdentifier>{b05d2204-9e90-4ef6-9376-7c48628dab73}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,28 +82,52 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CInputMgr.h">
-      <Filter>02.Manager\InputManager</Filter>
+      <Filter>Framework\02.Manager\InputManager</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="struct.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="CSceneMgr.h">
-      <Filter>02.Manager\SceneManager</Filter>
+      <Filter>Framework\02.Manager\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="CAnimationTool.h">
-      <Filter>03.Scene\Tool\AnimationTool</Filter>
+      <Filter>Framework\03.Scene\Tool\AnimationTool</Filter>
     </ClInclude>
     <ClInclude Include="CScene.h">
-      <Filter>03.Scene</Filter>
+      <Filter>Framework\03.Scene</Filter>
     </ClInclude>
     <ClInclude Include="CComponent.h">
-      <Filter>04.Component</Filter>
+      <Filter>Framework\04.Component</Filter>
     </ClInclude>
     <ClInclude Include="CAnimator.h">
-      <Filter>04.Component\Animator</Filter>
+      <Filter>Framework\04.Component\Animator</Filter>
     </ClInclude>
     <ClInclude Include="CAnimation.h">
-      <Filter>04.Component\Animator\Animation</Filter>
+      <Filter>Framework\04.Component\Animator\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="CPathMgr.h">
+      <Filter>Framework\02.Manager\PathManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CResource.h">
+      <Filter>Framework\05.Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>Framework\05.Resource\CTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="CFactory.h">
+      <Filter>Framework\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>Framework\06.Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CObject.h">
+      <Filter>Framework\06.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjectMgr.h">
+      <Filter>Framework\02.Manager\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CEngine.h">
+      <Filter>Framework\01.Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -87,25 +135,49 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CInputMgr.cpp">
-      <Filter>02.Manager\InputManager</Filter>
+      <Filter>Framework\02.Manager\InputManager</Filter>
     </ClCompile>
     <ClCompile Include="CSceneMgr.cpp">
-      <Filter>02.Manager\SceneManager</Filter>
+      <Filter>Framework\02.Manager\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="CAnimationTool.cpp">
-      <Filter>03.Scene\Tool\AnimationTool</Filter>
+      <Filter>Framework\03.Scene\Tool\AnimationTool</Filter>
     </ClCompile>
     <ClCompile Include="CScene.cpp">
-      <Filter>03.Scene</Filter>
+      <Filter>Framework\03.Scene</Filter>
     </ClCompile>
     <ClCompile Include="CComponent.cpp">
-      <Filter>04.Component</Filter>
+      <Filter>Framework\04.Component</Filter>
     </ClCompile>
     <ClCompile Include="CAnimator.cpp">
-      <Filter>04.Component\Animator</Filter>
+      <Filter>Framework\04.Component\Animator</Filter>
     </ClCompile>
     <ClCompile Include="CAnimation.cpp">
-      <Filter>04.Component\Animator\Animation</Filter>
+      <Filter>Framework\04.Component\Animator\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="CPathMgr.cpp">
+      <Filter>Framework\02.Manager\PathManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CResource.cpp">
+      <Filter>Framework\05.Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>Framework\05.Resource\CTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="CFactory.cpp">
+      <Filter>Framework\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>Framework\06.Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CObject.cpp">
+      <Filter>Framework\06.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjectMgr.cpp">
+      <Filter>Framework\02.Manager\ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CEngine.cpp">
+      <Filter>Framework\01.Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
