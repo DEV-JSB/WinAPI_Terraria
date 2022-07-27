@@ -85,18 +85,22 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    return TRUE;
 }
+
+
+INT_PTR CALLBACK AnimationToolProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
-    case WM_COMMAND:
+    case WM_COMMAND:    
         {
             int wmId = LOWORD(wParam);
             // Parse the menu selections:
             switch (wmId)
             {
             case IDM_OPENFILE:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_SETFILENAME), hWnd, About);
+                DialogBox(hInst, MAKEINTRESOURCE(IDD_SETFILENAME), hWnd, AnimationToolProc);
                 break;
             case IDM_EXIT:
                 DestroyWindow(hWnd);

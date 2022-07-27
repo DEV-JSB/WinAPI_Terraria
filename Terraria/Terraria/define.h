@@ -11,6 +11,13 @@
 								return &mgr;			   \
 							}\
 
+enum class SCENE
+{
+	SCENE_MENU,
+	SCENE_WORLD,
+	SCENE_ANITOOL,
+	SCENE_END
+};
 
 // Input State type
 enum class INPUTSTATE
