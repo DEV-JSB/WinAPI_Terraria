@@ -1,17 +1,4 @@
-﻿  CAnimation.cpp
-  CAnimationTool.cpp
-  CAnimator.cpp
-  CComponent.cpp
-  CEngine.cpp
-  CFactory.cpp
-  CInputMgr.cpp
-  CObject.cpp
-  CObjectMgr.cpp
-  CPathMgr.cpp
-  CPlayer.cpp
-  CResource.cpp
-  CScene.cpp
-  CSceneMgr.cpp
+﻿  CFactory.cpp
   CTexture.cpp
-CPlayer.obj : error LNK2019: unresolved external symbol "private: __thiscall CPlayer::CPlayer(void)" (??0CPlayer@@AAE@XZ) referenced in function "public: static class CPlayer * __cdecl CPlayer::Create(void)" (?Create@CPlayer@@SAPAV1@XZ)
-C:\Users\Admin\Documents\GitHub\WinAPI_Terraria\Terraria\Debug\Terraria.exe : fatal error LNK1120: 1 unresolved externals
+  Terraria.cpp
+  Terraria.vcxproj -> C:\Users\Admin\Documents\GitHub\WinAPI_Terraria\Terraria\Debug\Terraria.exe

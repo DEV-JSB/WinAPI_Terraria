@@ -6,6 +6,10 @@ CPlayer* CPlayer::Create()
     return new CPlayer();
 }
 
+CPlayer::CPlayer()
+{
+}
+
 CPlayer::~CPlayer()
 {
 }
