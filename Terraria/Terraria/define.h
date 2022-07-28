@@ -6,6 +6,7 @@
 #define CLIENT_HEIGHT 720
 
 #define RTTI_DYNAMIC_CAST(classname,map,type) 	dynamic_cast<classname*>((*map.find(type)).second);
+#define GET_COMPONENT(classname,map,type) RTTI_DYNAMIC_CAST(classname,map,type)
 #define SINGLE(classname)private:\
 						classname(); \
 						~classname();\

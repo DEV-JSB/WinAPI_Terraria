@@ -6,9 +6,9 @@ class CTransform2D;
 class CObject
 {
 public:
-	virtual int Update();
-	virtual int Render(HDC _dc);
-	
+	virtual int Update()			= 0;
+	virtual int Render(HDC _dc)		= 0;
+	virtual int FinalUpdate()		= 0;
 
 protected:
 	// GetTransform

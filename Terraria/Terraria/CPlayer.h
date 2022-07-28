@@ -4,8 +4,11 @@
 
 class CPlayer : public CObject
 {
+
 public:
-	static CPlayer* Create();
+	virtual int FinalUpdate() override;
+	virtual int Update() override;
+	virtual int Render(const HDC _dc) override;
 
 private:
 	CPlayer();
