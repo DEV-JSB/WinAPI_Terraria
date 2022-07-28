@@ -156,6 +156,8 @@
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneMgr.h" />
     <ClInclude Include="CTexture.h" />
+    <ClInclude Include="CTransform2D.h" />
+    <ClInclude Include="CUI.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
@@ -170,7 +172,6 @@
     <ClCompile Include="CAnimator.cpp" />
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CEngine.cpp" />
-    <ClCompile Include="CFactory.cpp" />
     <ClCompile Include="CInputMgr.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CObjectMgr.cpp" />
@@ -180,6 +181,8 @@
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneMgr.cpp" />
     <ClCompile Include="CTexture.cpp" />
+    <ClCompile Include="CTransform2D.cpp" />
+    <ClCompile Include="CUI.cpp" />
     <ClCompile Include="Terraria.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@
 #include<vector>
 #include<Windows.h>
 #include<map>
+#include<list>
 #include<wchar.h>
 #include<assert.h>
 #include"struct.h"

@@ -1,9 +1,10 @@
 #pragma once
 class CComponent
 {
-private:
+
+protected: // construction Nedd Acces SubClass
 	CComponent();
-protected:
+public:
 	virtual ~CComponent();
 };
 

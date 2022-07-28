@@ -10,7 +10,7 @@ class CAnimator : public CComponent
 public:
 	
 
-
+	
 private:
 	// Animator Owner
 	CObject*					m_pOwner;

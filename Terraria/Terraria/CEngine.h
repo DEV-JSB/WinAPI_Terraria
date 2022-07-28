@@ -2,9 +2,12 @@
 class CEngine
 {
 	SINGLE(CEngine);
-public:
-	void Init(HWND _hwnd , POINT _resoulution);
-	void Update();
+public: // Logic , Can Access OutSide
+	int Progress();
+	int Init(HWND _hwnd , POINT _resoulution);
+private:
+	int Update();
+	int Render();
 private:
 	// Main global HWND
 	HWND m_hWnd;

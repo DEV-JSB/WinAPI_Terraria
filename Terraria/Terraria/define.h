@@ -1,6 +1,11 @@
 #pragma once
 
 
+
+#define CLIENT_WIDTH 1280
+#define CLIENT_HEIGHT 720
+
+#define RTTI_DYNAMIC_CAST(classname,map,type) 	dynamic_cast<classname*>((*map.find(type)).second);
 #define SINGLE(classname)private:\
 						classname(); \
 						~classname();\
@@ -48,6 +53,7 @@ enum class OBJECT
 {
 	OBJECT_PLAYER,
 	OBJECT_BLOCK,
+	OBJECT_UI,
 	OBJECT_END
 };
 

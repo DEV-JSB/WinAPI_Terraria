@@ -67,6 +67,12 @@
     <Filter Include="Framework\01.Engine">
       <UniqueIdentifier>{b05d2204-9e90-4ef6-9376-7c48628dab73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\06.Object\UI">
+      <UniqueIdentifier>{6e7c8554-99e2-48c0-9307-19e4191eee50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\04.Component\Transform2D">
+      <UniqueIdentifier>{072aa963-de06-4f17-8eee-1dcd44d3691e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -129,6 +135,12 @@
     <ClInclude Include="CEngine.h">
       <Filter>Framework\01.Engine</Filter>
     </ClInclude>
+    <ClInclude Include="CUI.h">
+      <Filter>Framework\06.Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransform2D.h">
+      <Filter>Framework\04.Component\Transform2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -164,9 +176,6 @@
     <ClCompile Include="CTexture.cpp">
       <Filter>Framework\05.Resource\CTexture</Filter>
     </ClCompile>
-    <ClCompile Include="CFactory.cpp">
-      <Filter>Framework\Factory</Filter>
-    </ClCompile>
     <ClCompile Include="CPlayer.cpp">
       <Filter>Framework\06.Object\Player</Filter>
     </ClCompile>
@@ -178,6 +187,12 @@
     </ClCompile>
     <ClCompile Include="CEngine.cpp">
       <Filter>Framework\01.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI.cpp">
+      <Filter>Framework\06.Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransform2D.cpp">
+      <Filter>Framework\04.Component\Transform2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

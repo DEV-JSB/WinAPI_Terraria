@@ -9,7 +9,7 @@ public: // Logic
 	int Update();
 	int Render(HDC _hdc);
 	int Enter();
-
+	int Init();
 public:
 	int SetCurScene(CScene* _pScene) { m_pCurScene = _pScene; }
 	CScene* GetCurScene()const { return m_pCurScene; }

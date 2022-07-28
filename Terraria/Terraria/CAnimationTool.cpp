@@ -1,24 +1,58 @@
 #include "pch.h"
+// Use Define DIALOG
+#include "resource.h"
 #include "CAnimationTool.h"
-#include"CSceneMgr.h"
+#include "CFactory.h"
+#include "CSceneMgr.h"
+#include "CUI.h"
 
-
-#include"resource.h"
-CAnimationTool* CAnimationTool::Create()
+CAnimationTool::CAnimationTool()
 {
-    return new CAnimationTool();
 }
+
 CAnimationTool::~CAnimationTool()
 {
 }
+
+int CAnimationTool::Release()
+{
+    for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
+    {
+        for (int j = 0; j < (int)m_vecObjectList[i].size(); ++j)
+        {
+            if (nullptr != m_vecObjectList[i][j])
+                delete m_vecObjectList[i][j];
+        }
+    }
+    return 0;
+}
+
 int CAnimationTool::Render(const HDC _hdc)
 {
+    for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
+    {
+        for (int j = 0; j < (int)m_vecObjectList[i].size(); ++j)
+            m_vecObjectList[i][j]->Render(_hdc);
+    }
 	return 0;
 }
 
 int CAnimationTool::Update()
 {
+
+
+
 	return 0;
+}
+
+int CAnimationTool::Enter()
+{
+    // Create UI Test
+    CUI* pUi = CFactory<CUI>::Create(Vector3({ 50.f ,50.f ,0.f}), Vector3({ 50.f ,50.f ,0.f}), Vector2({50.f,50.f }));
+    
+    m_vecObjectList[(int)OBJECT::OBJECT_UI].push_back(pUi);
+
+    return 0;
 }
 
 

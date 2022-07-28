@@ -1,13 +1,23 @@
 #pragma once
+#include"pch.h"
 
-class CResource;
-class CObject;
-class CScene;
-
+template<typename T>
 class CFactory
 {
-	const CResource* CreateResource(RESOURCE _type)const;
-	const CObject* CreateObject(OBJECT _type)const;
-	const CScene* CreateScene(SCENE _type)const;
+public:
+	static T* Create();
+	// Transform Component
+	static T* Create(const Vector3& _pos, const Vector3& _rot, const Vector2& _scale);
 };
 
+template<typename T>
+inline T* CFactory<T>::Create()
+{
+	return new T();
+}
+
+template<typename T>
+inline T* CFactory<T>::Create(const Vector3& _pos, const Vector3& _rot, const Vector2& _scale)
+{
+	return new T(_pos, _rot, _scale);
+}
