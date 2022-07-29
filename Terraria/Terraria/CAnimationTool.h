@@ -20,6 +20,7 @@ public:
 	virtual int Enter()				   override;
 
 private:// Member
+	// SaveFileName_Setting_Dialog
 	wstring m_strFileName;
 	
 	// Will MakeAnimation

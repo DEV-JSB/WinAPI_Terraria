@@ -17,12 +17,24 @@ public:
     virtual int Render(const HDC _dc) override;
     virtual int FinalUpdate() override;
 
-public: // Child Update Logic
+public:
+
+    // On UI Event Function
+    virtual void MouseOn();
+    virtual void MouseLBT_Down();
+    virtual void MouseLBT_Up();
+    virtual void MouseLBT_Clicked();
+
+
+private: // Child Update Logic
 
     int Update_Child();
     int Render_Child(const HDC _dc);
     int FinalUpdate_Child();
     
+
+
+
 private: 
     
     // Have Many Child UI  
@@ -31,12 +43,13 @@ private:
     CUI* m_pParent;
     // Culculate relative Position
     Vector3 m_vOffsetPos;
+    //Is Affected Camera?
+    bool m_bCamAffected;
 
-private: //Factory
-    friend class CFactory<CUI>;
 private: //Construct
-    CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
-    CUI();
+    friend class CFactory<CUI>;
+    CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAffected);
+    CUI(const bool _bAffected);
 public:
     virtual ~CUI();
 };

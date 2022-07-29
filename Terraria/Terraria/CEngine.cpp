@@ -66,9 +66,11 @@ int CEngine::Init(HWND _hwnd, POINT _resoulution)
 
 
 
-	// Setting Manager
+	// Initialize Manager
 	CSceneMgr::GetInstance()->Init();
 	CPathMgr::GetInstance()->Init();
+	CInputMgr::GetInstance()->Init();
+
 
 	return 0;
 }
@@ -81,6 +83,9 @@ int CEngine::Release()
 
 int CEngine::Update()
 {
+	// UpdateManager
+	CSceneMgr::GetInstance()->Update();
+	CInputMgr::GetInstance()->Update();
 	return 0;
 }
 

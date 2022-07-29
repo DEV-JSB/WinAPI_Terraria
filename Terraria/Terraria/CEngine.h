@@ -4,9 +4,10 @@ class CEngine
 	SINGLE(CEngine);
 public: // Logic , Can Access OutSide
 	int Progress();
-	int Init(HWND _hwnd , POINT _resoulution);
+	int Init(HWND _hwnd, POINT _resoulution);
 	int Release();
 
+	HWND GetMainHWND()const { return m_hWnd; }
 	HDC GetBufferDC()const { return m_bufferDC; }
 private:
 	int Update();

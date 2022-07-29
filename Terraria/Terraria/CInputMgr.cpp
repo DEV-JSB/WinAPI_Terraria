@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "CEngine.h"
 #include "CInputMgr.h"
 
 #define MOUSE_LEFT 0
@@ -23,6 +24,17 @@ int KeyInfo[(int)KEY::KEY_LAST] = {
 	VK_RETURN,
 	VK_ESCAPE
 };
+
+CInputMgr::CInputMgr()
+	:m_stMousePos({0,0})
+{
+
+}
+CInputMgr::~CInputMgr()
+{
+
+}
+
 
 int CInputMgr::Update()
 {
@@ -59,6 +71,10 @@ int CInputMgr::Update()
 		}
 	}
 
+	GetCursorPos(&m_stMousePos);
+	ScreenToClient(CEngine::GetInstance()->GetMainHWND(), &m_stMousePos);
+
+
 	return 0;
 }
 
@@ -77,11 +93,11 @@ int CInputMgr::Init()
 	}
 
 
-	m_vecstMouseInfo[MOUSE_LEFT].iKey = VK_LBUTTON;
-	m_vecstMouseInfo[MOUSE_RIGHT].iKey = VK_RBUTTON;
+	m_arrMouseInfo[MOUSE_LEFT].iKey = VK_LBUTTON;
+	m_arrMouseInfo[MOUSE_RIGHT].iKey = VK_RBUTTON;
 
-	m_vecstMouseInfo[MOUSE_LEFT].eState = INPUTSTATE::INPUTSTATE_NONE;
-	m_vecstMouseInfo[MOUSE_RIGHT].eState = INPUTSTATE::INPUTSTATE_NONE;
+	m_arrMouseInfo[MOUSE_LEFT].eState = INPUTSTATE::INPUTSTATE_NONE;
+	m_arrMouseInfo[MOUSE_RIGHT].eState = INPUTSTATE::INPUTSTATE_NONE;
 	m_vecstKeyInfo[MOUSE_RIGHT].bIsPressed = false;
 	m_vecstKeyInfo[MOUSE_LEFT].bIsPressed = false;
 	return 0;

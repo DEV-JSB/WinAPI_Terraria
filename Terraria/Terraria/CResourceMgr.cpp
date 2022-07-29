@@ -21,7 +21,7 @@ CTexture* CResourceMgr::LoadTexture(const wstring& _strKey, const wstring& _strR
         return pTex;
       
     wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
-    strFilePath += _strRelativePath;
+    strFilePath += _strKey;
 
     // Setting New Texture Information
     pTex = CFactory<CTexture>::Create();

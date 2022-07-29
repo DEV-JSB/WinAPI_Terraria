@@ -16,6 +16,10 @@ int CUI::Update()
 
 int CUI::Render(const HDC _dc)
 {
+
+
+
+
 	CTransform2D* pTrans = GetTransform();
 	Rectangle(_dc, (int)(pTrans->GetPosition_X() - pTrans->GetScale_Width() / 2.f)
 				 , (int)(pTrans->GetPosition_Y() - pTrans->GetScale_Height() / 2.f	 )
@@ -35,6 +39,22 @@ int CUI::FinalUpdate()
 		pTransform->SetPosition(Pos);
 	}
 	return 0;
+}
+
+void CUI::MouseOn()
+{
+}
+
+void CUI::MouseLBT_Down()
+{
+}
+
+void CUI::MouseLBT_Up()
+{
+}
+
+void CUI::MouseLBT_Clicked()
+{
 }
 
 int CUI::Update_Child()
@@ -62,16 +82,18 @@ int CUI::FinalUpdate_Child()
 	return 0;
 }
 
-CUI::CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale)
+CUI::CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale,bool _bAffected)
 	:CObject(_pos, _rot, _scale)
 	, m_pParent(nullptr)
 	, m_vOffsetPos({ 0.f,0.f,0.f })
+	, m_bCamAffected(_bAffected)
 {
 }
 
-CUI::CUI()
+CUI::CUI(const bool _bAffected)
 	:m_pParent(nullptr)
 	, m_vOffsetPos({ 0.f,0.f,0.f })
+	, m_bCamAffected(_bAffected)
 {
 }
 

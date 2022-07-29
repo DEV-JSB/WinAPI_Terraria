@@ -8,6 +8,7 @@ public:
 	static T* Create();
 	// Transform Component
 	static T* Create(const Vector3& _pos, const Vector3& _rot, const Vector2& _scale);
+	static T* Create(const Vector3& _pos, const Vector3& _rot, const Vector2& _scale, const bool _b);
 };
 
 template<typename T>
@@ -20,4 +21,11 @@ template<typename T>
 inline T* CFactory<T>::Create(const Vector3& _pos, const Vector3& _rot, const Vector2& _scale)
 {
 	return new T(_pos, _rot, _scale);
+}
+
+// Create UI Constructor
+template<typename T>
+inline T* CFactory<T>::Create(const Vector3& _pos, const Vector3& _rot, const Vector2& _scale,const bool _b)
+{
+	return new T(_pos, _rot, _scale,_b);
 }

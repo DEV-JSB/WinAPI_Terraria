@@ -7,6 +7,8 @@
 #include<list>
 #include<wchar.h>
 #include<assert.h>
+#include<string>
+#include<stdio.h>
 
 #pragma comment(lib,"msimg32.lib")
 

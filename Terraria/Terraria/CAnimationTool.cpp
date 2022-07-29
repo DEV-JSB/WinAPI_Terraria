@@ -6,7 +6,9 @@
 #include "CUI.h"
 #include "CAnimation.h"
 #include "CTexture.h"
+#include "CPathMgr.h"
 #include "CSceneMgr.h"
+#include "CInputMgr.h"
 #include "CResourceMgr.h"
 
 CAnimationTool::CAnimationTool()
@@ -29,6 +31,16 @@ int CAnimationTool::Release()
 
 int CAnimationTool::Render(const HDC _hdc)
 {
+
+    for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
+    {
+        for (size_t j = 0; j < m_arrObjectVec[i].size(); ++j)
+        {
+            m_arrObjectVec[i][j]->Render(_hdc);
+        }
+    }
+    if (nullptr == m_pTexture)
+        return 0;
     TransparentBlt(_hdc
                        , 0
                        , 0
@@ -40,6 +52,11 @@ int CAnimationTool::Render(const HDC _hdc)
                        , m_pTexture->GetBitInfo().bmWidth
                        , m_pTexture->GetBitInfo().bmHeight
                        , NULL);
+    
+    wstring str;
+    POINT p = CInputMgr::GetInstance()->GetMousePos();
+    
+    printf("X : %d , Y : %d\n", p.x, p.y);
     return 0;
     
 }
@@ -50,7 +67,7 @@ int CAnimationTool::Update()
     if (m_strFileName.size() == 0)
         return 1;
     
-    m_pTexture = CResourceMgr::GetInstance()->FindTexture(m_strFileName);
+    m_pTexture = CResourceMgr::GetInstance()->LoadTexture(m_strFileName, CPathMgr::GetInstance()->GetContentPath());
 
 	return 0;
 }
@@ -60,12 +77,13 @@ int CAnimationTool::Enter()
     // Create UI Test
     CUI* pUi = CFactory<CUI>::Create(Vector3({ CLIENT_WIDTH - 50 ,CLIENT_HEIGHT * 0.5f ,0.f})
                                    , Vector3({ 0.f ,0.f ,0.f})
-                                   , Vector2({(float)CLIENT_WIDTH / 2,(float)CLIENT_HEIGHT }));
-    
+                                   , Vector2({(float)CLIENT_WIDTH / 2,(float)CLIENT_HEIGHT })
+                                   , false);
     // Create Child UI Test
     CUI* pChildUi = CFactory<CUI>::Create(Vector3({ CLIENT_WIDTH - 50 ,CLIENT_HEIGHT * 0.25f ,0.f })
                                         , Vector3({ 0.f ,0.f ,0.f })
-                                        , Vector2({ (float)CLIENT_WIDTH / 2,(float)100 }));
+                                        , Vector2({ (float)CLIENT_WIDTH / 2,(float)100 })
+                                        , false);
     // Push Child UI
     pUi->AddChild(pChildUi);
 
@@ -104,6 +122,7 @@ INT_PTR CALLBACK AnimationToolProc(HWND hDlg, UINT message, WPARAM wParam, LPARA
             
             pToolScene->SetOpenFileName(tChar);
 
+            EndDialog(hDlg, LOWORD(wParam));
             return (INT_PTR)TRUE;
         }
         else if (LOWORD(wParam) == IDCANCEL)
