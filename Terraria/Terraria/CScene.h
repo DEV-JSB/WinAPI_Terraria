@@ -15,6 +15,6 @@ public:
 	virtual int Enter()				   = 0;
 protected:
 	// ObjectVector
-	std::vector<CObject*> m_vecObjectList[(int)OBJECT::OBJECT_END];
+	std::vector<CObject*> m_arrObjectVec[(int)OBJECT::OBJECT_END];
 };
 

@@ -1,5 +1,4 @@
 #pragma once
-#include"CFactory.h"
 #include"CComponent.h"
 
 
@@ -21,7 +20,7 @@ public: // Get Set Function
 	float GetPosition_X()const { return m_vecPosition.x; }
 	float GetPosition_Y()const { return m_vecPosition.y; }
 	float GetScale_Width()const { return m_vecScale.x; };
-	float GetScale_Hegiht()const { return m_vecScale.y; };
+	float GetScale_Height()const { return m_vecScale.y; };
 
 
 

@@ -1,7 +1,7 @@
 #include"pch.h"
 #include"CUI.h"
 #include"CTransform2D.h"
-
+#include"Function.h"
 int CUI::AddChild(CUI* _pChild)
 {
 	m_vecChildUI.push_back(_pChild);
@@ -14,14 +14,14 @@ int CUI::Update()
 	return 0;
 }
 
-int CUI::Render(HDC _dc)
+int CUI::Render(const HDC _dc)
 {
 	CTransform2D* pTrans = GetTransform();
-	Rectangle(_dc, (int)(pTrans->GetPosition_X() - pTrans->GetScale_Hegiht() / 2.f)
-				 , (int)(pTrans->GetPosition_Y() - pTrans->GetPosition_Y() / 2.f	 )
-				 , (int)(pTrans->GetPosition_X() + pTrans->GetScale_Hegiht() / 2.f)
-				 , (int)(pTrans->GetPosition_Y() + pTrans->GetPosition_Y() / 2.f  ));
-	
+	Rectangle(_dc, (int)(pTrans->GetPosition_X() - pTrans->GetScale_Width() / 2.f)
+				 , (int)(pTrans->GetPosition_Y() - pTrans->GetScale_Height() / 2.f	 )
+				 , (int)(pTrans->GetPosition_X() + pTrans->GetScale_Width() / 2.f)
+				 , (int)(pTrans->GetPosition_Y() + pTrans->GetScale_Height() / 2.f  ));
+	Render_Child(_dc);
 	return 0;
 }
 
@@ -77,9 +77,5 @@ CUI::CUI()
 
 CUI::~CUI()
 {
-	for (size_t i = 0; i < m_vecChildUI.size(); ++i)
-	{
-		if (nullptr != m_vecChildUI[i])
-			delete m_vecChildUI[i];
-	}
+	Delete_Vec<CUI*>(m_vecChildUI);
 }

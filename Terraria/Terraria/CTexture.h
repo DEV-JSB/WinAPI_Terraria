@@ -1,14 +1,13 @@
 #pragma once
 #include"CResource.h"
+
 class CTexture : public CResource
 {
-	
-
-
 public:
 	int LoadTexture(const wstring& _strfilepath);
-
-
+public:
+	BITMAP GetBitInfo()const { return m_bitInfo; }
+	HDC GetTextureDC()const { return m_DC; }
 private:
 	// Where DrawingDC
 	HDC m_DC;
@@ -20,8 +19,8 @@ private:
 private:
 	// hidden Constructor
 	CTexture();
+	friend class CFactory<CTexture>;
 public:
-	static CTexture* Create();
 	virtual ~CTexture();
 };
 

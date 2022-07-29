@@ -3,44 +3,54 @@
 #include "resource.h"
 #include "CAnimationTool.h"
 #include "CFactory.h"
-#include "CSceneMgr.h"
 #include "CUI.h"
+#include "CAnimation.h"
+#include "CTexture.h"
+#include "CSceneMgr.h"
+#include "CResourceMgr.h"
 
 CAnimationTool::CAnimationTool()
+    :m_pWillMake(nullptr)
+    ,m_pTexture(nullptr)
 {
 }
 
 CAnimationTool::~CAnimationTool()
 {
+    delete m_pWillMake;
 }
 
 int CAnimationTool::Release()
 {
-    for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
-    {
-        for (int j = 0; j < (int)m_vecObjectList[i].size(); ++j)
-        {
-            if (nullptr != m_vecObjectList[i][j])
-                delete m_vecObjectList[i][j];
-        }
-    }
+    // Scene Parent Will Delete All of Object
+    delete this;
     return 0;
 }
 
 int CAnimationTool::Render(const HDC _hdc)
 {
-    for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
-    {
-        for (int j = 0; j < (int)m_vecObjectList[i].size(); ++j)
-            m_vecObjectList[i][j]->Render(_hdc);
-    }
-	return 0;
+    TransparentBlt(_hdc
+                       , 0
+                       , 0
+                       , m_pTexture->GetBitInfo().bmWidth
+                       , m_pTexture->GetBitInfo().bmHeight 
+                       , m_pTexture->GetTextureDC()
+                       , 0
+                       , 0
+                       , m_pTexture->GetBitInfo().bmWidth
+                       , m_pTexture->GetBitInfo().bmHeight
+                       , NULL);
+    return 0;
+    
 }
 
 int CAnimationTool::Update()
 {
-
-
+    // Not File Name Setting Exeption handling
+    if (m_strFileName.size() == 0)
+        return 1;
+    
+    m_pTexture = CResourceMgr::GetInstance()->FindTexture(m_strFileName);
 
 	return 0;
 }
@@ -48,10 +58,21 @@ int CAnimationTool::Update()
 int CAnimationTool::Enter()
 {
     // Create UI Test
-    CUI* pUi = CFactory<CUI>::Create(Vector3({ 50.f ,50.f ,0.f}), Vector3({ 50.f ,50.f ,0.f}), Vector2({50.f,50.f }));
+    CUI* pUi = CFactory<CUI>::Create(Vector3({ CLIENT_WIDTH - 50 ,CLIENT_HEIGHT * 0.5f ,0.f})
+                                   , Vector3({ 0.f ,0.f ,0.f})
+                                   , Vector2({(float)CLIENT_WIDTH / 2,(float)CLIENT_HEIGHT }));
     
-    m_vecObjectList[(int)OBJECT::OBJECT_UI].push_back(pUi);
+    // Create Child UI Test
+    CUI* pChildUi = CFactory<CUI>::Create(Vector3({ CLIENT_WIDTH - 50 ,CLIENT_HEIGHT * 0.25f ,0.f })
+                                        , Vector3({ 0.f ,0.f ,0.f })
+                                        , Vector2({ (float)CLIENT_WIDTH / 2,(float)100 }));
+    // Push Child UI
+    pUi->AddChild(pChildUi);
 
+    // Add Object in Scene
+    m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pUi);
+
+    m_pWillMake = CFactory<CAnimation>::Create();
     return 0;
 }
 
@@ -71,14 +92,17 @@ INT_PTR CALLBACK AnimationToolProc(HWND hDlg, UINT message, WPARAM wParam, LPARA
     case WM_COMMAND:
         if (LOWORD(wParam) == IDOK)
         {
+            // FileName
             TCHAR tChar[255];
-            GetDlgItemText(hDlg, IDC_EDIT1, tChar, 255);
-            
             CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
-            
             //Check Is it Tool scene , -> Only Use In Tool Scene
             CAnimationTool* pToolScene = dynamic_cast<CAnimationTool*>(pCurScene);
             assert(pToolScene);
+            
+            // GetFilename From dialog
+            GetDlgItemText(hDlg, IDC_EDIT1, tChar, 255);
+            
+            pToolScene->SetOpenFileName(tChar);
 
             return (INT_PTR)TRUE;
         }

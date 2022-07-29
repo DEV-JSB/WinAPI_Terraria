@@ -5,8 +5,8 @@ class CResource
 {
 public:
 	// SetKey and Path
-	int SetKey(const wstring& _strKey) { m_strKey = _strKey; }
-	int SetPath(const wstring& _strPath) { m_strRelativePath = _strPath; }
+	int SetKey(const wstring& _strKey) { m_strKey = _strKey; return 0; }
+	int SetPath(const wstring& _strPath) { m_strRelativePath = _strPath; return 0; }
 
 	// Get Key and Path
 	const wstring& GetKey()const { return m_strKey; }

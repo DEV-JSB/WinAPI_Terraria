@@ -3,12 +3,13 @@
 #include "CAnimationTool.h"
 #include "CFactory.h"
 CSceneMgr::CSceneMgr()
+	:m_pCurScene(nullptr)
 {
 
 }
 CSceneMgr::~CSceneMgr()
 {
-
+	
 }
 
 int CSceneMgr::Update()
@@ -37,5 +38,12 @@ int CSceneMgr::Init()
 	
 	// Setting Scene
 	m_pCurScene->Enter();
+	return 0;
+}
+
+int CSceneMgr::Release()
+{
+	m_pCurScene->Release();
+
 	return 0;
 }

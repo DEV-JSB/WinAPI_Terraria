@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "CEngine.h"
 #include"CSceneMgr.h"
-
+#include"CInputMgr.h"
+#include"CPathMgr.h"
+#include"CResourceMgr.h"
 
 #define WINDOWSTART_X 100
 #define WINDOWSTART_Y 100
@@ -62,10 +64,18 @@ int CEngine::Init(HWND _hwnd, POINT _resoulution)
 	// New Bit Set WHITE
 	PatBlt(m_bufferDC, 0, 0, m_ptResolution.x, m_ptResolution.y, WHITENESS);
 
-	// Setting Scene
+
+
+	// Setting Manager
 	CSceneMgr::GetInstance()->Init();
+	CPathMgr::GetInstance()->Init();
 
+	return 0;
+}
 
+int CEngine::Release()
+{
+	CSceneMgr::GetInstance()->Release();
 	return 0;
 }
 

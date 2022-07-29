@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CTexture.h"
+#include"CEngine.h"
 
 int CTexture::LoadTexture(const wstring& _strfilepath)
 {
@@ -9,8 +10,15 @@ int CTexture::LoadTexture(const wstring& _strfilepath)
 	// Failed load Bitmap exception handling
 	assert(m_hBit);
 
-	// Need Make DC
+	// SetDraw DC
+	m_DC = CEngine::GetInstance()->GetBufferDC();
 
+	// Set DC on Bit
+	HBITMAP hPrevBit = (HBITMAP)SelectObject(m_DC, m_hBit);
+	DeleteObject(hPrevBit);
+
+	// GetBitmap Info
+	GetObject(m_hBit, sizeof(BITMAP), &m_bitInfo);
 	return 0;
 }
 
@@ -19,11 +27,6 @@ CTexture::CTexture()
 	,m_hBit(0)
 	,m_bitInfo{}
 {
-}
-
-CTexture* CTexture::Create()
-{
-	return new CTexture();
 }
 
 CTexture::~CTexture()

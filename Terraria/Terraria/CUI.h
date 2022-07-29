@@ -1,6 +1,5 @@
 #pragma once
 #include "CObject.h"
-#include"CFactory.h"
 
 class CUI :
     public CObject

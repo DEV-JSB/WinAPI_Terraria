@@ -5,6 +5,9 @@ class CEngine
 public: // Logic , Can Access OutSide
 	int Progress();
 	int Init(HWND _hwnd , POINT _resoulution);
+	int Release();
+
+	HDC GetBufferDC()const { return m_bufferDC; }
 private:
 	int Update();
 	int Render();
