@@ -10,8 +10,9 @@ class CAnimationTool : public CScene
 public:
 	// Setting FileName
 	int SetOpenFileName(const wstring& _Key) { m_strFileName = _Key; return 0; };
-	// Setting Rect
-	int SettingRect();
+	// DrawSelectRect Line
+	int DrawSelectRect(const HDC _hdc);
+
 public:
 	// Delete Object
 	virtual int Release()			   override;

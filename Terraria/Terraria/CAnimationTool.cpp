@@ -24,8 +24,13 @@ CAnimationTool::~CAnimationTool()
     delete m_pWillMake;
 }
  
-int CAnimationTool::SettingRect()
+
+int CAnimationTool::DrawSelectRect(const HDC _hdc)
 {
+    MoveToEx(_hdc, m_stSelectRect.left, m_stSelectRect.right, NULL);
+    LineTo(_hdc, m_stSelectRect.right, m_stSelectRect.bottom);
+    LineTo(_hdc, m_stSelectRect.bottom, m_stSelectRect.left);
+    LineTo(_hdc, m_stSelectRect.left, m_stSelectRect.top);
     return 0;
 }
 
@@ -60,10 +65,12 @@ int CAnimationTool::Render(const HDC _hdc)
                        , m_pTexture->GetBitInfo().bmHeight
                        , NULL);
     
+    
+    DrawSelectRect(_hdc);
+
     // MouseUpdate Test
     wstring str;
     POINT p = CInputMgr::GetInstance()->GetMousePos();
-    printf("X : %d , Y : %d\n", p.x, p.y);
     return 0;
     
 }
@@ -76,10 +83,20 @@ int CAnimationTool::Update()
     
     m_pTexture = CResourceMgr::GetInstance()->LoadTexture(m_strFileName, CPathMgr::GetInstance()->GetContentPath());
 
-    if(CInputMgr::GetInstance()->IsLBTDown())
-        printf("버튼 눌림!!\n");
+    // SetRect Follow MouseDrag
+    if (CInputMgr::GetInstance()->IsLBTDown())
+    {
+        m_stSelectRect.left = CInputMgr::GetInstance()->GetMousePos().x;
+        m_stSelectRect.top = CInputMgr::GetInstance()->GetMousePos().y;
+        printf("LBT_DOWN! \n");
+    }
+    if (CInputMgr::GetInstance()->IsLBTUp())
+    {
+        m_stSelectRect.right = CInputMgr::GetInstance()->GetMousePos().x;
+        m_stSelectRect.bottom = CInputMgr::GetInstance()->GetMousePos().y;
+        printf("LBT_UP! \n");
 
-    
+    }
 
 
 	return 0;

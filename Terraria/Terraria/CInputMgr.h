@@ -8,6 +8,8 @@ public:
 	bool IsLBTDown();
 	bool IsLBTUp();
 
+	INPUTSTATE GetKeyState();
+
 	POINT GetMousePos()const { return m_stMousePos; }
 public:// Logic
 	int Update();
