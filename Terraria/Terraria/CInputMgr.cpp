@@ -36,6 +36,22 @@ CInputMgr::~CInputMgr()
 }
 
 
+bool CInputMgr::IsLBTDown()
+{
+	switch (m_arrMouseInfo[MOUSE_LEFT].eState)
+	{
+	case INPUTSTATE::INPUTSTATE_TAP:
+		return true;
+	default:
+		return false;
+	}
+}
+
+bool CInputMgr::IsLBTUp()
+{
+	return false;
+}
+
 int CInputMgr::Update()
 {
 	for (size_t i = 0; i < m_vecstKeyInfo.size(); ++i)
@@ -70,6 +86,41 @@ int CInputMgr::Update()
 			}
 		}
 	}
+
+
+	for (int i = 0; i < (int)MOUSE::MOUSE_END; ++i)
+	{
+		// Key Pressed State
+		if (GetAsyncKeyState(m_arrMouseInfo[i].iKey) & 0x8000)
+		{
+			// Is Not prev Pressed
+			if (m_arrMouseInfo[i].bIsPressed == false)
+			{
+				m_arrMouseInfo[i].bIsPressed = true;
+				m_arrMouseInfo[i].eState = INPUTSTATE::INPUTSTATE_TAP;
+			}// Is prev Pressed
+			else if (m_arrMouseInfo[i].bIsPressed == true)
+			{
+				m_arrMouseInfo[i].bIsPressed = true;
+				m_arrMouseInfo[i].eState = INPUTSTATE::INPUTSTATE_TAP;
+				m_arrMouseInfo[i].eState = INPUTSTATE::INPUTSTATE_HOLD;
+			}
+		} // Not Key Pressed
+		else
+		{
+			if (m_arrMouseInfo[i].bIsPressed == true)
+			{
+				m_arrMouseInfo[i].bIsPressed = false;
+				m_arrMouseInfo[i].eState = INPUTSTATE::INPUTSTATE_AWAY;
+			}
+			else
+			{
+				m_arrMouseInfo[i].bIsPressed = false;
+				m_arrMouseInfo[i].eState = INPUTSTATE::INPUTSTATE_NONE;
+			}
+		}
+	}
+
 
 	GetCursorPos(&m_stMousePos);
 	ScreenToClient(CEngine::GetInstance()->GetMainHWND(), &m_stMousePos);

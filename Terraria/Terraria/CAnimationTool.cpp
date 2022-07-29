@@ -14,12 +14,19 @@
 CAnimationTool::CAnimationTool()
     :m_pWillMake(nullptr)
     ,m_pTexture(nullptr)
+    ,m_stSelectRect({0,0,0,0})
+    ,m_strFileName({})
 {
 }
 
 CAnimationTool::~CAnimationTool()
 {
     delete m_pWillMake;
+}
+ 
+int CAnimationTool::SettingRect()
+{
+    return 0;
 }
 
 int CAnimationTool::Release()
@@ -53,9 +60,9 @@ int CAnimationTool::Render(const HDC _hdc)
                        , m_pTexture->GetBitInfo().bmHeight
                        , NULL);
     
+    // MouseUpdate Test
     wstring str;
     POINT p = CInputMgr::GetInstance()->GetMousePos();
-    
     printf("X : %d , Y : %d\n", p.x, p.y);
     return 0;
     
@@ -68,6 +75,12 @@ int CAnimationTool::Update()
         return 1;
     
     m_pTexture = CResourceMgr::GetInstance()->LoadTexture(m_strFileName, CPathMgr::GetInstance()->GetContentPath());
+
+    if(CInputMgr::GetInstance()->IsLBTDown())
+        printf("버튼 눌림!!\n");
+
+    
+
 
 	return 0;
 }

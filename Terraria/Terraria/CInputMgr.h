@@ -5,6 +5,9 @@
 class CInputMgr
 {
 public:
+	bool IsLBTDown();
+	bool IsLBTUp();
+
 	POINT GetMousePos()const { return m_stMousePos; }
 public:// Logic
 	int Update();

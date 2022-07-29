@@ -10,6 +10,8 @@ class CAnimationTool : public CScene
 public:
 	// Setting FileName
 	int SetOpenFileName(const wstring& _Key) { m_strFileName = _Key; return 0; };
+	// Setting Rect
+	int SettingRect();
 public:
 	// Delete Object
 	virtual int Release()			   override;
@@ -28,6 +30,9 @@ private:// Member
 
 	// Will Load Texture
 	CTexture* m_pTexture;
+
+	// Select RectRange
+	RECT m_stSelectRect;
 
 private: // Constructor
 	friend class CFactory<CAnimationTool>;
