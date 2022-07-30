@@ -12,6 +12,8 @@ public:
 	int SetOpenFileName(const wstring& _Key) { m_strFileName = _Key; return 0; };
 	// DrawSelectRect Line
 	int DrawSelectRect(const HDC _hdc);
+	// SettingAnimationFrame
+	int SetAnimation();
 
 public:
 	// Delete Object
@@ -23,18 +25,28 @@ public:
 	virtual int Enter()				   override;
 
 private:// Member
+
+	// Check SettingRect
+	bool m_bIsSetRect;
+
 	// SaveFileName_Setting_Dialog
 	wstring m_strFileName;
 	
+	// Wiil MakeAnimation Frame
+	stAnimFrame m_stAniFrame;
+
 	// Will MakeAnimation
-	CAnimation* m_pWillMake;
+	CAnimation* m_pAnimation;
 
 	// Will Load Texture
 	CTexture* m_pTexture;
 
 	// Select RectRange
 	RECT m_stSelectRect;
+private:// Private Function
 
+	// CutBitmap
+	bool CheckCutBitmap(const HDC _hdc);
 private: // Constructor
 	friend class CFactory<CAnimationTool>;
 	CAnimationTool();

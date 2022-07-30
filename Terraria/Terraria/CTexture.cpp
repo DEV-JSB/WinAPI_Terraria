@@ -2,13 +2,17 @@
 #include "CTexture.h"
 #include"CEngine.h"
 
+
+
 int CTexture::LoadTexture(const wstring& _strfilepath)
 {
 	m_hBit = (HBITMAP)LoadImage(nullptr, _strfilepath.c_str()
 		, IMAGE_BITMAP, 0, 0
 		, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
 	// Failed load Bitmap exception handling
-	assert(m_hBit);
+	if(nullptr == m_hBit)
+		return FUNC_ERROR;
+	//assert(m_hBit);
 
 	// SetDraw DC
 	m_DC = CEngine::GetInstance()->GetBufferDC();

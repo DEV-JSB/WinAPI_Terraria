@@ -42,6 +42,8 @@ bool CInputMgr::IsLBTDown()
 	{
 	case INPUTSTATE::INPUTSTATE_TAP:
 		return true;
+	case INPUTSTATE::INPUTSTATE_HOLD:
+		return false;
 	default:
 		return false;
 	}
@@ -49,6 +51,18 @@ bool CInputMgr::IsLBTDown()
 
 bool CInputMgr::IsLBTUp()
 {
+	switch (m_arrMouseInfo[MOUSE_LEFT].eState)
+	{
+	case INPUTSTATE::INPUTSTATE_AWAY:
+		return true;
+	default:
+		return false;
+	}
+}
+
+bool CInputMgr::IsLBTPressed()
+{
+
 	return false;
 }
 

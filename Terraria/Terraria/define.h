@@ -1,6 +1,8 @@
 #pragma once
 
 
+// Funtion Error then return 503
+#define FUNC_ERROR 503
 
 #define CLIENT_WIDTH 1280
 #define CLIENT_HEIGHT 720

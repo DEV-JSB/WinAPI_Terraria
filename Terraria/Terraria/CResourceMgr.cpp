@@ -26,7 +26,9 @@ CTexture* CResourceMgr::LoadTexture(const wstring& _strKey, const wstring& _strR
     // Setting New Texture Information
     pTex = CFactory<CTexture>::Create();
     
-    pTex->LoadTexture(strFilePath);
+    // Exeption Handling
+    if (FUNC_ERROR == pTex->LoadTexture(strFilePath))
+        return nullptr;
 
     pTex->SetPath(strFilePath);
     pTex->SetKey(_strKey);

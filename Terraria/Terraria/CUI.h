@@ -1,8 +1,7 @@
 #pragma once
 #include "CObject.h"
 
-class CUI :
-    public CObject
+class CUI : public CObject
 {
 public:
 
@@ -17,23 +16,11 @@ public:
     virtual int Render(const HDC _dc) override;
     virtual int FinalUpdate() override;
 
-public:
-
-    // On UI Event Function
-    virtual void MouseOn();
-    virtual void MouseLBT_Down();
-    virtual void MouseLBT_Up();
-    virtual void MouseLBT_Clicked();
-
-
 private: // Child Update Logic
 
     int Update_Child();
     int Render_Child(const HDC _dc);
     int FinalUpdate_Child();
-    
-
-
 
 private: 
     

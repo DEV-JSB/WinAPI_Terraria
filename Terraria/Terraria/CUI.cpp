@@ -41,21 +41,7 @@ int CUI::FinalUpdate()
 	return 0;
 }
 
-void CUI::MouseOn()
-{
-}
 
-void CUI::MouseLBT_Down()
-{
-}
-
-void CUI::MouseLBT_Up()
-{
-}
-
-void CUI::MouseLBT_Clicked()
-{
-}
 
 int CUI::Update_Child()
 {

@@ -11,26 +11,85 @@
 #include "CInputMgr.h"
 #include "CResourceMgr.h"
 
+#define BIT_BOUNDARY_LINE 50
+
+
 CAnimationTool::CAnimationTool()
-    :m_pWillMake(nullptr)
-    ,m_pTexture(nullptr)
-    ,m_stSelectRect({0,0,0,0})
-    ,m_strFileName({})
+    : m_pAnimation(nullptr)
+    , m_pTexture(nullptr)
+    , m_stSelectRect({ 0,0,0,0 })
+    , m_strFileName({})
+    , m_bIsSetRect(false)
+    , m_stAniFrame({0})
 {
 }
 
+
+bool CAnimationTool::CheckCutBitmap(const HDC _hdc)
+{
+    if (!m_bIsSetRect)
+        return 0;
+
+    COLORREF rgb;
+    RECT CuttingRect = { CLIENT_WIDTH,CLIENT_HEIGHT,0,0 };
+    for (int x = m_stSelectRect.left; x <= m_stSelectRect.right; ++x)
+    {
+        for (int y = m_stSelectRect.top; y <= m_stSelectRect.bottom; ++y)
+        {
+            rgb = GetPixel(_hdc, x, y);
+            if (BIT_BOUNDARY_LINE == GetRValue(rgb)
+                && BIT_BOUNDARY_LINE == GetGValue(rgb)
+                && BIT_BOUNDARY_LINE == GetBValue(rgb))
+            {
+                if (CuttingRect.left > x)
+                    CuttingRect.left = x;
+                else if (CuttingRect.right < x)
+                    CuttingRect.right = x;
+                if (CuttingRect.top > y)
+                    CuttingRect.top = y;
+                else if (CuttingRect.bottom < y)
+                    CuttingRect.bottom = y;
+            }
+        }
+    }
+
+    // Check Cut is Success
+    if (CuttingRect.left != 0 && CuttingRect.right != 0 && CuttingRect.top != 0 && CuttingRect.bottom != 0)
+    {
+        m_stSelectRect = CuttingRect;
+        return true;
+    }
+    return false;
+}
+
+
+
 CAnimationTool::~CAnimationTool()
 {
-    delete m_pWillMake;
+    delete m_pAnimation;
 }
  
 
 int CAnimationTool::DrawSelectRect(const HDC _hdc)
 {
-    MoveToEx(_hdc, m_stSelectRect.left, m_stSelectRect.right, NULL);
+    MoveToEx(_hdc, m_stSelectRect.left, m_stSelectRect.top, NULL);
+    LineTo(_hdc, m_stSelectRect.right, m_stSelectRect.top);
     LineTo(_hdc, m_stSelectRect.right, m_stSelectRect.bottom);
-    LineTo(_hdc, m_stSelectRect.bottom, m_stSelectRect.left);
+    LineTo(_hdc, m_stSelectRect.left, m_stSelectRect.bottom);
     LineTo(_hdc, m_stSelectRect.left, m_stSelectRect.top);
+    return 0;
+}
+
+
+int CAnimationTool::SetAnimation()
+{
+    m_stAniFrame.vLT.x = (float)m_stSelectRect.left;
+    m_stAniFrame.vLT.y = (float)m_stSelectRect.top;
+    m_stAniFrame.vSliceSize.x = (float)(m_stSelectRect.right - m_stSelectRect.left);
+    m_stAniFrame.vSliceSize.y = (float)(m_stSelectRect.bottom - m_stSelectRect.top);
+
+    m_pAnimation->SetAniFrame(m_stAniFrame);
+    
     return 0;
 }
 
@@ -57,16 +116,26 @@ int CAnimationTool::Render(const HDC _hdc)
                        , 0
                        , 0
                        , m_pTexture->GetBitInfo().bmWidth
-                       , m_pTexture->GetBitInfo().bmHeight 
+                       , m_pTexture->GetBitInfo().bmHeight
                        , m_pTexture->GetTextureDC()
                        , 0
                        , 0
                        , m_pTexture->GetBitInfo().bmWidth
                        , m_pTexture->GetBitInfo().bmHeight
                        , NULL);
-    
-    
-    DrawSelectRect(_hdc);
+
+
+    // Setting CutBitmap
+    if (m_bIsSetRect)
+    {
+        DrawSelectRect(_hdc);
+        if (CheckCutBitmap(_hdc))
+        {
+            // Save Animation and Can Replace Offset
+            m_bIsSetRect = false;
+            SetAnimation();
+        }
+    }
 
     // MouseUpdate Test
     wstring str;
@@ -79,9 +148,16 @@ int CAnimationTool::Update()
 {
     // Not File Name Setting Exeption handling
     if (m_strFileName.size() == 0)
-        return 1;
+        return FUNC_ERROR;
     
     m_pTexture = CResourceMgr::GetInstance()->LoadTexture(m_strFileName, CPathMgr::GetInstance()->GetContentPath());
+    
+    // Exeption Handling
+    if (m_pTexture == nullptr)
+    {
+        m_strFileName.clear();
+        return FUNC_ERROR;
+    }
 
     // SetRect Follow MouseDrag
     if (CInputMgr::GetInstance()->IsLBTDown())
@@ -89,12 +165,14 @@ int CAnimationTool::Update()
         m_stSelectRect.left = CInputMgr::GetInstance()->GetMousePos().x;
         m_stSelectRect.top = CInputMgr::GetInstance()->GetMousePos().y;
         printf("LBT_DOWN! \n");
+        m_bIsSetRect = false;
     }
     if (CInputMgr::GetInstance()->IsLBTUp())
     {
         m_stSelectRect.right = CInputMgr::GetInstance()->GetMousePos().x;
         m_stSelectRect.bottom = CInputMgr::GetInstance()->GetMousePos().y;
         printf("LBT_UP! \n");
+        m_bIsSetRect = true;
 
     }
 
@@ -105,22 +183,15 @@ int CAnimationTool::Update()
 int CAnimationTool::Enter()
 {
     // Create UI Test
-    CUI* pUi = CFactory<CUI>::Create(Vector3({ CLIENT_WIDTH - 50 ,CLIENT_HEIGHT * 0.5f ,0.f})
+    CUI* pUi = CFactory<CUI>::Create(Vector3({ (float)CLIENT_WIDTH - 150.f , (float)CLIENT_HEIGHT * 0.5f ,0.f})
                                    , Vector3({ 0.f ,0.f ,0.f})
-                                   , Vector2({(float)CLIENT_WIDTH / 2,(float)CLIENT_HEIGHT })
+                                   , Vector2({ 300.f , (float)CLIENT_HEIGHT })
                                    , false);
-    // Create Child UI Test
-    CUI* pChildUi = CFactory<CUI>::Create(Vector3({ CLIENT_WIDTH - 50 ,CLIENT_HEIGHT * 0.25f ,0.f })
-                                        , Vector3({ 0.f ,0.f ,0.f })
-                                        , Vector2({ (float)CLIENT_WIDTH / 2,(float)100 })
-                                        , false);
-    // Push Child UI
-    pUi->AddChild(pChildUi);
 
     // Add Object in Scene
     m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pUi);
 
-    m_pWillMake = CFactory<CAnimation>::Create();
+    m_pAnimation= CFactory<CAnimation>::Create();
     return 0;
 }
 

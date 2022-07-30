@@ -7,8 +7,7 @@ class CInputMgr
 public:
 	bool IsLBTDown();
 	bool IsLBTUp();
-
-	INPUTSTATE GetKeyState();
+	bool IsLBTPressed();
 
 	POINT GetMousePos()const { return m_stMousePos; }
 public:// Logic

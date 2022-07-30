@@ -73,11 +73,11 @@
     <Filter Include="Framework\02.Manager\ResourceManager">
       <UniqueIdentifier>{a1e2c15f-4911-4215-8b55-98a90cf2cb84}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Framework\06.Object\UI\UI_PlayKeyFrame">
-      <UniqueIdentifier>{2611cfed-d6dd-4eef-9b6f-2f7621f0a907}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\02.Manager\UIManager">
       <UniqueIdentifier>{8ca485bd-764d-44bc-8ac3-3bc764cf1b5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\06.Object\UI\UI_Animation">
+      <UniqueIdentifier>{2611cfed-d6dd-4eef-9b6f-2f7621f0a907}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +151,9 @@
     <ClInclude Include="CUIManager.h">
       <Filter>Framework\02.Manager\UIManager</Filter>
     </ClInclude>
+    <ClInclude Include="CAnimationUI.h">
+      <Filter>Framework\06.Object\UI\UI_Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -206,6 +209,9 @@
     </ClCompile>
     <ClCompile Include="CUIManager.cpp">
       <Filter>Framework\02.Manager\UIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimationUI.cpp">
+      <Filter>Framework\06.Object\UI\UI_Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
