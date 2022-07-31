@@ -115,17 +115,7 @@ int CAnimationTool::Render(const HDC _hdc)
     }
     if (nullptr == m_pTexture)
         return 0;
-    TransparentBlt(_hdc
-                       , 0
-                       , 0
-                       , m_pTexture->GetBitInfo().bmWidth
-                       , m_pTexture->GetBitInfo().bmHeight
-                       , m_pTexture->GetTextureDC()
-                       , 0
-                       , 0
-                       , m_pTexture->GetBitInfo().bmWidth
-                       , m_pTexture->GetBitInfo().bmHeight
-                       , NULL);
+    
 
 
     // Setting CutBitmap
@@ -139,6 +129,18 @@ int CAnimationTool::Render(const HDC _hdc)
         }
         DrawSelectRect(_hdc);
     }
+
+    TransparentBlt(_hdc
+        , 0
+        , 0
+        , m_pTexture->GetBitInfo().bmWidth
+        , m_pTexture->GetBitInfo().bmHeight
+        , m_pTexture->GetTextureDC()
+        , 0
+        , 0
+        , m_pTexture->GetBitInfo().bmWidth
+        , m_pTexture->GetBitInfo().bmHeight
+        , NULL);
 
     // MouseUpdate Test
     wstring str;

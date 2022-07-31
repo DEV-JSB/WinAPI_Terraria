@@ -3,15 +3,15 @@
 
 
 CTransform2D::CTransform2D()
-	:m_vecPosition()
-	, m_vecRotation()
-	, m_vecScale()
+	:m_vPosition()
+	, m_vRotation()
+	, m_vScale()
 {}
 
 CTransform2D::CTransform2D(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale)
-	:m_vecPosition(_pos)
-	,m_vecRotation(_rot)
-	,m_vecScale(_scale)
+	:m_vPosition(_pos)
+	,m_vRotation(_rot)
+	,m_vScale(_scale)
 {
 }
 
