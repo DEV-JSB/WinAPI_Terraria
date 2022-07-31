@@ -79,6 +79,9 @@
     <Filter Include="Framework\06.Object\UI\UI_Animation">
       <UniqueIdentifier>{2611cfed-d6dd-4eef-9b6f-2f7621f0a907}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\02.Manager\TimeManager">
+      <UniqueIdentifier>{1cf1fdd8-9160-4b9a-b27d-f122dc461ec4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -154,6 +157,9 @@
     <ClInclude Include="CAnimationUI.h">
       <Filter>Framework\06.Object\UI\UI_Animation</Filter>
     </ClInclude>
+    <ClInclude Include="CTimeMgr.h">
+      <Filter>Framework\02.Manager\TimeManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -212,6 +218,9 @@
     </ClCompile>
     <ClCompile Include="CAnimationUI.cpp">
       <Filter>Framework\06.Object\UI\UI_Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimeMgr.cpp">
+      <Filter>Framework\02.Manager\TimeManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

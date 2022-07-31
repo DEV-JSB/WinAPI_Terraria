@@ -1,5 +1,2 @@
-﻿  CAnimationTool.cpp
-  CAnimationUI.cpp
-  CEngine.cpp
-  CInputMgr.cpp
+﻿  CTimeMgr.cpp
   Terraria.vcxproj -> D:\UNITY\JK_MU\WinAPI_Terraria\Terraria\Debug\Terraria.exe

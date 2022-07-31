@@ -4,6 +4,7 @@
 #include"CInputMgr.h"
 #include"CPathMgr.h"
 #include"CResourceMgr.h"
+#include"CTimeMgr.h"
 
 #define WINDOWSTART_X 100
 #define WINDOWSTART_Y 100
@@ -67,10 +68,10 @@ int CEngine::Init(HWND _hwnd, POINT _resoulution)
 
 
 	// Initialize Manager
+	CTimeMgr::GetInstance()->Init();
 	CSceneMgr::GetInstance()->Init();
 	CPathMgr::GetInstance()->Init();
 	CInputMgr::GetInstance()->Init();
-
 
 	return 0;
 }
@@ -86,12 +87,16 @@ int CEngine::Update()
 	// UpdateManager
 	CSceneMgr::GetInstance()->Update();
 	CInputMgr::GetInstance()->Update();
+	CTimeMgr::GetInstance()->Update();
+
 	return 0;
 }
 
 int CEngine::Render()
 {
+	// RenderingManager
 	CSceneMgr::GetInstance()->Render(m_bufferDC);
+	CTimeMgr::GetInstance()->Render();
 
 	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
 		m_bufferDC, 0, 0, SRCCOPY);
