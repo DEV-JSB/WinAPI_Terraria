@@ -2,7 +2,10 @@
 class CTimeMgr
 {
 
+public:
 
+	// GetDelaTime
+	double GetDT() { return m_dDT; }
 
 public:
 	int Update();

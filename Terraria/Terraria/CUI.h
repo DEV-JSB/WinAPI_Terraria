@@ -15,7 +15,8 @@ public:
     virtual int Update()        override;
     virtual int Render(const HDC _dc) override;
     virtual int FinalUpdate() override;
-
+public:
+    int Release();
 private: // Child Update Logic
 
     int Update_Child();
@@ -33,7 +34,7 @@ private:
     //Is Affected Camera?
     bool m_bCamAffected;
 
-private: //Construct
+protected: //Construct
     friend class CFactory<CUI>;
     CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAffected);
     CUI(const bool _bAffected);

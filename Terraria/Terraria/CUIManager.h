@@ -7,11 +7,8 @@ class CUIManager
 {
 
 public:
+	int Release();
 	int Update();
-
-
-private:
-	CUI* m_pUI;
 private:
 	SINGLE(CUIManager);
 

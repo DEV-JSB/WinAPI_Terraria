@@ -2,6 +2,23 @@
 #include"CUI.h"
 #include"CTransform2D.h"
 #include"Function.h"
+
+
+CUI::CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAffected)
+	:CObject(_pos, _rot, _scale)
+	, m_pParent(nullptr)
+	, m_vOffsetPos({ 0.f,0.f,0.f })
+	, m_bCamAffected(_bAffected)
+{
+}
+
+CUI::CUI(const bool _bAffected)
+	:m_pParent(nullptr)
+	, m_vOffsetPos({ 0.f,0.f,0.f })
+	, m_bCamAffected(_bAffected)
+{
+}
+
 int CUI::AddChild(CUI* _pChild)
 {
 	m_vecChildUI.push_back(_pChild);
@@ -33,11 +50,18 @@ int CUI::FinalUpdate()
 {
 	if (GetParent())
 	{
+		// Follow Parent UI
 		CTransform2D* pTransform = GET_COMPONENT(CTransform2D, m_mapComponent, COMPONENT::COMPONENT_TRANSFORM2D);
 		Vector3 Pos = pTransform->GetPosition();
 		Pos += m_vOffsetPos;
 		pTransform->SetPosition(Pos);
 	}
+	return 0;
+}
+
+int CUI::Release()
+{
+	Delete_Vec<CUI*>(m_vecChildUI);
 	return 0;
 }
 
@@ -68,22 +92,8 @@ int CUI::FinalUpdate_Child()
 	return 0;
 }
 
-CUI::CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale,bool _bAffected)
-	:CObject(_pos, _rot, _scale)
-	, m_pParent(nullptr)
-	, m_vOffsetPos({ 0.f,0.f,0.f })
-	, m_bCamAffected(_bAffected)
-{
-}
-
-CUI::CUI(const bool _bAffected)
-	:m_pParent(nullptr)
-	, m_vOffsetPos({ 0.f,0.f,0.f })
-	, m_bCamAffected(_bAffected)
-{
-}
 
 CUI::~CUI()
 {
-	Delete_Vec<CUI*>(m_vecChildUI);
+	Release();
 }

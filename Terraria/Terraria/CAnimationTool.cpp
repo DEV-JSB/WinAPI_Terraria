@@ -3,6 +3,8 @@
 #include "resource.h"
 #include "CAnimationTool.h"
 #include "CFactory.h"
+#include "CUIManager.h"
+#include "CAnimationUI.h"
 #include "CUI.h"
 #include "CAnimation.h"
 #include "CTexture.h"
@@ -56,7 +58,8 @@ bool CAnimationTool::CheckCutBitmap(const HDC _hdc)
     // Check Cut is Success
     if (CuttingRect.left != 0 && CuttingRect.right != 0 && CuttingRect.top != 0 && CuttingRect.bottom != 0)
     {
-        m_stSelectRect = CuttingRect;
+        m_stSelectRect = CuttingRect;  
+        SetAnimation();
         return true;
     }
     return false;
@@ -133,10 +136,9 @@ int CAnimationTool::Render(const HDC _hdc)
         {
             // Save Animation and Can Replace Offset
             m_bIsSetRect = false;
-            SetAnimation();
         }
+        DrawSelectRect(_hdc);
     }
-    DrawSelectRect(_hdc);
 
     // MouseUpdate Test
     wstring str;
@@ -150,7 +152,7 @@ int CAnimationTool::Update()
     // Not File Name Setting Exeption handling
     if (m_strFileName.size() == 0)
         return FUNC_ERROR;
-    
+
     m_pTexture = CResourceMgr::GetInstance()->LoadTexture(m_strFileName, CPathMgr::GetInstance()->GetContentPath());
     
     // Exeption Handling
@@ -160,21 +162,21 @@ int CAnimationTool::Update()
         return FUNC_ERROR;
     }
 
+    // UI Update
+    CUIManager::GetInstance()->Update();
+
     // SetRect Follow MouseDrag
     if (CInputMgr::GetInstance()->IsLBTDown())
     {
         m_stSelectRect.left = CInputMgr::GetInstance()->GetMousePos().x;
         m_stSelectRect.top = CInputMgr::GetInstance()->GetMousePos().y;
-        printf("LBT_DOWN! \n");
         m_bIsSetRect = false;
     }
     if (CInputMgr::GetInstance()->IsLBTUp())
     {
         m_stSelectRect.right = CInputMgr::GetInstance()->GetMousePos().x;
         m_stSelectRect.bottom = CInputMgr::GetInstance()->GetMousePos().y;
-        printf("LBT_UP! \n");
         m_bIsSetRect = true;
-
     }
 
 
@@ -189,9 +191,18 @@ int CAnimationTool::Enter()
                                    , Vector2({ 300.f , (float)CLIENT_HEIGHT })
                                    , false);
 
+    CUI* pAnimationUi = CFactory<CAnimationUI>::Create(Vector3({ (float)CLIENT_WIDTH - 150.f , (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.25f),0.f })
+                                            , Vector3({ 0.f ,0.f ,0.f })
+                                            , Vector2({ 300.f , (float)CLIENT_HEIGHT * 0.5f })
+                                            , false);
+
+    pUi->AddChild(pAnimationUi);
+
+
     // Add Object in Scene
     m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pUi);
 
+    //Create Animation
     m_pAnimation= CFactory<CAnimation>::Create();
     return 0;
 }

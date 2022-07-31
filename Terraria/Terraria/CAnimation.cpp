@@ -13,6 +13,7 @@ CAnimation::CAnimation()
 	:m_strName()
 	,m_pTex(nullptr)
 	,m_bIsFinish(false)
+	,m_fAccumulateTime(0.f)
 {
 }
 
