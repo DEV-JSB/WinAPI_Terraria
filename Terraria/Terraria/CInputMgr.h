@@ -10,6 +10,7 @@ public:
 	bool IsLBTPressed();
 
 	POINT GetMousePos()const { return m_stMousePos; }
+	INPUTSTATE GetKeyState(KEY _eType) { return m_vecstKeyInfo[(int)_eType].eState; }
 public:// Logic
 	int Update();
 	int Init();

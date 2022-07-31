@@ -136,6 +136,7 @@ int CAnimationTool::Render(const HDC _hdc)
             SetAnimation();
         }
     }
+    DrawSelectRect(_hdc);
 
     // MouseUpdate Test
     wstring str;
