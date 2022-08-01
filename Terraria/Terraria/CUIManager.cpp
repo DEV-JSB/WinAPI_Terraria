@@ -42,3 +42,14 @@ int CUIManager::Update()
 
 	return 0;
 }
+
+int CUIManager::Render(const HDC _hdc)
+{
+	//Get UI Objcet Group
+	CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
+	const vector<CObject*>& vecUI = pCurScene->GetObjectGroup(OBJECT::OBJECT_UI);
+
+	for (size_t i = 0; i < vecUI.size(); ++i)
+		vecUI[i]->Render(_hdc);
+	return 0;
+}

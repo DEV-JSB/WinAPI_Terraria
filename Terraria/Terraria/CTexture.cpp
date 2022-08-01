@@ -15,7 +15,7 @@ int CTexture::LoadTexture(const wstring& _strfilepath)
 	//assert(m_hBit);
 
 	// SetDraw DC
-	m_DC = CEngine::GetInstance()->GetBufferDC();
+	m_DC = CreateCompatibleDC(CEngine::GetInstance()->GetMainDC());
 
 	// Set DC on Bit
 	HBITMAP hPrevBit = (HBITMAP)SelectObject(m_DC, m_hBit);

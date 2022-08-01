@@ -103,4 +103,15 @@ int CEngine::Render()
 	return 0;
 }
 
+int CEngine::RenderExceptDoubleBuffer()
+{
+	CSceneMgr::GetInstance()->Render(m_hDC);
+	CTimeMgr::GetInstance()->Render();
+
+	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
+		m_bufferDC, 0, 0, SRCCOPY);
+	return 0;
+	return 0;
+}
+
 

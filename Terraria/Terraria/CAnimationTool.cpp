@@ -106,29 +106,10 @@ int CAnimationTool::Release()
 int CAnimationTool::Render(const HDC _hdc)
 {
 
-    for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
-    {
-        for (size_t j = 0; j < m_arrObjectVec[i].size(); ++j)
-        {
-            m_arrObjectVec[i][j]->Render(_hdc);
-        }
-    }
+    
     if (nullptr == m_pTexture)
         return 0;
-    
 
-
-    // Setting CutBitmap
-    if (m_bIsSetRect)
-    {
-        DrawSelectRect(_hdc);
-        if (CheckCutBitmap(_hdc))
-        {
-            // Save Animation and Can Replace Offset
-            m_bIsSetRect = false;
-        }
-        DrawSelectRect(_hdc);
-    }
 
     TransparentBlt(_hdc
         , 0
@@ -142,9 +123,33 @@ int CAnimationTool::Render(const HDC _hdc)
         , m_pTexture->GetBitInfo().bmHeight
         , NULL);
 
+    for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
+    {
+        for (size_t j = 0; j < m_arrObjectVec[i].size(); ++j)
+        {
+            m_arrObjectVec[i][j]->Render(_hdc);
+        }
+    }
+
+
+    // Setting CutBitmap
+    if (m_bIsSetRect)
+    {
+        if (CheckCutBitmap(_hdc))
+        {
+            // Save Animation and Can Replace Offset
+            m_bIsSetRect = false;
+        }
+        DrawSelectRect(_hdc);
+    }
+
+
+    //UI Rendering
+    CUIManager::GetInstance()->Render(_hdc);
+
     // MouseUpdate Test
-    wstring str;
-    POINT p = CInputMgr::GetInstance()->GetMousePos();
+    /*wstring str;
+    POINT p = CInputMgr::GetInstance()->GetMousePos();*/
     return 0;
     
 }
