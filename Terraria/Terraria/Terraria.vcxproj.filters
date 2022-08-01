@@ -82,6 +82,9 @@
     <Filter Include="Framework\02.Manager\TimeManager">
       <UniqueIdentifier>{1cf1fdd8-9160-4b9a-b27d-f122dc461ec4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\06.Object\UI\UI_Button">
+      <UniqueIdentifier>{75b79dde-68e6-403a-aca9-28b23930e66e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -160,6 +163,9 @@
     <ClInclude Include="CTimeMgr.h">
       <Filter>Framework\02.Manager\TimeManager</Filter>
     </ClInclude>
+    <ClInclude Include="CButtonUI.h">
+      <Filter>Framework\06.Object\UI\UI_Button</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -221,6 +227,9 @@
     </ClCompile>
     <ClCompile Include="CTimeMgr.cpp">
       <Filter>Framework\02.Manager\TimeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CButtonUI.cpp">
+      <Filter>Framework\06.Object\UI\UI_Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

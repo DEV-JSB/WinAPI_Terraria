@@ -10,9 +10,9 @@ public:
 	virtual int Render(HDC _dc)		= 0;
 	virtual int FinalUpdate()		= 0;
 
-protected:
+public:
 	// GetTransform
-	CTransform2D* GetTransform()const;
+	CTransform2D* GetTransform() const;
 
 public: // Set Funtion
 	// Setting Object Pos

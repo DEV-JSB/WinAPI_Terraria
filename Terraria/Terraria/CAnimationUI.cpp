@@ -1,16 +1,23 @@
 #include "pch.h"
 #include"CTransform2D.h"
 #include "CAnimationUI.h"
+#include"CAnimation.h"
 
-int CAnimationUI::PlayAnimationSample(CAnimation& _animation)
+int CAnimationUI::PlayAnimationSample(const HDC _dc)
 {
-	
-
+	if (0 == m_pAnimationSample->GetFrameCount())
+		return 0;
+	m_pAnimationSample->SampleRender(_dc, m_vSamplePos);
 	return 0;
 }
 
+
+
 int CAnimationUI::Update()
 {
+	if (0 == m_pAnimationSample->GetFrameCount())
+		return 0;
+	m_pAnimationSample->Update();
 	return 0;
 }
 
@@ -35,6 +42,9 @@ int CAnimationUI::Render(const HDC _dc)
 	LineTo(_dc
 		, (int)pTrans->GetPosition_X()
 		, (int)(pTrans->GetPosition_Y() + pTrans->GetScale_Height() * 0.5f));
+	
+	if (nullptr != m_pAnimationSample)
+		PlayAnimationSample(_dc);
 	return 0;
 }
 
@@ -46,8 +56,10 @@ int CAnimationUI::FinalUpdate()
 
 CAnimationUI::CAnimationUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAffected)
 	:CUI(_pos,_rot,_scale,_bAffected)
+	, m_pAnimationSample(nullptr)
 {
 	CTransform2D* pTrans = CUI::GetTransform();
 	m_vSamplePos.x = pTrans->GetPosition_X();
 	m_vSamplePos.y = pTrans->GetPosition_Y();
+	m_eType = UI_TYPE::UI_ANIMTAION;
 }

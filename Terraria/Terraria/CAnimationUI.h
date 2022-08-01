@@ -7,17 +7,17 @@ class CAnimation;
 
 class CAnimationUI : public CUI
 {
-
-
-
 public:
-	int PlayAnimationSample(CAnimation& _animator);
+	int SetAnimation(CAnimation* _p) { m_pAnimationSample = _p; return 0; }
+	int PlayAnimationSample(const HDC _dc);
 public: // Logic
 	virtual int Update()        override;
 	virtual int Render(const HDC _dc) override;
 	virtual int FinalUpdate() override;
+	virtual UI_TYPE GetType() override { return m_eType; };
 
 private:
+	CAnimation* m_pAnimationSample;
 	Vector2 m_vSamplePos;
 private: // Constructor
 	friend class CFactory<CAnimationUI>;

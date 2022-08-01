@@ -8,9 +8,15 @@ class CAnimation
 {
 public:
 	
-	int SampleRender(const HDC _dc, const Vector2 Pos);
+	int SampleRender(const HDC _dc, const Vector2& Pos);
 	// SetAnimationFrame
 	int SetAniFrame(stAnimFrame& _frame) { m_vecFrame.push_back(_frame); return 0; }
+	// Set Texture
+	int SetTexture(CTexture* _pTexture) { m_pTex = _pTexture; return 0; }
+	// Get Frame Count
+	int GetFrameCount()const { return m_vecFrame.size(); }
+public:
+	int Update();
 
 private:
 	// Animation Name
@@ -23,6 +29,8 @@ private:
 	bool m_bIsFinish;
 	// Time accumulate
 	float m_fAccumulateTime;
+	// FrameIndex
+	int m_iFrameIndex;
 
 private: // Constructor
 

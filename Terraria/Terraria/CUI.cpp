@@ -9,6 +9,7 @@ CUI::CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAf
 	, m_pParent(nullptr)
 	, m_vOffsetPos({ 0.f,0.f,0.f })
 	, m_bCamAffected(_bAffected)
+	, m_eType(UI_TYPE::UI_PARENT)
 {
 }
 
@@ -16,27 +17,26 @@ CUI::CUI(const bool _bAffected)
 	:m_pParent(nullptr)
 	, m_vOffsetPos({ 0.f,0.f,0.f })
 	, m_bCamAffected(_bAffected)
+	, m_eType(UI_TYPE::UI_PARENT)
 {
 }
 
 int CUI::AddChild(CUI* _pChild)
 {
-	m_vecChildUI.push_back(_pChild);
+	UI_TYPE type = _pChild->GetType();
+	m_vecChildUI[(int)type].push_back(_pChild);
 	_pChild->m_pParent = this;
 	return 0;
 }
 
 int CUI::Update()
 {
+	Update_Child();
 	return 0;
 }
 
 int CUI::Render(const HDC _dc)
 {
-
-
-
-
 	CTransform2D* pTrans = GetTransform();
 	Rectangle(_dc, (int)(pTrans->GetPosition_X() - pTrans->GetScale_Width() / 2.f)
 				 , (int)(pTrans->GetPosition_Y() - pTrans->GetScale_Height() / 2.f	 )
@@ -61,7 +61,8 @@ int CUI::FinalUpdate()
 
 int CUI::Release()
 {
-	Delete_Vec<CUI*>(m_vecChildUI);
+	for(int i = 0 ; i<(int)UI_TYPE::UI_END;++i)
+		Delete_Vec<CUI*>(m_vecChildUI[i]);
 	return 0;
 }
 
@@ -69,25 +70,30 @@ int CUI::Release()
 
 int CUI::Update_Child()
 {
-	for (size_t i = 0; i < m_vecChildUI.size(); ++i)
-		m_vecChildUI[i]->Update();
+	for (int i = 0; i < (int)UI_TYPE::UI_END; ++i)
+	{
+		for(UINT j = 0 ; j < m_vecChildUI[i].size();++j)
+			m_vecChildUI[i][j]->Update();
+	}
 	return 0;
 }
 
 int CUI::Render_Child(const HDC _dc)
 {
-	for (size_t i = 0; i < m_vecChildUI.size(); ++i)
+	for (int i = 0; i < (int)UI_TYPE::UI_END; ++i)
 	{
-		m_vecChildUI[i]->Render(_dc);
+		for (UINT j = 0; j < m_vecChildUI[i].size(); ++j)
+			m_vecChildUI[i][j]->Render(_dc);
 	}
 	return 0;
 }
 
 int CUI::FinalUpdate_Child()
 {
-	for (size_t i = 0; i < m_vecChildUI.size(); ++i)
+	for (int i = 0; i < (int)UI_TYPE::UI_END; ++i)
 	{
-		m_vecChildUI[i]->FinalUpdate_Child();
+		for (UINT j = 0; j < m_vecChildUI[i].size(); ++j)
+			m_vecChildUI[i][j]->FinalUpdate();
 	}
 	return 0;
 }

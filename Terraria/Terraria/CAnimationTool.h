@@ -4,12 +4,14 @@
 
 class CAnimation;
 class CTexture;
+class CAnimationUI;
+
 
 class CAnimationTool : public CScene
 {
 public:
 	// Setting FileName
-	int SetOpenFileName(const wstring& _Key) { m_strFileName = _Key; return 0; };
+	int SetOpenFileName(const wstring& _Key);
 	// DrawSelectRect Line
 	int DrawSelectRect(const HDC _hdc);
 	// SettingAnimationFrame
@@ -31,7 +33,7 @@ private:// Member
 
 	// SaveFileName_Setting_Dialog
 	wstring m_strFileName;
-	
+
 	// Wiil MakeAnimation Frame
 	stAnimFrame m_stAniFrame;
 

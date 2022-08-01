@@ -29,7 +29,7 @@ int CObject::Render(HDC _dc)
 
 CTransform2D* CObject::GetTransform() const
 {
-	CTransform2D* pTrans = RTTI_DYNAMIC_CAST(CTransform2D, m_mapComponent, COMPONENT::COMPONENT_TRANSFORM2D);
+	CTransform2D* pTrans = RTTI_DYNAMIC_CAST_MAP(CTransform2D, m_mapComponent, COMPONENT::COMPONENT_TRANSFORM2D);
 	// Exeption handling
 	assert(pTrans);
 
@@ -38,7 +38,7 @@ CTransform2D* CObject::GetTransform() const
 
 int CObject::SetTransform(const Vector3 _pos)
 {
-	CTransform2D* pTrans = RTTI_DYNAMIC_CAST(CTransform2D, m_mapComponent, COMPONENT::COMPONENT_TRANSFORM2D);
+	CTransform2D* pTrans = RTTI_DYNAMIC_CAST_MAP(CTransform2D, m_mapComponent, COMPONENT::COMPONENT_TRANSFORM2D);
 	// Exeption handling
 	assert(pTrans);
 	pTrans->SetPosition(_pos);
@@ -48,7 +48,7 @@ int CObject::SetTransform(const Vector3 _pos)
 
 int CObject::SetScale(const Vector2 _scale)
 {
-	CTransform2D* pTrans = RTTI_DYNAMIC_CAST(CTransform2D, m_mapComponent, COMPONENT::COMPONENT_TRANSFORM2D);
+	CTransform2D* pTrans = RTTI_DYNAMIC_CAST_MAP(CTransform2D, m_mapComponent, COMPONENT::COMPONENT_TRANSFORM2D);
 	// Exeption handling
 	assert(pTrans);
 	pTrans->SetScale(_scale);
