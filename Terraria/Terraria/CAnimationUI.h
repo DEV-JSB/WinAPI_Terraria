@@ -15,6 +15,7 @@ public: // Logic
 	virtual int Render(const HDC _dc) override;
 	virtual int FinalUpdate() override;
 	virtual UI_TYPE GetType() override { return m_eType; };
+	virtual int MouseButtonClicked() override;
 
 private:
 	CAnimation* m_pAnimationSample;

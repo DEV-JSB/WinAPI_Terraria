@@ -7,7 +7,8 @@ class CTexture;
 class CAnimation
 {
 public:
-	
+	// SetFrameOffser
+	int ReposOffset(const int _frameIdx, const Vector2& _off);
 	int SampleRender(const HDC _dc, const Vector2& Pos);
 	// SetAnimationFrame
 	int SetAniFrame(stAnimFrame& _frame) { m_vecFrame.push_back(_frame); return 0; }

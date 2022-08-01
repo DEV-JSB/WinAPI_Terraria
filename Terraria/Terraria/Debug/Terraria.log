@@ -1,2 +1,22 @@
-﻿  CUIManager.cpp
-  Terraria.vcxproj -> D:\UNITY\JK_MU\WinAPI_Terraria\Terraria\Debug\Terraria.exe
+﻿  CAnimation.cpp
+  CAnimationTool.cpp
+  CAnimationUI.cpp
+  CAnimator.cpp
+  CButtonUI.cpp
+D:\UNITY\JK_MU\WinAPI_Terraria\Terraria\Terraria\CButtonUI.cpp(36,17): error C2198: 'int (__cdecl *)(DWORD_PTR,DWORD_PTR)': too few arguments for call
+  CComponent.cpp
+  CEngine.cpp
+  CInputMgr.cpp
+  CObject.cpp
+  CPathMgr.cpp
+  CPlayer.cpp
+  CResource.cpp
+  CResourceMgr.cpp
+  CScene.cpp
+  CSceneMgr.cpp
+  CTexture.cpp
+  CTimeMgr.cpp
+  CTransform2D.cpp
+  CUI.cpp
+  CUIManager.cpp
+  Terraria.cpp

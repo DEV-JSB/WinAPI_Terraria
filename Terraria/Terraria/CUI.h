@@ -11,6 +11,7 @@ public:
     // Get UI Type
     virtual UI_TYPE GetType() { return m_eType; };
     
+    // Get UI Group
     const vector<CUI*>& GetUIGroup(const UI_TYPE _type)
     {
         return m_vecChildUI[(int)_type]; 
@@ -21,6 +22,8 @@ public:
     virtual int Update()        override;
     virtual int Render(const HDC _dc) override;
     virtual int FinalUpdate() override;
+    // Child Function
+    virtual int MouseButtonClicked() { return 0; };
 public:
     int Release();
 private: // Child Update Logic
@@ -29,7 +32,9 @@ private: // Child Update Logic
     int Render_Child(const HDC _dc);
     int FinalUpdate_Child();
 
-protected: 
+protected:
+    // IsFocusing
+    bool m_bIsFocus;
     // Have Many Child UI  
     vector<CUI*> m_vecChildUI[(int)UI_TYPE::UI_END];
     // Parent UI

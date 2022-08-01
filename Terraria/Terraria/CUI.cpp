@@ -10,6 +10,7 @@ CUI::CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAf
 	, m_vOffsetPos({ 0.f,0.f,0.f })
 	, m_bCamAffected(_bAffected)
 	, m_eType(UI_TYPE::UI_PARENT)
+	, m_bIsFocus(false)
 {
 }
 
@@ -18,6 +19,7 @@ CUI::CUI(const bool _bAffected)
 	, m_vOffsetPos({ 0.f,0.f,0.f })
 	, m_bCamAffected(_bAffected)
 	, m_eType(UI_TYPE::UI_PARENT)
+	, m_bIsFocus(false)
 {
 }
 
@@ -58,6 +60,7 @@ int CUI::FinalUpdate()
 	}
 	return 0;
 }
+
 
 int CUI::Release()
 {

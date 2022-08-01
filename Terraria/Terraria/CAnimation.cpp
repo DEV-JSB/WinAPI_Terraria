@@ -4,6 +4,12 @@
 #include "CTimeMgr.h"
 #include"CTexture.h"
 
+int CAnimation::ReposOffset(const int _frameIdx, const Vector2& _off)
+{
+	m_vecFrame[_frameIdx].vOffset = _off;
+	return 0;
+}
+
 int CAnimation::SampleRender(const HDC _dc, const Vector2& Pos)
 {
 	TransparentBlt(_dc

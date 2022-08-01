@@ -7,6 +7,12 @@
 #define CLIENT_WIDTH 1280
 #define CLIENT_HEIGHT 720
 
+#define CHECK_POS_IN_TRANSRECT(trans,pos)((trans->GetPosition_X() - trans->GetScale_Width() * 0.5f) <= pos.x\
+									&& pos.x <= (trans->GetPosition_X() + trans->GetScale_Width() * 0.5f)\
+									&& (trans->GetPosition_Y() - trans->GetScale_Height() * 0.5f) <= pos.y\
+									&& pos.y <= (trans->GetPosition_X() - trans->GetScale_Width() * 0.5f))\
+
+
 #define RTTI_DYNAMIC_CAST_MAP(classname,map,type) 	dynamic_cast<classname*>((*map.find(type)).second);
 #define GET_COMPONENT(classname,map,type) RTTI_DYNAMIC_CAST_MAP(classname,map,type)
 #define SINGLE(classname)private:\

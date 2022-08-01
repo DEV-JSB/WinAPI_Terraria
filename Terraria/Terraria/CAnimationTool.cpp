@@ -239,14 +239,26 @@ CAnimationTool::~CAnimationTool()
 }
 
 
-int ChangeOffsetMin(DWORD_PTR, DWORD_PTR)
+int ChangeOffsetUp(DWORD_PTR, DWORD_PTR)
 {
     
     return 0;
 }
+int ChangeOffsetDown(DWORD_PTR, DWORD_PTR)
+{
 
+    return 0;
+}
+int ChangeOffsetLeft(DWORD_PTR, DWORD_PTR)
+{
 
+    return 0;
+}
+int ChangeOffsetRight(DWORD_PTR, DWORD_PTR)
+{
 
+    return 0;
+}
 
 // ==========================================
 // This is Tool Proc , Not Member Function

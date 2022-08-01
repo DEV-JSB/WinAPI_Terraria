@@ -64,7 +64,7 @@ int CUIManager::Update()
 	}
 
 	FoucusingCheck();
-
+	
 	return 0;
 }
 
@@ -90,20 +90,14 @@ int CUIManager::FoucusingCheck()
 	{
 		// If Mouse Isn't on ParentUI Then BreakOut
 		pTrans = vecUI[i]->GetTransform();
-		if (!((pTrans->GetPosition_X() - pTrans->GetScale_Width() * 0.5f) <= stMousePos.x
-			&& stMousePos.x <= (pTrans->GetPosition_X() + pTrans->GetScale_Width() * 0.5f)
-			&& (pTrans->GetPosition_Y() - pTrans->GetScale_Height() * 0.5f) <= stMousePos.y
-			&& stMousePos.y <= (pTrans->GetPosition_X() - pTrans->GetScale_Width() * 0.5f)))
+		if (!CHECK_POS_IN_TRANSRECT(pTrans,stMousePos))
 			break;
 		vector<CUI*>ButtonUI = (dynamic_cast<CUI*>(vecUI[i]))->GetUIGroup(UI_TYPE::UI_BUTTON);
 		for (size_t j = 0; j < ButtonUI.size(); ++j)
 		{
 			pTrans = ButtonUI[j]->GetTransform();
 			POINT stMousePos = CInputMgr::GetInstance()->GetMousePos();
-			if ((pTrans->GetPosition_X() - pTrans->GetScale_Width() * 0.5f)<= stMousePos.x
-				&& stMousePos.x <= (pTrans->GetPosition_X() + pTrans->GetScale_Width() * 0.5f)
-				&& (pTrans->GetPosition_Y() - pTrans->GetScale_Height() * 0.5f) <= stMousePos.y
-				&& stMousePos.y <= (pTrans->GetPosition_X() - pTrans->GetScale_Width() * 0.5f))
+			if (CHECK_POS_IN_TRANSRECT(pTrans, stMousePos))
 			{
 				Focus = true;
 				m_pFocusing = (CUI*)vecUI[i];
