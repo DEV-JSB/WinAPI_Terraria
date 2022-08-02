@@ -12,6 +12,7 @@
 									&& (trans->GetPosition_Y() - trans->GetScale_Height() * 0.5f) <= pos.y\
 									&& pos.y <= (trans->GetPosition_X() - trans->GetScale_Width() * 0.5f))\
 
+#define RTTI_DYNAMIC_CAST(classpointer,changeclass) dynamic_cast<changeclass*>(classpointer)
 
 #define RTTI_DYNAMIC_CAST_MAP(classname,map,type) 	dynamic_cast<classname*>((*map.find(type)).second);
 #define GET_COMPONENT(classname,map,type) RTTI_DYNAMIC_CAST_MAP(classname,map,type)

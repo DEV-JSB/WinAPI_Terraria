@@ -54,6 +54,11 @@ int CAnimationUI::FinalUpdate()
 	return 0;
 }
 
+int CAnimationUI::MouseButtonClicked()
+{
+	return 0;
+}
+
 CAnimationUI::CAnimationUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAffected)
 	:CUI(_pos,_rot,_scale,_bAffected)
 	, m_pAnimationSample(nullptr)

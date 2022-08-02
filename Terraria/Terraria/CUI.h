@@ -4,6 +4,9 @@
 class CUI : public CObject
 {
 public:
+    
+    //SetFocus
+    int SetFocus(const bool _b) { m_bIsFocus = _b; return 0; };
 
     CUI* GetParent()const { return m_pParent; }
     // Add Chid UI and Set Parent Point

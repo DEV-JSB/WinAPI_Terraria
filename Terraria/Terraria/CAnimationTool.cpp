@@ -20,6 +20,12 @@
 #define ANI_UI_WIDTH 300.f
 #define ANI_UI_HEIGHT
 
+int ChangeOffsetRight(DWORD_PTR _pAni, DWORD_PTR _pIdx);
+int ChangeOffsetDown(DWORD_PTR _pAni, DWORD_PTR _pIdx);
+int ChangeOffsetUp(DWORD_PTR _pAni, DWORD_PTR _pIdx);
+int ChangeOffsetLeft(DWORD_PTR _pAni, DWORD_PTR _pIdx);
+
+
 CAnimationTool::CAnimationTool()
     : m_pAnimation(nullptr)
     , m_pTexture(nullptr)
@@ -27,6 +33,7 @@ CAnimationTool::CAnimationTool()
     , m_strFileName({})
     , m_bIsSetRect(false)
     , m_stAniFrame({0})
+    , m_iSettingFrame(0)
 {
 }
 
@@ -187,6 +194,11 @@ int CAnimationTool::Update()
 
 int CAnimationTool::Enter()
 {
+
+    //Create Animation
+    m_pAnimation= CFactory<CAnimation>::Create();
+    
+    
     // Create UI Test
     CUI* pUi = CFactory<CUI>::Create(Vector3({ (float)CLIENT_WIDTH - ANI_UI_WIDTH * 0.5f , (float)CLIENT_HEIGHT * 0.5f ,0.f})
                                    , Vector3({ 0.f ,0.f ,0.f})
@@ -204,22 +216,22 @@ int CAnimationTool::Enter()
                                             , Vector2({ 80.f , 40.f })
                                             , false);
     pBtnUi->SetButtonName(L"OFFSET_UP");
+    pBtnUi->SetFunc(ChangeOffsetUp, (DWORD_PTR)m_pAnimation, (DWORD_PTR)&m_iSettingFrame);
     pUi->AddChild(pBtnUi);
     // Button UI 2
     pBtnUi = CFactory<CButtonUI>::Create(Vector3({ (float)CLIENT_WIDTH - 150.f , (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.8f),0.f })
                                             , Vector3({ 0.f ,0.f ,0.f })
                                             , Vector2({ 80.f , 40.f })
                                             , false);
+
+    pBtnUi->SetFunc(ChangeOffsetDown, (DWORD_PTR)m_pAnimation, (DWORD_PTR)&m_iSettingFrame);
     pBtnUi->SetButtonName(L"OFFSET_DOWN");
     pUi->AddChild(pBtnUi);
-
 
 
     // Add Object in Scene
     m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pUi);
 
-    //Create Animation
-    m_pAnimation= CFactory<CAnimation>::Create();
     return 0;
 }
 
@@ -239,24 +251,49 @@ CAnimationTool::~CAnimationTool()
 }
 
 
-int ChangeOffsetUp(DWORD_PTR, DWORD_PTR)
+int ChangeOffsetUp(DWORD_PTR _pAni, DWORD_PTR _pIdx)
 {
-    
+    CAnimation* pAni = (CAnimation*)_pAni;
+    if (0 == pAni->GetFrameCount())
+        return 0;
+    int Idx = *(int*)_pIdx;
+    Vector2 FrameOffset = ((CAnimation*)_pAni)->GetOffset(Idx);
+    --FrameOffset.y;
+    ((CAnimation*)_pAni)->ReposOffset(Idx, FrameOffset);
+    printf("업 버튼 함수 호출!\n");
     return 0;
 }
-int ChangeOffsetDown(DWORD_PTR, DWORD_PTR)
+int ChangeOffsetDown(DWORD_PTR _pAni, DWORD_PTR _pIdx)
 {
-
+    CAnimation* pAni = (CAnimation*)_pAni;
+    if (0 == pAni->GetFrameCount())
+        return 0;
+    int Idx = *(int*)_pIdx;
+    Vector2 FrameOffset = ((CAnimation*)_pAni)->GetOffset(Idx);
+    ++FrameOffset.y;
+    ((CAnimation*)_pAni)->ReposOffset(Idx, FrameOffset);
     return 0;
 }
-int ChangeOffsetLeft(DWORD_PTR, DWORD_PTR)
+int ChangeOffsetLeft(DWORD_PTR _pAni, DWORD_PTR _pIdx)
 {
-
+    CAnimation* pAni = (CAnimation*)_pAni;
+    if (0 == pAni->GetFrameCount())
+        return 0;
+    int Idx = *(int*)_pIdx;
+    Vector2 FrameOffset = ((CAnimation*)_pAni)->GetOffset(Idx);
+    --FrameOffset.x;
+    ((CAnimation*)_pAni)->ReposOffset(Idx, FrameOffset);
     return 0;
 }
-int ChangeOffsetRight(DWORD_PTR, DWORD_PTR)
+int ChangeOffsetRight(DWORD_PTR _pAni, DWORD_PTR _pIdx)
 {
-
+    CAnimation* pAni = (CAnimation*)_pAni;
+    if (0 == pAni->GetFrameCount())
+        return 0;
+    int Idx = *(int*)_pIdx;
+    Vector2 FrameOffset = ((CAnimation*)_pAni)->GetOffset(Idx);
+    ++FrameOffset.x;
+    ((CAnimation*)_pAni)->ReposOffset(Idx, FrameOffset);
     return 0;
 }
 

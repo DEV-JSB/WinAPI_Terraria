@@ -33,13 +33,18 @@ int CButtonUI::SetFunc(int(*_pFunc)(DWORD_PTR, DWORD_PTR), DWORD_PTR _p1, DWORD_
 int CButtonUI::MouseButtonClicked()
 {
     if (nullptr != m_pFunc)
-        m_pFunc(m_pParam1,m_pParam2);
+    {
+        printf("이벤트 함수 호출!\n");
+        m_pFunc(m_pParam1, m_pParam2);
+    }
     return 0;
 }
 CButtonUI::CButtonUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAffected)
     : CUI(_pos, _rot, _scale, _bAffected)
     , m_pFunc(nullptr)
     , m_strButtonName({})
+    , m_pParam1(0)
+    , m_pParam2(0)
 {
     m_eType = UI_TYPE::UI_BUTTON;
 }

@@ -16,7 +16,6 @@ public:
 	int DrawSelectRect(const HDC _hdc);
 	// SettingAnimationFrame
 	int SetAnimation();
-
 public:
 	// Delete Object
 	virtual int Release()			   override;
@@ -27,6 +26,9 @@ public:
 	virtual int Enter()				   override;
 
 private:// Member
+
+	// Will Fix Frame
+	int m_iSettingFrame;
 
 	// Check SettingRect
 	bool m_bIsSetRect;
@@ -46,7 +48,7 @@ private:// Member
 	// Select RectRange
 	RECT m_stSelectRect;
 private:// Private Function
-
+	
 	// CutBitmap
 	bool CheckCutBitmap(const HDC _hdc);
 private: // Constructor

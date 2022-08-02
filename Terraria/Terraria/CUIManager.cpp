@@ -11,6 +11,7 @@
 
 CUIManager::CUIManager()
 	:m_pFocusing(nullptr)
+	,m_eFocusType(UI_TYPE::UI_END)
 {
 
 }
@@ -64,7 +65,12 @@ int CUIManager::Update()
 	}
 
 	FoucusingCheck();
-	
+
+	if (nullptr != m_pFocusing && CInputMgr::GetInstance()->IsLBTDown())
+	{
+		m_pFocusing->MouseButtonClicked();
+		printf("버튼 이벤트 발생!\n");
+	}
 	return 0;
 }
 
@@ -92,6 +98,7 @@ int CUIManager::FoucusingCheck()
 		pTrans = vecUI[i]->GetTransform();
 		if (!CHECK_POS_IN_TRANSRECT(pTrans,stMousePos))
 			break;
+		// ////////////////////////////////////////
 		vector<CUI*>ButtonUI = (dynamic_cast<CUI*>(vecUI[i]))->GetUIGroup(UI_TYPE::UI_BUTTON);
 		for (size_t j = 0; j < ButtonUI.size(); ++j)
 		{
@@ -100,16 +107,18 @@ int CUIManager::FoucusingCheck()
 			if (CHECK_POS_IN_TRANSRECT(pTrans, stMousePos))
 			{
 				Focus = true;
-				m_pFocusing = (CUI*)vecUI[i];
-				printf("포커싱 할당!!\n");
+				m_pFocusing = RTTI_DYNAMIC_CAST(ButtonUI[i], CButtonUI);
+				m_pFocusing->SetFocus(true);
+				m_eFocusType = UI_TYPE::UI_BUTTON;
+
 				break;
 			}
 		}
 	}
 	if (!Focus && m_pFocusing != nullptr)
 	{
+		m_pFocusing->SetFocus(false);
 		m_pFocusing = nullptr;
-		printf("포커싱 해제");
 	}
 
 	return 0;
