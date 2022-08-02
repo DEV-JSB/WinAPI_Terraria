@@ -5,9 +5,13 @@
 
 int CAnimationUI::PlayAnimationSample(const HDC _dc)
 {
-	if (0 == m_pAnimationSample->GetFrameCount())
+	if (0 == m_vecAnimationSample.size())
 		return 0;
-	m_pAnimationSample->SampleRender(_dc, m_vSamplePos);
+	for (size_t i = 0; i < m_vecAnimationSample.size(); ++i)
+	{
+		if( 0 != m_vecAnimationSample[i]->GetFrameCount() )
+			m_vecAnimationSample[i]->SampleRender(_dc, m_vSamplePos);
+	}
 	return 0;
 }
 
@@ -15,9 +19,13 @@ int CAnimationUI::PlayAnimationSample(const HDC _dc)
 
 int CAnimationUI::Update()
 {
-	if (0 == m_pAnimationSample->GetFrameCount())
+	if (0 == m_vecAnimationSample.size())
 		return 0;
-	m_pAnimationSample->Update();
+	for (size_t i = 0; i < m_vecAnimationSample.size(); ++i)
+	{
+		if(0 != m_vecAnimationSample[i]->GetFrameCount())
+			m_vecAnimationSample[i]->Update();
+	}
 	return 0;
 }
 
@@ -43,7 +51,7 @@ int CAnimationUI::Render(const HDC _dc)
 		, (int)pTrans->GetPosition_X()
 		, (int)(pTrans->GetPosition_Y() + pTrans->GetScale_Height() * 0.5f));
 	
-	if (nullptr != m_pAnimationSample)
+	if (0 != m_vecAnimationSample.size())
 		PlayAnimationSample(_dc);
 	return 0;
 }
@@ -61,7 +69,7 @@ int CAnimationUI::MouseButtonClicked()
 
 CAnimationUI::CAnimationUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAffected)
 	:CUI(_pos,_rot,_scale,_bAffected)
-	, m_pAnimationSample(nullptr)
+	, m_iAnimationIndex(0)
 {
 	CTransform2D* pTrans = CUI::GetTransform();
 	m_vSamplePos.x = pTrans->GetPosition_X();

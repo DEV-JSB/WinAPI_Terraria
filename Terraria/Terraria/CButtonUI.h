@@ -1,8 +1,7 @@
 #pragma once
 #include "CUI.h"
 #include "CFactory.h"
-class CButtonUI :
-    public CUI
+class CButtonUI : public CUI 
 {
 public:
     int SetButtonName(const wstring& _name) { m_strButtonName = _name; return 0; }

@@ -103,6 +103,7 @@ int CAnimationTool::SetOpenFileName(const wstring& _Key)
         // & Exaption Handling
         if (FUNC_ERROR == CUIManager::GetInstance()->SettingAnimation(m_pAnimation))
             assert(nullptr);
+        if(FUNC_ERROR)
         // Input Texture In Animation
         m_pAnimation->SetTexture(m_pTexture);
     }
@@ -122,8 +123,6 @@ int CAnimationTool::SetAnimation()
 
     // SetAnimation
     m_pAnimation->SetAniFrame(m_stAniFrame);
-    
-
 
     return 0;
 }
@@ -192,45 +191,71 @@ int CAnimationTool::Update()
 	return 0;
 }
 
+int CAnimationTool::SettingUI()
+{
+    // Create UI Test
+    CUI* pUi = CFactory<CUI>::Create(Vector3({ (float)CLIENT_WIDTH - ANI_UI_WIDTH * 0.5f , (float)CLIENT_HEIGHT * 0.5f ,0.f })
+        , Vector3({ 0.f ,0.f ,0.f })
+        , Vector2({ ANI_UI_WIDTH , (float)CLIENT_HEIGHT })
+        , false);
+    
+    // Animation UI
+    CUI* pAnimationUi = CFactory<CAnimationUI>::Create(Vector3({ (float)CLIENT_WIDTH - ANI_UI_WIDTH * 0.5f , (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.25f),0.f })
+        , Vector3({ 0.f ,0.f ,0.f })
+        , Vector2({ ANI_UI_WIDTH , (float)CLIENT_HEIGHT * 0.5f })
+        , false);
+    pUi->AddChild(pAnimationUi);
+    
+    // Button UI 1
+    CButtonUI* pBtnUi = CFactory<CButtonUI>::Create(Vector3({ (float)CLIENT_WIDTH - 150.f, (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.9f),0.f })
+        , Vector3({ 0.f ,0.f ,0.f })
+        , Vector2({ 80.f , 40.f })
+        , false);
+    pBtnUi->SetButtonName(L"OFF_UP");
+    pBtnUi->SetFunc(ChangeOffsetUp, (DWORD_PTR)m_pAnimation, (DWORD_PTR)&m_iSettingFrame);
+    pUi->AddChild(pBtnUi);
+
+    // Button UI 2
+    pBtnUi = CFactory<CButtonUI>::Create(Vector3({ (float)CLIENT_WIDTH - 150.f , (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.8f),0.f })
+        , Vector3({ 0.f ,0.f ,0.f })
+        , Vector2({ 80.f , 40.f })
+        , false);
+    pBtnUi->SetFunc(ChangeOffsetDown, (DWORD_PTR)m_pAnimation, (DWORD_PTR)&m_iSettingFrame);
+    pBtnUi->SetButtonName(L"OFF_DOWN");
+    pUi->AddChild(pBtnUi);
+
+    // Button UI 3
+    pBtnUi = CFactory<CButtonUI>::Create(Vector3({ (float)CLIENT_WIDTH - ANI_UI_WIDTH + (float)(150.f * 0.3f) ,(float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.85f),0.f })
+        , Vector3({ 0.f ,0.f ,0.f })
+        , Vector2({ 80.f , 40.f })
+        , false);
+    pBtnUi->SetFunc(ChangeOffsetLeft, (DWORD_PTR)m_pAnimation, (DWORD_PTR)&m_iSettingFrame);
+    pBtnUi->SetButtonName(L"OFF_LEFT");
+    pUi->AddChild(pBtnUi);
+
+    // Button UI 4
+    pBtnUi = CFactory<CButtonUI>::Create(Vector3({ (float)CLIENT_WIDTH - 150.f + (float)(150.f * 0.7f), (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.85f),0.f })
+        , Vector3({ 0.f ,0.f ,0.f })
+        , Vector2({ 80.f , 40.f })
+        , false);
+    pBtnUi->SetFunc(ChangeOffsetRight, (DWORD_PTR)m_pAnimation, (DWORD_PTR)&m_iSettingFrame);
+    pBtnUi->SetButtonName(L"OFF_RIGHT");
+    pUi->AddChild(pBtnUi);
+    
+    // Add Object in Scene
+    m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pUi);
+
+    return 0;
+}
 int CAnimationTool::Enter()
 {
 
     //Create Animation
     m_pAnimation= CFactory<CAnimation>::Create();
     
+    SettingUI();
+
     
-    // Create UI Test
-    CUI* pUi = CFactory<CUI>::Create(Vector3({ (float)CLIENT_WIDTH - ANI_UI_WIDTH * 0.5f , (float)CLIENT_HEIGHT * 0.5f ,0.f})
-                                   , Vector3({ 0.f ,0.f ,0.f})
-                                   , Vector2({ ANI_UI_WIDTH , (float)CLIENT_HEIGHT })
-                                   , false);
-    // Animation UI
-    CUI* pAnimationUi = CFactory<CAnimationUI>::Create(Vector3({ (float)CLIENT_WIDTH - ANI_UI_WIDTH * 0.5f , (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.25f),0.f })
-                                            , Vector3({ 0.f ,0.f ,0.f })
-                                            , Vector2({ ANI_UI_WIDTH , (float)CLIENT_HEIGHT * 0.5f })
-                                            , false);
-    pUi->AddChild(pAnimationUi);
-    // Button UI 1
-    CButtonUI* pBtnUi = CFactory<CButtonUI>::Create(Vector3({ (float)CLIENT_WIDTH - 150.f, (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.9f),0.f })
-                                            , Vector3({ 0.f ,0.f ,0.f })
-                                            , Vector2({ 80.f , 40.f })
-                                            , false);
-    pBtnUi->SetButtonName(L"OFFSET_UP");
-    pBtnUi->SetFunc(ChangeOffsetUp, (DWORD_PTR)m_pAnimation, (DWORD_PTR)&m_iSettingFrame);
-    pUi->AddChild(pBtnUi);
-    // Button UI 2
-    pBtnUi = CFactory<CButtonUI>::Create(Vector3({ (float)CLIENT_WIDTH - 150.f , (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.8f),0.f })
-                                            , Vector3({ 0.f ,0.f ,0.f })
-                                            , Vector2({ 80.f , 40.f })
-                                            , false);
-
-    pBtnUi->SetFunc(ChangeOffsetDown, (DWORD_PTR)m_pAnimation, (DWORD_PTR)&m_iSettingFrame);
-    pBtnUi->SetButtonName(L"OFFSET_DOWN");
-    pUi->AddChild(pBtnUi);
-
-
-    // Add Object in Scene
-    m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pUi);
 
     return 0;
 }
@@ -260,7 +285,6 @@ int ChangeOffsetUp(DWORD_PTR _pAni, DWORD_PTR _pIdx)
     Vector2 FrameOffset = ((CAnimation*)_pAni)->GetOffset(Idx);
     --FrameOffset.y;
     ((CAnimation*)_pAni)->ReposOffset(Idx, FrameOffset);
-    printf("업 버튼 함수 호출!\n");
     return 0;
 }
 int ChangeOffsetDown(DWORD_PTR _pAni, DWORD_PTR _pIdx)

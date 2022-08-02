@@ -28,14 +28,18 @@ int CUIManager::SettingAnimation(CAnimation* pAni)
 
 
 	vector<CUI*> pAniUI = dynamic_cast<CUI*>(vecUI[0])->GetUIGroup(UI_TYPE::UI_ANIMTAION);
-
+	CAnimationUI* aniUI = dynamic_cast<CAnimationUI*>(pAniUI[0]);
+	// Excaption Handling
 	if (1 != pAniUI.size())
 		return FUNC_ERROR;
-	else
+	// Excaption Handling
+	assert(aniUI);
+
+	if( 0 != aniUI->GetAnimationCount())
 	{
-		CAnimationUI* aniUI = dynamic_cast<CAnimationUI*>(pAniUI[0]);
-		aniUI->SetAnimation(pAni);
+		aniUI->AddAnimationIndex();
 	}
+	aniUI->SetAnimation(pAni);
 	return 0;
 }
 
@@ -107,7 +111,7 @@ int CUIManager::FoucusingCheck()
 			if (CHECK_POS_IN_TRANSRECT(pTrans, stMousePos))
 			{
 				Focus = true;
-				m_pFocusing = RTTI_DYNAMIC_CAST(ButtonUI[i], CButtonUI);
+				m_pFocusing = RTTI_DYNAMIC_CAST(ButtonUI[j], CButtonUI);
 				m_pFocusing->SetFocus(true);
 				m_eFocusType = UI_TYPE::UI_BUTTON;
 

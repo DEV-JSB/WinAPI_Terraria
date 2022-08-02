@@ -141,6 +141,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             case IDM_OPENFILE:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_SETFILENAME), hWnd, AnimationToolProc);
                 break;
+            case IDM_ADD_ANI:
+                DialogBox(hInst, MAKEINTRESOURCE(IDD_SETFILENAME), hWnd, AnimationToolProc);
+                break;
             case IDM_EXIT:
                 DestroyWindow(hWnd);
                 break;

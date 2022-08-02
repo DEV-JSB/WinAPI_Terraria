@@ -5,11 +5,6 @@
 
 class CTransform2D : public CComponent
 {
-private:
-	CTransform2D(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
-	CTransform2D();
-
-
 public:
 	virtual ~CTransform2D();
 public: // Logic Function
@@ -31,6 +26,8 @@ private: // Member
 	Vector3 m_vPosition;
 	Vector3 m_vRotation;
 	Vector2 m_vScale;
-
+private:
 	friend class CFactory<CTransform2D>;
+	CTransform2D(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
+	CTransform2D();
 };

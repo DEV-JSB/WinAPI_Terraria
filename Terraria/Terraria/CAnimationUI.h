@@ -1,15 +1,18 @@
 #pragma once
 #include"CUI.h"
 #include"CFactory.h"
-
+#include"CAnimationTool.h"
 
 class CAnimation;
 
 class CAnimationUI : public CUI
 {
 public:
-	int SetAnimation(CAnimation* _p) { m_pAnimationSample = _p; return 0; }
+	int SetAnimation(CAnimation* _p) { m_vecAnimationSample.push_back(_p); return 0; }
 	int PlayAnimationSample(const HDC _dc);
+	int GetAnimationCount()const { return m_iAnimationIndex; }
+	int AddAnimationIndex() { ++m_iAnimationIndex; return 0; }
+	int MinAnimationIndex() { --m_iAnimationIndex; return 0; }
 public: // Logic
 	virtual int Update()        override;
 	virtual int Render(const HDC _dc) override;
@@ -18,7 +21,8 @@ public: // Logic
 	virtual int MouseButtonClicked() override;
 
 private:
-	CAnimation* m_pAnimationSample;
+	int m_iAnimationIndex;
+	vector<CAnimation*> m_vecAnimationSample;
 	Vector2 m_vSamplePos;
 private: // Constructor
 	friend class CFactory<CAnimationUI>;

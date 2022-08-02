@@ -10,7 +10,7 @@
 #define CHECK_POS_IN_TRANSRECT(trans,pos)((trans->GetPosition_X() - trans->GetScale_Width() * 0.5f) <= pos.x\
 									&& pos.x <= (trans->GetPosition_X() + trans->GetScale_Width() * 0.5f)\
 									&& (trans->GetPosition_Y() - trans->GetScale_Height() * 0.5f) <= pos.y\
-									&& pos.y <= (trans->GetPosition_X() - trans->GetScale_Width() * 0.5f))\
+									&& pos.y <= (trans->GetPosition_Y() + trans->GetScale_Height() * 0.5f))\
 
 #define RTTI_DYNAMIC_CAST(classpointer,changeclass) dynamic_cast<changeclass*>(classpointer)
 

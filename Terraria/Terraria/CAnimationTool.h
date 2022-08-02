@@ -48,7 +48,8 @@ private:// Member
 	// Select RectRange
 	RECT m_stSelectRect;
 private:// Private Function
-	
+	// Setting UI
+	int SettingUI();
 	// CutBitmap
 	bool CheckCutBitmap(const HDC _hdc);
 private: // Constructor

@@ -5,6 +5,7 @@ template<typename T>
 class CFactory
 {
 public:
+
 	static T* Create();
 	// Transform Component
 	static T* Create(const Vector3& _pos, const Vector3& _rot, const Vector2& _scale);
