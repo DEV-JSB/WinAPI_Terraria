@@ -12,7 +12,7 @@
 #include "CSceneMgr.h"
 #include "CInputMgr.h"
 #include "CResourceMgr.h"
-#include"CButtonUI.h"
+#include "CButtonUI.h"
 
 #define BIT_BOUNDARY_LINE 50
 #define SAMPLE_ANIMATION_DURATION 0.5f
@@ -20,10 +20,11 @@
 #define ANI_UI_WIDTH 300.f
 #define ANI_UI_HEIGHT
 
-int ChangeOffsetRight(DWORD_PTR _pAni, DWORD_PTR _pIdx);
-int ChangeOffsetDown(DWORD_PTR _pAni, DWORD_PTR _pIdx);
-int ChangeOffsetUp(DWORD_PTR _pAni, DWORD_PTR _pIdx);
-int ChangeOffsetLeft(DWORD_PTR _pAni, DWORD_PTR _pIdx);
+int ChangeOffsetRight   (DWORD_PTR _pAni, DWORD_PTR _pIdx);
+int ChangeOffsetDown    (DWORD_PTR _pAni, DWORD_PTR _pIdx);
+int ChangeOffsetUp      (DWORD_PTR _pAni, DWORD_PTR _pIdx);
+int ChangeOffsetLeft    (DWORD_PTR _pAni, DWORD_PTR _pIdx);
+int ChangeIndex         (DWORD_PTR _pAni, DWORD_PTR _pIdx);
 
 
 CAnimationTool::CAnimationTool()
@@ -34,6 +35,7 @@ CAnimationTool::CAnimationTool()
     , m_bIsSetRect(false)
     , m_stAniFrame({0})
     , m_iSettingFrame(0)
+    ,m_pAnimationUI(nullptr)
 {
 }
 
@@ -73,6 +75,8 @@ bool CAnimationTool::CheckCutBitmap(const HDC _hdc)
         SetAnimation();
         return true;
     }
+    // Reset Rect
+    m_stSelectRect = { 0,0,0,0 };
     return false;
 }
 
@@ -99,13 +103,19 @@ int CAnimationTool::SetOpenFileName(const wstring& _Key)
     }
     else
     {
-        // Input Animation In UI
-        // & Exaption Handling
-        if (FUNC_ERROR == CUIManager::GetInstance()->SettingAnimation(m_pAnimation))
-            assert(nullptr);
-        if(FUNC_ERROR)
+        if (m_pAnimationUI->GetAnimationCount() != 0)
+        {
+            m_pAnimation = CFactory<CAnimation>::Create();
+            for (size_t i = 0; i < m_vecBtnUI.size(); ++i)
+            {
+                m_vecBtnUI[i]->SetParam1((DWORD_PTR)m_pAnimation);
+            }
+
+        }
         // Input Texture In Animation
         m_pAnimation->SetTexture(m_pTexture);
+        // Input Animation In UI
+        m_pAnimationUI->SetAnimation(m_pAnimation);
     }
     return 0;
 }
@@ -173,24 +183,31 @@ int CAnimationTool::Update()
     // UI Update
     CUIManager::GetInstance()->Update();
 
-    // SetRect Follow MouseDrag
-    if (CInputMgr::GetInstance()->IsLBTDown())
-    {
-        m_stSelectRect.left = CInputMgr::GetInstance()->GetMousePos().x;
-        m_stSelectRect.top = CInputMgr::GetInstance()->GetMousePos().y;
-        m_bIsSetRect = false;
-    }
-    if (CInputMgr::GetInstance()->IsLBTUp())
-    {
-        m_stSelectRect.right = CInputMgr::GetInstance()->GetMousePos().x;
-        m_stSelectRect.bottom = CInputMgr::GetInstance()->GetMousePos().y;
-        m_bIsSetRect = true;
-    }
 
-
+    if (!CUIManager::GetInstance()->IsFocusingAnything())
+    {
+        // SetRect Follow MouseDrag
+        if (CInputMgr::GetInstance()->IsLBTDown())
+        {
+            m_stSelectRect.left = CInputMgr::GetInstance()->GetMousePos().x;
+            m_stSelectRect.top = CInputMgr::GetInstance()->GetMousePos().y;
+            m_bIsSetRect = false;
+        }
+        if (CInputMgr::GetInstance()->IsLBTUp())
+        {
+            m_stSelectRect.right = CInputMgr::GetInstance()->GetMousePos().x;
+            m_stSelectRect.bottom = CInputMgr::GetInstance()->GetMousePos().y;
+            m_bIsSetRect = true;
+        }
+    }
 	return 0;
 }
+int CAnimationTool::SettingBTN_Func()
+{
+    
 
+    return 0;
+}
 int CAnimationTool::SettingUI()
 {
     // Create UI Test
@@ -200,11 +217,11 @@ int CAnimationTool::SettingUI()
         , false);
     
     // Animation UI
-    CUI* pAnimationUi = CFactory<CAnimationUI>::Create(Vector3({ (float)CLIENT_WIDTH - ANI_UI_WIDTH * 0.5f , (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.25f),0.f })
+    m_pAnimationUI = CFactory<CAnimationUI>::Create(Vector3({ (float)CLIENT_WIDTH - ANI_UI_WIDTH * 0.5f , (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.25f),0.f })
         , Vector3({ 0.f ,0.f ,0.f })
         , Vector2({ ANI_UI_WIDTH , (float)CLIENT_HEIGHT * 0.5f })
         , false);
-    pUi->AddChild(pAnimationUi);
+    pUi->AddChild(m_pAnimationUI);
     
     // Button UI 1
     CButtonUI* pBtnUi = CFactory<CButtonUI>::Create(Vector3({ (float)CLIENT_WIDTH - 150.f, (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.9f),0.f })
@@ -215,6 +232,8 @@ int CAnimationTool::SettingUI()
     pBtnUi->SetFunc(ChangeOffsetUp, (DWORD_PTR)m_pAnimation, (DWORD_PTR)&m_iSettingFrame);
     pUi->AddChild(pBtnUi);
 
+    m_vecBtnUI.push_back(pBtnUi);
+
     // Button UI 2
     pBtnUi = CFactory<CButtonUI>::Create(Vector3({ (float)CLIENT_WIDTH - 150.f , (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.8f),0.f })
         , Vector3({ 0.f ,0.f ,0.f })
@@ -223,6 +242,8 @@ int CAnimationTool::SettingUI()
     pBtnUi->SetFunc(ChangeOffsetDown, (DWORD_PTR)m_pAnimation, (DWORD_PTR)&m_iSettingFrame);
     pBtnUi->SetButtonName(L"OFF_DOWN");
     pUi->AddChild(pBtnUi);
+
+    m_vecBtnUI.push_back(pBtnUi);
 
     // Button UI 3
     pBtnUi = CFactory<CButtonUI>::Create(Vector3({ (float)CLIENT_WIDTH - ANI_UI_WIDTH + (float)(150.f * 0.3f) ,(float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.85f),0.f })
@@ -233,6 +254,8 @@ int CAnimationTool::SettingUI()
     pBtnUi->SetButtonName(L"OFF_LEFT");
     pUi->AddChild(pBtnUi);
 
+    m_vecBtnUI.push_back(pBtnUi);
+
     // Button UI 4
     pBtnUi = CFactory<CButtonUI>::Create(Vector3({ (float)CLIENT_WIDTH - 150.f + (float)(150.f * 0.7f), (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.85f),0.f })
         , Vector3({ 0.f ,0.f ,0.f })
@@ -241,7 +264,20 @@ int CAnimationTool::SettingUI()
     pBtnUi->SetFunc(ChangeOffsetRight, (DWORD_PTR)m_pAnimation, (DWORD_PTR)&m_iSettingFrame);
     pBtnUi->SetButtonName(L"OFF_RIGHT");
     pUi->AddChild(pBtnUi);
-    
+
+    m_vecBtnUI.push_back(pBtnUi);
+
+    // Button Switching Index
+    pBtnUi = CFactory<CButtonUI>::Create(Vector3({ (float)CLIENT_WIDTH - 150.f + (float)(150.f * 0.7f), (float)CLIENT_HEIGHT - (float)(CLIENT_HEIGHT * 0.6f),0.f })
+        , Vector3({ 0.f ,0.f ,0.f })
+        , Vector2({ 80.f , 40.f })
+        , false);
+    pBtnUi->SetFunc(ChangeIndex, (DWORD_PTR)m_pAnimation, (DWORD_PTR)&m_iSettingFrame);
+    pBtnUi->SetButtonName(L"PartChange");
+    pUi->AddChild(pBtnUi);
+
+    m_vecBtnUI.push_back(pBtnUi);
+
     // Add Object in Scene
     m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pUi);
 
@@ -249,20 +285,18 @@ int CAnimationTool::SettingUI()
 }
 int CAnimationTool::Enter()
 {
-
     //Create Animation
-    m_pAnimation= CFactory<CAnimation>::Create();
-    
+    m_pAnimation = CFactory<CAnimation>::Create();
     SettingUI();
-
-    
-
     return 0;
 }
 
 
 int CAnimationTool::Release()
 {
+    // Object Will Delete In Scene
+    vector<CAnimation*> vecAnimation = m_pAnimationUI->GetAniVector();
+    Delete_Vec(vecAnimation);
     // Scene Parent Will Delete All of Object
     delete this;
     return 0;
@@ -271,10 +305,19 @@ int CAnimationTool::Release()
 
 CAnimationTool::~CAnimationTool()
 {
-    // Object Will Delete In Scene
-    delete m_pAnimation;
+    
 }
 
+
+int ChangeIndex(DWORD_PTR _pAni, DWORD_PTR _pIdx)
+{
+    int MaxIdx = ((CAnimation*)_pAni)->GetFrameCount();
+    if (MaxIdx < (*(int*)_pIdx) + 1)
+        *(int*)_pIdx = 0;
+    else
+        ++(*(int*)_pIdx);
+    return 0;
+}
 
 int ChangeOffsetUp(DWORD_PTR _pAni, DWORD_PTR _pIdx)
 {

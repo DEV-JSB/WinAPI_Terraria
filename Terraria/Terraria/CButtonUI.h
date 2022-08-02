@@ -4,6 +4,8 @@
 class CButtonUI : public CUI 
 {
 public:
+    // SetParam1 
+    int SetParam1(const DWORD_PTR _param) { m_pParam1 = _param; return 0; }
     int SetButtonName(const wstring& _name) { m_strButtonName = _name; return 0; }
     int SetFunc(int(*_pFunc)(DWORD_PTR,DWORD_PTR) , DWORD_PTR _p1 , DWORD_PTR _p2);
 public:
@@ -19,6 +21,8 @@ private:
     // Function Pointer 
     int(*m_pFunc) (DWORD_PTR, DWORD_PTR);
     // For Function P
+
+    // In SceneTool : Animation*
     DWORD_PTR m_pParam1;
     DWORD_PTR m_pParam2;
 private:

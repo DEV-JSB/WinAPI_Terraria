@@ -21,27 +21,27 @@ CUIManager::~CUIManager()
 }
 
 // Only OneAnimation UI 
-int CUIManager::SettingAnimation(CAnimation* pAni)
-{
-	CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
-	vector<CObject*> vecUI = pCurScene->GetObjectGroup(OBJECT::OBJECT_UI);
-
-
-	vector<CUI*> pAniUI = dynamic_cast<CUI*>(vecUI[0])->GetUIGroup(UI_TYPE::UI_ANIMTAION);
-	CAnimationUI* aniUI = dynamic_cast<CAnimationUI*>(pAniUI[0]);
-	// Excaption Handling
-	if (1 != pAniUI.size())
-		return FUNC_ERROR;
-	// Excaption Handling
-	assert(aniUI);
-
-	if( 0 != aniUI->GetAnimationCount())
-	{
-		aniUI->AddAnimationIndex();
-	}
-	aniUI->SetAnimation(pAni);
-	return 0;
-}
+//int CUIManager::SettingAnimation(CAnimation* pAni)
+//{
+//	CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
+//	vector<CObject*> vecUI = pCurScene->GetObjectGroup(OBJECT::OBJECT_UI);
+//
+//
+//	vector<CUI*> pAniUI = dynamic_cast<CUI*>(vecUI[0])->GetUIGroup(UI_TYPE::UI_ANIMTAION);
+//	CAnimationUI* aniUI = dynamic_cast<CAnimationUI*>(pAniUI[0]);
+//	// Excaption Handling
+//	if (1 != pAniUI.size())
+//		return FUNC_ERROR;
+//	// Excaption Handling
+//	assert(aniUI);
+//
+//	if( 0 != aniUI->GetAnimationCount())
+//	{
+//		aniUI->AddAnimationIndex();
+//	}
+//	aniUI->SetAnimation(pAni);
+//	return 0;
+//}
 
 int CUIManager::Release()
 {
@@ -86,6 +86,14 @@ int CUIManager::Render(const HDC _hdc)
 	for (size_t i = 0; i < vecUI.size(); ++i)
 		vecUI[i]->Render(_hdc);
 	return 0;
+}
+
+bool CUIManager::IsFocusingAnything() const
+{
+	if (nullptr != m_pFocusing)
+		return true;
+	else
+		return false;
 }
 
 int CUIManager::FoucusingCheck()

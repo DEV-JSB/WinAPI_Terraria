@@ -8,9 +8,10 @@ class CAnimation;
 class CAnimationUI : public CUI
 {
 public:
+	vector<CAnimation*> GetAniVector()const { return m_vecAnimationSample; }
 	int SetAnimation(CAnimation* _p) { m_vecAnimationSample.push_back(_p); return 0; }
 	int PlayAnimationSample(const HDC _dc);
-	int GetAnimationCount()const { return m_iAnimationIndex; }
+	int GetAnimationCount()const { return m_vecAnimationSample.size(); }
 	int AddAnimationIndex() { ++m_iAnimationIndex; return 0; }
 	int MinAnimationIndex() { --m_iAnimationIndex; return 0; }
 public: // Logic
@@ -27,5 +28,7 @@ private:
 private: // Constructor
 	friend class CFactory<CAnimationUI>;
 	CAnimationUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAffected);
+public:
+	virtual ~CAnimationUI();
 };
 

@@ -38,8 +38,6 @@ private: // Child Update Logic
 protected:
     // IsFocusing
     bool m_bIsFocus;
-    // Have Many Child UI  
-    vector<CUI*> m_vecChildUI[(int)UI_TYPE::UI_END];
     // Parent UI
     CUI* m_pParent;
     // Culculate relative Position
@@ -48,6 +46,9 @@ protected:
     bool m_bCamAffected;
     // UI Type
     UI_TYPE m_eType;
+private:
+    // Have Many Child UI  
+    vector<CUI*> m_vecChildUI[(int)UI_TYPE::UI_END];
 protected: //Construct
     friend class CFactory<CUI>;
     CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAffected);

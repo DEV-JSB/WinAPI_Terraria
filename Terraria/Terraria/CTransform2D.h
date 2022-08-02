@@ -14,8 +14,8 @@ public: // Get Set Function
 	Vector3 GetPosition()const { return m_vPosition; }
 	float GetPosition_X()const { return m_vPosition.x; }
 	float GetPosition_Y()const { return m_vPosition.y; }
-	float GetScale_Width()const { return m_vScale.x; };
-	float GetScale_Height()const { return m_vScale.y; };
+	float GetScale_Width()const { return m_vScale.x; }
+	float GetScale_Height()const { return m_vScale.y; }
 
 
 

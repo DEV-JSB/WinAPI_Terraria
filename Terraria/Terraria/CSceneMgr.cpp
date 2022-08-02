@@ -14,6 +14,8 @@ CSceneMgr::~CSceneMgr()
 
 int CSceneMgr::Update()
 {
+	if (nullptr == m_pCurScene)
+		return 0;
 	m_pCurScene->Update();
 	return 0;
 }

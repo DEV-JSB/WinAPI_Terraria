@@ -34,7 +34,6 @@ int CButtonUI::MouseButtonClicked()
 {
     if (nullptr != m_pFunc)
     {
-        printf("이벤트 함수 호출!\n");
         m_pFunc(m_pParam1, m_pParam2);
     }
     return 0;

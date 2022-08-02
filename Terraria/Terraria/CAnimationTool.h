@@ -5,7 +5,7 @@
 class CAnimation;
 class CTexture;
 class CAnimationUI;
-
+class CButtonUI;
 
 class CAnimationTool : public CScene
 {
@@ -25,8 +25,12 @@ public:
 	virtual int Update()			   override;
 	virtual int Enter()				   override;
 
-private:// Member
+private: // Member
 
+	// Coupling Animation UI , Manager !!
+	CAnimationUI* m_pAnimationUI;
+	// Coupling BTN UI , Manager !!
+	vector<CButtonUI*> m_vecBtnUI;
 	// Will Fix Frame
 	int m_iSettingFrame;
 
@@ -47,7 +51,9 @@ private:// Member
 
 	// Select RectRange
 	RECT m_stSelectRect;
-private:// Private Function
+private: // Private Function
+	// ReSetting BTN Function
+	int SettingBTN_Func();
 	// Setting UI
 	int SettingUI();
 	// CutBitmap
