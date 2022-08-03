@@ -85,6 +85,9 @@
     <Filter Include="Framework\06.Object\UI\UI_Button">
       <UniqueIdentifier>{75b79dde-68e6-403a-aca9-28b23930e66e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\03.Scene\World">
+      <UniqueIdentifier>{187238d6-be2e-40c7-8e74-c543d7ec4061}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -166,6 +169,9 @@
     <ClInclude Include="CButtonUI.h">
       <Filter>Framework\06.Object\UI\UI_Button</Filter>
     </ClInclude>
+    <ClInclude Include="CWorld.h">
+      <Filter>Framework\03.Scene\World</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -230,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="CButtonUI.cpp">
       <Filter>Framework\06.Object\UI\UI_Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CWorld.cpp">
+      <Filter>Framework\03.Scene\World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

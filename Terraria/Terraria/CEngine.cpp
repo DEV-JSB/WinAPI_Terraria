@@ -69,9 +69,9 @@ int CEngine::Init(HWND _hwnd, POINT _resoulution)
 
 	// Initialize Manager
 	CTimeMgr::GetInstance()->Init();
-	CSceneMgr::GetInstance()->Init();
 	CPathMgr::GetInstance()->Init();
 	CInputMgr::GetInstance()->Init();
+	CSceneMgr::GetInstance()->Init();
 
 	return 0;
 }

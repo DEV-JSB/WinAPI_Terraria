@@ -127,6 +127,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 
 INT_PTR CALLBACK AnimationToolProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+INT_PTR CALLBACK SaveAnimationProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -143,6 +144,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 break;
             case IDM_ADD_ANI:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_SETFILENAME), hWnd, AnimationToolProc);
+                break;
+            case IDM_SAVEFILE:
+                DialogBox(hInst, MAKEINTRESOURCE(IDD_SAVINGDIALOG), hWnd, SaveAnimationProc);
                 break;
             case IDM_EXIT:
                 DestroyWindow(hWnd);

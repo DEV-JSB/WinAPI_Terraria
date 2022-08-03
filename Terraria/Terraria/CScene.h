@@ -17,6 +17,7 @@ protected:
 	std::vector<CObject*> m_arrObjectVec[(int)OBJECT::OBJECT_END];
 protected:
 	CScene();
+public:
 	virtual ~CScene();
 };
 

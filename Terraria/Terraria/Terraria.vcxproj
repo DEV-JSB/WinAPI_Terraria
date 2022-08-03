@@ -162,6 +162,7 @@
     <ClInclude Include="CTransform2D.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CUIManager.h" />
+    <ClInclude Include="CWorld.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Function.h" />
@@ -192,6 +193,7 @@
     <ClCompile Include="CTransform2D.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CUIManager.cpp" />
+    <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="Terraria.cpp" />
   </ItemGroup>
   <ItemGroup>

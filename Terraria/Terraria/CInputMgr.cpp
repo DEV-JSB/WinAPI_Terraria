@@ -27,6 +27,7 @@ int KeyInfo[(int)KEY::KEY_LAST] = {
 
 CInputMgr::CInputMgr()
 	:m_stMousePos({0,0})
+	,m_arrMouseInfo()
 {
 
 }

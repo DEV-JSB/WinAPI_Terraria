@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CSceneMgr.h"
 #include "CAnimationTool.h"
+#include"CWorld.h"
 #include "CFactory.h"
 CSceneMgr::CSceneMgr()
 	:m_pCurScene(nullptr)
@@ -28,24 +29,27 @@ int CSceneMgr::Render(HDC _hdc)
 
 int CSceneMgr::Enter()
 {
-	
+	// Setting Scene
+	m_pCurScene->Enter();
 
 	return 0;
 }
 
 int CSceneMgr::Init()
 {
-	//Create Scene
-	m_pCurScene = CFactory<CAnimationTool>::Create();
 	
-	// Setting Scene
-	m_pCurScene->Enter();
+	// CreateWorld
+	//m_pCurScene = CFactory<CWorld>::Create();
+	// Create Tool
+	m_pCurScene = CFactory<CAnimationTool>::Create();
+
+	Enter();
 	return 0;
 }
 
 int CSceneMgr::Release()
 {
 	m_pCurScene->Release();
-
+	delete m_pCurScene;
 	return 0;
 }

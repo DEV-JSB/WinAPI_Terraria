@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "CPlayer.h"
+#include"CAnimator.h"
+
 
 int CPlayer::FinalUpdate()
 {
@@ -18,6 +20,9 @@ int CPlayer::Render(const HDC _dc)
 
 CPlayer::CPlayer()
 {
+    // SetAnimator
+    CAnimator* pAnimator = CFactory<CAnimator>::Create();
+    pAnimator->LoadAnimation(L"Player");
 }
 
 CPlayer::~CPlayer()

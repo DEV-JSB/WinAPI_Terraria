@@ -10,8 +10,10 @@ class CButtonUI;
 class CAnimationTool : public CScene
 {
 public:
-	// Setting FileName
-	int SetOpenFileName(const wstring& _Key);
+	// SaveAnimation
+	int SaveAnimation();
+	// Setting FileName and Animation Name
+	int SetOpenFileName(const wstring& _Key,const wstring& _aniName, const wstring& _objname);
 	// DrawSelectRect Line
 	int DrawSelectRect(const HDC _hdc);
 	// SettingAnimationFrame

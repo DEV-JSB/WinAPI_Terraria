@@ -15,6 +15,7 @@
 #include "CButtonUI.h"
 
 #define BIT_BOUNDARY_LINE 50
+#define BIT_BOUNDRAY_LINE 61
 #define SAMPLE_ANIMATION_DURATION 0.5f
 
 #define ANI_UI_WIDTH 300.f
@@ -35,7 +36,7 @@ CAnimationTool::CAnimationTool()
     , m_bIsSetRect(false)
     , m_stAniFrame({0})
     , m_iSettingFrame(0)
-    ,m_pAnimationUI(nullptr)
+    , m_pAnimationUI(nullptr)
 {
 }
 
@@ -90,7 +91,7 @@ int CAnimationTool::DrawSelectRect(const HDC _hdc)
     LineTo(_hdc, m_stSelectRect.left, m_stSelectRect.top);
     return 0;
 }
-int CAnimationTool::SetOpenFileName(const wstring& _Key)
+int CAnimationTool::SetOpenFileName(const wstring& _Key,const wstring& _aniName,const wstring& _objname)
 {
     m_strFileName = _Key;
 
@@ -114,6 +115,8 @@ int CAnimationTool::SetOpenFileName(const wstring& _Key)
         }
         // Input Texture In Animation
         m_pAnimation->SetTexture(m_pTexture);
+        // Setting Animation Name
+        m_pAnimation->SetAnimationName(_aniName, _objname);
         // Input Animation In UI
         m_pAnimationUI->SetAnimation(m_pAnimation);
     }
@@ -202,12 +205,22 @@ int CAnimationTool::Update()
     }
 	return 0;
 }
-int CAnimationTool::SettingBTN_Func()
-{
-    
 
+int CAnimationTool::SaveAnimation()
+{
+    vector<CAnimation*> vecAnimation = m_pAnimationUI->GetAniVector();
+
+    for (size_t i = 0; i < vecAnimation.size(); ++i)
+    {
+        vecAnimation[i]->SaveFile();
+    }
+
+    Release();
+    Enter();
     return 0;
 }
+
+
 int CAnimationTool::SettingUI()
 {
     // Create UI Test
@@ -298,14 +311,13 @@ int CAnimationTool::Release()
     vector<CAnimation*> vecAnimation = m_pAnimationUI->GetAniVector();
     Delete_Vec(vecAnimation);
     // Scene Parent Will Delete All of Object
-    delete this;
     return 0;
 }
 
 
+
 CAnimationTool::~CAnimationTool()
 {
-    
 }
 
 
@@ -379,16 +391,21 @@ INT_PTR CALLBACK AnimationToolProc(HWND hDlg, UINT message, WPARAM wParam, LPARA
         if (LOWORD(wParam) == IDOK)
         {
             // FileName
-            TCHAR tChar[255];
-            CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
+            TCHAR tChar[255] = { L"\0" };;
+            TCHAR tChar2[255] = { L"\0" };
+            TCHAR tChar3[255] = { L"\0" };
+
+            CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();    
             //Check Is it Tool scene , -> Only Use In Tool Scene
             CAnimationTool* pToolScene = dynamic_cast<CAnimationTool*>(pCurScene);
             assert(pToolScene);
             
             // GetFilename From dialog
             GetDlgItemText(hDlg, IDC_EDIT1, tChar, 255);
-            
-            pToolScene->SetOpenFileName(tChar);
+            GetDlgItemText(hDlg, IDC_EDIT2, tChar2, 255);
+            GetDlgItemText(hDlg, IDC_EDIT3, tChar3, 255);
+
+            pToolScene->SetOpenFileName(tChar, tChar2, tChar3);
 
             EndDialog(hDlg, LOWORD(wParam));
             return (INT_PTR)TRUE;
@@ -403,4 +420,34 @@ INT_PTR CALLBACK AnimationToolProc(HWND hDlg, UINT message, WPARAM wParam, LPARA
     return (INT_PTR)FALSE;
 }
 
+INT_PTR CALLBACK SaveAnimationProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    UNREFERENCED_PARAMETER(lParam);
+    switch (message)
+    {
+    case WM_INITDIALOG:
+        return (INT_PTR)TRUE;
+
+    case WM_COMMAND:
+        if (LOWORD(wParam) == IDOK)
+        {
+            CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
+            //Check Is it Tool scene , -> Only Use In Tool Scene
+            CAnimationTool* pToolScene = dynamic_cast<CAnimationTool*>(pCurScene);
+            assert(pToolScene);
+
+            pToolScene->SaveAnimation();
+
+            EndDialog(hDlg, LOWORD(wParam));
+            return (INT_PTR)TRUE;
+        }
+        else if (LOWORD(wParam) == IDCANCEL)
+        {
+            EndDialog(hDlg, LOWORD(wParam));
+            return (INT_PTR)TRUE;
+        }
+        break;
+    }
+    return (INT_PTR)FALSE;
+}
 

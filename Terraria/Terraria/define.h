@@ -26,6 +26,18 @@
 								return &mgr;			   \
 							}\
 
+
+enum class PLAYER_ANI
+{
+	PLAYER_ANI_HAIR,
+	PLAYER_ANI_HEAD,
+	PLAYER_ANI_CLOTH,
+	PLAYER_ANI_LEFTARM,
+	PLAYER_ANI_RIGHTARM,
+	PLAYER_ANI_LEG,
+	PLAYER_ANI_END
+};
+
 enum class UI_TYPE
 {
 	UI_PARENT,

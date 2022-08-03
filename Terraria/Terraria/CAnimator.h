@@ -8,7 +8,7 @@ class CTexture;
 class CAnimator : public CComponent
 {
 public:
-	
+	int LoadAnimation(const wstring& _listfilename);
 
 	
 private:

@@ -69,6 +69,7 @@ int CAnimationUI::MouseButtonClicked()
 
 CAnimationUI::CAnimationUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAffected)
 	:CUI(_pos,_rot,_scale,_bAffected)
+	,m_iAnimationIndex(0)
 {
 	CTransform2D* pTrans = CUI::GetTransform();
 	m_vSamplePos.x = pTrans->GetPosition_X();
