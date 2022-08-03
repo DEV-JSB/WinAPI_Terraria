@@ -10,6 +10,13 @@ int CWorld::Release()
 }
 int CWorld::Render(const HDC _hdc)
 {
+    for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
+    {
+        for (size_t j = 0; j < m_arrObjectVec[i].size(); ++j)
+        {
+            m_arrObjectVec[i][j]->Render(_hdc);
+        }
+    }
     return 0;
 }
 int CWorld::Update()
@@ -19,10 +26,8 @@ int CWorld::Update()
 int CWorld::Enter()
 {
     LoadResource();
-
-
     CPlayer* Player = CFactory<CPlayer>::Create();
-    
+    m_arrObjectVec[(int)OBJECT::OBJECT_PLAYER].push_back(Player);
     
     return 0;
 }

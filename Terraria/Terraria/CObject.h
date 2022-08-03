@@ -7,7 +7,7 @@ class CObject
 {
 public:
 	virtual int Update()			= 0;
-	virtual int Render(HDC _dc)		= 0;
+	virtual int Render(const HDC _dc)		= 0;
 	virtual int FinalUpdate()		= 0;
 
 public:

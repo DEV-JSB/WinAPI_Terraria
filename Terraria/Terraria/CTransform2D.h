@@ -8,7 +8,9 @@ class CTransform2D : public CComponent
 public:
 	virtual ~CTransform2D();
 public: // Logic Function
-	
+	virtual int Render(const HDC _hdc) override;
+	virtual int Update(const HDC _hdc) override;
+	virtual int FinalUpdate(const HDC _hdc) override;
 
 public: // Get Set Function
 	Vector3 GetPosition()const { return m_vPosition; }
@@ -27,7 +29,7 @@ private: // Member
 	Vector3 m_vRotation;
 	Vector2 m_vScale;
 private:
-	HIDE_CONSTRUCTOR(CTransform2D);
+	FRIEND_FACTORY(CTransform2D);
 	CTransform2D(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
 
 };

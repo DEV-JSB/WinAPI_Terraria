@@ -4,6 +4,17 @@
 #include"CPathMgr.h"
 #include"CResourceMgr.h"
 #include<iostream>
+
+
+CAnimator::CAnimator(const bool _willRender)
+	:CComponent(_willRender)
+	,m_pOwner(nullptr)
+{
+}
+
+
+
+
 int CAnimator::LoadAnimation(const wstring& _filename,const wstring& _texture)
 {
 	wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
@@ -22,11 +33,15 @@ int CAnimator::LoadAnimation(const wstring& _filename,const wstring& _texture)
 	bool IsTrash;
 	stAnimFrame stFrame;
 
+
 	while (feof(pFile) == 0)
 	{
 		IsTrash = fread(&stFrame, sizeof(stAnimFrame), 1, pFile);
 		if (IsTrash)
+		{
 			pAnimation->SetAniFrame(stFrame);
+
+		}
 	}
 
 	// Save Animator
@@ -37,10 +52,64 @@ int CAnimator::LoadAnimation(const wstring& _filename,const wstring& _texture)
 	return 0;
 }
 
-CAnimator::CAnimator()
+int CAnimator::SettingPlayAnimation(const vector<wstring>& _vecName)
 {
+	for (size_t i = 0; i < _vecName.size(); ++i)
+	{
+		m_vecCurAnimation.push_back((*m_mapAnimation.find(_vecName[i])).second);
+	}
+	return 0;
 }
+
+int CAnimator::SubstitutePlayAnimation(const wstring _deleteAni, const wstring& _substitute)
+{
+	CutCurFrame(_deleteAni);
+	m_vecCurAnimation.push_back((*m_mapAnimation.find(_substitute)).second);
+	return 0;
+}
+
+int CAnimator::Render(const HDC _hdc)
+{
+	for (size_t i = 0; i < m_vecCurAnimation.size(); ++i)
+	{
+		m_vecCurAnimation[i]->SampleRender(_hdc, Vector2({ CLIENT_WIDTH * 0.5,CLIENT_HEIGHT * 0.5 }));
+	}
+	return 0;
+}
+
+int CAnimator::Update(const HDC _hdc)
+{
+	return 0;
+}
+
+int CAnimator::FinalUpdate(const HDC _hdc)
+{
+	return 0;
+}
+
+int CAnimator::CutCurFrame(const wstring& _filename)
+{
+	for (auto iter = m_vecCurAnimation.begin(); iter != m_vecCurAnimation.end(); ++iter)
+	{
+		if ((*iter) == (*m_mapAnimation.find(_filename)).second)
+		{
+			m_vecCurAnimation.erase(iter);
+			break;
+		}
+	}
+	return 0;
+}
+
+
+
 
 CAnimator::~CAnimator()
 {
+	for (auto iter = m_mapAnimation.begin(); iter != m_mapAnimation.end(); ++iter)
+	{
+		if (nullptr != (*iter).second)
+			delete (*iter).second;
+	}
+	m_mapAnimation.clear();
+	m_vecCurAnimation.clear();
 }

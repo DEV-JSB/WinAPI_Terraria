@@ -4,6 +4,7 @@
 // Funtion Error then return 503
 #define FUNC_ERROR 503
 
+#define FRIEND_FACTORY(classname) friend class CFactory<classname>;
 #define HIDE_CONSTRUCTOR(classname)private:\
 									friend class CFactory<classname>;\
 									classname();\

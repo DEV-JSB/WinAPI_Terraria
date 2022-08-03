@@ -9,17 +9,18 @@ class CAnimation
 public:
 	// SaveAnimation
 	int SaveFile()const;
+	int SampleRender(const HDC _dc, const Vector2& _Pos);
+public: // Get Set
 	// GetFrame Offset
 	Vector2 GetOffset(const int _frameIdx)const { return m_vecFrame[_frameIdx].vOffset; }
+	// Get Frame Count
+	int GetFrameCount()const { return m_vecFrame.size(); }
 	// SetFrameOffset
 	int ReposOffset(const int _frameIdx, const Vector2& _off);
-	int SampleRender(const HDC _dc, const Vector2& _Pos);
 	// SetAnimationFrame
 	int SetAniFrame(stAnimFrame& _frame) { m_vecFrame.push_back(_frame); return 0; }
 	// Set Texture
 	int SetTexture(CTexture* _pTexture) { m_pTex = _pTexture; return 0; }
-	// Get Frame Count
-	int GetFrameCount()const { return m_vecFrame.size(); }
 	// SetAnimationName
 	int SetAnimationName(const wstring& _name) { m_strName = _name; return 0; }
 public:
@@ -40,10 +41,7 @@ private:
 	int m_iFrameIndex;
 
 private: // Constructor
-
 	HIDE_CONSTRUCTOR(CAnimation);
-
-
 public:
 	~CAnimation();
 };

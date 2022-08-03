@@ -95,8 +95,8 @@ int CEngine::Update()
 int CEngine::Render()
 {
 	// RenderingManager
-	CSceneMgr::GetInstance()->Render(m_bufferDC);
 	CTimeMgr::GetInstance()->Render();
+	CSceneMgr::GetInstance()->Render(m_bufferDC);
 
 	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
 		m_bufferDC, 0, 0, SRCCOPY);
