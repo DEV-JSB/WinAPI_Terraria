@@ -11,22 +11,16 @@ int CAnimation::SaveFile()const
 	if (L"" == m_strName)
 		return 0;
 	wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
-	wstring strFilePath2 = CPathMgr::GetInstance()->GetContentPath();
 
 	strFilePath  += L"Animation\\" + m_strName;
-	strFilePath2 += L"Animation\\" + m_strOwner;
 
 	FILE* pFile = nullptr;
-	FILE* pFile2 = nullptr;
 
-	_wfopen_s(&pFile, strFilePath.c_str(), L"wb"); 
-	_wfopen_s(&pFile2, strFilePath2.c_str(), L"wb");
+	_wfopen_s(&pFile, strFilePath.c_str(), L"ab"); 
 
 	assert(pFile);
-	assert(pFile2);
 
-	fwrite(&m_strName, sizeof(wstring), 1, pFile2);
-
+	
 	for (size_t i = 0; i < m_vecFrame.size(); ++i)
 	{
 		// struct Save Test
@@ -34,7 +28,6 @@ int CAnimation::SaveFile()const
 	}
 
 	fclose(pFile);
-	fclose(pFile2);
 	return 0;
 }
 
