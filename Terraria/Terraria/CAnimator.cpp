@@ -14,9 +14,11 @@ int CAnimator::LoadAnimation(const wstring& _listfilename)
 
 	stAnimFrame stFrame;
 
+	// if a == 0 Don't Set Animation
+	int a;
 	while (feof(pFile) == 0)
 	{
-		fread(&stFrame, sizeof(stAnimFrame), 1, pFile);
+		a = fread(&stFrame, sizeof(stAnimFrame), 1, pFile);
 	}
 
 	fclose(pFile);

@@ -13,14 +13,9 @@ int CAnimation::SaveFile()const
 	wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
 
 	strFilePath  += L"Animation\\" + m_strName;
-
 	FILE* pFile = nullptr;
-
 	_wfopen_s(&pFile, strFilePath.c_str(), L"ab"); 
-
 	assert(pFile);
-
-	
 	for (size_t i = 0; i < m_vecFrame.size(); ++i)
 	{
 		// struct Save Test
