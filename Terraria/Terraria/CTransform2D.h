@@ -27,7 +27,7 @@ private: // Member
 	Vector3 m_vRotation;
 	Vector2 m_vScale;
 private:
-	friend class CFactory<CTransform2D>;
+	HIDE_CONSTRUCTOR(CTransform2D);
 	CTransform2D(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
-	CTransform2D();
+
 };

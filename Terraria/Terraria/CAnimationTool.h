@@ -54,15 +54,12 @@ private: // Member
 	// Select RectRange
 	RECT m_stSelectRect;
 private: // Private Function
-	// ReSetting BTN Function
-	int SettingBTN_Func();
 	// Setting UI
 	int SettingUI();
 	// CutBitmap
 	bool CheckCutBitmap(const HDC _hdc);
 private: // Constructor
-	friend class CFactory<CAnimationTool>;
-	CAnimationTool();
+	HIDE_CONSTRUCTOR(CAnimationTool);
 public:
 	virtual ~CAnimationTool();
 };

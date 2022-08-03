@@ -26,7 +26,7 @@ private:
     DWORD_PTR m_pParam1;
     DWORD_PTR m_pParam2;
 private:
-    friend class CFactory<CButtonUI>;
+    HIDE_CONSTRUCTOR(CButtonUI);
     CButtonUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAffected);
 };
 

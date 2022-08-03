@@ -5,6 +5,14 @@
 #include"CTexture.h"
 #include"CPathMgr.h"
 
+CAnimation::CAnimation()
+	:m_strName()
+	, m_pTex(nullptr)
+	, m_bIsFinish(false)
+	, m_fAccumulateTime(0.f)
+	, m_iFrameIndex(0)
+{
+}
 
 int CAnimation::SaveFile()const
 {
@@ -64,14 +72,7 @@ int CAnimation::Update()
 	return 0;
 }
 
-CAnimation::CAnimation()
-	:m_strName()
-	, m_pTex(nullptr)
-	, m_bIsFinish(false)
-	, m_fAccumulateTime(0.f)
-	, m_iFrameIndex(0)
-{
-}
+
 
 CAnimation::~CAnimation()
 {

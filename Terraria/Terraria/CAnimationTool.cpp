@@ -116,7 +116,7 @@ int CAnimationTool::SetOpenFileName(const wstring& _Key,const wstring& _aniName,
         // Input Texture In Animation
         m_pAnimation->SetTexture(m_pTexture);
         // Setting Animation Name
-        m_pAnimation->SetAnimationName(_objname, _aniName);
+        m_pAnimation->SetAnimationName(_aniName);
         // Input Animation In UI
         m_pAnimationUI->SetAnimation(m_pAnimation);
     }
@@ -310,6 +310,7 @@ int CAnimationTool::Release()
     // Object Will Delete In Scene
     vector<CAnimation*> vecAnimation = m_pAnimationUI->GetAniVector();
     Delete_Vec(vecAnimation);
+    m_pAnimationUI->ResetAnimationVec();
     // Scene Parent Will Delete All of Object
     return 0;
 }

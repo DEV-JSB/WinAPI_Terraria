@@ -21,13 +21,11 @@ public:
 	// Get Frame Count
 	int GetFrameCount()const { return m_vecFrame.size(); }
 	// SetAnimationName
-	int SetAnimationName(const wstring& _ownername, const wstring& _name) { m_strOwner = _ownername; m_strName = _name; return 0; }
+	int SetAnimationName(const wstring& _name) { m_strName = _name; return 0; }
 public:
 	int Update();
 
 private:
-	// 
-	wstring m_strOwner;
 	// Animation Name
 	wstring m_strName;
 	// Using Texture
@@ -43,8 +41,8 @@ private:
 
 private: // Constructor
 
-	friend class CFactory<CAnimation>;
-	CAnimation();
+	HIDE_CONSTRUCTOR(CAnimation);
+
 
 public:
 	~CAnimation();

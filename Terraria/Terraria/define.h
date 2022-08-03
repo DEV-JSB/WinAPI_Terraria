@@ -4,6 +4,10 @@
 // Funtion Error then return 503
 #define FUNC_ERROR 503
 
+#define HIDE_CONSTRUCTOR(classname)private:\
+									friend class CFactory<classname>;\
+									classname();\
+
 #define CLIENT_WIDTH 1280
 #define CLIENT_HEIGHT 720
 
@@ -27,15 +31,15 @@
 							}\
 
 
-enum class PLAYER_ANI
+enum class PLAYER_IDLEANI
 {
-	PLAYER_ANI_HAIR,
-	PLAYER_ANI_HEAD,
-	PLAYER_ANI_CLOTH,
-	PLAYER_ANI_LEFTARM,
-	PLAYER_ANI_RIGHTARM,
-	PLAYER_ANI_LEG,
-	PLAYER_ANI_END
+	PLAYER_IDLEANI_HAIR,
+	PLAYER_IDLEANI_HEAD,
+	PLAYER_IDLEANI_CLOTH,
+	PLAYER_IDLEANI_LEFTARM,
+	PLAYER_IDLEANI_RIGHTARM,
+	PLAYER_IDLEANI_LEG,
+	PLAYER_IDLEANI_END
 };
 
 enum class UI_TYPE

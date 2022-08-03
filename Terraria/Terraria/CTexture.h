@@ -17,9 +17,8 @@ private:
 	BITMAP m_bitInfo;
 
 private:
-	// hidden Constructor
-	CTexture();
-	friend class CFactory<CTexture>;
+	HIDE_CONSTRUCTOR(CTexture);
+
 public:
 	virtual ~CTexture();
 };

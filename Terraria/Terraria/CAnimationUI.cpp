@@ -3,6 +3,7 @@
 #include "CAnimationUI.h"
 #include"CAnimation.h"
 
+
 int CAnimationUI::PlayAnimationSample(const HDC _dc)
 {
 	if (0 == m_vecAnimationSample.size())
