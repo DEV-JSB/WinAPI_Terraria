@@ -48,7 +48,7 @@ int CSceneMgr::Init()
 	m_pCurScene = CFactory<CWorld>::Create();
 	// Create Tool
 	//m_pCurScene = CFactory<CAnimationTool>::Create();
-
+	
 	Enter();
 	return 0;
 }

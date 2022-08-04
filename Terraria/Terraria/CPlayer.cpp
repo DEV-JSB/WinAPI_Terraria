@@ -4,6 +4,8 @@
 #include "CInputMgr.h"
 #include"CTransform2D.h"
 
+#define MOVE_FORCE 50.f
+
 int CPlayer::FinalUpdate()
 {
     for (auto iter = m_mapComponent.begin(); iter != m_mapComponent.end(); ++iter)
@@ -17,11 +19,11 @@ int CPlayer::Update()
 {
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_A) == INPUTSTATE::INPUTSTATE_HOLD)
     {
-        CObject::AddForce(Vector2{ -100.f,0.f });
+        CObject::AddForce(Vector2{ -MOVE_FORCE,0.f });
     }
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_D) == INPUTSTATE::INPUTSTATE_HOLD)
     {
-        CObject::AddForce(Vector2{ 100.f,0.f });
+        CObject::AddForce(Vector2{ MOVE_FORCE,0.f });
     }
 
 

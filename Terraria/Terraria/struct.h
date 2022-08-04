@@ -20,16 +20,22 @@ typedef struct MyVector2
 		return (float)(sqrt(pow(x, 2) + pow(y, 2)));
 	}
 
-	MyVector2 Normalize()
+	MyVector2& Normalize()
 	{
-		return MyVector2({ x / Length(),y / Length() });
+		float length = this->Length();
+		this->x /= length;
+		this->y /= length;
+		return *this;
 	}
 
 	MyVector2 operator+(MyVector2& _vec)const
 	{
 		return MyVector2({ x + _vec.x, y + _vec.y });
 	}
-
+	MyVector2 operator-(MyVector2& _vec)const
+	{
+		return MyVector2({ x - _vec.x, y - _vec.y });
+	}
 	MyVector2& operator+=(const MyVector2& _vec)
 	{
 		this->x += _vec.x;
@@ -44,7 +50,12 @@ typedef struct MyVector2
 	{
 		return MyVector2({ this->x * (float)_d, this->y * (float)_d });
 	}
-
+	MyVector2& operator *= (const float _f)
+	{
+		this->x *= _f;
+		this->y *= _f;
+		return *this;
+	}
 }Vector2;
 
 

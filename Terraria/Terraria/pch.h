@@ -10,6 +10,9 @@
 #include<string>
 #include<stdio.h>
 
+// For Flip Rotator
+#include<wincodec.h>
+
 #pragma comment(lib,"msimg32.lib")
 
 using std::wstring;

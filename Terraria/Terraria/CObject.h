@@ -7,9 +7,9 @@ class CRigidbody;
 class CObject
 {
 public:
-	virtual int Update()			= 0;
+	virtual int Update()					= 0;
 	virtual int Render(const HDC _dc)		= 0;
-	virtual int FinalUpdate()		= 0;
+	virtual int FinalUpdate()				= 0;
 
 public:
 	// GetTransform

@@ -6,6 +6,7 @@
 
 CRigidbody::CRigidbody()
     :CComponent(false)
+    , m_fMaxSpeed(20.f)
     ,m_fMass(1.f)
     ,m_vAcceleration({0,0})
     ,m_vForce({0,0})
@@ -29,7 +30,6 @@ int CRigidbody::Move()
     Vector3 vOwnerPos = m_pOwner->GetTransform()->GetPosition();
     vOwnerPos.x += m_vVelocity.x * fSpeed * (float)GET_DT;
     vOwnerPos.y += m_vVelocity.y * fSpeed * (float)GET_DT;
-    printf("플레이어 포지션 업데이트 X : %.f , Y : %.f\n", vOwnerPos.x, vOwnerPos.y);
     m_pOwner->SetPosition(vOwnerPos);
     return 0;
 }
@@ -59,8 +59,14 @@ int CRigidbody::FinalUpdate()
         // Acceleration
         m_vAcceleration = m_vForce * m_fAcceleration;
         //Final Speed
-        m_vVelocity += m_vAcceleration * GET_DT;
+        m_vVelocity += m_vAcceleration * (float)GET_DT;
 
+        if (m_vVelocity.Length() > m_fMaxSpeed)
+        {
+            printf("최대값 도달! \n");
+            m_vVelocity.Normalize();
+            m_vVelocity *= m_fMaxSpeed;
+        }
 
         // PowerReset
         m_vForce = Vector2({ 0.f, 0.f });

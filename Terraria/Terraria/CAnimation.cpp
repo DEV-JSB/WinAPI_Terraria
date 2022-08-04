@@ -42,9 +42,11 @@ int CAnimation::ReposOffset(const int _frameIdx, const Vector2& _off)
 
 int CAnimation::Render(const HDC _dc, const Vector2& _Pos)
 {
-	Vector2 Pos = _Pos + m_vecFrame[m_iFrameIndex].vOffset;
+	Vector2 Pos;
+
+	/*Pos = _Pos + m_vecFrame[m_iFrameIndex].vOffset;
 	TransparentBlt(_dc
-		, (int)(Pos.x - m_vecFrame[m_iFrameIndex].vSliceSize.x * 0.5f)
+		, (int)(Pos.x - m_vecFrame[m_iFrameIndex].vSliceSize.x * 0.5f + 14)
 		, (int)(Pos.y - m_vecFrame[m_iFrameIndex].vSliceSize.y * 0.5f)
 		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.x
 		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y
@@ -53,7 +55,25 @@ int CAnimation::Render(const HDC _dc, const Vector2& _Pos)
 		, (int)m_vecFrame[m_iFrameIndex].vLT.y
 		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.x
 		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y
-		, RGB(255, 255, 255));
+		, RGB(255, 255, 255));*/
+
+	// X Pivot Flip Version
+	
+	//Make Pivot Flip
+	Pos.y = _Pos.y + m_vecFrame[m_iFrameIndex].vOffset.y;
+	//Y Pivot Don't tocuh
+	Pos.x = _Pos.x - m_vecFrame[m_iFrameIndex].vOffset.x;
+
+	StretchBlt(_dc
+		, (int)(Pos.x + m_vecFrame[m_iFrameIndex].vSliceSize.x * 0.5f)
+		, (int)(Pos.y - m_vecFrame[m_iFrameIndex].vSliceSize.y * 0.5f)
+		, -(int)m_vecFrame[m_iFrameIndex].vSliceSize.x
+		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y
+		, m_pTex->GetTextureDC()
+		, (int)m_vecFrame[m_iFrameIndex].vLT.x
+		, (int)m_vecFrame[m_iFrameIndex].vLT.y
+		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.x
+		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y, SRCCOPY);
 	return 0;
 }
 
@@ -70,6 +90,12 @@ int CAnimation::Update()
 
 	if (m_vecFrame.size() == m_iFrameIndex)
 		m_iFrameIndex = 0;
+	return 0;
+}
+
+int CAnimation::FlipBitmap()
+{
+
 	return 0;
 }
 

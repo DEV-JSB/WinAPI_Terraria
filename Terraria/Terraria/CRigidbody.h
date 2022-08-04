@@ -19,6 +19,8 @@ public:// Logic
     virtual int Update()      override;
     virtual int FinalUpdate() override;
 private:
+    // MaxSpeed
+    float m_fMaxSpeed;
     // Owner
     CObject* m_pOwner;
     // Direction Vec

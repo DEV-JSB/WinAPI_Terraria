@@ -52,9 +52,6 @@
     <Filter Include="Framework\05.Resource\CTexture">
       <UniqueIdentifier>{afac9c0a-68e3-4bac-a1c4-1d523b7f729e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Framework\Factory">
-      <UniqueIdentifier>{364fada1-9abe-43a9-ae6b-ea1f47477be8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\06.Object">
       <UniqueIdentifier>{a4df2d91-2bdc-4331-8b98-b7cfbe39972f}</UniqueIdentifier>
     </Filter>
@@ -90,6 +87,21 @@
     </Filter>
     <Filter Include="Framework\04.Component\Rigidbody">
       <UniqueIdentifier>{bbe5fc4c-f3ee-4e66-9ef7-d6e79285558e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\07.Factory">
+      <UniqueIdentifier>{364fada1-9abe-43a9-ae6b-ea1f47477be8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\06.Object\Tile">
+      <UniqueIdentifier>{4ec5f232-b661-430a-8c8f-0300e71561e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\04.Component\Skin">
+      <UniqueIdentifier>{a83f914b-54f4-4456-b717-752dd4fbfe28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\07.Factory\OldFactory">
+      <UniqueIdentifier>{40e6fe6e-900e-4ac9-8543-2c8d5ffe7207}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\07.Factory\Factory">
+      <UniqueIdentifier>{836cc098-23cf-41f5-aac7-db8f64d60437}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +150,6 @@
     <ClInclude Include="CTexture.h">
       <Filter>Framework\05.Resource\CTexture</Filter>
     </ClInclude>
-    <ClInclude Include="CFactory.h">
-      <Filter>Framework\Factory</Filter>
-    </ClInclude>
     <ClInclude Include="CPlayer.h">
       <Filter>Framework\06.Object\Player</Filter>
     </ClInclude>
@@ -177,6 +186,18 @@
     </ClInclude>
     <ClInclude Include="CRigidbody.h">
       <Filter>Framework\04.Component\Rigidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="CTile.h">
+      <Filter>Framework\06.Object\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkin.h">
+      <Filter>Framework\04.Component\Skin</Filter>
+    </ClInclude>
+    <ClInclude Include="CFactory.h">
+      <Filter>Framework\07.Factory\OldFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="CFactory2.h">
+      <Filter>Framework\07.Factory\Factory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +269,15 @@
     </ClCompile>
     <ClCompile Include="CRigidbody.cpp">
       <Filter>Framework\04.Component\Rigidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="CTile.cpp">
+      <Filter>Framework\06.Object\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkin.cpp">
+      <Filter>Framework\04.Component\Skin</Filter>
+    </ClCompile>
+    <ClCompile Include="CFactory2.cpp">
+      <Filter>Framework\07.Factory\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

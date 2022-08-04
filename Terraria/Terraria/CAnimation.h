@@ -25,7 +25,8 @@ public: // Get Set
 	int SetAnimationName(const wstring& _name) { m_strName = _name; return 0; }
 public:
 	int Update();
-
+private:
+	int FlipBitmap();
 private:
 	// Animation Name
 	wstring m_strName;
