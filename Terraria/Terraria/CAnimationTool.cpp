@@ -304,6 +304,11 @@ int CAnimationTool::Enter()
     return 0;
 }
 
+int CAnimationTool::FinalUpdate()
+{
+    return 0;
+}
+
 
 int CAnimationTool::Release()
 {

@@ -40,7 +40,7 @@ int CAnimation::ReposOffset(const int _frameIdx, const Vector2& _off)
 	return 0;
 }
 
-int CAnimation::SampleRender(const HDC _dc, const Vector2& _Pos)
+int CAnimation::Render(const HDC _dc, const Vector2& _Pos)
 {
 	Vector2 Pos = _Pos + m_vecFrame[m_iFrameIndex].vOffset;
 	TransparentBlt(_dc
@@ -56,6 +56,7 @@ int CAnimation::SampleRender(const HDC _dc, const Vector2& _Pos)
 		, RGB(255, 255, 255));
 	return 0;
 }
+
 
 int CAnimation::Update()
 {

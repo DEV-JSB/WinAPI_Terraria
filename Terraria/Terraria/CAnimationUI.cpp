@@ -11,7 +11,7 @@ int CAnimationUI::PlayAnimationSample(const HDC _dc)
 	for (size_t i = 0; i < m_vecAnimationSample.size(); ++i)
 	{
 		if( 0 != m_vecAnimationSample[i]->GetFrameCount() )
-			m_vecAnimationSample[i]->SampleRender(_dc, m_vSamplePos);
+			m_vecAnimationSample[i]->Render(_dc, m_vSamplePos);
 	}
 	return 0;
 }

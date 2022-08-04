@@ -13,11 +13,6 @@ CTimeMgr::CTimeMgr()
 }
 
 
-CTimeMgr::~CTimeMgr()
-{
-
-}
-
 int CTimeMgr::Update()
 {
 	QueryPerformanceCounter(&m_llCurCount);
@@ -65,4 +60,10 @@ int CTimeMgr::PrintTimeState()
 	SetWindowText(CEngine::GetInstance()->GetMainHWND(), szBuffer);
 
 	return 0;
+}
+
+
+CTimeMgr::~CTimeMgr()
+{
+
 }

@@ -6,6 +6,7 @@ class CSceneMgr
 {
 	SINGLE(CSceneMgr);
 public: // Logic
+	int FinalUpdate();
 	int Update();
 	int Render(HDC _hdc);
 	int Enter();

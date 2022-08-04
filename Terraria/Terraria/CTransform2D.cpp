@@ -18,17 +18,17 @@ CTransform2D::~CTransform2D()
 {
 }
 
-int CTransform2D::Render(const HDC _hdc)
+int CTransform2D::Render(const HDC _hdc)const
 {
 	return 0;
 }
 
-int CTransform2D::Update(const HDC _hdc)
+int CTransform2D::Update()
 {
 	return 0;
 }
 
-int CTransform2D::FinalUpdate(const HDC _hdc)
+int CTransform2D::FinalUpdate()
 {
 	return 0;
 }

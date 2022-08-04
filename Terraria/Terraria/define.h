@@ -9,6 +9,8 @@
 									friend class CFactory<classname>;\
 									classname();\
 
+#define GET_DT CTimeMgr::GetInstance()->GetDT();
+
 #define CLIENT_WIDTH 1280
 #define CLIENT_HEIGHT 720
 
@@ -81,6 +83,7 @@ enum class COMPONENT
 {
 	COMPONENT_TRANSFORM2D,
 	COMPONENT_ANIMATOR,
+	COMPONENT_RIGIDBODY,
 	COMPONENT_END
 };
 // Object

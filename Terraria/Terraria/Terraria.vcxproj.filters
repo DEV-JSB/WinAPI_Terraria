@@ -88,6 +88,9 @@
     <Filter Include="Framework\03.Scene\World">
       <UniqueIdentifier>{187238d6-be2e-40c7-8e74-c543d7ec4061}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\04.Component\Rigidbody">
+      <UniqueIdentifier>{bbe5fc4c-f3ee-4e66-9ef7-d6e79285558e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -172,6 +175,9 @@
     <ClInclude Include="CWorld.h">
       <Filter>Framework\03.Scene\World</Filter>
     </ClInclude>
+    <ClInclude Include="CRigidbody.h">
+      <Filter>Framework\04.Component\Rigidbody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -239,6 +245,9 @@
     </ClCompile>
     <ClCompile Include="CWorld.cpp">
       <Filter>Framework\03.Scene\World</Filter>
+    </ClCompile>
+    <ClCompile Include="CRigidbody.cpp">
+      <Filter>Framework\04.Component\Rigidbody</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

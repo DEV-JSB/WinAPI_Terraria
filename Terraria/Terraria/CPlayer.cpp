@@ -1,15 +1,30 @@
 #include "pch.h"
 #include "CPlayer.h"
 #include"CAnimator.h"
-
+#include "CInputMgr.h"
+#include"CTransform2D.h"
 
 int CPlayer::FinalUpdate()
 {
+    for (auto iter = m_mapComponent.begin(); iter != m_mapComponent.end(); ++iter)
+    {
+        (*iter).second->FinalUpdate();
+    }
     return 0;
 }
 
 int CPlayer::Update()
 {
+    if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_A) == INPUTSTATE::INPUTSTATE_HOLD)
+    {
+        CObject::AddForce(Vector2{ -100.f,0.f });
+    }
+    if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_D) == INPUTSTATE::INPUTSTATE_HOLD)
+    {
+        CObject::AddForce(Vector2{ 100.f,0.f });
+    }
+
+
     return 0;
 }
 
@@ -23,6 +38,7 @@ int CPlayer::Render(const HDC _dc)
 }
 
 CPlayer::CPlayer()
+    :CObject(Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5), 0.f }), Vector3(), Vector2())
 {
     // SetAnimator
     CAnimator* pAnimator = CFactory<CAnimator>::Create(true);
@@ -40,8 +56,12 @@ CPlayer::CPlayer()
                                                      ,L"PlayerLeftArm"
                                                      ,L"PlayerRightArm"
                                                      ,L"PlayerLeg" }));
+    pAnimator->SetOwner(this);
 
     m_mapComponent.insert({ COMPONENT::COMPONENT_ANIMATOR,pAnimator });
+
+    CObject::CreateRigidbody();
+
 }
 
 CPlayer::~CPlayer()

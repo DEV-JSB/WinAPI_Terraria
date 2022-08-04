@@ -73,7 +73,6 @@ int CUIManager::Update()
 	if (nullptr != m_pFocusing && CInputMgr::GetInstance()->IsLBTDown())
 	{
 		m_pFocusing->MouseButtonClicked();
-		printf("버튼 이벤트 발생!\n");
 	}
 	return 0;
 }

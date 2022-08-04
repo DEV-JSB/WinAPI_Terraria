@@ -1,13 +1,31 @@
 #include "pch.h"
 #include "CWorld.h"
-#include"CPlayer.h"
-#include"CResourceMgr.h"
-#include"CPathMgr.h"
-#include"CFactory.h"
-int CWorld::Release()
+#include "CPlayer.h"
+#include "CResourceMgr.h"
+#include "CInputMgr.h"
+#include "CPathMgr.h"
+#include "CFactory.h"
+
+
+
+
+CWorld::CWorld()
 {
+}
+
+
+int CWorld::FinalUpdate()
+{
+    for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
+    {
+        for (size_t j = 0; j < m_arrObjectVec[i].size(); ++j)
+        {
+            m_arrObjectVec[i][j]->FinalUpdate();
+        }
+    }
     return 0;
 }
+
 int CWorld::Render(const HDC _hdc)
 {
     for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
@@ -21,6 +39,15 @@ int CWorld::Render(const HDC _hdc)
 }
 int CWorld::Update()
 {
+
+    for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
+    {
+        for (size_t j = 0; j < m_arrObjectVec[i].size(); ++j)
+        {
+            m_arrObjectVec[i][j]->Update();
+        }
+    }
+
     return 0;
 }
 int CWorld::Enter()
@@ -46,10 +73,10 @@ int CWorld::LoadResource()const
     return 0;
 }
 
-CWorld::CWorld()
+int CWorld::Release()
 {
+    return 0;
 }
-
 CWorld::~CWorld()
 {
 }

@@ -8,9 +8,9 @@ class CTransform2D : public CComponent
 public:
 	virtual ~CTransform2D();
 public: // Logic Function
-	virtual int Render(const HDC _hdc) override;
-	virtual int Update(const HDC _hdc) override;
-	virtual int FinalUpdate(const HDC _hdc) override;
+	virtual int Render(const HDC _hdc)const override;
+	virtual int Update() override;
+	virtual int FinalUpdate() override;
 
 public: // Get Set Function
 	Vector3 GetPosition()const { return m_vPosition; }
@@ -20,7 +20,7 @@ public: // Get Set Function
 	float GetScale_Height()const { return m_vScale.y; }
 
 
-
+	int SetPosition(const Vector2 _pos) { m_vPosition.x = _pos.x; m_vPosition.y = _pos.y; return 0; }
 	int SetPosition(const Vector3 _pos) { m_vPosition = _pos; return 0; }
 	int SetPosition(const float _x, const float _y, const float _z) { m_vPosition.x = _x; m_vPosition.y = _y; m_vPosition.z = _z; return 0;}
 	int SetScale(const Vector2 _scale) { m_vScale = _scale; return 0; }

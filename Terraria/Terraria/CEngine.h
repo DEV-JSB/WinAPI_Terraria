@@ -10,7 +10,8 @@ public: // Logic , Can Access OutSide
 	HWND GetMainHWND()const { return m_hWnd; }
 	HDC GetBufferDC()const { return m_bufferDC; }
 	HDC GetMainDC()const { return m_hDC; }
-private:
+private: // Cycle
+	int FinalUpdate();
 	int Update();
 	int Render();
 	int RenderExceptDoubleBuffer();

@@ -26,6 +26,7 @@ public:
 	// Update Scene
 	virtual int Update()			   override;
 	virtual int Enter()				   override;
+	virtual int FinalUpdate()			override;
 
 private: // Member
 

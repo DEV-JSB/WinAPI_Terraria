@@ -8,6 +8,7 @@ class CScene
 public:
 	const vector<CObject*> GetObjectGroup(const OBJECT _type) { return m_arrObjectVec[(int)_type]; }
 public:
+	virtual int FinalUpdate()		   = 0;
 	virtual int Release()              = 0;
 	virtual int Render(const HDC _hdc) = 0;
 	virtual int Update()			   = 0;

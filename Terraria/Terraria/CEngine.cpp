@@ -23,6 +23,8 @@ CEngine::~CEngine()
 	DeleteObject(m_hBit);
 	DeleteObject(m_bufferDC);
 	DeleteObject(m_hDC);
+
+	
 }
 
 int CEngine::Progress()
@@ -32,6 +34,8 @@ int CEngine::Progress()
 	// Rendering
 	Render();
 
+	//Final Update
+	FinalUpdate();
 	return 0;
 }
 
@@ -82,6 +86,12 @@ int CEngine::Release()
 	return 0;
 }
 
+int CEngine::FinalUpdate()
+{
+	CSceneMgr::GetInstance()->FinalUpdate();
+	return 0;
+}
+
 int CEngine::Update()
 {
 	// UpdateManager
@@ -100,6 +110,8 @@ int CEngine::Render()
 
 	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
 		m_bufferDC, 0, 0, SRCCOPY);
+
+	Rectangle(m_bufferDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
 	return 0;
 }
 

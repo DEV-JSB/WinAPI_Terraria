@@ -13,6 +13,12 @@ CSceneMgr::~CSceneMgr()
 	
 }
 
+int CSceneMgr::FinalUpdate()
+{
+	m_pCurScene->FinalUpdate();
+	return 0;
+}
+
 int CSceneMgr::Update()
 {
 	if (nullptr == m_pCurScene)

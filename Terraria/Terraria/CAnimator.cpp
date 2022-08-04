@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CAnimator.h"
 #include"CAnimation.h"
+#include"CTransform2D.h"
 #include"CPathMgr.h"
 #include"CResourceMgr.h"
 #include<iostream>
@@ -68,21 +69,23 @@ int CAnimator::SubstitutePlayAnimation(const wstring _deleteAni, const wstring& 
 	return 0;
 }
 
-int CAnimator::Render(const HDC _hdc)
+int CAnimator::Render(const HDC _hdc)const
 {
+	CTransform2D* pTrans = m_pOwner->GetTransform();
+	Vector3 vPos = pTrans->GetPosition();
 	for (size_t i = 0; i < m_vecCurAnimation.size(); ++i)
 	{
-		m_vecCurAnimation[i]->SampleRender(_hdc, Vector2({ CLIENT_WIDTH * 0.5,CLIENT_HEIGHT * 0.5 }));
+		m_vecCurAnimation[i]->Render(_hdc, Vector2({ vPos.x,vPos.y }));
 	}
 	return 0;
 }
 
-int CAnimator::Update(const HDC _hdc)
+int CAnimator::Update()
 {
 	return 0;
 }
 
-int CAnimator::FinalUpdate(const HDC _hdc)
+int CAnimator::FinalUpdate()
 {
 	return 0;
 }

@@ -15,7 +15,8 @@ CUI::CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAf
 }
 
 CUI::CUI(const bool _bAffected)
-	:m_pParent(nullptr)
+	:CObject(Vector3{ 0.f,0.f ,0.f }, Vector3{ 0.f,0.f ,0.f }, Vector2{ 0.f ,0.f })
+	, m_pParent(nullptr)
 	, m_vOffsetPos({ 0.f,0.f,0.f })
 	, m_bCamAffected(_bAffected)
 	, m_eType(UI_TYPE::UI_PARENT)
