@@ -9,10 +9,11 @@ class CAnimator : public CComponent
 {
 public:// Set Func
 	int SetOwner(CObject* _p) { m_pOwner = _p; return 0; }
-
+	int SetFilp(const bool _bFlip) { m_bXflip = _bFlip; return 0; }
 public:
 	// Only One Time Use , ObjectCreate
 	int SettingPlayAnimation(const vector<wstring>& _vecName);
+
 	int LoadAnimation(const wstring& _filename, const wstring& _texture);
 	int SubstitutePlayAnimation(const wstring _deleteAni,const wstring& _substitute);
 
@@ -23,6 +24,8 @@ public://Logic
 private:
 	int CutCurFrame(const wstring& _filename);
 private:
+	// Will Flip Animation
+	bool m_bXflip;
 	// Animator Owner
 	CObject*					m_pOwner;
 	// Animation Map

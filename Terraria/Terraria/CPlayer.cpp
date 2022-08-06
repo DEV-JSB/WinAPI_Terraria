@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CPlayer.h"
-#include"CAnimator.h"
+#include "CAnimator.h"
 #include "CInputMgr.h"
 #include"CTransform2D.h"
 
@@ -17,13 +17,16 @@ int CPlayer::FinalUpdate()
 
 int CPlayer::Update()
 {
+    CAnimator* pAnimator = RTTI_DYNAMIC_CAST_MAP(CAnimator, m_mapComponent, COMPONENT::COMPONENT_ANIMATOR);
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_A) == INPUTSTATE::INPUTSTATE_HOLD)
     {
+        pAnimator->SetFilp(true);
         CObject::AddForce(Vector2{ -MOVE_FORCE,0.f });
     }
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_D) == INPUTSTATE::INPUTSTATE_HOLD)
     {
         CObject::AddForce(Vector2{ MOVE_FORCE,0.f });
+        pAnimator->SetFilp(false);
     }
 
 
@@ -48,15 +51,15 @@ CPlayer::CPlayer()
     pAnimator->LoadAnimation(L"PlayerCloth",    L"Player_Cloth.bmp");
     pAnimator->LoadAnimation(L"PlayerHead",     L"Player_Head.bmp");
     pAnimator->LoadAnimation(L"PlayerHair",     L"Player_Hair.bmp");
-    pAnimator->LoadAnimation(L"PlayerLeftArm",  L"Player_Arm.bmp");
-    pAnimator->LoadAnimation(L"PlayerRightArm", L"Player_Arm.bmp");
+    pAnimator->LoadAnimation(L"PlayerArm",  L"Player_Arm.bmp");
+    pAnimator->LoadAnimation(L"PlayerArm2", L"Player_Arm.bmp");
     pAnimator->LoadAnimation(L"PlayerLeg",      L"Player_Leg.bmp");
 
     pAnimator->SettingPlayAnimation(vector<wstring>({ L"PlayerCloth"
                                                      ,L"PlayerHead"
                                                      ,L"PlayerHair"
-                                                     ,L"PlayerLeftArm"
-                                                     ,L"PlayerRightArm"
+                                                     ,L"PlayerArm"
+                                                     ,L"PlayerArm2"
                                                      ,L"PlayerLeg" }));
     pAnimator->SetOwner(this);
 

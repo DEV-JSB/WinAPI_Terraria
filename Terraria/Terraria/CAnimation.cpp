@@ -40,40 +40,65 @@ int CAnimation::ReposOffset(const int _frameIdx, const Vector2& _off)
 	return 0;
 }
 
-int CAnimation::Render(const HDC _dc, const Vector2& _Pos)
+int CAnimation::Render(const HDC _dc, const Vector2& _Pos,const bool _xFlip)
 {
 	Vector2 Pos;
 
-	/*Pos = _Pos + m_vecFrame[m_iFrameIndex].vOffset;
-	TransparentBlt(_dc
-		, (int)(Pos.x - m_vecFrame[m_iFrameIndex].vSliceSize.x * 0.5f + 14)
-		, (int)(Pos.y - m_vecFrame[m_iFrameIndex].vSliceSize.y * 0.5f)
-		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.x
-		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y
-		, m_pTex->GetTextureDC()
-		, (int)m_vecFrame[m_iFrameIndex].vLT.x
-		, (int)m_vecFrame[m_iFrameIndex].vLT.y
-		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.x
-		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y
-		, RGB(255, 255, 255));*/
+	if (false == _xFlip)
+	{
+		Pos = _Pos + m_vecFrame[m_iFrameIndex].vOffset;
+		TransparentBlt(_dc
+			, (int)(Pos.x - m_vecFrame[m_iFrameIndex].vSliceSize.x * 0.5f)
+			, (int)(Pos.y - m_vecFrame[m_iFrameIndex].vSliceSize.y * 0.5f)
+			, (int)m_vecFrame[m_iFrameIndex].vSliceSize.x
+			, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y
+			, m_pTex->GetTextureDC()
+			, (int)m_vecFrame[m_iFrameIndex].vLT.x
+			, (int)m_vecFrame[m_iFrameIndex].vLT.y
+			, (int)m_vecFrame[m_iFrameIndex].vSliceSize.x
+			, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y
+			, RGB(255, 255, 255));
+	}
+	else
+	{
+		// X Pivot Flip Version
 
-	// X Pivot Flip Version
-	
 	//Make Pivot Flip
-	Pos.y = _Pos.y + m_vecFrame[m_iFrameIndex].vOffset.y;
-	//Y Pivot Don't tocuh
-	Pos.x = _Pos.x - m_vecFrame[m_iFrameIndex].vOffset.x;
+		Pos.y = _Pos.y + m_vecFrame[m_iFrameIndex].vOffset.y;
+		//Y Pivot Don't tocuh
+		Pos.x = _Pos.x - m_vecFrame[m_iFrameIndex].vOffset.x;
 
-	StretchBlt(_dc
-		, (int)(Pos.x + m_vecFrame[m_iFrameIndex].vSliceSize.x * 0.5f)
-		, (int)(Pos.y - m_vecFrame[m_iFrameIndex].vSliceSize.y * 0.5f)
-		, -(int)m_vecFrame[m_iFrameIndex].vSliceSize.x
-		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y
-		, m_pTex->GetTextureDC()
-		, (int)m_vecFrame[m_iFrameIndex].vLT.x
-		, (int)m_vecFrame[m_iFrameIndex].vLT.y
-		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.x
-		, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y, SRCCOPY);
+
+		HDC StretchDC = CreateCompatibleDC(m_pTex->GetTextureDC());
+		HBITMAP StretchBit = CreateCompatibleBitmap(_dc, CLIENT_WIDTH, CLIENT_HEIGHT);
+		DeleteObject(SelectObject(StretchDC, StretchBit));
+
+		StretchBlt(StretchDC
+			, (int)(Pos.x + m_vecFrame[m_iFrameIndex].vSliceSize.x * 0.5f) -1
+			, (int)(Pos.y - m_vecFrame[m_iFrameIndex].vSliceSize.y * 0.5f)
+			, -(int)m_vecFrame[m_iFrameIndex].vSliceSize.x
+			, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y
+			, m_pTex->GetTextureDC()
+			, (int)m_vecFrame[m_iFrameIndex].vLT.x
+			, (int)m_vecFrame[m_iFrameIndex].vLT.y
+			, (int)m_vecFrame[m_iFrameIndex].vSliceSize.x
+			, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y, SRCCOPY);
+
+		TransparentBlt(_dc
+			, (int)(Pos.x - m_vecFrame[m_iFrameIndex].vSliceSize.x * 0.5f)
+			, (int)(Pos.y - m_vecFrame[m_iFrameIndex].vSliceSize.y * 0.5f)
+			, (int)m_vecFrame[m_iFrameIndex].vSliceSize.x
+			, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y
+			, StretchDC
+			, (int)(Pos.x - m_vecFrame[m_iFrameIndex].vSliceSize.x * 0.5f)
+			, (int)(Pos.y - m_vecFrame[m_iFrameIndex].vSliceSize.y * 0.5f)
+			, (int)m_vecFrame[m_iFrameIndex].vSliceSize.x
+			, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y
+			, RGB(255, 255, 255));
+
+		DeleteObject(StretchDC);
+		DeleteObject(StretchBit);
+	}
 	return 0;
 }
 

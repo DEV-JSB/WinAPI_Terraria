@@ -10,6 +10,7 @@
 CAnimator::CAnimator(const bool _willRender)
 	:CComponent(_willRender)
 	,m_pOwner(nullptr)
+	, m_bXflip(false)
 {
 }
 
@@ -75,7 +76,7 @@ int CAnimator::Render(const HDC _hdc)const
 	Vector3 vPos = pTrans->GetPosition();
 	for (size_t i = 0; i < m_vecCurAnimation.size(); ++i)
 	{
-		m_vecCurAnimation[i]->Render(_hdc, Vector2({ vPos.x,vPos.y }));
+		m_vecCurAnimation[i]->Render(_hdc, Vector2({ vPos.x,vPos.y }), m_bXflip);
 	}
 	return 0;
 }

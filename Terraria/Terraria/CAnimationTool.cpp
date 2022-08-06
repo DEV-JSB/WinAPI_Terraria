@@ -128,8 +128,9 @@ int CAnimationTool::SetAnimation()
     // SetAnimation Frame
     m_stAniFrame.vLT.x = (float)m_stSelectRect.left;
     m_stAniFrame.vLT.y = (float)m_stSelectRect.top;
-    m_stAniFrame.vSliceSize.x = (float)(m_stSelectRect.right - m_stSelectRect.left);
-    m_stAniFrame.vSliceSize.y = (float)(m_stSelectRect.bottom - m_stSelectRect.top);
+    // If can't Plus 1 then Pixel will Cut strange
+    m_stAniFrame.vSliceSize.x = (float)(m_stSelectRect.right - m_stSelectRect.left + 1);
+    m_stAniFrame.vSliceSize.y = (float)(m_stSelectRect.bottom - m_stSelectRect.top + 1);
 
     // SetAnimation Duration Time
     m_stAniFrame.fDuration = SAMPLE_ANIMATION_DURATION;

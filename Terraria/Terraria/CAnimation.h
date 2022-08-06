@@ -9,7 +9,7 @@ class CAnimation
 public:
 	// SaveAnimation
 	int SaveFile()const;
-	int Render(const HDC _dc, const Vector2& _Pos);
+	int Render(const HDC _dc, const Vector2& _Pos, const bool _xFlip);
 public: // Get Set
 	// GetFrame Offset
 	Vector2 GetOffset(const int _frameIdx)const { return m_vecFrame[_frameIdx].vOffset; }
