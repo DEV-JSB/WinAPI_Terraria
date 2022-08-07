@@ -27,7 +27,10 @@ typedef struct MyVector2
 		this->y /= length;
 		return *this;
 	}
-
+	MyVector2 operator-()const
+	{
+		return MyVector2({ -x , -y});
+	}
 	MyVector2 operator+(MyVector2& _vec)const
 	{
 		return MyVector2({ x + _vec.x, y + _vec.y });

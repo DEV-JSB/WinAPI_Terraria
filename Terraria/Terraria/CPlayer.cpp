@@ -4,10 +4,11 @@
 #include "CInputMgr.h"
 #include"CTransform2D.h"
 
-#define MOVE_FORCE 50.f
+#define MOVE_FORCE 100.f
 
 CPlayer::CPlayer()
     :CObject(Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5), 0.f }), Vector3(), Vector2())
+    , m_eState(PLAYER_STATE::STATE_IDLE)
 {
     // SetAnimator
     CAnimator* pAnimator = CFactory<CAnimator>::Create(true);
@@ -45,18 +46,9 @@ int CPlayer::FinalUpdate()
 
 int CPlayer::Update()
 {
-    CAnimator* pAnimator = RTTI_DYNAMIC_CAST_MAP(CAnimator, m_mapComponent, COMPONENT::COMPONENT_ANIMATOR);
-    if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_A) == INPUTSTATE::INPUTSTATE_HOLD)
-    {
-        pAnimator->SetFilp(true);
-        CObject::AddForce(Vector2{ -MOVE_FORCE,0.f });
-    }
-    if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_D) == INPUTSTATE::INPUTSTATE_HOLD)
-    {
-        CObject::AddForce(Vector2{ MOVE_FORCE,0.f });
-        pAnimator->SetFilp(false);
-    }
-
+    Update_Move();
+    Update_State();
+    Update_Animation();
 
     return 0;
 }
@@ -67,6 +59,55 @@ int CPlayer::Render(const HDC _dc)
     {
         (*iter).second->Render(_dc);
     }
+    return 0;
+}
+
+int CPlayer::Update_Move()
+{
+    if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_A) == INPUTSTATE::INPUTSTATE_HOLD)
+    {
+        CObject::AddForce(Vector2{ -MOVE_FORCE,0.f });
+        m_eWillState = PLAYER_STATE::STATE_LEFTRUN;
+    }
+    if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_D) == INPUTSTATE::INPUTSTATE_HOLD)
+    {
+        CObject::AddForce(Vector2{ MOVE_FORCE,0.f });
+        m_eWillState = PLAYER_STATE::STATE_RIGHTRUN;
+    }
+    if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_S) == INPUTSTATE::INPUTSTATE_HOLD)
+    {
+        CObject::AddForce(Vector2{ 0.f,MOVE_FORCE });
+        m_eWillState = PLAYER_STATE::STATE_LEFTRUN;
+    }
+    if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_W) == INPUTSTATE::INPUTSTATE_HOLD)
+    {
+        CObject::AddForce(Vector2{ 0.f,-MOVE_FORCE });
+        m_eWillState = PLAYER_STATE::STATE_RIGHTRUN;
+    }
+    return 0;
+}
+
+int CPlayer::Update_Animation()
+{
+    CAnimator* pAnimator = RTTI_DYNAMIC_CAST_MAP(CAnimator, m_mapComponent, COMPONENT::COMPONENT_ANIMATOR);
+    switch (m_eState)
+    {
+    case PLAYER_STATE::STATE_IDLE:
+        break;
+    case PLAYER_STATE::STATE_LEFTRUN:
+        pAnimator->SetFilp(true);
+        break;
+    case PLAYER_STATE::STATE_RIGHTRUN:
+        pAnimator->SetFilp(false);
+        break;
+    }
+    return 0;
+}
+
+int CPlayer::Update_State()
+{
+    // Later Plus Exeption Handling
+    m_eState = m_eWillState;
     return 0;
 }
 

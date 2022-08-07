@@ -109,6 +109,18 @@
     <Filter Include="Framework\02.Manager\TileManager">
       <UniqueIdentifier>{f2fd06e1-0c1d-4bf4-84b7-7048dd7e7c96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\04.Component\Collider">
+      <UniqueIdentifier>{b1121c8e-5fbd-44b0-a993-556e34dbe289}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\04.Component\Collider\BoxCollider">
+      <UniqueIdentifier>{8b23a895-fe77-4ea1-a46d-6f79f848a30f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\04.Component\Collider\CircleCollider">
+      <UniqueIdentifier>{7b05b4cc-6c18-49f7-8002-f683bbd9e2d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\02.Manager\CollisionManager">
+      <UniqueIdentifier>{6caa11c6-e99c-45a2-b41e-89f2fbf012a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -208,6 +220,18 @@
     <ClInclude Include="CTileMgr.h">
       <Filter>Framework\02.Manager\TileManager</Filter>
     </ClInclude>
+    <ClInclude Include="CBoxCollider.h">
+      <Filter>Framework\04.Component\Collider\BoxCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="CCircleCollider.h">
+      <Filter>Framework\04.Component\Collider\CircleCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollider.h">
+      <Filter>Framework\04.Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollisionMgr.h">
+      <Filter>Framework\02.Manager\CollisionManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -290,6 +314,18 @@
     </ClCompile>
     <ClCompile Include="CTileMgr.cpp">
       <Filter>Framework\02.Manager\TileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoxCollider.cpp">
+      <Filter>Framework\04.Component\Collider\BoxCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="CCircleCollider.cpp">
+      <Filter>Framework\04.Component\Collider\CircleCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollider.cpp">
+      <Filter>Framework\04.Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionMgr.cpp">
+      <Filter>Framework\02.Manager\CollisionManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

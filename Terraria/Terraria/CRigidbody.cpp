@@ -6,13 +6,22 @@
 
 CRigidbody::CRigidbody()
     :CComponent(false)
-    , m_fMaxSpeed(20.f)
-    ,m_fMass(1.f)
-    ,m_vAcceleration({0,0})
-    ,m_vForce({0,0})
-    ,m_vVelocity({0,0})
+    , m_fMaxSpeed(100.f)
+    , m_fFriction(50.f)
+    , m_fMass(1.f)
+    , m_vAcceleration({0,0})
+    , m_vForce({0,0})
+    , m_vVelocity({0,0})
     , m_pOwner(nullptr)
 {
+}
+
+bool CRigidbody::IsMoving()
+{
+    if (0 == m_vVelocity.Length())
+        return false;
+    else
+        return true;
 }
 
 int CRigidbody::Move()
@@ -61,15 +70,27 @@ int CRigidbody::FinalUpdate()
         //Final Speed
         m_vVelocity += m_vAcceleration * (float)GET_DT;
 
+        // Check MaxSpeed
         if (m_vVelocity.Length() > m_fMaxSpeed)
         {
-            printf("최대값 도달! \n");
             m_vVelocity.Normalize();
             m_vVelocity *= m_fMaxSpeed;
         }
 
         // PowerReset
         m_vForce = Vector2({ 0.f, 0.f });
+    }
+
+    // Caculator Friction
+    if (0 != m_vVelocity.Length())
+    {
+        Vector2 vecFricDirect = -m_vVelocity;
+        vecFricDirect.Normalize() *= (float)GET_DT;
+        vecFricDirect *= m_fFriction;
+        if (m_vVelocity.Length() <= vecFricDirect.Length())
+            m_vVelocity = Vector2({ 0.f,0.f });
+        else
+            m_vVelocity += vecFricDirect;
     }
     Move();
     return 0;

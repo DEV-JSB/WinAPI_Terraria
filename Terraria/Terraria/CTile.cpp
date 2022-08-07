@@ -18,16 +18,23 @@ int CTile::Setting(TILE _eType, const Vector2 _pos)
 
 	// Pos will follow Pos
 	Vector3 Pos;
-	Pos.x = _pos.x;
-	Pos.y = _pos.y;
+	Pos.x = _pos.x + 8.f;
+	Pos.y = _pos.y + 8.f;
 	Pos.z = 0.f;
 	switch (_eType)
 	{
-	case TILE::TILE_GROUND:
+	case TILE::TILE_GROUNDUP:
 		CObject::CreateTransform(Pos, Vector3({ 0.f,0.f,0.f }), SkinInfo.vSliceSize);
 		pSkin->SetTexture(L"Tiles_Ground.bmp");
 		// Hard Coding Setting LT 
 		SkinInfo.vLT = Vector2({ 18.f,0.f });
+		pSkin->SetSkinInfo(SkinInfo);
+		break;
+	case TILE::TILE_GROUNDDOWN:
+		CObject::CreateTransform(Pos, Vector3({ 0.f,0.f,0.f }), SkinInfo.vSliceSize);
+		pSkin->SetTexture(L"Tiles_Ground.bmp");
+		// Hard Coding Setting LT 
+		SkinInfo.vLT = Vector2({ 18.f,18.f });
 		pSkin->SetSkinInfo(SkinInfo);
 		break;
 		

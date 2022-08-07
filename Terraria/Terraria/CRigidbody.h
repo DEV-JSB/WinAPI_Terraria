@@ -4,6 +4,9 @@
 class CRigidbody :
     public CComponent
 {
+public:
+    bool IsMoving();
+
 public:// Get
     float GetMass()const { return m_fMass; }
 
@@ -31,6 +34,8 @@ private:
     float m_fMass;
     // Veclocity = speed + direction
     Vector2 m_vVelocity;
+    // Friction
+    float m_fFriction;
 private:
     FRIEND_FACTORY(CRigidbody);
     CRigidbody();

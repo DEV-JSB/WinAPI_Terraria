@@ -146,6 +146,10 @@
     <ClInclude Include="CAnimationUI.h" />
     <ClInclude Include="CAnimator.h" />
     <ClInclude Include="CButtonUI.h" />
+    <ClInclude Include="CBoxCollider.h" />
+    <ClInclude Include="CCircleCollider.h" />
+    <ClInclude Include="CCollider.h" />
+    <ClInclude Include="CCollisionMgr.h" />
     <ClInclude Include="CComponent.h" />
     <ClInclude Include="CEngine.h" />
     <ClInclude Include="CFactory.h" />
@@ -183,6 +187,10 @@
     <ClCompile Include="CAnimationUI.cpp" />
     <ClCompile Include="CAnimator.cpp" />
     <ClCompile Include="CButtonUI.cpp" />
+    <ClCompile Include="CBoxCollider.cpp" />
+    <ClCompile Include="CCircleCollider.cpp" />
+    <ClCompile Include="CCollider.cpp" />
+    <ClCompile Include="CCollisionMgr.cpp" />
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CFactory2.cpp" />

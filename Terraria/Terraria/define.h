@@ -101,7 +101,8 @@ enum class OBJECT
 // Tile Type
 enum class TILE
 {
-	TILE_GROUND,
+	TILE_GROUNDUP,
+	TILE_GROUNDDOWN,
 	TILE_IRON,
 	TILE_COPPER,
 	TILE_END

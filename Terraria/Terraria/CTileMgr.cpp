@@ -28,7 +28,11 @@ int CTileMgr::Enter()
 		for (int y = 30; y <= 45; ++y)
 		{
 			CTile* pTile = RTTI_DYNAMIC_CAST(CFactory2::CreateObject(OBJECT::OBJECT_TILE), CTile);
-			pTile->Setting(TILE::TILE_GROUND, Vector2({ (float)(x * 16), (float)(y * 16) }));
+			if(y == 30)
+				pTile->Setting(TILE::TILE_GROUNDUP, Vector2({ (float)(x * 16), (float)(y * 16) }));
+			else
+				pTile->Setting(TILE::TILE_GROUNDDOWN, Vector2({ (float)(x * 16), (float)(y * 16) }));
+
 			m_vecTile.push_back(pTile);
 		}
 	}
