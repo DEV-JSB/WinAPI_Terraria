@@ -12,8 +12,9 @@
 #define GET_DT CTimeMgr::GetInstance()->GetDT();
 
 #define CLIENT_WIDTH 1280
+// 80
 #define CLIENT_HEIGHT 720
-
+// 45
 #define CHECK_POS_IN_TRANSRECT(trans,pos)((trans->GetPosition_X() - trans->GetScale_Width() * 0.5f) <= pos.x\
 									&& pos.x <= (trans->GetPosition_X() + trans->GetScale_Width() * 0.5f)\
 									&& (trans->GetPosition_Y() - trans->GetScale_Height() * 0.5f) <= pos.y\
@@ -90,10 +91,20 @@ enum class COMPONENT
 // Object
 enum class OBJECT
 {
+	OBJECT_TILE,
 	OBJECT_PLAYER,
 	OBJECT_BLOCK,
 	OBJECT_UI,
 	OBJECT_END
+};
+
+// Tile Type
+enum class TILE
+{
+	TILE_GROUND,
+	TILE_IRON,
+	TILE_COPPER,
+	TILE_END
 };
 
 // Keyboard Input Type

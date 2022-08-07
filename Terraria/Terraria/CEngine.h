@@ -9,7 +9,7 @@ public: // Logic , Can Access OutSide
 
 	HWND GetMainHWND()const { return m_hWnd; }
 	HDC GetBufferDC()const { return m_bufferDC; }
-	HDC GetMainDC()const { return m_hDC; }
+	HDC GetMainDC()const { return m_dc; }
 private: // Cycle
 	int FinalUpdate();
 	int Update();
@@ -19,7 +19,7 @@ private:
 	// Main global HWND
 	HWND m_hWnd;
 	// Main DrawDC;
-	HDC m_hDC;
+	HDC m_dc;
 
 	// For double b uffering DC
 	HDC m_bufferDC;

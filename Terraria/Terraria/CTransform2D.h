@@ -8,7 +8,7 @@ class CTransform2D : public CComponent
 public:
 	virtual ~CTransform2D();
 public: // Logic Function
-	virtual int Render(const HDC _hdc)const override;
+	virtual int Render(const HDC _dc)const override;
 	virtual int Update() override;
 	virtual int FinalUpdate() override;
 

@@ -41,7 +41,7 @@ CAnimationTool::CAnimationTool()
 }
 
 
-bool CAnimationTool::CheckCutBitmap(const HDC _hdc)
+bool CAnimationTool::CheckCutBitmap(const HDC _dc)
 {
     if (!m_bIsSetRect)
         return 0;
@@ -52,7 +52,7 @@ bool CAnimationTool::CheckCutBitmap(const HDC _hdc)
     {
         for (int y = m_stSelectRect.top; y <= m_stSelectRect.bottom; ++y)
         {
-            rgb = GetPixel(_hdc, x, y);
+            rgb = GetPixel(_dc, x, y);
             if (BIT_BOUNDARY_LINE == GetRValue(rgb)
                 && BIT_BOUNDARY_LINE == GetGValue(rgb)
                 && BIT_BOUNDARY_LINE == GetBValue(rgb))
@@ -82,13 +82,13 @@ bool CAnimationTool::CheckCutBitmap(const HDC _hdc)
 }
 
 
-int CAnimationTool::DrawSelectRect(const HDC _hdc)
+int CAnimationTool::DrawSelectRect(const HDC _dc)
 {
-    MoveToEx(_hdc, m_stSelectRect.left, m_stSelectRect.top, NULL);
-    LineTo(_hdc, m_stSelectRect.right, m_stSelectRect.top);
-    LineTo(_hdc, m_stSelectRect.right, m_stSelectRect.bottom);
-    LineTo(_hdc, m_stSelectRect.left, m_stSelectRect.bottom);
-    LineTo(_hdc, m_stSelectRect.left, m_stSelectRect.top);
+    MoveToEx(_dc, m_stSelectRect.left, m_stSelectRect.top, NULL);
+    LineTo(_dc, m_stSelectRect.right, m_stSelectRect.top);
+    LineTo(_dc, m_stSelectRect.right, m_stSelectRect.bottom);
+    LineTo(_dc, m_stSelectRect.left, m_stSelectRect.bottom);
+    LineTo(_dc, m_stSelectRect.left, m_stSelectRect.top);
     return 0;
 }
 int CAnimationTool::SetOpenFileName(const wstring& _Key,const wstring& _aniName,const wstring& _objname)
@@ -143,11 +143,11 @@ int CAnimationTool::SetAnimation()
 
 
 
-int CAnimationTool::Render(const HDC _hdc)
+int CAnimationTool::Render(const HDC _dc)
 {
     if (nullptr == m_pTexture)
         return 0;
-    TransparentBlt(_hdc
+    TransparentBlt(_dc
         , 0
         , 0
         , m_pTexture->GetBitInfo().bmWidth
@@ -162,17 +162,17 @@ int CAnimationTool::Render(const HDC _hdc)
     // Setting CutBitmap
     if (m_bIsSetRect)
     {
-        if (CheckCutBitmap(_hdc))
+        if (CheckCutBitmap(_dc))
         {
             // Save Animation and Can Replace Offset
             m_bIsSetRect = false;
         }
     }
     
-    DrawSelectRect(_hdc);
+    DrawSelectRect(_dc);
     
     //UI Rendering
-    CUIManager::GetInstance()->Render(_hdc);
+    CUIManager::GetInstance()->Render(_dc);
     return 0;
     
 }

@@ -10,7 +10,7 @@ public:
 public:
 	virtual int FinalUpdate()		   = 0;
 	virtual int Release()              = 0;
-	virtual int Render(const HDC _hdc) = 0;
+	virtual int Render(const HDC _dc) = 0;
 	virtual int Update()			   = 0;
 	virtual int Enter()				   = 0;
 protected:

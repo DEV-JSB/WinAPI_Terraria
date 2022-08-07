@@ -103,6 +103,12 @@
     <Filter Include="Framework\07.Factory\Factory">
       <UniqueIdentifier>{836cc098-23cf-41f5-aac7-db8f64d60437}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\06.Object\Item">
+      <UniqueIdentifier>{b3d54d4a-3fa2-4995-8cb3-cd4319474b62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\02.Manager\TileManager">
+      <UniqueIdentifier>{f2fd06e1-0c1d-4bf4-84b7-7048dd7e7c96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -199,6 +205,9 @@
     <ClInclude Include="CFactory2.h">
       <Filter>Framework\07.Factory\Factory</Filter>
     </ClInclude>
+    <ClInclude Include="CTileMgr.h">
+      <Filter>Framework\02.Manager\TileManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -278,6 +287,9 @@
     </ClCompile>
     <ClCompile Include="CFactory2.cpp">
       <Filter>Framework\07.Factory\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="CTileMgr.cpp">
+      <Filter>Framework\02.Manager\TileManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

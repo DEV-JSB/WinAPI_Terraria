@@ -6,6 +6,10 @@
 
 
 
+CObject::CObject()
+{
+}
+
 CObject::CObject(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale)
 {
 	CreateTransform(_pos,_rot,_scale);

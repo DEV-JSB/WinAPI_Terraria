@@ -26,13 +26,13 @@ int CWorld::FinalUpdate()
     return 0;
 }
 
-int CWorld::Render(const HDC _hdc)
+int CWorld::Render(const HDC _dc)
 {
     for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
     {
         for (size_t j = 0; j < m_arrObjectVec[i].size(); ++j)
         {
-            m_arrObjectVec[i][j]->Render(_hdc);
+            m_arrObjectVec[i][j]->Render(_dc);
         }
     }
     return 0;

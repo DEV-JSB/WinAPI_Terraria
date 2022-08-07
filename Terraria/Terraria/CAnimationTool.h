@@ -15,14 +15,14 @@ public:
 	// Setting FileName and Animation Name
 	int SetOpenFileName(const wstring& _Key,const wstring& _aniName, const wstring& _objname);
 	// DrawSelectRect Line
-	int DrawSelectRect(const HDC _hdc);
+	int DrawSelectRect(const HDC _dc);
 	// SettingAnimationFrame
 	int SetAnimation();
 public:
 	// Delete Object
 	virtual int Release()			   override;
 	// Rendering
-	virtual int Render(const HDC _hdc) override;
+	virtual int Render(const HDC _dc) override;
 	// Update Scene
 	virtual int Update()			   override;
 	virtual int Enter()				   override;
@@ -58,7 +58,7 @@ private: // Private Function
 	// Setting UI
 	int SettingUI();
 	// CutBitmap
-	bool CheckCutBitmap(const HDC _hdc);
+	bool CheckCutBitmap(const HDC _dc);
 private: // Constructor
 	HIDE_CONSTRUCTOR(CAnimationTool);
 public:

@@ -15,7 +15,7 @@ public:// Func
     int AddForce(Vector2 _vForce) { m_vForce += _vForce; return 0; };
     int Move();
 public:// Logic
-    virtual int Render(const HDC _hdc)const      override;
+    virtual int Render(const HDC _dc)const      override;
     virtual int Update()      override;
     virtual int FinalUpdate() override;
 private:

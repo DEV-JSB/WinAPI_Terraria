@@ -27,9 +27,9 @@ int CSceneMgr::Update()
 	return 0;
 }
 
-int CSceneMgr::Render(HDC _hdc)
+int CSceneMgr::Render(HDC _dc)
 {
-	m_pCurScene->Render(_hdc);
+	m_pCurScene->Render(_dc);
 	return 0;
 }
 

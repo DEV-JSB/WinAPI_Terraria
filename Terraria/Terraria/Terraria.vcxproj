@@ -162,6 +162,7 @@
     <ClInclude Include="CSkin.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTile.h" />
+    <ClInclude Include="CTileMgr.h" />
     <ClInclude Include="CTimeMgr.h" />
     <ClInclude Include="CTransform2D.h" />
     <ClInclude Include="CUI.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="CSkin.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTile.cpp" />
+    <ClCompile Include="CTileMgr.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
     <ClCompile Include="CTransform2D.cpp" />
     <ClCompile Include="CUI.cpp" />

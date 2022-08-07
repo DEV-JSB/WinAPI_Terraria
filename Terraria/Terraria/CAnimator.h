@@ -18,7 +18,7 @@ public:
 	int SubstitutePlayAnimation(const wstring _deleteAni,const wstring& _substitute);
 
 public://Logic
-	virtual int Render(const HDC _hdc)const override;
+	virtual int Render(const HDC _dc)const override;
 	virtual int Update() override;
 	virtual int FinalUpdate() override;
 private:

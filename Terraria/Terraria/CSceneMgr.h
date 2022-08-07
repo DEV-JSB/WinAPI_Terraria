@@ -8,7 +8,7 @@ class CSceneMgr
 public: // Logic
 	int FinalUpdate();
 	int Update();
-	int Render(HDC _hdc);
+	int Render(HDC _dc);
 	int Enter();
 	int Init();
 	int Release();

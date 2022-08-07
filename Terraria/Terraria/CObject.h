@@ -33,9 +33,11 @@ protected:
 protected:
 	// Component Map
 	std::map<COMPONENT, CComponent*> m_mapComponent;
-private: // CreateComponent
+protected: // CreateComponent
 	int CreateTransform(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
 protected:
+	// Normal Constructor
+	CObject();
 	// Set Transform Constructor
 	CObject(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
 public:

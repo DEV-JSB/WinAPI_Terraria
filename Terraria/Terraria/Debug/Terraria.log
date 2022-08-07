@@ -1,3 +1,26 @@
-﻿  CPlayer.cpp
+﻿  CAnimation.cpp
+  CAnimationTool.cpp
+  CAnimationUI.cpp
+  CAnimator.cpp
+  CButtonUI.cpp
+  CComponent.cpp
+  CEngine.cpp
+  CFactory2.cpp
+  CInputMgr.cpp
+  CObject.cpp
+  CPathMgr.cpp
+  CPlayer.cpp
+  CResource.cpp
+  CResourceMgr.cpp
+  CRigidbody.cpp
+  CScene.cpp
   CSceneMgr.cpp
+  CSkin.cpp
+  CTexture.cpp
+  CTile.cpp
+  CTileMgr.cpp
+  CTimeMgr.cpp
+  CTransform2D.cpp
+  CUI.cpp
+  CUIManager.cpp
   Terraria.vcxproj -> D:\UNITY\JK_MU\WinAPI_Terraria\Terraria\Debug\Terraria.exe

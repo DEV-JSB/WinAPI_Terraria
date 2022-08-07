@@ -18,7 +18,7 @@ CTransform2D::~CTransform2D()
 {
 }
 
-int CTransform2D::Render(const HDC _hdc)const
+int CTransform2D::Render(const HDC _dc)const
 {
 	return 0;
 }

@@ -34,7 +34,7 @@ int CRigidbody::Move()
     return 0;
 }
 
-int CRigidbody::Render(const HDC _hdc)const
+int CRigidbody::Render(const HDC _dc)const
 {
     return 0;
 }

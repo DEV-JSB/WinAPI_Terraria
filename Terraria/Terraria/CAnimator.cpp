@@ -70,13 +70,13 @@ int CAnimator::SubstitutePlayAnimation(const wstring _deleteAni, const wstring& 
 	return 0;
 }
 
-int CAnimator::Render(const HDC _hdc)const
+int CAnimator::Render(const HDC _dc)const
 {
 	CTransform2D* pTrans = m_pOwner->GetTransform();
 	Vector3 vPos = pTrans->GetPosition();
 	for (size_t i = 0; i < m_vecCurAnimation.size(); ++i)
 	{
-		m_vecCurAnimation[i]->Render(_hdc, Vector2({ vPos.x,vPos.y }), m_bXflip);
+		m_vecCurAnimation[i]->Render(_dc, Vector2({ vPos.x,vPos.y }), m_bXflip);
 	}
 	return 0;
 }

@@ -8,7 +8,7 @@ class CUIManager
 public:
 	int Release();
 	int Update();
-	int Render(const HDC _hdc);
+	int Render(const HDC _dc);
 	bool IsFocusingAnything()const;
 private:
 	UI_TYPE m_eFocusType;

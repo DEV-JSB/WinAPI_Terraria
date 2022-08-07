@@ -97,6 +97,14 @@ struct stMouseInfo
 	int				iKey;
 };
 
+struct stSkinInfo
+{
+	// VewPivot Left Top
+	Vector2 vLT;
+	// Slice Size
+	Vector2 vSliceSize;
+};
+
 // Use In Animation
 struct stAnimFrame
 {

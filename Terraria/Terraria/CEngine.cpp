@@ -12,7 +12,7 @@
 CEngine::CEngine()
 	:m_bufferDC(0)
 	,m_hBit(0)
-	,m_hDC(0)
+	,m_dc(0)
 	,m_hWnd(0)
 	,m_ptResolution({0,0})
 {}
@@ -22,7 +22,7 @@ CEngine::~CEngine()
 	// Delete Buffer, Buffer DC , GetDC
 	DeleteObject(m_hBit);
 	DeleteObject(m_bufferDC);
-	DeleteObject(m_hDC);
+	DeleteObject(m_dc);
 
 	
 }
@@ -53,13 +53,13 @@ int CEngine::Init(HWND _hwnd, POINT _resoulution)
 		rt.right - rt.left, rt.bottom - rt.top, 0);
 	
 	// Make DC for Draw Main Window
-	m_hDC = GetDC(m_hWnd);
+	m_dc = GetDC(m_hWnd);
 	
 	// Make Bitmap
-	m_hBit = CreateCompatibleBitmap(m_hDC, m_ptResolution.x, m_ptResolution.y);
+	m_hBit = CreateCompatibleBitmap(m_dc, m_ptResolution.x, m_ptResolution.y);
 	
 	// Make AnotherDC
-	m_bufferDC = CreateCompatibleDC(m_hDC);
+	m_bufferDC = CreateCompatibleDC(m_dc);
 	
 	// Setting New DC on BitBuffer
 	// Then New DC is Ready Draw On new Buffer
@@ -108,7 +108,7 @@ int CEngine::Render()
 	CTimeMgr::GetInstance()->Render();
 	CSceneMgr::GetInstance()->Render(m_bufferDC);
 
-	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
+	BitBlt(m_dc, 0, 0, m_ptResolution.x, m_ptResolution.y,
 		m_bufferDC, 0, 0, SRCCOPY);
 
 	Rectangle(m_bufferDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
@@ -117,10 +117,10 @@ int CEngine::Render()
 
 int CEngine::RenderExceptDoubleBuffer()
 {
-	CSceneMgr::GetInstance()->Render(m_hDC);
+	CSceneMgr::GetInstance()->Render(m_dc);
 	CTimeMgr::GetInstance()->Render();
 
-	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
+	BitBlt(m_dc, 0, 0, m_ptResolution.x, m_ptResolution.y,
 		m_bufferDC, 0, 0, SRCCOPY);
 	return 0;
 	return 0;
