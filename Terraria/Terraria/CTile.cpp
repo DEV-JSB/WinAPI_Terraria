@@ -37,7 +37,6 @@ int CTile::Setting(TILE _eType, const Vector2 _pos)
 		SkinInfo.vLT = Vector2({ 18.f,18.f });
 		pSkin->SetSkinInfo(SkinInfo);
 		break;
-		
 	}
 
 	m_mapComponent.insert({ COMPONENT::COMPONENT_SKIN , pSkin });

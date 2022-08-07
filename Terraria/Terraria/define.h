@@ -108,6 +108,15 @@ enum class TILE
 	TILE_END
 };
 
+// Collider Group
+enum class GROUP
+{
+	GROUP_TILE,
+	GROUP_PLAYER,
+	GROUP_MONSTER,
+	GROUP_END
+};
+
 // Keyboard Input Type
 enum class KEY
 {
