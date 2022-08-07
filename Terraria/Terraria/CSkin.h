@@ -8,6 +8,7 @@ class CObject;
 class CSkin : public CComponent
 {
 public:// Set Func
+    int SetOwner(CObject* _obj) { m_pOwner = _obj; return 0; }
     int SetTexture(const wstring& _str);
     int SetSkinInfo(const stSkinInfo& _skinInfo) { m_stSkinInfo = _skinInfo; return 0; }
 public:// Logic

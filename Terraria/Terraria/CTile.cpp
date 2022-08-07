@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CTile.h"
-#include"CFactory2.h"
+#include "CFactory2.h"
 #include "CSkin.h"
 
 CTile::CTile()
@@ -11,6 +11,7 @@ CTile::CTile()
 int CTile::Setting(TILE _eType, const Vector2 _pos)
 {
 	CSkin* pSkin = RTTI_DYNAMIC_CAST(CFactory2::CreateComponent(COMPONENT::COMPONENT_SKIN), CSkin);
+	pSkin->SetOwner(this);
 	// Tile Only Cut Size 16,16
 	stSkinInfo SkinInfo;
 	SkinInfo.vSliceSize = Vector2({ 16.f,16.f });
@@ -44,6 +45,7 @@ int CTile::Update()
 
 int CTile::Render(const HDC _dc)
 {
+	m_mapComponent[COMPONENT::COMPONENT_SKIN]->Render(_dc);
 	return 0;
 }
 

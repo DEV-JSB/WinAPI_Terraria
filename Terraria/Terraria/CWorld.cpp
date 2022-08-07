@@ -5,7 +5,7 @@
 #include "CInputMgr.h"
 #include "CPathMgr.h"
 #include "CFactory.h"
-
+#include "CTileMgr.h"
 
 
 
@@ -35,6 +35,7 @@ int CWorld::Render(const HDC _dc)
             m_arrObjectVec[i][j]->Render(_dc);
         }
     }
+    CTileMgr::GetInstance()->Render(_dc);
     return 0;
 }
 int CWorld::Update()
@@ -56,6 +57,8 @@ int CWorld::Enter()
     CPlayer* Player = CFactory<CPlayer>::Create();
     m_arrObjectVec[(int)OBJECT::OBJECT_PLAYER].push_back(Player);
     
+    CTileMgr::GetInstance()->Enter();
+
     return 0;
 }
 
