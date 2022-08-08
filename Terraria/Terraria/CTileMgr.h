@@ -1,16 +1,19 @@
 #pragma once
 
-class CTile;
+class CObject;
+
 
 class CTileMgr
 {
+public:
+	const vector<CObject*> GetTileGroup()const { return m_vecTile; }
 public:
 	//Tile Render
 	int Render(const HDC _dc);
 	//Tile Setting
 	int Enter();
 private:	
-	vector<CTile*> m_vecTile;
+	vector<CObject*> m_vecTile;
 private:
 	SINGLE(CTileMgr);
 

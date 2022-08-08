@@ -1,10 +1,16 @@
 #include "pch.h"
 #include "CCollider.h"
 
-CCollider::CCollider()
+
+
+UINT CCollider::g_iIdValue = 0;
+
+CCollider::CCollider(COLLIDER _eType)
 	:CComponent(false)
-	,m_pOwner(nullptr)
-	,m_vPos(Vector2({0.f,0.f}))
+	, m_eType(_eType)
+	, m_pOwner(nullptr)
+	, m_vPos(Vector2({ 0.f,0.f }))
+	, m_iID(g_iIdValue++)
 {
 }
 

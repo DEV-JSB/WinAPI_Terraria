@@ -6,6 +6,7 @@ class CObject;
 class CScene
 {
 public:
+	// Return ObjectGroup
 	const vector<CObject*> GetObjectGroup(const OBJECT _type) { return m_arrObjectVec[(int)_type]; }
 public:
 	virtual int FinalUpdate()		   = 0;

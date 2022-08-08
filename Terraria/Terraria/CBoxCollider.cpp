@@ -3,8 +3,10 @@
 
 
 CBoxCollider::CBoxCollider()
-	:m_vOffset(Vector2({0.f,0.f}))
+	: CCollider(COLLIDER::COLLIDER_CIRCLE)
+	,m_vOffset(Vector2({0.f,0.f}))
 	,m_vScale(Vector2({ 0.f,0.f }))
+
 {
 }
 

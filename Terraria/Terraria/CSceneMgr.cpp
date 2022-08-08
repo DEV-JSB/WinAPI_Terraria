@@ -13,6 +13,11 @@ CSceneMgr::~CSceneMgr()
 	
 }
 
+const vector<CObject*> CSceneMgr::GetObjectGroup(const OBJECT _eType)
+{
+	return m_pCurScene->GetObjectGroup(_eType);
+}
+
 int CSceneMgr::FinalUpdate()
 {
 	m_pCurScene->FinalUpdate();

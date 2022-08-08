@@ -4,7 +4,10 @@ class CScene;
 
 class CSceneMgr
 {
-	SINGLE(CSceneMgr);
+public://Get
+
+	// Return ObjectGroup in CurrentScene
+	const vector<CObject*> GetObjectGroup(const OBJECT _eType);
 public: // Logic
 	int FinalUpdate();
 	int Update();
@@ -17,5 +20,8 @@ public:
 	CScene* GetCurScene()const { return m_pCurScene; }
 private:
 	CScene* m_pCurScene;
+private:
+	SINGLE(CSceneMgr);
+
 };
 

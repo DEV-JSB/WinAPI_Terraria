@@ -1,12 +1,11 @@
 #include "pch.h"
 #include "CCircleCollider.h"
 CCircleCollider::CCircleCollider()
+	:CCollider(COLLIDER::COLLIDER_CIRCLE)
 {
 }
 
-CCircleCollider::~CCircleCollider()
-{
-}
+
 
 int CCircleCollider::Render(const HDC _dc) const
 {
@@ -23,3 +22,8 @@ int CCircleCollider::FinalUpdate()
 	return 0;
 }
 
+
+
+CCircleCollider::~CCircleCollider()
+{
+}

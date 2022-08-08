@@ -53,7 +53,12 @@ enum class UI_TYPE
 	UI_ANIMTAION,
 	UI_END
 };
-
+enum class COLLIDER
+{
+	COLLIDER_CIRCLE,
+	COLLIDER_RECT,
+	COLLIDER_END
+};
 enum class SCENE
 {
 	SCENE_MENU,
@@ -91,10 +96,10 @@ enum class COMPONENT
 // Object
 enum class OBJECT
 {
-	OBJECT_TILE,
 	OBJECT_PLAYER,
 	OBJECT_BLOCK,
 	OBJECT_UI,
+	OBJECT_TILE,
 	OBJECT_END
 };
 
@@ -106,15 +111,6 @@ enum class TILE
 	TILE_IRON,
 	TILE_COPPER,
 	TILE_END
-};
-
-// Collider Group
-enum class GROUP
-{
-	GROUP_TILE,
-	GROUP_PLAYER,
-	GROUP_MONSTER,
-	GROUP_END
 };
 
 // Keyboard Input Type

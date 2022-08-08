@@ -16,15 +16,6 @@
     <Filter Include="Framework">
       <UniqueIdentifier>{516bf2b0-25a5-485b-98f6-8879b5b43114}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Framework\03.Scene">
-      <UniqueIdentifier>{bfc25e68-5094-45df-b0e1-a20126245f84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Framework\03.Scene\Tool">
-      <UniqueIdentifier>{15f02bd7-81c4-4f3c-808c-8ab93b12fa8c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Framework\03.Scene\Tool\AnimationTool">
-      <UniqueIdentifier>{908fee7b-531f-4d14-a6ae-f60d19b67de1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\02.Manager">
       <UniqueIdentifier>{83cb2b6e-0a07-499c-92ce-68b389241ad8}</UniqueIdentifier>
     </Filter>
@@ -82,9 +73,6 @@
     <Filter Include="Framework\06.Object\UI\UI_Button">
       <UniqueIdentifier>{75b79dde-68e6-403a-aca9-28b23930e66e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Framework\03.Scene\World">
-      <UniqueIdentifier>{187238d6-be2e-40c7-8e74-c543d7ec4061}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\04.Component\Rigidbody">
       <UniqueIdentifier>{bbe5fc4c-f3ee-4e66-9ef7-d6e79285558e}</UniqueIdentifier>
     </Filter>
@@ -120,6 +108,18 @@
     </Filter>
     <Filter Include="Framework\02.Manager\CollisionManager">
       <UniqueIdentifier>{6caa11c6-e99c-45a2-b41e-89f2fbf012a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\03.Scene">
+      <UniqueIdentifier>{bfc25e68-5094-45df-b0e1-a20126245f84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\03.Scene\Tool">
+      <UniqueIdentifier>{15f02bd7-81c4-4f3c-808c-8ab93b12fa8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\03.Scene\Tool\AnimationTool">
+      <UniqueIdentifier>{908fee7b-531f-4d14-a6ae-f60d19b67de1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\03.Scene\World">
+      <UniqueIdentifier>{187238d6-be2e-40c7-8e74-c543d7ec4061}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

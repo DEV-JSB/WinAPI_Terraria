@@ -19,7 +19,6 @@ using std::wstring;
 using std::map;
 using std::vector;
 
-
 #include"struct.h"
 #include"define.h"
 #include"Function.h"
