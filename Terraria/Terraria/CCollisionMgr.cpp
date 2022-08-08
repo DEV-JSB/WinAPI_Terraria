@@ -30,17 +30,10 @@ int CCollisionMgr::Update()
 
 int CCollisionMgr::CollisionCheck(const OBJECT _eLeft, const OBJECT _eRight)
 {
-	//const vector<CObject*>& vecLeft;
-	//const vector<CObject*>& vecRight;
-	//// Tile Except Have TileManager
-	//if (GROUP::GROUP_TILE == _eLeft)
-	//	vecLeft = CTileMgr::GetInstance()->GetTileGroup();
-	//else if (GROUP::GROUP_TILE == _eRight)
-	//	vecRight = CTileMgr::GetInstance()->GetTileGroup();
-	//else
-	//{
-	//	
-	//}
+	// GetCollision Group
+	const vector<CObject*>& vecRight = GetObjectVec(_eLeft);
+	const vector<CObject*>& vecLeft  = GetObjectVec(_eRight);
+
 
 
 	return 0;

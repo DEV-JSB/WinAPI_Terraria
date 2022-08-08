@@ -6,7 +6,7 @@
 
 CRigidbody::CRigidbody()
     :CComponent(false)
-    , m_fMaxSpeed(100.f)
+    , m_fMaxSpeed(20.f)
     , m_fFriction(50.f)
     , m_fMass(1.f)
     , m_vAcceleration({0,0})
