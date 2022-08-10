@@ -1,7 +1,3 @@
 ﻿  CEngine.cpp
-  CInputMgr.cpp
-  CTexture.cpp
-  CTileMgr.cpp
-  CTimeMgr.cpp
-  Terraria.cpp
+  CObject.cpp
   Terraria.vcxproj -> C:\Users\Admin\Documents\GitHub\WinAPI_Terraria\Terraria\Debug\Terraria.exe

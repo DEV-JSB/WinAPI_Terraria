@@ -109,15 +109,12 @@ int CEngine::Update()
 int CEngine::Render()
 {
 	// RenderingManager
-	BitBlt(m_bufferDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
-		m_bufferDC, 0, 0, SRCCOPY);
-	PatBlt(m_bufferDC, 0, 0, m_ptResolution.x, m_ptResolution.y, WHITENESS);
-
 	CTimeMgr::GetInstance()->Render();
 	CSceneMgr::GetInstance()->Render(m_bufferDC);
 
 	BitBlt(m_dc, 0, 0, m_ptResolution.x, m_ptResolution.y,
 		m_bufferDC, 0, 0, SRCCOPY);
+	PatBlt(m_bufferDC, 0, 0, m_ptResolution.x, m_ptResolution.y, WHITENESS);
 
 	return 0;
 }
