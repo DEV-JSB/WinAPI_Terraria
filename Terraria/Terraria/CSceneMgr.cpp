@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "CSceneMgr.h"
 #include "CAnimationTool.h"
-#include"CWorld.h"
+#include "CCollisionMgr.h"
+#include "CWorld.h"
 #include "CFactory.h"
 CSceneMgr::CSceneMgr()
 	:m_pCurScene(nullptr)

@@ -1,14 +1,20 @@
 #include "pch.h"
 #include "CPlayer.h"
 #include "CAnimator.h"
+#include "CCollider.h"
+#include "CFactory2.h"
+#include "CBoxCollider.h"
 #include "CInputMgr.h"
-#include"CTransform2D.h"
+#include "CTransform2D.h"
 
+#define PLAYER_WIDTH 32.f
+#define PLAYER_HEIGHT 48.f
 #define MOVE_FORCE 100.f
 
 CPlayer::CPlayer()
     :CObject(Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5), 0.f }), Vector3(), Vector2())
     , m_eState(PLAYER_STATE::STATE_IDLE)
+    , m_eWillState(PLAYER_STATE::STATE_IDLE)
 {
     // SetAnimator
     CAnimator* pAnimator = CFactory<CAnimator>::Create(true);
@@ -30,22 +36,24 @@ CPlayer::CPlayer()
 
     m_mapComponent.insert({ COMPONENT::COMPONENT_ANIMATOR,pAnimator });
 
-    CObject::CreateRigidbody();
+    CreateCollider(Vector2({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) }));
 
+    CObject::CreateRigidbody();
+    
 }
 
 
 int CPlayer::FinalUpdate()
 {
-    for (auto iter = m_mapComponent.begin(); iter != m_mapComponent.end(); ++iter)
-    {
-        (*iter).second->FinalUpdate();
-    }
+    CObject::FinalUpdate();
+ 
     return 0;
 }
 
 int CPlayer::Update()
 {
+    CObject::Update();
+
     Update_Move();
     Update_State();
     Update_Animation();
@@ -108,6 +116,17 @@ int CPlayer::Update_State()
 {
     // Later Plus Exeption Handling
     m_eState = m_eWillState;
+    return 0;
+}
+
+int CPlayer::CreateCollider(const Vector2 _pos)
+{
+    CComponent* pBoxCollider = CFactory2::CreateComponent(COMPONENT::COMPONENT_BOXCOLLIDER);
+    RTTI_DYNAMIC_CAST(pBoxCollider, CBoxCollider)->SetInformation(this,_pos
+        , Vector2({ PLAYER_WIDTH , PLAYER_HEIGHT })
+        , Vector2({ 0.f,0.f }));
+    
+    m_mapComponent.insert({ COMPONENT::COMPONENT_COLLIDER , pBoxCollider });
     return 0;
 }
 

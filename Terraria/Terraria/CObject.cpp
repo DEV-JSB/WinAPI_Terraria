@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "CObject.h"
 #include "CFactory.h"
+#include "CCollider.h"
+#include "CComponent.h"
 #include "CTransform2D.h"
-#include"CRigidbody.h"
+#include "CRigidbody.h"
 
 
 
@@ -35,21 +37,50 @@ int CObject::CreateRigidbody()
 
 int CObject::Update()
 {
+	for (auto iter = m_mapComponent.begin(); iter != m_mapComponent.end(); ++iter)
+	{
+		(*iter).second->Update();
+	}
+	return 0;
+}
+
+int CObject::FinalUpdate()
+{
+	for (auto iter = m_mapComponent.begin(); iter != m_mapComponent.end(); ++iter)
+	{
+		(*iter).second->FinalUpdate();
+	}
 	return 0;
 }
 
 int CObject::Render(HDC _dc)
 {
+	// Component Rendering Test
+	CCollider* p = RTTI_DYNAMIC_CAST_MAP(CCollider, m_mapComponent, COMPONENT::COMPONENT_COLLIDER);
+	p->Render(_dc);
 	return 0;
 }
 
+
+CCollider* CObject::GetCollider() const
+{
+	auto iter = m_mapComponent.find(COMPONENT::COMPONENT_COLLIDER);
+	// Exeption handling
+	if (iter == m_mapComponent.end())
+		return nullptr;
+	else
+	{
+		CCollider* pCollider = dynamic_cast<CCollider*>(iter->second);
+		return pCollider;
+	}
+		
+}
 
 CTransform2D* CObject::GetTransform() const
 {
 	CTransform2D* pTrans = RTTI_DYNAMIC_CAST_MAP(CTransform2D, m_mapComponent, COMPONENT::COMPONENT_TRANSFORM2D);
 	// Exeption handling
 	assert(pTrans);
-
 	return pTrans;
 }
 

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CFactory2.h"
 #include "CTile.h"
+#include "CBoxCollider.h"
 #include "CSkin.h"
 
 CFactory2::CFactory2()
@@ -24,8 +25,15 @@ CComponent* CFactory2::CreateComponent(COMPONENT _eType)
     switch (_eType)
     {
     case COMPONENT::COMPONENT_SKIN:
-        CSkin* pComponent = new CSkin(true);
-        return pComponent;
+        {
+            CSkin* pSkin = new CSkin(true);
+            return pSkin;
+        }
+    case COMPONENT::COMPONENT_BOXCOLLIDER:
+        {
+            CCollider* pCollider = new CBoxCollider();
+            return pCollider;
+        }
     }
     return nullptr;
 }

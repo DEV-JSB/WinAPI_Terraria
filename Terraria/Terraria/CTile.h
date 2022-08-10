@@ -13,6 +13,8 @@ public:// Logic
     virtual int Render(const HDC _dc)   override;
     virtual int FinalUpdate()           override;
 private:
+    int CreateCollider(const Vector2 _pos);
+private:
     // Only Can Setting int CTileManager
     friend class CTileMgr;
     int Setting(TILE _eType, const Vector2 _pos);

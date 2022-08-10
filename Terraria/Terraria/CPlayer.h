@@ -11,9 +11,12 @@ public:
 	virtual int Render(const HDC _dc) override;
 
 private:
+	// Update Logic 
 	int Update_Move();
 	int Update_Animation();
 	int Update_State();
+
+	int CreateCollider(const Vector2 _pos);
 private:
 	enum class PLAYER_STATE { STATE_IDLE, STATE_LEFTRUN, STATE_RIGHTRUN, STATE_END };
 private:

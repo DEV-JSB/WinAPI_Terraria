@@ -20,6 +20,9 @@ int CAnimation::SaveFile()const
 		return 0;
 	wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
 
+	// [PlayerAnimation]
+	// PlayerArm
+	// eof
 	strFilePath  += L"Animation\\" + m_strName;
 	FILE* pFile = nullptr;
 	_wfopen_s(&pFile, strFilePath.c_str(), L"ab"); 

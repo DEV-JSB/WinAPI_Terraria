@@ -3,15 +3,27 @@
 
 class CTransform2D;
 class CRigidbody;
+class CCollider;
 
 class CObject
 {
+public: // Logic
+	virtual int Render(const HDC _dc);
+	// Component Update
+	virtual int Update();
+	// Component FinalUpdate
+	virtual int FinalUpdate();
+public: // Collision Function
+	// On Collision
+	virtual int OnCollision(const CObject* _pOther)			{ return 0; };
+	// Enter Collsiion
+	virtual int OnCollisionEnter(const CObject* _pOther)	{ return 0; };
+	// Exit Collision
+	virtual int OnCollisionExit(const CObject* _pOther)		{ return 0; };
 public:
-	virtual int Update()					= 0;
-	virtual int Render(const HDC _dc)		= 0;
-	virtual int FinalUpdate()				= 0;
-
-public:
+	// GetCollider
+	CCollider* GetCollider()const;
+	
 	// GetTransform
 	CTransform2D* GetTransform() const;
 	// Get Rigidbody
@@ -27,7 +39,6 @@ public: // Set Transform Funtion
 	int SetScale(const Vector2 _scale);
 public: // Set Rigidbody Function
 	int AddForce(const Vector2 _force);
-
 protected:
 	int CreateRigidbody();
 protected:

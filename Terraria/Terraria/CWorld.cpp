@@ -2,6 +2,8 @@
 #include "CWorld.h"
 #include "CPlayer.h"
 #include "CResourceMgr.h"
+#include "CCollisionMgr.h"
+#include"CComponent.h"
 #include "CInputMgr.h"
 #include "CPathMgr.h"
 #include "CFactory.h"
@@ -40,7 +42,6 @@ int CWorld::Render(const HDC _dc)
 }
 int CWorld::Update()
 {
-
     for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
     {
         for (size_t j = 0; j < m_arrObjectVec[i].size(); ++j)
@@ -58,6 +59,8 @@ int CWorld::Enter()
     m_arrObjectVec[(int)OBJECT::OBJECT_PLAYER].push_back(Player);
     
     CTileMgr::GetInstance()->Enter();
+    
+    CCollisionMgr::GetInstance()->CheckingGroupBox(OBJECT::OBJECT_TILE, OBJECT::OBJECT_PLAYER);
 
     return 0;
 }

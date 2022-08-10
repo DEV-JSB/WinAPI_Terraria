@@ -30,7 +30,6 @@ public:
 public:
     int Release();
 private: // Child Update Logic
-
     int Update_Child();
     int Render_Child(const HDC _dc);
     int FinalUpdate_Child();

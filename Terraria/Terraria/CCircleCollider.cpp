@@ -19,6 +19,7 @@ int CCircleCollider::Update()
 
 int CCircleCollider::FinalUpdate()
 {
+	CCollider::FinalUpdate();
 	return 0;
 }
 

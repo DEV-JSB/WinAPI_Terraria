@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "CEngine.h"
-#include"CSceneMgr.h"
 #include"CInputMgr.h"
 #include"CPathMgr.h"
 #include"CResourceMgr.h"
+#include "CSceneMgr.h"
+#include "CCollisionMgr.h"
 #include"CTimeMgr.h"
 
 #define WINDOWSTART_X 100
@@ -98,7 +99,7 @@ int CEngine::Update()
 	CSceneMgr::GetInstance()->Update();
 	CInputMgr::GetInstance()->Update();
 	CTimeMgr::GetInstance()->Update();
-
+	CCollisionMgr::GetInstance()->Update();
 	return 0;
 }
 

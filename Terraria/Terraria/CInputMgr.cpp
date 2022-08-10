@@ -105,7 +105,7 @@ int CInputMgr::Update()
 
 	for (int i = 0; i < (int)MOUSE::MOUSE_END; ++i)
 	{
-		// Key Pressed State
+		// Mouse Pressed State
 		if (GetAsyncKeyState(m_arrMouseInfo[i].iKey) & 0x8000)
 		{
 			// Is Not prev Pressed
