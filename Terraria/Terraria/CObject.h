@@ -23,12 +23,12 @@ public: // Collision Function
 public:
 	// GetCollider
 	CCollider* GetCollider()const;
-	
 	// GetTransform
 	CTransform2D* GetTransform() const;
 	// Get Rigidbody
 	CRigidbody* GetRigidbody() const;
-
+	// Get Type
+	OBJECT GetType() const { return m_eType; }
 public: // Set Transform Funtion
 	// Setting Object Pos
 	int SetPosition(const Vector3 _pos);
@@ -37,6 +37,9 @@ public: // Set Transform Funtion
 	int SetRotation(const Vector3 _rot);
 	// Setting Object SetScale
 	int SetScale(const Vector2 _scale);
+	// Setting Type
+	int SetType(const OBJECT _eType) { m_eType = _eType; return 0; }
+
 public: // Set Rigidbody Function
 	int AddForce(const Vector2 _force);
 protected:
@@ -46,11 +49,14 @@ protected:
 	std::map<COMPONENT, CComponent*> m_mapComponent;
 protected: // CreateComponent
 	int CreateTransform(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
+
+protected:
+	OBJECT m_eType;
 protected:
 	// Normal Constructor
 	CObject();
 	// Set Transform Constructor
-	CObject(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
+	CObject(const OBJECT _eType, const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
 public:
 	// Release Component
 	virtual ~CObject();

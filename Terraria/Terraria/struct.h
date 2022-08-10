@@ -35,10 +35,6 @@ typedef struct MyVector2
 	{
 		return MyVector2({ x + _vec.x, y + _vec.y });
 	}
-	MyVector2 operator-(MyVector2& _vec)const
-	{
-		return MyVector2({ x - _vec.x, y - _vec.y });
-	}
 	MyVector2& operator+=(const MyVector2& _vec)
 	{
 		this->x += _vec.x;

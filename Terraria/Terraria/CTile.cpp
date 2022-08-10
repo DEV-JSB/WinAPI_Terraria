@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CTile.h"
 #include "CFactory2.h"
+#include"CTransform2D.h"
 #include "CBoxCollider.h"
 #include "CSkin.h"
 
@@ -18,6 +19,9 @@ int CTile::Setting(TILE _eType, const Vector2 _pos)
 	// Tile Only Cut Size 16,16
 	stSkinInfo SkinInfo;
 	SkinInfo.vSliceSize = Vector2({ TILE_SIZE,TILE_SIZE });
+
+	// Setting Type
+	CObject::SetType(OBJECT::OBJECT_TILE);
 
 	// Pos will follow Pos
 	Vector3 Pos;
@@ -42,8 +46,43 @@ int CTile::Setting(TILE _eType, const Vector2 _pos)
 		break;
 	}
 	CreateCollider(Vector2{ Pos.x,Pos.y });
+	
 	m_mapComponent.insert({ COMPONENT::COMPONENT_SKIN , pSkin });
 	
+
+	return 0;
+}
+
+int CTile::OnCollision(const CObject* _pOther)
+{
+	if (OBJECT::OBJECT_PLAYER == _pOther->GetType())
+	{
+		// For Collider Bottom
+		Vector2 vColliderPos = _pOther->GetCollider()->GetPos();
+		Vector2 vColliderScale = RTTI_DYNAMIC_CAST(_pOther->GetCollider(), CBoxCollider)->GetScale();
+		
+		// For Tile Top
+		Vector3 vTilePos = CObject::GetTransform()->GetPosition();
+		Vector2 vTileScale = CObject::GetTransform()->GetScale();
+
+		// Difference Value
+		int DiffValue = (int)(vColliderPos.y + vColliderScale.y * 0.5f) - (int)(vTilePos.y - vTileScale.y * 0.5f);
+		if (DiffValue > 0)
+		{
+			// Player Position Up
+			_pOther->GetTransform()->Set_Y_Pos((int)_pOther->GetTransform()->GetPosition_Y() - DiffValue);
+		}
+	}
+	return 0;
+}
+
+int CTile::OnCollisionEnter(const CObject* _pOther)
+{
+	return 0;
+}
+
+int CTile::OnCollisionExit(const CObject* _pOther)
+{
 	return 0;
 }
 

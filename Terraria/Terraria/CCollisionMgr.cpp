@@ -54,17 +54,17 @@ int CCollisionMgr::CollisionCheck(const OBJECT _eLeft, const OBJECT _eRight)
 			CCollider* pRightCollider = vecRight[j]->GetCollider();
 
 			// ID Search for Prev State check
-			COLLIDER_ID ID;
-			ID.Left_id = pLeftCollider->GetID();
-			ID.Right_id = pRightCollider->GetID();
+			COLLIDER_ID NewID;
+			NewID.Left_id = pLeftCollider->GetID();
+			NewID.Right_id = pRightCollider->GetID();
 
-			auto iter = m_mapPrevState.find(ID);
+			auto iter = m_mapPrevState.find(NewID.ID);
 			if (iter == m_mapPrevState.end())
 			{
 				// If can't find then the first check Each other so Insert false prevstate
-				m_mapPrevState.insert({ ID,false });
+				m_mapPrevState.insert({ NewID.ID,false });
 				// And refresh iterator
-				iter = m_mapPrevState.find(ID);
+				iter = m_mapPrevState.find(NewID.ID);
 			}
 			
 			// Checking Is Collision
@@ -72,7 +72,7 @@ int CCollisionMgr::CollisionCheck(const OBJECT _eLeft, const OBJECT _eRight)
 			{
 				printf("Ãæµ¹ ! \n");
 				// Prev state was Collision
-				if (iter->second)
+				if (true == iter->second)
 				{
 					vecLeft[i]->OnCollision(vecRight[j]);
 					vecRight[j]->OnCollision(vecLeft[i]);
@@ -113,9 +113,8 @@ bool CCollisionMgr::IsCollision(CCollider* _left, CCollider* _right)
 		Vector2 vRightPos = _right->GetPos();
 		Vector2 vRightScale = RTTI_DYNAMIC_CAST(_right, CBoxCollider)->GetScale();
 		
-		Vector2 ScaleSum = vLeftScale + vRightScale;
-		if (abs(vLeftPos.x - vRightPos.x) < (ScaleSum.x * 0.5f)
-			&& abs(vLeftPos.y - vRightPos.y) < ((ScaleSum.y) * 0.5f))
+		if (abs(vLeftPos.x - vRightPos.x) < (vLeftScale.x * 0.5f + vRightScale.x * 0.5f)
+			&& abs(vLeftPos.y - vRightPos.y) < (vLeftScale.y * 0.5f + vRightScale.y * 0.5f))
 		{
 			return true;
 		}

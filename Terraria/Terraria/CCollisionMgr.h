@@ -13,7 +13,6 @@ union COLLIDER_ID
 	{
 		return false;
 	}
-
 };
 
 
@@ -38,7 +37,7 @@ private:
 	
 
 	// Hash For Collider Uion prev Collision state
-	map<COLLIDER_ID, bool> m_mapPrevState;
+	map<LONGLONG, bool> m_mapPrevState;
 	// CheckBox Group_End * 32 Box
 	UINT m_arrCheckBox[(UINT)OBJECT::OBJECT_END];
 private:

@@ -75,7 +75,7 @@ CAnimationUI::CAnimationUI(const Vector3 _pos, const Vector3 _rot, const Vector2
 	CTransform2D* pTrans = CUI::GetTransform();
 	m_vSamplePos.x = pTrans->GetPosition_X();
 	m_vSamplePos.y = pTrans->GetPosition_Y();
-	m_eType = UI_TYPE::UI_ANIMTAION;
+	m_eUI_Type = UI_TYPE::UI_ANIMTAION;
 }
 
 CAnimationUI::~CAnimationUI()

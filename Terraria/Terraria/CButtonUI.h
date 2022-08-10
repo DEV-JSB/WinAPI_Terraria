@@ -14,7 +14,7 @@ public:
     virtual int Update()                override;
     virtual int Render(const HDC _dc)   override;
     virtual int FinalUpdate()           override;
-    virtual UI_TYPE GetType() override { return m_eType; }
+    virtual UI_TYPE GetUIType() override { return m_eUI_Type; }
 private:
     // Button wstring
     wstring m_strButtonName;

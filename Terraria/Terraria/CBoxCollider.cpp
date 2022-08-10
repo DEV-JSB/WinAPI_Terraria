@@ -24,7 +24,7 @@ int CBoxCollider::Render(const HDC _dc) const
 {
 	if (m_bRender)
 	{
-		Rectangle(_dc, (int)(m_vPos.x - m_vScale.x * 0.5f), (int)(m_vPos.y - m_vScale.y)
+		Rectangle(_dc, (int)(m_vPos.x - m_vScale.x * 0.5f), (int)(m_vPos.y - m_vScale.y*0.5f)
 			, (int)(m_vPos.x + m_vScale.x * 0.5f), (int)(m_vPos.y + m_vScale.y * 0.5f));
 	}
 	return 0;

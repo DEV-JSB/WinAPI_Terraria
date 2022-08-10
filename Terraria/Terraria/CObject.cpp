@@ -12,7 +12,8 @@ CObject::CObject()
 {
 }
 
-CObject::CObject(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale)
+CObject::CObject(const OBJECT _eType,const Vector3 _pos, const Vector3 _rot, const Vector2 _scale)
+	:m_eType(_eType)
 {
 	CreateTransform(_pos,_rot,_scale);
 }

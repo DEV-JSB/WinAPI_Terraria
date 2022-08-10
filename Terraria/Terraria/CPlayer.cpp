@@ -12,7 +12,7 @@
 #define MOVE_FORCE 100.f
 
 CPlayer::CPlayer()
-    :CObject(Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5), 0.f }), Vector3(), Vector2())
+    :CObject(OBJECT::OBJECT_PLAYER,Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5), 0.f }), Vector3(), Vector2())
     , m_eState(PLAYER_STATE::STATE_IDLE)
     , m_eWillState(PLAYER_STATE::STATE_IDLE)
 {
@@ -42,6 +42,21 @@ CPlayer::CPlayer()
     
 }
 
+
+int CPlayer::OnCollision(const CObject* _pOther)
+{
+    return 0;
+}
+
+int CPlayer::OnCollisionEnter(const CObject* _pOther)
+{
+    return 0;
+}
+
+int CPlayer::OnCollisionExit(const CObject* _pOther)
+{
+    return 0;
+}
 
 int CPlayer::FinalUpdate()
 {

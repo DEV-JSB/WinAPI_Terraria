@@ -5,28 +5,28 @@
 
 
 CUI::CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAffected)
-	:CObject(_pos, _rot, _scale)
+	:CObject(OBJECT::OBJECT_UI,_pos, _rot, _scale)
 	, m_pParent(nullptr)
 	, m_vOffsetPos({ 0.f,0.f,0.f })
 	, m_bCamAffected(_bAffected)
-	, m_eType(UI_TYPE::UI_PARENT)
+	, m_eUI_Type(UI_TYPE::UI_PARENT)
 	, m_bIsFocus(false)
 {
 }
 
 CUI::CUI(const bool _bAffected)
-	:CObject(Vector3{ 0.f,0.f ,0.f }, Vector3{ 0.f,0.f ,0.f }, Vector2{ 0.f ,0.f })
+	:CObject(OBJECT::OBJECT_UI,Vector3{ 0.f,0.f ,0.f }, Vector3{ 0.f,0.f ,0.f }, Vector2{ 0.f ,0.f })
 	, m_pParent(nullptr)
 	, m_vOffsetPos({ 0.f,0.f,0.f })
 	, m_bCamAffected(_bAffected)
-	, m_eType(UI_TYPE::UI_PARENT)
+	, m_eUI_Type(UI_TYPE::UI_PARENT)
 	, m_bIsFocus(false)
 {
 }
 
 int CUI::AddChild(CUI* _pChild)
 {
-	UI_TYPE type = _pChild->GetType();
+	UI_TYPE type = _pChild->GetUIType();
 	m_vecChildUI[(int)type].push_back(_pChild);
 	_pChild->m_pParent = this;
 	return 0;

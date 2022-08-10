@@ -16,6 +16,7 @@ CEngine::CEngine()
 	,m_dc(0)
 	,m_hWnd(0)
 	,m_ptResolution({0,0})
+	
 {}
 
 CEngine::~CEngine()
@@ -57,7 +58,7 @@ int CEngine::Init(HWND _hwnd, POINT _resoulution)
 	m_dc = GetDC(m_hWnd);
 	
 	// Make Bitmap
-	m_hBit = CreateCompatibleBitmap(m_dc, m_ptResolution.x, m_ptResolution.y);
+	m_hBit = CreateBitmap(m_ptResolution.x, m_ptResolution.y,32, 1, nullptr);
 	
 	// Make AnotherDC
 	m_bufferDC = CreateCompatibleDC(m_dc);
@@ -66,6 +67,8 @@ int CEngine::Init(HWND _hwnd, POINT _resoulution)
 	// Then New DC is Ready Draw On new Buffer
 	HBITMAP OldBit = (HBITMAP)SelectObject(m_bufferDC, m_hBit);
 	DeleteObject(OldBit);
+
+	DeleteObject(SelectObject(m_bufferDC, CreateBitmap(m_ptResolution.x, m_ptResolution.y, 32, 1, nullptr)));
 
 	// New Bit Set WHITE
 	PatBlt(m_bufferDC, 0, 0, m_ptResolution.x, m_ptResolution.y, WHITENESS);
@@ -106,13 +109,16 @@ int CEngine::Update()
 int CEngine::Render()
 {
 	// RenderingManager
+	BitBlt(m_bufferDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
+		m_bufferDC, 0, 0, SRCCOPY);
+	PatBlt(m_bufferDC, 0, 0, m_ptResolution.x, m_ptResolution.y, WHITENESS);
+
 	CTimeMgr::GetInstance()->Render();
 	CSceneMgr::GetInstance()->Render(m_bufferDC);
 
 	BitBlt(m_dc, 0, 0, m_ptResolution.x, m_ptResolution.y,
 		m_bufferDC, 0, 0, SRCCOPY);
 
-	Rectangle(m_bufferDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
 	return 0;
 }
 
@@ -123,7 +129,6 @@ int CEngine::RenderExceptDoubleBuffer()
 
 	BitBlt(m_dc, 0, 0, m_ptResolution.x, m_ptResolution.y,
 		m_bufferDC, 0, 0, SRCCOPY);
-	return 0;
 	return 0;
 }
 

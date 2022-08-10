@@ -45,5 +45,5 @@ CButtonUI::CButtonUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scal
     , m_pParam1(0)
     , m_pParam2(0)
 {
-    m_eType = UI_TYPE::UI_BUTTON;
+    m_eUI_Type = UI_TYPE::UI_BUTTON;
 }

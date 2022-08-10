@@ -12,7 +12,7 @@ public:
     // Add Chid UI and Set Parent Point
     int AddChild(CUI* _pChild);
     // Get UI Type
-    virtual UI_TYPE GetType() { return m_eType; };
+    virtual UI_TYPE GetUIType() { return m_eUI_Type; };
     
     // Get UI Group
     const vector<CUI*>& GetUIGroup(const UI_TYPE _type)
@@ -44,7 +44,7 @@ protected:
     //Is Affected Camera?
     bool m_bCamAffected;
     // UI Type
-    UI_TYPE m_eType;
+    UI_TYPE m_eUI_Type;
 private:
     // Have Many Child UI  
     vector<CUI*> m_vecChildUI[(int)UI_TYPE::UI_END];
