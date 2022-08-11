@@ -11,9 +11,9 @@
 #define PLAYER_WIDTH 32.f
 #define PLAYER_HEIGHT 40.f
 //////////////////////////
-#define MOVE_FORCE 36.f
-#define MAX_SPEED 20.f
-#define JUMP_POWER -1000.f
+#define MOVE_FORCE 45.f
+#define MAX_SPEED 1000.f
+#define JUMP_POWER -2000.f
 /// ////////////////////////
 CPlayer::CPlayer()
     :CObject(OBJECT::OBJECT_PLAYER,Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5), 0.f }), Vector3(), Vector2())
@@ -66,7 +66,6 @@ int CPlayer::OnCollisionEnter(const CObject* _pOther)
         // Prev State is Not On Ground then Gravity Power Set 0.f Only 1
         if (m_bIsOnGround != true)
         {
-            printf("타일과 최초 충돌!\n");
             CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
             pRigid->SetGravityPower(0.f);
         }
@@ -111,6 +110,14 @@ int CPlayer::Render(const HDC _dc)
     {
         (*iter).second->Render(_dc);
     }
+
+    /*wstring Pos = L"PlayerPos X : ";
+    CTransform2D* pPos = RTTI_DYNAMIC_CAST_MAP(CTransform2D, m_mapComponent, COMPONENT::COMPONENT_TRANSFORM2D);
+    Pos += std::to_wstring(pPos->GetPosition_X());
+    Pos += L" Y : ";
+    Pos += std::to_wstring(pPos->GetPosition_Y());
+    SetWindowText(CEngine::GetInstance()->GetMainHWND(),Pos.c_str());*/
+
     return 0;
 }
 
@@ -126,13 +133,9 @@ int CPlayer::Update_Move()
         CObject::AddForce(Vector2{ MOVE_FORCE,0.f });
         m_eWillState = PLAYER_STATE::STATE_RIGHTRUN;
     }
-    if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_S) == INPUTSTATE::INPUTSTATE_HOLD)
-    {
-        CObject::AddForce(Vector2{ 0.f,MOVE_FORCE });
-        m_eWillState = PLAYER_STATE::STATE_LEFTRUN;
-    }
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_SPACE) == INPUTSTATE::INPUTSTATE_TAP)
     {
+        printf("점프!!\n");
         CObject::AddForce(Vector2{ 0.f, JUMP_POWER });
         m_bIsOnGround = false;
         /*m_eWillState = PLAYER_STATE::STATE_RIGHTRUN;*/

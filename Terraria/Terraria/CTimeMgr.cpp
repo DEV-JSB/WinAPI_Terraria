@@ -20,7 +20,6 @@ int CTimeMgr::Update()
 	// Cululate Delta Time
 	m_dDT = (double)(m_llCurCount.QuadPart - m_llPrevCount.QuadPart) / (double)m_llFrequency.QuadPart;
 
-
 	// ResetPrevTime
 	m_llPrevCount = m_llCurCount;
 	// Add DT Accum

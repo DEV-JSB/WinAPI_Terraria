@@ -8,8 +8,8 @@ CRigidbody::CRigidbody()
     :CComponent(false)
     ,m_fGravityPower(70.f)
     ,m_vGravity({0.f,1.f})
-    , m_fMaxSpeed(14.f)
-    , m_fFriction(20.f)
+    , m_fMaxSpeed(100.f)
+    , m_fFriction(25.f)
     , m_fMass(1.f)
     , m_vAcceleration({0,0})
     , m_vForce({0,0})
@@ -44,6 +44,7 @@ int CRigidbody::Render(const HDC _dc)const
 
 int CRigidbody::Update()
 {
+
     return 0;
 }
 
@@ -51,22 +52,23 @@ int CRigidbody::FinalUpdate()
 {
     // Divide Force -> Power And Direction
     float fForce = m_vForce.Length();
-
     if (0.f != fForce)
     {
         // Direction
         m_vForce = m_vForce.Normalize();
 
+
         // Acceleration Power = Force / Mass
         float m_fAcceleration = fForce / m_fMass;
         // Acceleration
-        m_vAcceleration = m_vForce * m_fAcceleration;
+        m_vAcceleration = m_vForce * m_fAcceleration * (float)GET_DT;
         //Final Speed
-        m_vVelocity += m_vAcceleration * (float)GET_DT;
+        m_vVelocity += m_vAcceleration;
 
         // Check MaxSpeed
         if (m_vVelocity.Length() > m_fMaxSpeed)
         {
+            printf("Max!");
             m_vVelocity.Normalize();
             m_vVelocity *= m_fMaxSpeed;
         }
@@ -87,13 +89,14 @@ int CRigidbody::FinalUpdate()
             m_vVelocity += vecFricDirect;
     }
 
-    if (m_fGravityPower != 0.f)
+    // Gravity Logic
+    /*if (m_fGravityPower != 0.f)
     {
         m_vGravity *= m_fGravityPower;
         m_vGravity *= (float)GET_DT;
         m_vVelocity += m_vGravity;
         m_vGravity = Vector2({ 0.f,1.f });
-    }
+    }*/
     
     Move();
     return 0;
@@ -105,16 +108,20 @@ int CRigidbody::Move()
     if (0.f == fSpeed)
         return 0;
 
+
     // Will Move Direction
     Vector2 vDirection = m_vVelocity;
     vDirection.Normalize();
 
+    // Speed Setting
+    fSpeed *= (float)GET_DT;
+    printf("%f\n", fSpeed);
 
     //Final Position
     Vector3 vOwnerPos = m_pOwner->GetTransform()->GetPosition();
 
-    vOwnerPos.x += m_vVelocity.x * fSpeed * (float)GET_DT;
-    vOwnerPos.y += m_vVelocity.y * fSpeed * (float)GET_DT;
+    vOwnerPos.x += m_vVelocity.x * fSpeed;
+    vOwnerPos.y += m_vVelocity.y * fSpeed;
     m_pOwner->SetPosition(vOwnerPos);
     return 0;
 }

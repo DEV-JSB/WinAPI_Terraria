@@ -35,9 +35,6 @@ int CEngine::Progress()
 	Update();
 	// Rendering
 	Render();
-
-	//Final Update
-	FinalUpdate();
 	return 0;
 }
 
@@ -90,19 +87,14 @@ int CEngine::Release()
 	return 0;
 }
 
-int CEngine::FinalUpdate()
-{
-	CSceneMgr::GetInstance()->FinalUpdate();
-	CCollisionMgr::GetInstance()->Update();
-	return 0;
-}
 
 int CEngine::Update()
 {
 	// UpdateManager
+	CTimeMgr::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
 	CInputMgr::GetInstance()->Update();
-	CTimeMgr::GetInstance()->Update();
+	CCollisionMgr::GetInstance()->Update();
 	return 0;
 }
 

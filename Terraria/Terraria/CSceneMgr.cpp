@@ -30,6 +30,7 @@ int CSceneMgr::Update()
 	if (nullptr == m_pCurScene)
 		return 0;
 	m_pCurScene->Update();
+	m_pCurScene->FinalUpdate();
 	return 0;
 }
 

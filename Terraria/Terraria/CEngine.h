@@ -11,7 +11,6 @@ public: // Logic , Can Access OutSide
 	HDC GetBufferDC()const { return m_bufferDC; }
 	HDC GetMainDC()const { return m_dc; }
 private: // Cycle
-	int FinalUpdate();
 	int Update();
 	int Render();
 	int RenderExceptDoubleBuffer();
