@@ -129,7 +129,6 @@ int CObject::SetScale(const Vector2 _scale)
 
 int CObject::AddForce(const Vector2 _force)
 {
-	printf("%f\n", _force.y);
 	CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
 	// Exeption handling
 	assert(pRigid);

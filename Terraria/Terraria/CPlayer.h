@@ -23,6 +23,7 @@ private:
 	int Update_Move();
 	int Update_Animation();
 	int Update_State();
+	int Update_Gravity();
 
 	int CreateCollider(const Vector2 _pos);
 private:

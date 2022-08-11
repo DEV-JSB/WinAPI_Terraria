@@ -27,7 +27,6 @@ int CCollisionMgr::Update()
 			}
 		}
 	}
-
 	return 0;
 }
 
@@ -94,10 +93,7 @@ int CCollisionMgr::CollisionCheck(const OBJECT _eLeft, const OBJECT _eRight)
 				}
 			}
 		}
-		
 	}
-
-
 	return 0;
 }
 

@@ -68,7 +68,6 @@ int CRigidbody::FinalUpdate()
         // Check MaxSpeed
         if (m_vVelocity.Length() > m_fMaxSpeed)
         {
-            printf("Max!");
             m_vVelocity.Normalize();
             m_vVelocity *= m_fMaxSpeed;
         }
@@ -90,13 +89,12 @@ int CRigidbody::FinalUpdate()
     }
 
     // Gravity Logic
-    /*if (m_fGravityPower != 0.f)
+    if (m_fGravityPower != 0.f)
     {
-        m_vGravity *= m_fGravityPower;
-        m_vGravity *= (float)GET_DT;
+        m_vGravity *= m_fGravityPower * (float)GET_DT;
         m_vVelocity += m_vGravity;
         m_vGravity = Vector2({ 0.f,1.f });
-    }*/
+    }
     
     Move();
     return 0;
@@ -105,6 +103,7 @@ int CRigidbody::Move()
 {
     // MoveSpeed
     float fSpeed = m_vVelocity.Length();
+    printf("Speed : %f\n", fSpeed);
     if (0.f == fSpeed)
         return 0;
 
@@ -113,9 +112,8 @@ int CRigidbody::Move()
     Vector2 vDirection = m_vVelocity;
     vDirection.Normalize();
 
-    // Speed Setting
+    // Speed Setting ?? Delete
     fSpeed *= (float)GET_DT;
-    printf("%f\n", fSpeed);
 
     //Final Position
     Vector3 vOwnerPos = m_pOwner->GetTransform()->GetPosition();

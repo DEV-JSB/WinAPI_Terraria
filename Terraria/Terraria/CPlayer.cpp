@@ -13,7 +13,7 @@
 //////////////////////////
 #define MOVE_FORCE 45.f
 #define MAX_SPEED 1000.f
-#define JUMP_POWER -2000.f
+#define JUMP_POWER -500.f
 /// ////////////////////////
 CPlayer::CPlayer()
     :CObject(OBJECT::OBJECT_PLAYER,Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5), 0.f }), Vector3(), Vector2())
@@ -44,16 +44,29 @@ CPlayer::CPlayer()
     CreateCollider(Vector2({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) }));
 
     CObject::CreateRigidbody(MAX_SPEED);
-    
+
 }
 
+int CPlayer::Update_Gravity()
+{
+    if (!m_bIsOnGround )
+    {
+        CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
+        pRigid->SetGravityPower(70.f);
+    }
+    else if( m_bIsOnGround && m_eState != PLAYER_STATE::STATE_LEFTRUN && m_eState != PLAYER_STATE::STATE_RIGHTRUN)
+    {
+        CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
+        pRigid->SetGravityPower(0.f);
+    }
+    return 0;
+}
 
 int CPlayer::OnCollision(const CObject* _pOther)
 {
     // Set True Object Still On Ground
     if (OBJECT::OBJECT_TILE == _pOther->GetType())
     {
-        m_bIsOnGround = true;
     }
     return 0;
 }
@@ -63,25 +76,18 @@ int CPlayer::OnCollisionEnter(const CObject* _pOther)
 
     if (OBJECT::OBJECT_TILE == _pOther->GetType())
     {
-        // Prev State is Not On Ground then Gravity Power Set 0.f Only 1
-        if (m_bIsOnGround != true)
-        {
-            CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
-            pRigid->SetGravityPower(0.f);
-        }
+        m_bIsOnGround = true;
+
     }
     return 0;
 }
 
 int CPlayer::OnCollisionExit(const CObject* _pOther)
 {
+    // Tile Overlap Fuck
     if (OBJECT::OBJECT_TILE == _pOther->GetType())
     {
-        if (m_bIsOnGround != true)
-        {
-            CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
-            pRigid->SetGravityPower(70.f);
-        }
+        m_bIsOnGround = false;
     }
     return 0;
 }
@@ -100,6 +106,7 @@ int CPlayer::Update()
     Update_Move();
     Update_State();
     Update_Animation();
+    Update_Gravity();
 
     return 0;
 }
@@ -110,14 +117,6 @@ int CPlayer::Render(const HDC _dc)
     {
         (*iter).second->Render(_dc);
     }
-
-    /*wstring Pos = L"PlayerPos X : ";
-    CTransform2D* pPos = RTTI_DYNAMIC_CAST_MAP(CTransform2D, m_mapComponent, COMPONENT::COMPONENT_TRANSFORM2D);
-    Pos += std::to_wstring(pPos->GetPosition_X());
-    Pos += L" Y : ";
-    Pos += std::to_wstring(pPos->GetPosition_Y());
-    SetWindowText(CEngine::GetInstance()->GetMainHWND(),Pos.c_str());*/
-
     return 0;
 }
 
@@ -137,7 +136,6 @@ int CPlayer::Update_Move()
     {
         printf("มกวม!!\n");
         CObject::AddForce(Vector2{ 0.f, JUMP_POWER });
-        m_bIsOnGround = false;
         /*m_eWillState = PLAYER_STATE::STATE_RIGHTRUN;*/
     }
     return 0;
@@ -160,12 +158,15 @@ int CPlayer::Update_Animation()
     return 0;
 }
 
+
 int CPlayer::Update_State()
 {
     // Later Plus Exeption Handling
     m_eState = m_eWillState;
     return 0;
 }
+
+
 
 int CPlayer::CreateCollider(const Vector2 _pos)
 {
