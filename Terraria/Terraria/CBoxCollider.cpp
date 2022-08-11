@@ -33,6 +33,9 @@ int CBoxCollider::Render(const HDC _dc) const
 int CBoxCollider::FinalUpdate()
 {
 	CCollider::FinalUpdate();
+	m_vPos.x += m_vOffset.x;
+	m_vPos.y += m_vOffset.y;
+
 	return 0;
 }
 

@@ -70,7 +70,6 @@ int CCollisionMgr::CollisionCheck(const OBJECT _eLeft, const OBJECT _eRight)
 			// Checking Is Collision
 			if (IsCollision(pLeftCollider, pRightCollider))
 			{
-				printf("Ãæµ¹ ! \n");
 				// Prev state was Collision
 				if (true == iter->second)
 				{
@@ -113,8 +112,8 @@ bool CCollisionMgr::IsCollision(CCollider* _left, CCollider* _right)
 		Vector2 vRightPos = _right->GetPos();
 		Vector2 vRightScale = RTTI_DYNAMIC_CAST(_right, CBoxCollider)->GetScale();
 		
-		if (abs(vLeftPos.x - vRightPos.x) < (vLeftScale.x * 0.5f + vRightScale.x * 0.5f)
-			&& abs(vLeftPos.y - vRightPos.y) < (vLeftScale.y * 0.5f + vRightScale.y * 0.5f))
+		if ((int)abs(vLeftPos.x - vRightPos.x) < (int)(vLeftScale.x * 0.5f + vRightScale.x * 0.5f)
+			&& (int)abs(vLeftPos.y - vRightPos.y) < (int)(vLeftScale.y * 0.5f + vRightScale.y * 0.5f))
 		{
 			return true;
 		}

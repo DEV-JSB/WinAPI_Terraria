@@ -3,13 +3,15 @@
 #include "CAnimator.h"
 #include "CCollider.h"
 #include "CFactory2.h"
+#include "CRigidbody.h"
 #include "CBoxCollider.h"
 #include "CInputMgr.h"
 #include "CTransform2D.h"
 
 #define PLAYER_WIDTH 32.f
-#define PLAYER_HEIGHT 48.f
-#define MOVE_FORCE 100.f
+#define PLAYER_HEIGHT 40.f
+#define MOVE_FORCE 40.f
+#define JUMP_POWER -1000.f
 
 CPlayer::CPlayer()
     :CObject(OBJECT::OBJECT_PLAYER,Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5), 0.f }), Vector3(), Vector2())
@@ -45,6 +47,11 @@ CPlayer::CPlayer()
 
 int CPlayer::OnCollision(const CObject* _pOther)
 {
+    if (OBJECT::OBJECT_TILE == _pOther->GetType())
+    {
+        CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
+        pRigid->SetGravityPower(0.f);
+    }
     return 0;
 }
 
@@ -55,6 +62,11 @@ int CPlayer::OnCollisionEnter(const CObject* _pOther)
 
 int CPlayer::OnCollisionExit(const CObject* _pOther)
 {
+    if (OBJECT::OBJECT_TILE == _pOther->GetType())
+    {
+        CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
+        pRigid->SetGravityPower(70.f);
+    }
     return 0;
 }
 
@@ -102,10 +114,11 @@ int CPlayer::Update_Move()
         CObject::AddForce(Vector2{ 0.f,MOVE_FORCE });
         m_eWillState = PLAYER_STATE::STATE_LEFTRUN;
     }
-    if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_W) == INPUTSTATE::INPUTSTATE_HOLD)
+    if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_SPACE) == INPUTSTATE::INPUTSTATE_TAP)
     {
-        CObject::AddForce(Vector2{ 0.f,-MOVE_FORCE });
-        m_eWillState = PLAYER_STATE::STATE_RIGHTRUN;
+        CObject::AddForce(Vector2{ 0.f, JUMP_POWER });
+        CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
+        /*m_eWillState = PLAYER_STATE::STATE_RIGHTRUN;*/
     }
     return 0;
 }
@@ -139,7 +152,7 @@ int CPlayer::CreateCollider(const Vector2 _pos)
     CComponent* pBoxCollider = CFactory2::CreateComponent(COMPONENT::COMPONENT_BOXCOLLIDER);
     RTTI_DYNAMIC_CAST(pBoxCollider, CBoxCollider)->SetInformation(this,_pos
         , Vector2({ PLAYER_WIDTH , PLAYER_HEIGHT })
-        , Vector2({ 0.f,0.f }));
+        , Vector2({ 0.f,-2.f }));
     
     m_mapComponent.insert({ COMPONENT::COMPONENT_COLLIDER , pBoxCollider });
     return 0;

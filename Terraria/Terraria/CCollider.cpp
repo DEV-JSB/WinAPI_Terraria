@@ -16,7 +16,7 @@ int CCollider::FinalUpdate()
 }
 
 CCollider::CCollider(COLLIDER _eType)
-	:CComponent(true)
+	:CComponent(false)
 	, m_eType(_eType)
 	, m_pOwner(nullptr)
 	, m_vPos(Vector2({ 0.f,0.f }))

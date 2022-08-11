@@ -6,8 +6,10 @@
 
 CRigidbody::CRigidbody()
     :CComponent(false)
-    , m_fMaxSpeed(20.f)
-    , m_fFriction(50.f)
+    ,m_fGravityPower(70.f)
+    ,m_vGravity({0.f,1.f})
+    , m_fMaxSpeed(14.f)
+    , m_fFriction(30.f)
     , m_fMass(1.f)
     , m_vAcceleration({0,0})
     , m_vForce({0,0})
@@ -24,24 +26,6 @@ bool CRigidbody::IsMoving()
         return true;
 }
 
-int CRigidbody::Move()
-{
-    // MoveSpeed
-    float fSpeed = m_vVelocity.Length();
-    if (0.f == fSpeed)
-        return 0;
-    
-    // Will Move Direction
-    Vector2 vDirection = m_vVelocity;
-    vDirection.Normalize();
-
-    //Final Position
-    Vector3 vOwnerPos = m_pOwner->GetTransform()->GetPosition();
-    vOwnerPos.x += m_vVelocity.x * fSpeed * (float)GET_DT;
-    vOwnerPos.y += m_vVelocity.y * fSpeed * (float)GET_DT;
-    m_pOwner->SetPosition(vOwnerPos);
-    return 0;
-}
 
 int CRigidbody::Render(const HDC _dc)const
 {
@@ -92,9 +76,40 @@ int CRigidbody::FinalUpdate()
         else
             m_vVelocity += vecFricDirect;
     }
+
+    if (m_fGravityPower)
+    {
+        m_vGravity *= m_fGravityPower;
+        m_vGravity *= (float)GET_DT;
+        m_vVelocity += m_vGravity;
+        m_vGravity = Vector2({ 0.f,1.f });
+    }
+    
     Move();
     return 0;
 }
+int CRigidbody::Move()
+{
+    // MoveSpeed
+    float fSpeed = m_vVelocity.Length();
+    if (0.f == fSpeed)
+        return 0;
+
+    // Will Move Direction
+    Vector2 vDirection = m_vVelocity;
+    vDirection.Normalize();
+
+
+    //Final Position
+    Vector3 vOwnerPos = m_pOwner->GetTransform()->GetPosition();
+
+    vOwnerPos.x += m_vVelocity.x * fSpeed * (float)GET_DT;
+    vOwnerPos.y += m_vVelocity.y * fSpeed * (float)GET_DT;
+    printf("이동 속도 : %f\n", fSpeed);
+    m_pOwner->SetPosition(vOwnerPos);
+    return 0;
+}
+
 
 CRigidbody::~CRigidbody()
 {

@@ -5,6 +5,7 @@
 #include "CBoxCollider.h"
 #include "CSkin.h"
 
+#define Y_COMPENSATE_VALUE 2
 #define TILE_SIZE 16.f
 
 CTile::CTile()
@@ -65,13 +66,13 @@ int CTile::OnCollision(const CObject* _pOther)
 		Vector3 vTilePos = CObject::GetTransform()->GetPosition();
 		Vector2 vTileScale = CObject::GetTransform()->GetScale();
 
+		//int DiffValue = (int)(vColliderPos.y + vColliderScale.y * 0.5f) - (int)(vTilePos.y - vTileScale.y * 0.5f);
 		// Difference Value
-		int DiffValue = (int)(vColliderPos.y + vColliderScale.y * 0.5f) - (int)(vTilePos.y - vTileScale.y * 0.5f);
-		if (DiffValue > 0)
-		{
-			// Player Position Up
-			_pOther->GetTransform()->Set_Y_Pos((int)_pOther->GetTransform()->GetPosition_Y() - DiffValue);
-		}
+		int Y_Pos = (int)(vTilePos.y - vTileScale.y * 0.5f) - (int)(vColliderScale.y * 0.5);
+
+		/*_pOther->GetTransform()->Set_Y_Pos((int)_pOther->GetTransform()->GetPosition_Y() - DiffValue);*/
+		// Player Position Up
+		_pOther->GetTransform()->Set_Y_Pos(Y_Pos + Y_COMPENSATE_VALUE);
 	}
 	return 0;
 }
