@@ -10,10 +10,10 @@ public:
 public:// Get
     float GetMass()const { return m_fMass; }
 public:// Set
-    int SetGravityPower(const float _f) { m_fGravityPower = _f; return 0; }
+    int SetMaxSpeed(const float _fMaxspeed) { m_fMaxSpeed = _fMaxspeed; return 0; }
+    int SetGravityPower(const float _f);
     int SetMass(const float _f) { m_fMass = _f; return 0;}
     int SetOwner(CObject* _p) { m_pOwner = _p; return 0; }
-    int SetGraity(const float _f) { m_fGravityPower = _f; return 0; }
 public:// Func
     int AddForce(Vector2 _vForce) { m_vForce += _vForce; return 0; };
     int Move();

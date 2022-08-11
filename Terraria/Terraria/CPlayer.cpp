@@ -10,13 +10,16 @@
 
 #define PLAYER_WIDTH 32.f
 #define PLAYER_HEIGHT 40.f
-#define MOVE_FORCE 40.f
+//////////////////////////
+#define MOVE_FORCE 36.f
+#define MAX_SPEED 20.f
 #define JUMP_POWER -1000.f
-
+/// ////////////////////////
 CPlayer::CPlayer()
     :CObject(OBJECT::OBJECT_PLAYER,Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5), 0.f }), Vector3(), Vector2())
     , m_eState(PLAYER_STATE::STATE_IDLE)
     , m_eWillState(PLAYER_STATE::STATE_IDLE)
+    , m_bIsOnGround(false)
 {
     // SetAnimator
     CAnimator* pAnimator = CFactory<CAnimator>::Create(true);
@@ -40,23 +43,34 @@ CPlayer::CPlayer()
 
     CreateCollider(Vector2({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) }));
 
-    CObject::CreateRigidbody();
+    CObject::CreateRigidbody(MAX_SPEED);
     
 }
 
 
 int CPlayer::OnCollision(const CObject* _pOther)
 {
+    // Set True Object Still On Ground
     if (OBJECT::OBJECT_TILE == _pOther->GetType())
     {
-        CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
-        pRigid->SetGravityPower(0.f);
+        m_bIsOnGround = true;
     }
     return 0;
 }
 
 int CPlayer::OnCollisionEnter(const CObject* _pOther)
 {
+
+    if (OBJECT::OBJECT_TILE == _pOther->GetType())
+    {
+        // Prev State is Not On Ground then Gravity Power Set 0.f Only 1
+        if (m_bIsOnGround != true)
+        {
+            printf("타일과 최초 충돌!\n");
+            CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
+            pRigid->SetGravityPower(0.f);
+        }
+    }
     return 0;
 }
 
@@ -64,8 +78,11 @@ int CPlayer::OnCollisionExit(const CObject* _pOther)
 {
     if (OBJECT::OBJECT_TILE == _pOther->GetType())
     {
-        CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
-        pRigid->SetGravityPower(70.f);
+        if (m_bIsOnGround != true)
+        {
+            CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
+            pRigid->SetGravityPower(70.f);
+        }
     }
     return 0;
 }
@@ -117,7 +134,7 @@ int CPlayer::Update_Move()
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_SPACE) == INPUTSTATE::INPUTSTATE_TAP)
     {
         CObject::AddForce(Vector2{ 0.f, JUMP_POWER });
-        CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
+        m_bIsOnGround = false;
         /*m_eWillState = PLAYER_STATE::STATE_RIGHTRUN;*/
     }
     return 0;

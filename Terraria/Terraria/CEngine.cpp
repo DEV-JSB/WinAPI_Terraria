@@ -93,6 +93,7 @@ int CEngine::Release()
 int CEngine::FinalUpdate()
 {
 	CSceneMgr::GetInstance()->FinalUpdate();
+	CCollisionMgr::GetInstance()->Update();
 	return 0;
 }
 
@@ -102,7 +103,6 @@ int CEngine::Update()
 	CSceneMgr::GetInstance()->Update();
 	CInputMgr::GetInstance()->Update();
 	CTimeMgr::GetInstance()->Update();
-	CCollisionMgr::GetInstance()->Update();
 	return 0;
 }
 

@@ -27,11 +27,12 @@ int CObject::CreateTransform(const Vector3 _pos, const Vector3 _rot, const Vecto
 	return 0;
 }
 
-int CObject::CreateRigidbody()
+int CObject::CreateRigidbody(const float _fMaxSpeed)
 {
 	CRigidbody* pRigidbody = CFactory<CRigidbody>::Create();
 	assert(pRigidbody);
 	pRigidbody->SetOwner(this);
+	pRigidbody->SetMaxSpeed(_fMaxSpeed);
 	m_mapComponent.insert({ COMPONENT::COMPONENT_RIGIDBODY,pRigidbody });
 	return 0;
 }

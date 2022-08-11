@@ -5,7 +5,7 @@
 #include "CBoxCollider.h"
 #include "CSkin.h"
 
-#define Y_COMPENSATE_VALUE 2
+#define Y_COMPENSATE_VALUE 3
 #define TILE_SIZE 16.f
 
 CTile::CTile()
@@ -56,12 +56,18 @@ int CTile::Setting(TILE _eType, const Vector2 _pos)
 
 int CTile::OnCollision(const CObject* _pOther)
 {
+	
+	return 0;
+}
+
+int CTile::OnCollisionEnter(const CObject* _pOther)
+{
 	if (OBJECT::OBJECT_PLAYER == _pOther->GetType())
 	{
 		// For Collider Bottom
 		Vector2 vColliderPos = _pOther->GetCollider()->GetPos();
 		Vector2 vColliderScale = RTTI_DYNAMIC_CAST(_pOther->GetCollider(), CBoxCollider)->GetScale();
-		
+
 		// For Tile Top
 		Vector3 vTilePos = CObject::GetTransform()->GetPosition();
 		Vector2 vTileScale = CObject::GetTransform()->GetScale();
@@ -74,11 +80,6 @@ int CTile::OnCollision(const CObject* _pOther)
 		// Player Position Up
 		_pOther->GetTransform()->Set_Y_Pos(Y_Pos + Y_COMPENSATE_VALUE);
 	}
-	return 0;
-}
-
-int CTile::OnCollisionEnter(const CObject* _pOther)
-{
 	return 0;
 }
 

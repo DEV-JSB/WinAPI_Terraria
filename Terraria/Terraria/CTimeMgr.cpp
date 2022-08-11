@@ -26,6 +26,7 @@ int CTimeMgr::Update()
 	// Add DT Accum
 	m_dAccumulate += m_dDT;
 
+
 	return 0;
 }
 

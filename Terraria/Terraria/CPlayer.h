@@ -28,6 +28,7 @@ private:
 private:
 	enum class PLAYER_STATE { STATE_IDLE, STATE_LEFTRUN, STATE_RIGHTRUN, STATE_END };
 private:
+	bool m_bIsOnGround;
 	PLAYER_STATE m_eWillState;
 	PLAYER_STATE m_eState;
 private:

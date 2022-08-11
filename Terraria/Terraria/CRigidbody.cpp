@@ -9,7 +9,7 @@ CRigidbody::CRigidbody()
     ,m_fGravityPower(70.f)
     ,m_vGravity({0.f,1.f})
     , m_fMaxSpeed(14.f)
-    , m_fFriction(30.f)
+    , m_fFriction(20.f)
     , m_fMass(1.f)
     , m_vAcceleration({0,0})
     , m_vForce({0,0})
@@ -24,6 +24,16 @@ bool CRigidbody::IsMoving()
         return false;
     else
         return true;
+}
+
+int CRigidbody::SetGravityPower(const float _f)
+{
+    m_fGravityPower = _f;
+    if (0.f == _f)
+    {
+        m_vVelocity = Vector2({ 0.f,0.f });
+    }
+    return 0;
 }
 
 
@@ -77,7 +87,7 @@ int CRigidbody::FinalUpdate()
             m_vVelocity += vecFricDirect;
     }
 
-    if (m_fGravityPower)
+    if (m_fGravityPower != 0.f)
     {
         m_vGravity *= m_fGravityPower;
         m_vGravity *= (float)GET_DT;
@@ -105,7 +115,6 @@ int CRigidbody::Move()
 
     vOwnerPos.x += m_vVelocity.x * fSpeed * (float)GET_DT;
     vOwnerPos.y += m_vVelocity.y * fSpeed * (float)GET_DT;
-    printf("이동 속도 : %f\n", fSpeed);
     m_pOwner->SetPosition(vOwnerPos);
     return 0;
 }
