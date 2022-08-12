@@ -12,8 +12,8 @@
 #define PLAYER_HEIGHT 40.f
 //////////////////////////
 #define MOVE_FORCE 45.f
-#define MAX_SPEED 1000.f
-#define JUMP_POWER -1000.f
+#define MAX_SPEED 25.f
+#define JUMP_POWER 100.f
 /// ////////////////////////
 CPlayer::CPlayer()
     : CMover(OBJECT::OBJECT_PLAYER,Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) + 110, 0.f }), Vector3(), Vector2())
@@ -30,7 +30,7 @@ int CPlayer::Update_Gravity()
 {
     if (!m_bIsOnGround)
     {
-        CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_GRAVITY, 50.f);
+        CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_GRAVITY, 90.f);
     }
     else
     {
@@ -59,7 +59,7 @@ int CPlayer::OnCollisionEnter(const CObject* _pOther)
 
 int CPlayer::OnCollisionExit(const CObject* _pOther)
 {
-    // Tile Overlap Fuck
+    // Tile Overlap
     if (OBJECT::OBJECT_TILE == _pOther->GetType())
     {
     }
@@ -132,7 +132,7 @@ int CPlayer::Update_Move()
     }
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_SPACE) == INPUTSTATE::INPUTSTATE_TAP)
     {
-        CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_JUMPPOWER, -200);
+        CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_JUMPPOWER, JUMP_POWER);
         /*m_eWillState = PLAYER_STATE::STATE_RIGHTRUN;*/
     }
 

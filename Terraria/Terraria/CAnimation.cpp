@@ -108,6 +108,7 @@ int CAnimation::Render(const HDC _dc, const Vector2& _Pos,const bool _xFlip)
 
 int CAnimation::Update()
 {
+	// 1ÃÊ  0.0018  1 
 	m_fAccumulateTime += (float)CTimeMgr::GetInstance()->GetDT();
 
 	if (m_vecFrame[m_iFrameIndex].fDuration <= m_fAccumulateTime)

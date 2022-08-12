@@ -33,6 +33,7 @@ private:
 	// Using Texture
 	CTexture* m_pTex;
 	// All Of Frame Information
+
 	vector<stAnimFrame> m_vecFrame;
 	// Is Play Finish
 	bool m_bIsFinish;

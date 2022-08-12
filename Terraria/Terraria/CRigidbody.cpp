@@ -85,6 +85,7 @@ int CRigidbody::GravityLogic()
     if (m_fGravityPower != 0.f)
     {
         m_vGravity *= m_fGravityPower * (float)GET_DT;
+        m_fJumpingPower -= m_fGravityPower * (float)GET_DT;
         m_vVelocity += m_vGravity;
         m_vGravity = Vector2({ 0.f,1.f });
     }
@@ -95,10 +96,10 @@ int CRigidbody::JumpLogic()
 {
     if (m_fJumpingPower != 0.f)
     {
-        Vector2 vUp = Vector2({ 0,-1 });
+        Vector2 vUp = Vector2({ 0, -1 });
         float fJump = m_fJumpingPower * (float)GET_DT;
         m_fJumpingPower -= fJump;
-        vUp *= m_fJumpingPower;
+        vUp *= fJump;
         m_vVelocity += vUp;
     }
     return 0;
@@ -124,6 +125,7 @@ int CRigidbody::FinalUpdate()
     MoveLogic();
     FrictionLogic();
     GravityLogic();
+    JumpLogic();
 
     Move();
     return 0;

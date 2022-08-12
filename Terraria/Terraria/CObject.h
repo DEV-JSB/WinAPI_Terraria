@@ -42,14 +42,13 @@ public: // Set Transform Funtion
 
 public: // Set Rigidbody Function
 	int AddForce(const Vector2 _force);
-protected:
-	int CreateRigidbody(const float _fMaxSpeed);
+
 protected:
 	// Component Map
 	std::map<COMPONENT, CComponent*> m_mapComponent;
 protected: // CreateComponent
 	int CreateTransform(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
-
+	int CreateRigidbody(const float _fMaxSpeed);
 protected:
 	OBJECT m_eType;
 protected:
