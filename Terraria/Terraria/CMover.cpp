@@ -44,6 +44,9 @@ int CMover::SetRigidbody(const RIGIDBODY _eType, float _f)
 	case RIGIDBODY::RIGIDBODY_GRAVITY:
 		pRigidbody->SetGravityPower(_f);
 		break;
+	case RIGIDBODY::RIGIDBODY_JUMPPOWER:
+		pRigidbody->SetJumpPower(_f);
+		break;
 	case RIGIDBODY::RIGIDBODY_MASS:
 		pRigidbody->SetMass(_f);
 		break;

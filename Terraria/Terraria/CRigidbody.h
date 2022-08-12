@@ -10,6 +10,7 @@ public:
 public:// Get
     float GetMass()const { return m_fMass; }
 public:// Set
+    int SetJumpPower(const float _f) { m_fJumpingPower = _f; return 0; }
     int SetGravityPower(const float _f);
     int SetFriction(const float _f) { m_fFriction = _f; return 0; }
     int SetMaxSpeed(const float _f) { m_fMaxSpeed = _f; return 0; }
@@ -23,6 +24,9 @@ public:// Logic
     virtual int Update()      override;
     virtual int FinalUpdate() override;
 private:
+    // For Jump
+    float m_fJumpingPower;
+
     // For Gravity
     Vector2 m_vGravity;
     float m_fGravityPower;
@@ -41,6 +45,14 @@ private:
     Vector2 m_vVelocity;
     // Friction
     float m_fFriction;
+
+private:
+
+    int MoveLogic();
+    int GravityLogic();
+    int JumpLogic();
+    int FrictionLogic();
+
 private:
     FRIEND_FACTORY(CRigidbody);
     CRigidbody();

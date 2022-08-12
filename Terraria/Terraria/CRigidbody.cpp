@@ -4,8 +4,10 @@
 #include "CObject.h"
 #include"CTransform2D.h"
 
+
 CRigidbody::CRigidbody()
     :CComponent(false)
+    , m_fJumpingPower   (0.f)
     , m_fGravityPower   (DEFAULT_GRAVITYPOWER)
     , m_fMaxSpeed       (DEFAULT_MAXSPEED)
     , m_fMass           (DEFAULT_MASS)
@@ -44,7 +46,7 @@ int CRigidbody::Update()
     return 0;
 }
 
-int CRigidbody::FinalUpdate()
+int CRigidbody::MoveLogic()
 {
     // Divide Force -> Power And Direction
     float fForce = m_vForce.Length();
@@ -56,8 +58,10 @@ int CRigidbody::FinalUpdate()
 
         // Acceleration Power = Force / Mass
         float m_fAcceleration = fForce / m_fMass;
+        m_fAcceleration *= (float)GET_DT;
+        printf("Acceleration : %f", m_fAcceleration);
         // Acceleration
-        m_vAcceleration = m_vForce * m_fAcceleration * (float)GET_DT;
+        m_vAcceleration = m_vForce * m_fAcceleration;
         //Final Speed
         m_vVelocity += m_vAcceleration;
 
@@ -71,7 +75,37 @@ int CRigidbody::FinalUpdate()
         // PowerReset
         m_vForce = Vector2({ 0.f, 0.f });
     }
+    return 0;
+}
 
+int CRigidbody::GravityLogic()
+{
+
+    // Gravity Logic
+    if (m_fGravityPower != 0.f)
+    {
+        m_vGravity *= m_fGravityPower * (float)GET_DT;
+        m_vVelocity += m_vGravity;
+        m_vGravity = Vector2({ 0.f,1.f });
+    }
+    return 0;
+}
+
+int CRigidbody::JumpLogic()
+{
+    if (m_fJumpingPower != 0.f)
+    {
+        Vector2 vUp = Vector2({ 0,-1 });
+        float fJump = m_fJumpingPower * (float)GET_DT;
+        m_fJumpingPower -= fJump;
+        vUp *= m_fJumpingPower;
+        m_vVelocity += vUp;
+    }
+    return 0;
+}
+
+int CRigidbody::FrictionLogic()
+{
     // Caculator Friction
     if (0 != m_vVelocity.Length())
     {
@@ -83,15 +117,14 @@ int CRigidbody::FinalUpdate()
         else
             m_vVelocity += vecFricDirect;
     }
+    return 0;
+}
+int CRigidbody::FinalUpdate()
+{
+    MoveLogic();
+    FrictionLogic();
+    GravityLogic();
 
-    // Gravity Logic
-    if (m_fGravityPower != 0.f)
-    {
-        m_vGravity *= m_fGravityPower * (float)GET_DT;
-        m_vVelocity += m_vGravity;
-        m_vGravity = Vector2({ 0.f,1.f });
-    }
-    
     Move();
     return 0;
 }

@@ -30,7 +30,7 @@ int CPlayer::Update_Gravity()
 {
     if (!m_bIsOnGround)
     {
-        CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_GRAVITY, 70.f);
+        CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_GRAVITY, 50.f);
     }
     else
     {
@@ -132,7 +132,7 @@ int CPlayer::Update_Move()
     }
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_SPACE) == INPUTSTATE::INPUTSTATE_TAP)
     {
-        CObject::AddForce(Vector2{ 0.f, JUMP_POWER });
+        CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_JUMPPOWER, -200);
         /*m_eWillState = PLAYER_STATE::STATE_RIGHTRUN;*/
     }
 
@@ -163,10 +163,7 @@ int CPlayer::Update_State()
     m_eState = m_eWillState;
 
     if (CMover::FootRayCast())
-    {
-        printf("땅에 있습니다\n");
         m_bIsOnGround = true;
-    }
     else
         m_bIsOnGround = false;
 
