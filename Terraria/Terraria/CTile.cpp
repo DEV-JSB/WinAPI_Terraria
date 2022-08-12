@@ -56,7 +56,22 @@ int CTile::Setting(TILE _eType, const Vector2 _pos)
 
 int CTile::OnCollision(const CObject* _pOther)
 {
-	
+	if (OBJECT::OBJECT_PLAYER == _pOther->GetType())
+	{
+		// For Collider Bottom
+		Vector2 vColliderPos = _pOther->GetCollider()->GetPos();
+		Vector2 vColliderScale = RTTI_DYNAMIC_CAST(_pOther->GetCollider(), CBoxCollider)->GetScale();
+
+		// For Tile Top
+		Vector3 vTilePos = CObject::GetTransform()->GetPosition();
+		Vector2 vTileScale = CObject::GetTransform()->GetScale();
+
+		// Difference Value
+		int Y_Pos = (int)(vTilePos.y - vTileScale.y * 0.5f) - (int)(vColliderScale.y * 0.5);
+
+		// Player Position Up
+		_pOther->GetTransform()->Set_Y_Pos(Y_Pos + Y_COMPENSATE_VALUE);
+	}
 	return 0;
 }
 
@@ -72,11 +87,9 @@ int CTile::OnCollisionEnter(const CObject* _pOther)
 		Vector3 vTilePos = CObject::GetTransform()->GetPosition();
 		Vector2 vTileScale = CObject::GetTransform()->GetScale();
 
-		//int DiffValue = (int)(vColliderPos.y + vColliderScale.y * 0.5f) - (int)(vTilePos.y - vTileScale.y * 0.5f);
 		// Difference Value
 		int Y_Pos = (int)(vTilePos.y - vTileScale.y * 0.5f) - (int)(vColliderScale.y * 0.5);
 
-		/*_pOther->GetTransform()->Set_Y_Pos((int)_pOther->GetTransform()->GetPosition_Y() - DiffValue);*/
 		// Player Position Up
 		_pOther->GetTransform()->Set_Y_Pos(Y_Pos + Y_COMPENSATE_VALUE);
 	}
@@ -106,8 +119,6 @@ int CTile::Render(const HDC _dc)
 	CObject::Render(_dc);
 	return 0;
 }
-
-
 
 int CTile::CreateCollider(const Vector2 _pos)
 {

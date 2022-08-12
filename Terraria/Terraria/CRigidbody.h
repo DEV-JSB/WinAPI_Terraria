@@ -10,8 +10,9 @@ public:
 public:// Get
     float GetMass()const { return m_fMass; }
 public:// Set
-    int SetMaxSpeed(const float _fMaxspeed) { m_fMaxSpeed = _fMaxspeed; return 0; }
     int SetGravityPower(const float _f);
+    int SetFriction(const float _f) { m_fFriction = _f; return 0; }
+    int SetMaxSpeed(const float _f) { m_fMaxSpeed = _f; return 0; }
     int SetMass(const float _f) { m_fMass = _f; return 0;}
     int SetOwner(CObject* _p) { m_pOwner = _p; return 0; }
 public:// Func

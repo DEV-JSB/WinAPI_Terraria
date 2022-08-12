@@ -13,51 +13,28 @@
 //////////////////////////
 #define MOVE_FORCE 45.f
 #define MAX_SPEED 1000.f
-#define JUMP_POWER -500.f
+#define JUMP_POWER -1000.f
 /// ////////////////////////
 CPlayer::CPlayer()
-    :CObject(OBJECT::OBJECT_PLAYER,Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5), 0.f }), Vector3(), Vector2())
-    , m_eState(PLAYER_STATE::STATE_IDLE)
-    , m_eWillState(PLAYER_STATE::STATE_IDLE)
+    : CMover(OBJECT::OBJECT_PLAYER,Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) + 110, 0.f }), Vector3(), Vector2())
+    , m_eState(MOVER_STATE::STATE_IDLE)
+    , m_eWillState(MOVER_STATE::STATE_IDLE)
     , m_bIsOnGround(false)
 {
-    // SetAnimator
-    CAnimator* pAnimator = CFactory<CAnimator>::Create(true);
-
-    pAnimator->LoadAnimation(L"PlayerCloth", L"Player_Cloth.bmp");
-    pAnimator->LoadAnimation(L"PlayerHead", L"Player_Head.bmp");
-    pAnimator->LoadAnimation(L"PlayerHair", L"Player_Hair.bmp");
-    pAnimator->LoadAnimation(L"PlayerArm", L"Player_Arm.bmp");
-    pAnimator->LoadAnimation(L"PlayerArm2", L"Player_Arm.bmp");
-    pAnimator->LoadAnimation(L"PlayerLeg", L"Player_Leg.bmp");
-
-    pAnimator->SettingPlayAnimation(vector<wstring>({ L"PlayerCloth"
-                                                     ,L"PlayerHead"
-                                                     ,L"PlayerHair"
-                                                     ,L"PlayerArm"
-                                                     ,L"PlayerArm2"
-                                                     ,L"PlayerLeg" }));
-    pAnimator->SetOwner(this);
-
-    m_mapComponent.insert({ COMPONENT::COMPONENT_ANIMATOR,pAnimator });
-
+    CreateAnimator();
     CreateCollider(Vector2({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) }));
-
     CObject::CreateRigidbody(MAX_SPEED);
-
 }
 
 int CPlayer::Update_Gravity()
 {
-    if (!m_bIsOnGround )
+    if (!m_bIsOnGround)
     {
-        CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
-        pRigid->SetGravityPower(70.f);
+        CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_GRAVITY, 70.f);
     }
-    else if( m_bIsOnGround && m_eState != PLAYER_STATE::STATE_LEFTRUN && m_eState != PLAYER_STATE::STATE_RIGHTRUN)
+    else
     {
-        CRigidbody* pRigid = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
-        pRigid->SetGravityPower(0.f);
+        CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_GRAVITY, 0.f);
     }
     return 0;
 }
@@ -76,8 +53,6 @@ int CPlayer::OnCollisionEnter(const CObject* _pOther)
 
     if (OBJECT::OBJECT_TILE == _pOther->GetType())
     {
-        m_bIsOnGround = true;
-
     }
     return 0;
 }
@@ -87,7 +62,6 @@ int CPlayer::OnCollisionExit(const CObject* _pOther)
     // Tile Overlap Fuck
     if (OBJECT::OBJECT_TILE == _pOther->GetType())
     {
-        m_bIsOnGround = false;
     }
     return 0;
 }
@@ -120,24 +94,48 @@ int CPlayer::Render(const HDC _dc)
     return 0;
 }
 
+int CPlayer::CreateAnimator()
+{
+    // SetAnimator
+    CAnimator* pAnimator = CFactory<CAnimator>::Create(true);
+
+    pAnimator->LoadAnimation(L"PlayerCloth", L"Player_Cloth.bmp");
+    pAnimator->LoadAnimation(L"PlayerHead", L"Player_Head.bmp");
+    pAnimator->LoadAnimation(L"PlayerHair", L"Player_Hair.bmp");
+    pAnimator->LoadAnimation(L"PlayerArm", L"Player_Arm.bmp");
+    pAnimator->LoadAnimation(L"PlayerArm2", L"Player_Arm.bmp");
+    pAnimator->LoadAnimation(L"PlayerLeg", L"Player_Leg.bmp");
+
+    pAnimator->SettingPlayAnimation(vector<wstring>({ L"PlayerCloth"
+                                                     ,L"PlayerHead"
+                                                     ,L"PlayerHair"
+                                                     ,L"PlayerArm"
+                                                     ,L"PlayerArm2"
+                                                     ,L"PlayerLeg" }));
+    pAnimator->SetOwner(this);
+
+    m_mapComponent.insert({ COMPONENT::COMPONENT_ANIMATOR,pAnimator });
+    return 0;
+}
+
 int CPlayer::Update_Move()
 {
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_A) == INPUTSTATE::INPUTSTATE_HOLD)
     {
         CObject::AddForce(Vector2{ -MOVE_FORCE,0.f });
-        m_eWillState = PLAYER_STATE::STATE_LEFTRUN;
+        m_eWillState = MOVER_STATE::STATE_LEFTRUN;
     }
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_D) == INPUTSTATE::INPUTSTATE_HOLD)
     {
         CObject::AddForce(Vector2{ MOVE_FORCE,0.f });
-        m_eWillState = PLAYER_STATE::STATE_RIGHTRUN;
+        m_eWillState = MOVER_STATE::STATE_RIGHTRUN;
     }
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_SPACE) == INPUTSTATE::INPUTSTATE_TAP)
     {
-        printf("점프!!\n");
         CObject::AddForce(Vector2{ 0.f, JUMP_POWER });
         /*m_eWillState = PLAYER_STATE::STATE_RIGHTRUN;*/
     }
+
     return 0;
 }
 
@@ -146,12 +144,12 @@ int CPlayer::Update_Animation()
     CAnimator* pAnimator = RTTI_DYNAMIC_CAST_MAP(CAnimator, m_mapComponent, COMPONENT::COMPONENT_ANIMATOR);
     switch (m_eState)
     {
-    case PLAYER_STATE::STATE_IDLE:
+    case MOVER_STATE::STATE_IDLE:
         break;
-    case PLAYER_STATE::STATE_LEFTRUN:
+    case MOVER_STATE::STATE_LEFTRUN:
         pAnimator->SetFilp(true);
         break;
-    case PLAYER_STATE::STATE_RIGHTRUN:
+    case MOVER_STATE::STATE_RIGHTRUN:
         pAnimator->SetFilp(false);
         break;
     }
@@ -163,6 +161,15 @@ int CPlayer::Update_State()
 {
     // Later Plus Exeption Handling
     m_eState = m_eWillState;
+
+    if (CMover::FootRayCast())
+    {
+        printf("땅에 있습니다\n");
+        m_bIsOnGround = true;
+    }
+    else
+        m_bIsOnGround = false;
+
     return 0;
 }
 

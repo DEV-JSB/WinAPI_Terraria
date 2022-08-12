@@ -10,9 +10,9 @@ public: // Set Function
 
 	int SetOwner(CObject* _pObj) { m_pOwner = _pObj; return 0; }
 public:// Get Function
-	Vector2 GetPos()const { return m_vPos; }
 	UINT GetID()const { return m_iID; }
 	virtual COLLIDER GetType()const { return m_eType; }
+	Vector2 GetPos()const { return m_vPos; }
 public:
 	virtual int Render(const HDC _dc)const = 0;
 	virtual int Update() = 0;

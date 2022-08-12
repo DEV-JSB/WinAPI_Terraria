@@ -6,11 +6,11 @@
 
 CRigidbody::CRigidbody()
     :CComponent(false)
-    ,m_fGravityPower(70.f)
-    ,m_vGravity({0.f,1.f})
-    , m_fMaxSpeed(100.f)
-    , m_fFriction(25.f)
-    , m_fMass(1.f)
+    , m_fGravityPower   (DEFAULT_GRAVITYPOWER)
+    , m_fMaxSpeed       (DEFAULT_MAXSPEED)
+    , m_fMass           (DEFAULT_MASS)
+    , m_fFriction       (DEFAULT_FRICTION)
+    , m_vGravity({0.f,1.f})
     , m_vAcceleration({0,0})
     , m_vForce({0,0})
     , m_vVelocity({0,0})
@@ -29,10 +29,6 @@ bool CRigidbody::IsMoving()
 int CRigidbody::SetGravityPower(const float _f)
 {
     m_fGravityPower = _f;
-    if (0.f == _f)
-    {
-        m_vVelocity = Vector2({ 0.f,0.f });
-    }
     return 0;
 }
 
@@ -103,7 +99,6 @@ int CRigidbody::Move()
 {
     // MoveSpeed
     float fSpeed = m_vVelocity.Length();
-    printf("Speed : %f\n", fSpeed);
     if (0.f == fSpeed)
         return 0;
 

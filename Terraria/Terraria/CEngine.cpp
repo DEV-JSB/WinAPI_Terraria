@@ -91,8 +91,8 @@ int CEngine::Release()
 int CEngine::Update()
 {
 	// UpdateManager
-	CTimeMgr::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
+	CTimeMgr::GetInstance()->Update();
 	CInputMgr::GetInstance()->Update();
 	CCollisionMgr::GetInstance()->Update();
 	return 0;

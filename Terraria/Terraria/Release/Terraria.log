@@ -1,0 +1,38 @@
+﻿  CAnimation.cpp
+  CAnimationTool.cpp
+  CAnimationUI.cpp
+  CAnimator.cpp
+  CButtonUI.cpp
+  CBoxCollider.cpp
+  CCircleCollider.cpp
+  CCollider.cpp
+  CCollisionMgr.cpp
+  CComponent.cpp
+  CEngine.cpp
+  CFactory2.cpp
+  CInputMgr.cpp
+  CMover.cpp
+  CObject.cpp
+  CPathMgr.cpp
+  CPlayer.cpp
+  CResource.cpp
+  CResourceMgr.cpp
+  CRigidbody.cpp
+  Compiling...
+  CScene.cpp
+  CSceneMgr.cpp
+  CSkin.cpp
+  CTexture.cpp
+  CTile.cpp
+  CTileMgr.cpp
+  CTimeMgr.cpp
+  CTransform2D.cpp
+  CUI.cpp
+  CUIManager.cpp
+  CWorld.cpp
+  Terraria.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 1198 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Terraria.vcxproj -> C:\Users\Admin\Documents\GitHub\WinAPI_Terraria\Terraria\Release\Terraria.exe

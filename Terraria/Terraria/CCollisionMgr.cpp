@@ -157,6 +157,27 @@ int CCollisionMgr::CheckingGroupBox(const OBJECT  _eLeft, const OBJECT  _eRight)
 	return 0;
 }
 
+bool CCollisionMgr::CheckingPointOnTile(const POINT _point)
+{
+	const vector<CObject*>vecTile = GetObjectVec(OBJECT::OBJECT_TILE);
+	
+	CCollider* pCollider;
+	Vector2 vPos;
+	Vector2 vScale;
+	for (size_t i = 0; i < vecTile.size(); ++i)
+	{
+		pCollider = vecTile[i]->GetCollider();
+		CBoxCollider* pBox = RTTI_DYNAMIC_CAST(pCollider,CBoxCollider);
+		vPos = pBox->GetPos();
+		vScale = pBox->GetScale();
+
+		if (vPos.x - vScale.x * 0.5f <= _point.x && _point.x <= vPos.x + vScale.x * 0.5f
+			&& vPos.y - vScale.y * 0.5f <= _point.y && _point.y <= vPos.y + vScale.y * 0.5f)
+			return true;
+	}
+	return false;
+}
+
 
 CCollisionMgr::~CCollisionMgr()
 {

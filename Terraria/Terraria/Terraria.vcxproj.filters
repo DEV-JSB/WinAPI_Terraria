@@ -46,9 +46,6 @@
     <Filter Include="Framework\06.Object">
       <UniqueIdentifier>{a4df2d91-2bdc-4331-8b98-b7cfbe39972f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Framework\06.Object\Player">
-      <UniqueIdentifier>{9243b94d-c34f-4399-a78b-24472b391b8e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\01.Engine">
       <UniqueIdentifier>{b05d2204-9e90-4ef6-9376-7c48628dab73}</UniqueIdentifier>
     </Filter>
@@ -121,6 +118,12 @@
     <Filter Include="Framework\03.Scene\World">
       <UniqueIdentifier>{187238d6-be2e-40c7-8e74-c543d7ec4061}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\06.Object\Mover">
+      <UniqueIdentifier>{f7cd1e23-0889-402f-87ed-e3a0a48dc1e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\06.Object\Mover\Player">
+      <UniqueIdentifier>{9243b94d-c34f-4399-a78b-24472b391b8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -169,7 +172,7 @@
       <Filter>Framework\05.Resource\CTexture</Filter>
     </ClInclude>
     <ClInclude Include="CPlayer.h">
-      <Filter>Framework\06.Object\Player</Filter>
+      <Filter>Framework\06.Object\Mover\Player</Filter>
     </ClInclude>
     <ClInclude Include="CObject.h">
       <Filter>Framework\06.Object</Filter>
@@ -232,6 +235,9 @@
     <ClInclude Include="CCollisionMgr.h">
       <Filter>Framework\02.Manager\CollisionManager</Filter>
     </ClInclude>
+    <ClInclude Include="CMover.h">
+      <Filter>Framework\06.Object\Mover</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -268,7 +274,7 @@
       <Filter>Framework\05.Resource\CTexture</Filter>
     </ClCompile>
     <ClCompile Include="CPlayer.cpp">
-      <Filter>Framework\06.Object\Player</Filter>
+      <Filter>Framework\06.Object\Mover\Player</Filter>
     </ClCompile>
     <ClCompile Include="CObject.cpp">
       <Filter>Framework\06.Object</Filter>
@@ -326,6 +332,9 @@
     </ClCompile>
     <ClCompile Include="CCollisionMgr.cpp">
       <Filter>Framework\02.Manager\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CMover.cpp">
+      <Filter>Framework\06.Object\Mover</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

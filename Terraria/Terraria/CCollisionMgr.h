@@ -10,7 +10,7 @@ union COLLIDER_ID
 	};
 	LONGLONG ID;
 	bool operator < (const COLLIDER_ID& a)const
-	{
+	{	
 		return false;
 	}
 };
@@ -24,6 +24,10 @@ public:
 public:
 	// Checking GroupBox Like Unity CheckBox
 	int CheckingGroupBox(const OBJECT  _eLeft, const OBJECT _eRight);
+
+	// Checking Just Point On Tile
+	bool CheckingPointOnTile(const POINT _point);
+
 private:
 	// Checking GroupBox call this function
 	int CollisionCheck(const OBJECT  _eLeft, const OBJECT  _eRight);
@@ -34,7 +38,6 @@ private:
 	// GetObjectGroup
 	const vector<CObject*> GetObjectVec(const OBJECT _eType);
 private:
-	
 
 	// Hash For Collider Uion prev Collision state
 	map<LONGLONG, bool> m_mapPrevState;

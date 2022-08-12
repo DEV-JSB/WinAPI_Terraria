@@ -1,8 +1,8 @@
 #pragma once
-#include"CObject.h"
 #include"CFactory.h"
+#include"CMover.h"
 
-class CPlayer : public CObject
+class CPlayer : public CMover
 {
 
 
@@ -19,19 +19,24 @@ public:
 	virtual int Render(const HDC _dc) override;
 
 private:
-	// Update Logic 
-	int Update_Move();
-	int Update_Animation();
-	int Update_State();
-	int Update_Gravity();
 
-	int CreateCollider(const Vector2 _pos);
+	virtual int CreateAnimator() override;
+
+private:
+
+	// Update Logic 
+	virtual int Update_Move()								override;
+	virtual int Update_Animation()							override;
+	virtual int Update_State()								override;
+	virtual int Update_Gravity()							override;
+
+	int CreateCollider(const Vector2 _pos)					override;
 private:
 	enum class PLAYER_STATE { STATE_IDLE, STATE_LEFTRUN, STATE_RIGHTRUN, STATE_END };
 private:
 	bool m_bIsOnGround;
-	PLAYER_STATE m_eWillState;
-	PLAYER_STATE m_eState;
+	MOVER_STATE m_eWillState;
+	MOVER_STATE m_eState;
 private:
 	HIDE_CONSTRUCTOR(CPlayer);
 public:
