@@ -105,13 +105,15 @@ int CPlayer::CreateAnimator()
     pAnimator->LoadAnimation(L"PlayerArm", L"Player_Arm.bmp");
     pAnimator->LoadAnimation(L"PlayerArm2", L"Player_Arm.bmp");
     pAnimator->LoadAnimation(L"PlayerLeg", L"Player_Leg.bmp");
+    pAnimator->LoadAnimation(L"PlayerJump", L"Player_Leg.bmp");
 
     pAnimator->SettingPlayAnimation(vector<wstring>({ L"PlayerCloth"
                                                      ,L"PlayerHead"
                                                      ,L"PlayerHair"
                                                      ,L"PlayerArm"
                                                      ,L"PlayerArm2"
-                                                     ,L"PlayerLeg" }));
+                                                     ,L"PlayerLeg"
+                                                     ,L"PlayerJump"}));
     pAnimator->SetOwner(this);
 
     m_mapComponent.insert({ COMPONENT::COMPONENT_ANIMATOR,pAnimator });
@@ -133,9 +135,9 @@ int CPlayer::Update_Move()
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_SPACE) == INPUTSTATE::INPUTSTATE_TAP)
     {
         CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_JUMPPOWER, JUMP_POWER);
-        /*m_eWillState = PLAYER_STATE::STATE_RIGHTRUN;*/
+        m_eWillState = MOVER_STATE::STATE_JUMP;
     }
-
+    
     return 0;
 }
 
@@ -144,7 +146,11 @@ int CPlayer::Update_Animation()
     CAnimator* pAnimator = RTTI_DYNAMIC_CAST_MAP(CAnimator, m_mapComponent, COMPONENT::COMPONENT_ANIMATOR);
     switch (m_eState)
     {
+    case MOVER_STATE::STATE_JUMP:
+        pAnimator->SubstitutePlayAnimation(L"PlayerLeg", L"PlayerJump");
+        break;
     case MOVER_STATE::STATE_IDLE:
+        pAnimator->SubstitutePlayAnimation(L"PlayerJump", L"PlayerLeg");
         break;
     case MOVER_STATE::STATE_LEFTRUN:
         pAnimator->SetFilp(true);
@@ -159,8 +165,13 @@ int CPlayer::Update_Animation()
 
 int CPlayer::Update_State()
 {
-    // Later Plus Exeption Handling
-    m_eState = m_eWillState;
+    CRigidbody* pRigidbody = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
+
+    // Later Plus Exeption Handlings
+    if (pRigidbody->IsMoving() == false)
+        m_eState = MOVER_STATE::STATE_IDLE;
+    else
+        m_eState = m_eWillState;
 
     if (CMover::FootRayCast())
         m_bIsOnGround = true;

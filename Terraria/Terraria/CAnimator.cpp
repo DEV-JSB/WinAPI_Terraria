@@ -54,6 +54,12 @@ int CAnimator::LoadAnimation(const wstring& _filename,const wstring& _texture)
 	return 0;
 }
 
+int CAnimator::SetFilp(const bool _bFlip)
+{
+	m_bXflip = _bFlip;
+	return 0;
+}
+
 int CAnimator::SettingPlayAnimation(const vector<wstring>& _vecName)
 {
 	for (size_t i = 0; i < _vecName.size(); ++i)
@@ -63,7 +69,7 @@ int CAnimator::SettingPlayAnimation(const vector<wstring>& _vecName)
 	return 0;
 }
 
-int CAnimator::SubstitutePlayAnimation(const wstring _deleteAni, const wstring& _substitute)
+int CAnimator::SubstitutePlayAnimation(const wstring& _deleteAni, const wstring& _substitute)
 {
 	CutCurFrame(_deleteAni);
 	m_vecCurAnimation.push_back((*m_mapAnimation.find(_substitute)).second);

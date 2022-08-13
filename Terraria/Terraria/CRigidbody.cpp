@@ -22,7 +22,7 @@ CRigidbody::CRigidbody()
 
 bool CRigidbody::IsMoving()
 {
-    if (0 == m_vVelocity.Length())
+    if (0 == m_vVelocity.Length() && m_fGravityPower == 0.f)
         return false;
     else
         return true;
