@@ -12,7 +12,7 @@
 #define PLAYER_HEIGHT 40.f
 //////////////////////////
 #define MOVE_FORCE 45.f
-#define MAX_SPEED 25.f
+#define MAX_SPEED 20.f
 #define JUMP_POWER 100.f
 /// ////////////////////////
 CPlayer::CPlayer()
@@ -78,9 +78,9 @@ int CPlayer::Update()
     CObject::Update();
 
     Update_Move();
+    Update_Gravity();
     Update_State();
     Update_Animation();
-    Update_Gravity();
 
     return 0;
 }
@@ -112,8 +112,7 @@ int CPlayer::CreateAnimator()
                                                      ,L"PlayerHair"
                                                      ,L"PlayerArm"
                                                      ,L"PlayerArm2"
-                                                     ,L"PlayerLeg"
-                                                     ,L"PlayerJump"}));
+                                                     ,L"PlayerLeg"}));
     pAnimator->SetOwner(this);
 
     m_mapComponent.insert({ COMPONENT::COMPONENT_ANIMATOR,pAnimator });
@@ -168,15 +167,20 @@ int CPlayer::Update_State()
     CRigidbody* pRigidbody = RTTI_DYNAMIC_CAST_MAP(CRigidbody, m_mapComponent, COMPONENT::COMPONENT_RIGIDBODY);
 
     // Later Plus Exeption Handlings
-    if (pRigidbody->IsMoving() == false)
-        m_eState = MOVER_STATE::STATE_IDLE;
-    else
+    if (m_eState != m_eWillState)
+    {
         m_eState = m_eWillState;
-
+    }
     if (CMover::FootRayCast())
+    {
         m_bIsOnGround = true;
+        m_eWillState = MOVER_STATE::STATE_IDLE;
+    }
     else
+    {
         m_bIsOnGround = false;
+        m_eWillState = MOVER_STATE::STATE_JUMP;
+    }
 
     return 0;
 }

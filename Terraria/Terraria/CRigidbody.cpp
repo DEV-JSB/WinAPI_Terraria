@@ -22,7 +22,7 @@ CRigidbody::CRigidbody()
 
 bool CRigidbody::IsMoving()
 {
-    if (0 == m_vVelocity.Length() && m_fGravityPower == 0.f)
+    if (0 == m_vForce.Length() && m_fGravityPower == 0.f && m_fJumpingPower <= 0.f)
         return false;
     else
         return true;
@@ -85,7 +85,8 @@ int CRigidbody::GravityLogic()
     if (m_fGravityPower != 0.f)
     {
         m_vGravity *= m_fGravityPower * (float)GET_DT;
-        m_fJumpingPower -= m_fGravityPower * (float)GET_DT;
+        if(m_fJumpingPower > 0.0f)
+            m_fJumpingPower -= m_fGravityPower * (float)GET_DT;
         m_vVelocity += m_vGravity;
         m_vGravity = Vector2({ 0.f,1.f });
     }
@@ -102,6 +103,8 @@ int CRigidbody::JumpLogic()
         vUp *= fJump;
         m_vVelocity += vUp;
     }
+    // If Gravity is Zero then must On the ground so Jump Set Zero
+    
     return 0;
 }
 
@@ -123,8 +126,8 @@ int CRigidbody::FrictionLogic()
 int CRigidbody::FinalUpdate()
 {
     MoveLogic();
-    FrictionLogic();
     GravityLogic();
+    FrictionLogic();
     JumpLogic();
 
     Move();

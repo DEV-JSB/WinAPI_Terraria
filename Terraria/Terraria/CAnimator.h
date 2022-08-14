@@ -22,7 +22,7 @@ public://Logic
 	virtual int Update() override;
 	virtual int FinalUpdate() override;
 private:
-	int CutCurFrame(const wstring& _filename);
+	bool CutCurFrame(const wstring& _filename);
 private:
 	// Will Flip Animation
 	bool m_bXflip;

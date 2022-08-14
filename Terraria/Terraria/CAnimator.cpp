@@ -71,8 +71,9 @@ int CAnimator::SettingPlayAnimation(const vector<wstring>& _vecName)
 
 int CAnimator::SubstitutePlayAnimation(const wstring& _deleteAni, const wstring& _substitute)
 {
-	CutCurFrame(_deleteAni);
-	m_vecCurAnimation.push_back((*m_mapAnimation.find(_substitute)).second);
+	// If Delete Success then Push BackAnimation
+	if(CutCurFrame(_deleteAni))
+		m_vecCurAnimation.push_back((*m_mapAnimation.find(_substitute)).second);
 	return 0;
 }
 
@@ -97,17 +98,17 @@ int CAnimator::FinalUpdate()
 	return 0;
 }
 
-int CAnimator::CutCurFrame(const wstring& _filename)
+bool CAnimator::CutCurFrame(const wstring& _filename)
 {
 	for (auto iter = m_vecCurAnimation.begin(); iter != m_vecCurAnimation.end(); ++iter)
 	{
 		if ((*iter) == (*m_mapAnimation.find(_filename)).second)
 		{
 			m_vecCurAnimation.erase(iter);
-			break;
+			return true;
 		}
 	}
-	return 0;
+	return false;
 }
 
 
