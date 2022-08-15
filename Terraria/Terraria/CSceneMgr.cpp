@@ -14,6 +14,11 @@ CSceneMgr::~CSceneMgr()
 	
 }
 
+SCENE CSceneMgr::GetType() const
+{
+	return m_pCurScene->GetSceneType();
+}
+
 const vector<CObject*> CSceneMgr::GetObjectGroup(const OBJECT _eType)
 {
 	return m_pCurScene->GetObjectGroup(_eType);

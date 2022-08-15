@@ -4,6 +4,7 @@
 #include"CTransform2D.h"
 #include"CPathMgr.h"
 #include"CResourceMgr.h"
+#include"CCamera.h"
 #include<iostream>
 
 
@@ -80,10 +81,13 @@ int CAnimator::SubstitutePlayAnimation(const wstring& _deleteAni, const wstring&
 int CAnimator::Render(const HDC _dc)const
 {
 	CTransform2D* pTrans = m_pOwner->GetTransform();
-	Vector3 vPos = pTrans->GetPosition();
+	Vector3 vRenderPos = pTrans->GetPosition();
+	Vector2 vDiff = CCamera::GetInstance()->GetDifference();
+	vRenderPos.x += vDiff.x;
+	vRenderPos.y += vDiff.y;
 	for (size_t i = 0; i < m_vecCurAnimation.size(); ++i)
 	{
-		m_vecCurAnimation[i]->Render(_dc, Vector2({ vPos.x,vPos.y }), m_bXflip);
+		m_vecCurAnimation[i]->Render(_dc, Vector2({ vRenderPos.x,vRenderPos.y }), m_bXflip);
 	}
 	return 0;
 }

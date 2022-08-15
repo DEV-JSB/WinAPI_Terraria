@@ -5,6 +5,7 @@
 #include"CResourceMgr.h"
 #include "CSceneMgr.h"
 #include "CCollisionMgr.h"
+#include"CCamera.h"
 #include"CTimeMgr.h"
 
 #define WINDOWSTART_X 100
@@ -73,10 +74,11 @@ int CEngine::Init(HWND _hwnd, POINT _resoulution)
 
 
 	// Initialize Manager
-	CTimeMgr::GetInstance()->Init();
-	CPathMgr::GetInstance()->Init();
-	CInputMgr::GetInstance()->Init();
-	CSceneMgr::GetInstance()->Init();
+	CTimeMgr::	GetInstance()->	Init();
+	CPathMgr::	GetInstance()->	Init();
+	CInputMgr::	GetInstance()->	Init();
+	CSceneMgr::	GetInstance()->	Init();
+	CCamera::	GetInstance()->	Init();
 
 	return 0;
 }
@@ -91,10 +93,12 @@ int CEngine::Release()
 int CEngine::Update()
 {
 	// UpdateManager
-	CSceneMgr::GetInstance()->Update();
 	CTimeMgr::GetInstance()->Update();
 	CInputMgr::GetInstance()->Update();
+	CSceneMgr::GetInstance()->Update();
 	CCollisionMgr::GetInstance()->Update();
+	CCamera::GetInstance()->Update();
+
 	return 0;
 }
 

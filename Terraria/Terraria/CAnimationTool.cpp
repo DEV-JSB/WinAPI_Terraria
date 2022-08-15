@@ -38,6 +38,8 @@ CAnimationTool::CAnimationTool()
     , m_iSettingFrame(0)
     , m_pAnimationUI(nullptr)
 {
+
+    m_eType = SCENE::SCENE_ANITOOL;
 }
 
 

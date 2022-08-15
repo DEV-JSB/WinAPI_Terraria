@@ -7,6 +7,8 @@ public: // Logic , Can Access OutSide
 	int Init(HWND _hwnd, POINT _resoulution);
 	int Release();
 
+public: // Get
+	POINT GetResolution()const { return m_ptResolution; }
 	HWND GetMainHWND()const { return m_hWnd; }
 	HDC GetBufferDC()const { return m_bufferDC; }
 	HDC GetMainDC()const { return m_dc; }

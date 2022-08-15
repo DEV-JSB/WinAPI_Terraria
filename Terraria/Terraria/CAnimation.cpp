@@ -50,6 +50,8 @@ int CAnimation::Render(const HDC _dc, const Vector2& _Pos,const bool _xFlip)
 	if (false == _xFlip)
 	{
 		Pos = _Pos + m_vecFrame[m_iFrameIndex].vOffset;
+		
+		// Rendering Pos
 		TransparentBlt(_dc
 			, (int)(Pos.x - m_vecFrame[m_iFrameIndex].vSliceSize.x * 0.5f)
 			, (int)(Pos.y - m_vecFrame[m_iFrameIndex].vSliceSize.y * 0.5f)
@@ -66,10 +68,11 @@ int CAnimation::Render(const HDC _dc, const Vector2& _Pos,const bool _xFlip)
 	{
 		// X Pivot Flip Version
 
-	//Make Pivot Flip
+		// Make Pivot Flip
 		Pos.y = _Pos.y + m_vecFrame[m_iFrameIndex].vOffset.y;
-		//Y Pivot Don't tocuh
+		// Y Pivot Don't tocuh
 		Pos.x = _Pos.x - m_vecFrame[m_iFrameIndex].vOffset.x;
+
 
 
 		HDC StretchDC = CreateCompatibleDC(m_pTex->GetTextureDC());

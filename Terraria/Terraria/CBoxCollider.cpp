@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CBoxCollider.h"
-
+#include"CCamera.h"
 
 CBoxCollider::CBoxCollider()
 	: CCollider(COLLIDER::COLLIDER_RECT)
@@ -24,8 +24,12 @@ int CBoxCollider::Render(const HDC _dc) const
 {
 	if (m_bRender)
 	{
-		Rectangle(_dc, (int)(m_vPos.x - m_vScale.x * 0.5f), (int)(m_vPos.y - m_vScale.y*0.5f)
-			, (int)(m_vPos.x + m_vScale.x * 0.5f), (int)(m_vPos.y + m_vScale.y * 0.5f));
+		Vector2 RenderPos = CCamera::GetInstance()->GetDifference();
+		Rectangle(_dc
+			, (int)(m_vPos.x - m_vScale.x * 0.5f) + (int)RenderPos.x
+			, (int)(m_vPos.y - m_vScale.y * 0.5f) + (int)RenderPos.y
+			, (int)(m_vPos.x + m_vScale.x * 0.5f) + (int)RenderPos.x
+			, (int)(m_vPos.y + m_vScale.y * 0.5f) + (int)RenderPos.y);
 	}
 	return 0;
 }

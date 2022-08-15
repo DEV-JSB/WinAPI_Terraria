@@ -13,6 +13,7 @@
 
 CWorld::CWorld()
 {
+    m_eType = SCENE::SCENE_WORLD;
 }
 
 

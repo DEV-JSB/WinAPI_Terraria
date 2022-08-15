@@ -19,7 +19,10 @@ typedef struct MyVector2
 	{
 		return (float)(sqrt(pow(x, 2) + pow(y, 2)));
 	}
-
+	MyVector2 operator - (MyVector2& p)
+	{
+		return Vector2({ this->x - p.x,this->y - p.y });
+	}
 	MyVector2& Normalize()
 	{
 		float length = this->Length();
@@ -55,6 +58,17 @@ typedef struct MyVector2
 		this->y *= _f;
 		return *this;
 	}
+	MyVector2& operator /= (const float _f)
+	{
+		this->x /= _f;
+		this->y /= _f;
+		return *this;
+	}
+	MyVector2 operator - (POINT& p)
+	{
+		return Vector2({ this->x - p.x,this->y - p.y });
+	}
+
 }Vector2;
 
 

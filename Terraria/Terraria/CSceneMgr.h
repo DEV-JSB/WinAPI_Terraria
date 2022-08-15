@@ -5,7 +5,7 @@ class CScene;
 class CSceneMgr
 {
 public://Get
-
+	SCENE GetType()const;
 	// Return ObjectGroup in CurrentScene
 	const vector<CObject*> GetObjectGroup(const OBJECT _eType);
 public: // Logic

@@ -3,6 +3,7 @@
 #include "CResourceMgr.h"
 #include "CTexture.h"
 #include "CPathMgr.h"
+#include "CCamera.h"
 #include "CTransform2D.h"
 CSkin::CSkin(const bool _willrender)
 	:CComponent(_willrender)
@@ -22,6 +23,9 @@ int CSkin::SetTexture(const wstring& _str)
 int CSkin::Render(const HDC _dc)const
 {
 	Vector3 Pos = m_pOwner->GetTransform()->GetPosition();
+	Vector2 vDiff = CCamera::GetInstance()->GetDifference();
+	Pos.x += vDiff.x;
+	Pos.y += vDiff.y;
 	TransparentBlt(_dc
 		, (int)(Pos.x - m_stSkinInfo.vSliceSize.x * 0.5f)
 		, (int)(Pos.y - m_stSkinInfo.vSliceSize.y * 0.5f)

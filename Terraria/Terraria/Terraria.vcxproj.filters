@@ -124,6 +124,9 @@
     <Filter Include="Framework\06.Object\Mover\Player">
       <UniqueIdentifier>{9243b94d-c34f-4399-a78b-24472b391b8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\02.Manager\Camera">
+      <UniqueIdentifier>{4499d066-c1e5-449d-9139-2544124a30b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -238,6 +241,9 @@
     <ClInclude Include="CMover.h">
       <Filter>Framework\06.Object\Mover</Filter>
     </ClInclude>
+    <ClInclude Include="CCamera.h">
+      <Filter>Framework\02.Manager\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -335,6 +341,9 @@
     </ClCompile>
     <ClCompile Include="CMover.cpp">
       <Filter>Framework\06.Object\Mover</Filter>
+    </ClCompile>
+    <ClCompile Include="CCamera.cpp">
+      <Filter>Framework\02.Manager\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

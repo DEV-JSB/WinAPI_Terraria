@@ -59,7 +59,6 @@ int CRigidbody::MoveLogic()
         // Acceleration Power = Force / Mass
         float m_fAcceleration = fForce / m_fMass;
         m_fAcceleration *= (float)GET_DT;
-        printf("Acceleration : %f", m_fAcceleration);
         // Acceleration
         m_vAcceleration = m_vForce * m_fAcceleration;
         //Final Speed
