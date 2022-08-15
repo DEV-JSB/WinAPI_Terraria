@@ -24,7 +24,6 @@ int CCamera::Update()
 		Vector3 vPos = m_pTarget->GetTransform()->GetPosition();
 		m_vLookAt.x = vPos.x;
 		m_vLookAt.y = vPos.y;
-		printf("Player X : %f,Y : %f\n", vPos.x, vPos.y);
 		//m_vDifference = Vector2({ 0.f,0.f });
 		m_vDifference = m_vResolution - m_vLookAt;
 	}

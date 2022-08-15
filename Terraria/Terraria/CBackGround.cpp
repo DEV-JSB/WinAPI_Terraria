@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CResourceMgr.h"
 #include "CSkin.h"
+#include "CCamera.h"
 #include "CComponent.h"
 #include "CBackGround.h"
 
@@ -25,7 +26,7 @@ int CBackGround::Setting(const wstring& _str)
 
 int CBackGround::Render(const HDC _dc)
 {
-	m_mapComponent[COMPONENT::COMPONENT_SKIN]->Render(_dc);
+	//m_mapComponent[COMPONENT::COMPONENT_SKIN]->Render(_dc);
 	return 0;
 }
 

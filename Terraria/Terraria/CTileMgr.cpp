@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CTile.h"
+#include "CTransform2D.h"
 #include "CFactory2.h"
+#include "CCamera.h"
 #include "CTileMgr.h"
 
 CTileMgr::CTileMgr()
@@ -11,9 +13,19 @@ CTileMgr::CTileMgr()
 
 int CTileMgr::Render(const HDC _dc)
 {
+	Vector2 vCameraPos = CCamera::GetInstance()->GetLookAt();
+	Vector2 vCameraRes = CCamera::GetInstance()->GetResolutuon();
+
 	for (size_t i = 0; i < m_vecTile.size(); ++i)
 	{
-		m_vecTile[i]->Render(_dc);
+		Vector2 vTilePos;
+		vTilePos.x = m_vecTile[i]->GetTransform()->GetPosition_X();
+		vTilePos.y = m_vecTile[i]->GetTransform()->GetPosition_Y();
+
+		if(vCameraPos.x - vCameraRes.x < vTilePos.x && vTilePos.x < vCameraPos.x + vCameraRes.x
+			&& vCameraPos.y - vCameraRes.y < vTilePos.y && vTilePos.y < vCameraPos.y + vCameraRes.y)
+			m_vecTile[i]->Render(_dc);
+
 	}
 	return 0;
 }
