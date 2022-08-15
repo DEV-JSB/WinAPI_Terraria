@@ -6,6 +6,7 @@
 CCamera::CCamera()
 	: m_vLookAt({})
 	, m_vDifference({})
+	, m_vResolution({})
 	, m_pTarget(nullptr)
 {
 	

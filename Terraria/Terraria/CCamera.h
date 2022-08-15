@@ -7,6 +7,8 @@ class CCamera
 {
 public:// Get
 	Vector2 GetDifference()const { return m_vDifference; }
+	Vector2 GetLookAt()const { return m_vLookAt; }
+	Vector2 GetResolutuon()const { return m_vResolution; }
 public:
 	// Caculator Diffrence
 	int Update();
