@@ -20,6 +20,15 @@ int CSkin::SetTexture(const wstring& _str)
 	return 0;
 }
 
+int CSkin::SetSkinInfoTexture()
+{
+	BITMAP BitInfo = m_pTex->GetBitInfo();
+	// Basic is Cut Start LT : 0,0
+	m_stSkinInfo.vLT = Vector2({ 0.f,0.f });
+	m_stSkinInfo.vSliceSize = Vector2({ (float)BitInfo.bmWidth,(float)BitInfo.bmHeight });
+	return 0;
+}
+
 int CSkin::Render(const HDC _dc)const
 {
 	Vector3 Pos = m_pOwner->GetTransform()->GetPosition();

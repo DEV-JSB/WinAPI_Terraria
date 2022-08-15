@@ -2,6 +2,7 @@
 #include "CFactory2.h"
 #include "CTile.h"
 #include "CBoxCollider.h"
+#include"CBackGround.h"
 #include "CSkin.h"
 
 CFactory2::CFactory2()
@@ -12,9 +13,17 @@ CObject* CFactory2::CreateObject(OBJECT _eType)
 {
     switch (_eType)
     {
+    case OBJECT::OBJECT_BACKGROUND:
+        {
+            CBackGround* pObject = new CBackGround();
+            return pObject;
+        }
+        break;
     case OBJECT::OBJECT_TILE:
-        CTile* pObject = new CTile();
-        return pObject;
+        {
+            CTile* pObject = new CTile();
+            return pObject;
+        }
         break;
     }
     return nullptr;

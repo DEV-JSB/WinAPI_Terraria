@@ -12,7 +12,7 @@
 #define PLAYER_HEIGHT 40.f
 //////////////////////////
 #define MOVE_FORCE 45.f
-#define MAX_SPEED 20.f
+#define MAX_SPEED 15.f
 #define JUMP_POWER 100.f
 /// ////////////////////////
 CPlayer::CPlayer()

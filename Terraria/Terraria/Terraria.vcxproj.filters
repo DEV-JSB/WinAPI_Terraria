@@ -127,6 +127,9 @@
     <Filter Include="Framework\02.Manager\Camera">
       <UniqueIdentifier>{4499d066-c1e5-449d-9139-2544124a30b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\06.Object\BackGround">
+      <UniqueIdentifier>{9490dcc0-7c48-4544-9561-f0034094f97a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -244,6 +247,9 @@
     <ClInclude Include="CCamera.h">
       <Filter>Framework\02.Manager\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="CBackGround.h">
+      <Filter>Framework\06.Object\BackGround</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -344,6 +350,9 @@
     </ClCompile>
     <ClCompile Include="CCamera.cpp">
       <Filter>Framework\02.Manager\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CBackGround.cpp">
+      <Filter>Framework\06.Object\BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

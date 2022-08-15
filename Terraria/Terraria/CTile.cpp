@@ -45,6 +45,14 @@ int CTile::Setting(TILE _eType, const Vector2 _pos)
 		SkinInfo.vLT = Vector2({ 18.f,18.f });
 		pSkin->SetSkinInfo(SkinInfo);
 		break;
+	case TILE::TILE_ROCK:
+		CObject::CreateTransform(Pos, Vector3({ 0.f,0.f,0.f }), SkinInfo.vSliceSize);
+		pSkin->SetTexture(L"Rock.bmp");
+		// Hard Coding Setting LT 
+		SkinInfo.vLT = Vector2({ 18.f,18.f });
+		pSkin->SetSkinInfo(SkinInfo);
+		break;
+
 	}
 	CreateCollider(Vector2{ Pos.x,Pos.y });
 	

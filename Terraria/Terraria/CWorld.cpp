@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CWorld.h"
 #include "CPlayer.h"
+#include "CBackGround.h"
 #include "CResourceMgr.h"
 #include "CCollisionMgr.h"
 #include"CComponent.h"
@@ -56,13 +57,23 @@ int CWorld::Update()
 int CWorld::Enter()
 {
     LoadResource();
+
+    // CreatePlayer
     CPlayer* Player = CFactory<CPlayer>::Create();
     m_arrObjectVec[(int)OBJECT::OBJECT_PLAYER].push_back(Player);
     
+    // CreateTile
     CTileMgr::GetInstance()->Enter();
     
+    // Setting Collider CheckBox
     CCollisionMgr::GetInstance()->CheckingGroupBox(OBJECT::OBJECT_TILE, OBJECT::OBJECT_PLAYER);
 
+    // CreateBackground    
+    CObject* pBackG = CFactory2::CreateObject(OBJECT::OBJECT_BACKGROUND);
+    RTTI_DYNAMIC_CAST(pBackG, CBackGround)->Setting(L"BackGround.bmp");
+    m_arrObjectVec[(int)OBJECT::OBJECT_BACKGROUND].push_back(pBackG);
+
+    
     return 0;
 }
 
@@ -75,6 +86,8 @@ int CWorld::LoadResource()const
     CResourceMgr::GetInstance()->LoadTexture(L"Player_Hair.bmp" , TexPath);
     CResourceMgr::GetInstance()->LoadTexture(L"Player_Arm.bmp"  , TexPath);
     CResourceMgr::GetInstance()->LoadTexture(L"Player_Leg.bmp"  , TexPath);
+    
+    CResourceMgr::GetInstance()->LoadTexture(L"BackGround.bmp", TexPath);
 
 
     return 0;
