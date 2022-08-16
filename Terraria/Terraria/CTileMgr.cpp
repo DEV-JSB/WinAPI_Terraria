@@ -35,11 +35,11 @@ int CTileMgr::Enter()
 	//NormalTileSetting
 		// 45 Row Max
 		// 80 colum Max
-	for (int x = 0 ; x < 80; ++x)
+	for (int x = -10 ; x < 120; ++x)
 	{
 		for (int y = 30; y <= 31; ++y)
 		{
-			if (0 <= x && x <= 80 && 30 <= y && y <= 31)
+			if (30 <= y && y <= 31)
 			{
 				// Create Tile
 				CTile* pTile = RTTI_DYNAMIC_CAST(CFactory2::CreateObject(OBJECT::OBJECT_TILE), CTile);

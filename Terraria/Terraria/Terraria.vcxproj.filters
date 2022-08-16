@@ -136,6 +136,21 @@
     <Filter Include="Framework\06.Object\UI\UI_Inventory\UI_ItemPocket">
       <UniqueIdentifier>{81747251-9ea1-44b1-aaa1-e2cbf2468f00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\06.Object\Item\CTool">
+      <UniqueIdentifier>{ea3d22ed-9884-4fec-9a81-fbc4ab6b8649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\06.Object\Item\CTileBlock">
+      <UniqueIdentifier>{41fadcf4-19cd-4d11-b23b-6d0a3a7e20bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\06.Object\Item\CTool\CWeapon">
+      <UniqueIdentifier>{75ccd243-8fc9-45c1-a78f-520c04f9a4fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\06.Object\Item\CTool\CWeapon\CSword">
+      <UniqueIdentifier>{1e1568fe-5261-4444-87cd-2b85fe5d1628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\06.Object\Item\CTool\CWeapon\CGun">
+      <UniqueIdentifier>{04295a3e-e0c9-48c3-a133-9ca3226a4d02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -265,6 +280,18 @@
     <ClInclude Include="CItem.h">
       <Filter>Framework\06.Object\Item</Filter>
     </ClInclude>
+    <ClInclude Include="CTileBlock.h">
+      <Filter>Framework\06.Object\Item\CTileBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="CTool.h">
+      <Filter>Framework\06.Object\Item\CTool</Filter>
+    </ClInclude>
+    <ClInclude Include="CGun.h">
+      <Filter>Framework\06.Object\Item\CTool\CWeapon\CGun</Filter>
+    </ClInclude>
+    <ClInclude Include="CSword.h">
+      <Filter>Framework\06.Object\Item\CTool\CWeapon\CSword</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -377,6 +404,18 @@
     </ClCompile>
     <ClCompile Include="CItem.cpp">
       <Filter>Framework\06.Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CTileBlock.cpp">
+      <Filter>Framework\06.Object\Item\CTileBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="CTool.cpp">
+      <Filter>Framework\06.Object\Item\CTool</Filter>
+    </ClCompile>
+    <ClCompile Include="CGun.cpp">
+      <Filter>Framework\06.Object\Item\CTool\CWeapon\CGun</Filter>
+    </ClCompile>
+    <ClCompile Include="CSword.cpp">
+      <Filter>Framework\06.Object\Item\CTool\CWeapon\CSword</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

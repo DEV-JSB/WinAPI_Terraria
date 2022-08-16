@@ -1,2 +1,9 @@
-﻿  CPlayer.cpp
+﻿  CAnimationTool.cpp
+  CAnimationUI.cpp
+  CGun.cpp
+  CItem.cpp
+  CSceneMgr.cpp
+  CSword.cpp
+  CTool.cpp
+  CUIManager.cpp
   Terraria.vcxproj -> C:\Users\Admin\Documents\GitHub\WinAPI_Terraria\Terraria\Debug\Terraria.exe

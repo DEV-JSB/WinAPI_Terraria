@@ -137,10 +137,12 @@ int CPlayer::Update_Move()
     }
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_SPACE) == INPUTSTATE::INPUTSTATE_TAP)
     {
-        CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_JUMPPOWER, JUMP_POWER);
-        m_eWillState = MOVER_STATE::STATE_JUMP;
+        if (m_bIsOnGround == true)
+        {
+            CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_JUMPPOWER, JUMP_POWER);
+            m_eWillState = MOVER_STATE::STATE_JUMP;
+        }
     }
-    
     return 0;
 }
 
@@ -163,16 +165,30 @@ int CPlayer::Update_Animation()
         break;
     case MOVER_STATE::STATE_LEFTRUN:
         pAnimator->SetFilp(true);
+        if (!m_bIsOnGround)
+        {
+            pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerJump");
+            break;
+        }
         pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmRun");
         pAnimator->SubstitutePlayAnimation(L"PlayerBackArm", L"PlayerBackArmRun");
         pAnimator->SubstitutePlayAnimation(L"PlayerLeg", L"PlayerRunLeg");
+        pAnimator->SubstitutePlayAnimation(L"PlayerJump", L"PlayerRunLeg");
 
         break;
     case MOVER_STATE::STATE_RIGHTRUN:
+        if (!m_bIsOnGround)
+        {
+            pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerJump");
+            break;
+        }
         pAnimator->SetFilp(false);
+        // ArmAnimation Setting
         pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmRun");
         pAnimator->SubstitutePlayAnimation(L"PlayerBackArm", L"PlayerBackArmRun");
+        // LegAnimation Setting
         pAnimator->SubstitutePlayAnimation(L"PlayerLeg", L"PlayerRunLeg");
+        pAnimator->SubstitutePlayAnimation(L"PlayerJump", L"PlayerRunLeg");
 
         break;
     }

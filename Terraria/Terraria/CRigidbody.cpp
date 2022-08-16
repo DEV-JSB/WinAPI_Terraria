@@ -99,11 +99,11 @@ int CRigidbody::JumpLogic()
         Vector2 vUp = Vector2({ 0, -1 });
         float fJump = m_fJumpingPower * (float)GET_DT;
         m_fJumpingPower -= fJump;
+        if (m_fJumpingPower < 0.f)
+            m_fJumpingPower = 0.f;
         vUp *= fJump;
         m_vVelocity += vUp;
     }
-    // If Gravity is Zero then must On the ground so Jump Set Zero
-    
     return 0;
 }
 

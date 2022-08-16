@@ -156,6 +156,7 @@
     <ClInclude Include="CEngine.h" />
     <ClInclude Include="CFactory.h" />
     <ClInclude Include="CFactory2.h" />
+    <ClInclude Include="CGun.h" />
     <ClInclude Include="CInputMgr.h" />
     <ClInclude Include="CInventoryUI.h" />
     <ClInclude Include="CItem.h" />
@@ -170,10 +171,13 @@
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneMgr.h" />
     <ClInclude Include="CSkin.h" />
+    <ClInclude Include="CSword.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTile.h" />
+    <ClInclude Include="CTileBlock.h" />
     <ClInclude Include="CTileMgr.h" />
     <ClInclude Include="CTimeMgr.h" />
+    <ClInclude Include="CTool.h" />
     <ClInclude Include="CTransform2D.h" />
     <ClInclude Include="CUI.h" />
     <ClInclude Include="CUIManager.h" />
@@ -202,6 +206,7 @@
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CFactory2.cpp" />
+    <ClCompile Include="CGun.cpp" />
     <ClCompile Include="CInputMgr.cpp" />
     <ClCompile Include="CInventoryUI.cpp" />
     <ClCompile Include="CItem.cpp" />
@@ -216,10 +221,13 @@
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneMgr.cpp" />
     <ClCompile Include="CSkin.cpp" />
+    <ClCompile Include="CSword.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTile.cpp" />
+    <ClCompile Include="CTileBlock.cpp" />
     <ClCompile Include="CTileMgr.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
+    <ClCompile Include="CTool.cpp" />
     <ClCompile Include="CTransform2D.cpp" />
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CUIManager.cpp" />
