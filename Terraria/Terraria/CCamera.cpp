@@ -23,7 +23,8 @@ int CCamera::Update()
 	{
 		Vector3 vPos = m_pTarget->GetTransform()->GetPosition();
 		m_vLookAt.x = vPos.x;
-		m_vLookAt.y = vPos.y;
+		/*m_vLookAt.y = vPos.y;*/
+		m_vLookAt.y = CLIENT_HEIGHT * 0.2f;
 		//m_vDifference = Vector2({ 0.f,0.f });
 		m_vDifference = m_vResolution - m_vLookAt;
 	}

@@ -43,7 +43,6 @@ int CAnimator::LoadAnimation(const wstring& _filename,const wstring& _texture)
 		if (IsTrash)
 		{
 			pAnimation->SetAniFrame(stFrame);
-
 		}
 	}
 

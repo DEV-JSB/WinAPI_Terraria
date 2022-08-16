@@ -20,7 +20,7 @@ int CTileMgr::Render(const HDC _dc)
 	{
 		Vector2 vTilePos;
 		vTilePos.x = m_vecTile[i]->GetTransform()->GetPosition_X();
-		vTilePos.y = m_vecTile[i]->GetTransform()->GetPosition_Y();
+		vTilePos.y = m_vecTile[i]->GetTransform()->GetPosition_Y() - 16;
 
 		if(vCameraPos.x - vCameraRes.x < vTilePos.x && vTilePos.x < vCameraPos.x + vCameraRes.x
 			&& vCameraPos.y - vCameraRes.y < vTilePos.y && vTilePos.y < vCameraPos.y + vCameraRes.y)
@@ -35,11 +35,11 @@ int CTileMgr::Enter()
 	//NormalTileSetting
 		// 45 Row Max
 		// 80 colum Max
-	for (int x = -50 ; x < 130; ++x)
+	for (int x = 0 ; x < 80; ++x)
 	{
-		for (int y = 0; y <= 70; ++y)
+		for (int y = 30; y <= 31; ++y)
 		{
-			if (0 <= x && x <= 80 && 30 <= y && y <= 70)
+			if (0 <= x && x <= 80 && 30 <= y && y <= 31)
 			{
 				// Create Tile
 				CTile* pTile = RTTI_DYNAMIC_CAST(CFactory2::CreateObject(OBJECT::OBJECT_TILE), CTile);
@@ -47,12 +47,6 @@ int CTileMgr::Enter()
 					pTile->Setting(TILE::TILE_GROUNDUP, Vector2({ (float)(x * 16), (float)(y * 16) }));
 				else
 					pTile->Setting(TILE::TILE_GROUNDDOWN, Vector2({ (float)(x * 16), (float)(y * 16) }));
-				m_vecTile.push_back(pTile);
-			}
-			else if( (-50 <= x && x < 0) || (80 < x && x < 130))
-			{
-				CTile* pTile = RTTI_DYNAMIC_CAST(CFactory2::CreateObject(OBJECT::OBJECT_TILE), CTile);
-				pTile->Setting(TILE::TILE_ROCK, Vector2({ (float)(x * 16), (float)(y * 16) }));
 				m_vecTile.push_back(pTile);
 			}
 		}
