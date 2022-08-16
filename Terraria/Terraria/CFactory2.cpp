@@ -2,13 +2,26 @@
 #include "CFactory2.h"
 #include "CTile.h"
 #include "CBoxCollider.h"
-#include"CBackGround.h"
+#include "CSword.h"
+#include "CBackGround.h"
 #include "CInventoryUI.h"
 #include "CItemPocketUI.h"
 #include "CSkin.h"
 
 CFactory2::CFactory2()
 {
+}
+
+CItem* CFactory2::CreateItem(const ITEM _eType)
+{
+    switch (_eType)
+    {
+    case ITEM::ITEM_SWORD:
+        CSword* pSword = new CSword();
+        return pSword;
+        break;
+    }
+    return nullptr;
 }
 
 CObject* CFactory2::CreateObject(const OBJECT _eType)

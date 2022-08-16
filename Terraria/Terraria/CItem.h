@@ -1,6 +1,5 @@
 #pragma once
 #include "CObject.h"
-#include "CFactory2.h"
 class CItem : public CObject
 {
 public: // Logic
@@ -9,8 +8,13 @@ public: // Logic
 protected:
 	// Setting Texture
 	virtual int SetTexture(const wstring& _str);
-private:
-	friend class CFactory2;
+protected:
+	// ItemIndex
+	int m_iItemIndex;
+	// Making through this Menber variable
+	static int m_iIdxKey;
+
+protected:
 	CItem();
 public:
 	virtual ~CItem();

@@ -40,7 +40,8 @@
 #define DEFAULT_FRICTION 25.f
 #define DEFAULT_MASS 1.f
 
-
+#define INVEN_ROW 9
+#define INVEN_COLUM 4
 
 enum class RIGIDBODY
 {
@@ -118,12 +119,20 @@ enum class COMPONENT
 	COMPONENT_SKIN,
 	COMPONENT_END
 };
+
+// Item
+enum class ITEM
+{
+	ITEM_SWORD,
+	ITEM_END
+};
 // Object
 enum class OBJECT
 {
 	OBJECT_BACKGROUND,
 	OBJECT_PLAYER,
 	OBJECT_UI,
+	OBJECT_ITEM,
 	OBJECT_TILE,
 	OBJECT_END
 };

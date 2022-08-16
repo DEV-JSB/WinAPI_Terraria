@@ -4,8 +4,7 @@
 #include "CFactory2.h"
 #include "CTransform2D.h"
 
-#define INVEN_ROW 9
-#define INVEN_COLUM 4
+
 
 int CInventoryUI::Update()
 {

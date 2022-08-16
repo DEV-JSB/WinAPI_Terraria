@@ -110,6 +110,10 @@ int CPlayer::CreateAnimator()
     pAnimator->LoadAnimation(L"PlayerBackArmRun", L"Player_Arm.bmp");
     pAnimator->LoadAnimation(L"PlayerRunLeg", L"Player_RunLeg.bmp");
 
+    // ArmJump
+    pAnimator->LoadAnimation(L"PlayerFrontArmJump", L"Player_Arm.bmp");
+    pAnimator->LoadAnimation(L"PlayerBackArmJump", L"Player_Arm.bmp");
+
 
     pAnimator->SettingPlayAnimation(vector<wstring>({ L"PlayerCloth"
                                                      ,L"PlayerHead"
@@ -154,20 +158,26 @@ int CPlayer::Update_Animation()
     case MOVER_STATE::STATE_JUMP:
         pAnimator->SubstitutePlayAnimation(L"PlayerLeg", L"PlayerJump");
         pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerJump");
-
+        pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmJump");
+        pAnimator->SubstitutePlayAnimation(L"PlayerBackArm", L"PlayerBackArmJump");
         break;
     case MOVER_STATE::STATE_IDLE:
         pAnimator->SubstitutePlayAnimation(L"PlayerJump", L"PlayerLeg");
+
         pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmRun", L"PlayerFrontArm");
         pAnimator->SubstitutePlayAnimation(L"PlayerBackArmRun", L"PlayerBackArm");
         pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerLeg");
 
+        pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmJump", L"PlayerFrontArm");
+        pAnimator->SubstitutePlayAnimation(L"PlayerBackArmJump", L"PlayerBackArm");
         break;
     case MOVER_STATE::STATE_LEFTRUN:
         pAnimator->SetFilp(true);
         if (!m_bIsOnGround)
         {
             pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerJump");
+            pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmRun", L"PlayerFrontArmJump");
+            pAnimator->SubstitutePlayAnimation(L"PlayerBackArmRun", L"PlayerBackArmJump");
             break;
         }
         pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmRun");
@@ -180,6 +190,8 @@ int CPlayer::Update_Animation()
         if (!m_bIsOnGround)
         {
             pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerJump");
+            pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmRun", L"PlayerFrontArmJump");
+            pAnimator->SubstitutePlayAnimation(L"PlayerBackArmRun", L"PlayerBackArmJump");
             break;
         }
         pAnimator->SetFilp(false);

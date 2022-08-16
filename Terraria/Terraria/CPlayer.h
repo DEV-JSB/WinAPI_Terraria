@@ -2,6 +2,8 @@
 #include"CFactory.h"
 #include"CMover.h"
 
+class CItem;
+
 class CPlayer : public CMover
 {
 
@@ -33,7 +35,11 @@ private:
 	int CreateCollider(const Vector2 _pos)					override;
 private:
 	enum class PLAYER_STATE { STATE_IDLE, STATE_LEFTRUN, STATE_RIGHTRUN, STATE_END };
-private:
+private: // Member
+	// Inventory
+	vector<CItem*> m_vecInventory;
+
+	// For State
 	bool m_bIsOnGround;
 	MOVER_STATE m_eWillState;
 	MOVER_STATE m_eState;

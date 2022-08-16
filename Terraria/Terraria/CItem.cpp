@@ -3,7 +3,11 @@
 #include "CFactory2.h"
 #include "CSkin.h"
 #include "CResourceMgr.h"
+
+int CItem::m_iIdxKey = 0;
+
 CItem::CItem()
+	:m_iItemIndex(m_iIdxKey++)
 {
 }
 

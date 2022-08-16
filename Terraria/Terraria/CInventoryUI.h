@@ -3,6 +3,7 @@
 #include "CFactory2.h"
 
 class CItemPocketUI;
+class CPlayer;
 
 class CInventoryUI : public CUI
 {
@@ -12,6 +13,7 @@ public:
 	virtual int FinalUpdate()			override;
 
 private:
+	CPlayer* m_pOwner;
 	bool m_bHidden;
 	map<int, CItemPocketUI*> m_mapPocket;
 private:

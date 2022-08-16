@@ -3,11 +3,14 @@
 #include "CPlayer.h"
 #include "CBackGround.h"
 #include "CResourceMgr.h"
+#include "CItem.h"
+#include "CSword.h"
 #include "CCollisionMgr.h"
-#include"CComponent.h"
+#include "CComponent.h"
 #include "CInputMgr.h"
 #include "CPathMgr.h"
 #include "CFactory.h"
+#include "CFactory2.h"
 #include "CInventoryUI.h"
 #include "CTileMgr.h"
 #include "CUIManager.h"
@@ -78,6 +81,13 @@ int CWorld::Enter()
     return 0;
 }
 
+int CWorld::LoadItem()
+{
+    CItem* pSword = CFactory2::CreateItem(ITEM::ITEM_SWORD);
+    m_arrObjectVec[(int)OBJECT::OBJECT_ITEM].push_back(pSword);
+    return 0;
+}
+
 int CWorld::LoadResource()const
 {
     wstring TexPath = CPathMgr::GetInstance()->GetContentPath();
@@ -101,7 +111,8 @@ int CWorld::LoadResource()const
 }
 
 int CWorld::CreateBackGround()
-{    // CreateBackground    
+{    
+    // CreateBackground    
     CObject* pBackG = CFactory2::CreateObject(OBJECT::OBJECT_BACKGROUND);
     RTTI_DYNAMIC_CAST(pBackG, CBackGround)->Setting(L"BackGround.bmp");
     m_arrObjectVec[(int)OBJECT::OBJECT_BACKGROUND].push_back(pBackG);
