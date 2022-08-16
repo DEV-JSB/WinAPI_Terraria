@@ -11,6 +11,7 @@ public:
 	virtual int Update()				override;
 	virtual int Enter()					override;
 private:
+	int PlayerDropItem();
 	int LoadItem();
 	int LoadResource()const;
 	int CreateBackGround();

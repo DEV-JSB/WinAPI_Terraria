@@ -81,10 +81,19 @@ int CWorld::Enter()
     return 0;
 }
 
+int CWorld::PlayerDropItem()
+{
+    return 0;
+}
+
 int CWorld::LoadItem()
 {
     CItem* pSword = CFactory2::CreateItem(ITEM::ITEM_SWORD);
     m_arrObjectVec[(int)OBJECT::OBJECT_ITEM].push_back(pSword);
+
+
+
+
     return 0;
 }
 
