@@ -130,6 +130,12 @@
     <Filter Include="Framework\06.Object\BackGround">
       <UniqueIdentifier>{9490dcc0-7c48-4544-9561-f0034094f97a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\06.Object\UI\UI_Inventory">
+      <UniqueIdentifier>{fab73b45-9be1-434e-aefd-b5b9204aebfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\06.Object\UI\UI_Inventory\UI_ItemPocket">
+      <UniqueIdentifier>{81747251-9ea1-44b1-aaa1-e2cbf2468f00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -250,6 +256,15 @@
     <ClInclude Include="CBackGround.h">
       <Filter>Framework\06.Object\BackGround</Filter>
     </ClInclude>
+    <ClInclude Include="CItemPocketUI.h">
+      <Filter>Framework\06.Object\UI\UI_Inventory\UI_ItemPocket</Filter>
+    </ClInclude>
+    <ClInclude Include="CInventoryUI.h">
+      <Filter>Framework\06.Object\UI\UI_Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="CItem.h">
+      <Filter>Framework\06.Object\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -353,6 +368,15 @@
     </ClCompile>
     <ClCompile Include="CBackGround.cpp">
       <Filter>Framework\06.Object\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="CItemPocketUI.cpp">
+      <Filter>Framework\06.Object\UI\UI_Inventory\UI_ItemPocket</Filter>
+    </ClCompile>
+    <ClCompile Include="CInventoryUI.cpp">
+      <Filter>Framework\06.Object\UI\UI_Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem.cpp">
+      <Filter>Framework\06.Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

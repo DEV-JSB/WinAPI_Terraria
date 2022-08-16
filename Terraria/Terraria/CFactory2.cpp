@@ -3,13 +3,15 @@
 #include "CTile.h"
 #include "CBoxCollider.h"
 #include"CBackGround.h"
+#include "CInventoryUI.h"
+#include "CItemPocketUI.h"
 #include "CSkin.h"
 
 CFactory2::CFactory2()
 {
 }
 
-CObject* CFactory2::CreateObject(OBJECT _eType)
+CObject* CFactory2::CreateObject(const OBJECT _eType)
 {
     switch (_eType)
     {
@@ -29,7 +31,7 @@ CObject* CFactory2::CreateObject(OBJECT _eType)
     return nullptr;
 }
 
-CComponent* CFactory2::CreateComponent(COMPONENT _eType)
+CComponent* CFactory2::CreateComponent(const COMPONENT _eType)
 {
     switch (_eType)
     {
@@ -42,6 +44,19 @@ CComponent* CFactory2::CreateComponent(COMPONENT _eType)
         {
             CCollider* pCollider = new CBoxCollider();
             return pCollider;
+        }
+    }
+    return nullptr;
+}
+
+CUI* CFactory2::CreateUI(const UI_TYPE _eType)
+{
+    switch (_eType)
+    {
+    case UI_TYPE::UI_INVENTORY:
+        {
+            CInventoryUI* pPocket = new CInventoryUI();
+            return pPocket;
         }
     }
     return nullptr;

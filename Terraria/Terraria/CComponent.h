@@ -3,9 +3,10 @@ class CComponent
 {
 
 public:// CComponent Logic
-	virtual int Render(const HDC _dc)const = 0;
+	virtual int Render(const HDC _dc)const	= 0;
 	virtual int Update()					= 0;
 	virtual int FinalUpdate()				= 0;
+	virtual int RenderLocalSpace(const HDC _dc)const;
 protected:
 	bool m_bRender;
 protected: // construction Nedd Acces SubClass

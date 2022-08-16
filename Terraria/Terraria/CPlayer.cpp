@@ -13,7 +13,7 @@
 //////////////////////////
 #define MOVE_FORCE 45.f
 #define MAX_SPEED 15.f
-#define JUMP_POWER 100.f
+#define JUMP_POWER 120.f
 /// ////////////////////////
 CPlayer::CPlayer()
     : CMover(OBJECT::OBJECT_PLAYER,Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) + 110, 0.f }), Vector3(), Vector2())
@@ -102,16 +102,20 @@ int CPlayer::CreateAnimator()
     pAnimator->LoadAnimation(L"PlayerCloth", L"Player_Cloth.bmp");
     pAnimator->LoadAnimation(L"PlayerHead", L"Player_Head.bmp");
     pAnimator->LoadAnimation(L"PlayerHair", L"Player_Hair.bmp");
-    pAnimator->LoadAnimation(L"PlayerArm", L"Player_Arm.bmp");
-    pAnimator->LoadAnimation(L"PlayerArm2", L"Player_Arm.bmp");
+    pAnimator->LoadAnimation(L"PlayerFrontArm", L"Player_Arm.bmp");
+    pAnimator->LoadAnimation(L"PlayerBackArm", L"Player_Arm.bmp");
     pAnimator->LoadAnimation(L"PlayerLeg", L"Player_Leg.bmp");
     pAnimator->LoadAnimation(L"PlayerJump", L"Player_Leg.bmp");
+    pAnimator->LoadAnimation(L"PlayerFrontArmRun", L"Player_Arm.bmp");
+    pAnimator->LoadAnimation(L"PlayerBackArmRun", L"Player_Arm.bmp");
+    pAnimator->LoadAnimation(L"PlayerRunLeg", L"Player_RunLeg.bmp");
+
 
     pAnimator->SettingPlayAnimation(vector<wstring>({ L"PlayerCloth"
                                                      ,L"PlayerHead"
                                                      ,L"PlayerHair"
-                                                     ,L"PlayerArm"
-                                                     ,L"PlayerArm2"
+                                                     ,L"PlayerFrontArm"
+                                                     ,L"PlayerBackArm"
                                                      ,L"PlayerLeg"}));
     pAnimator->SetOwner(this);
 
@@ -147,15 +151,29 @@ int CPlayer::Update_Animation()
     {
     case MOVER_STATE::STATE_JUMP:
         pAnimator->SubstitutePlayAnimation(L"PlayerLeg", L"PlayerJump");
+        pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerJump");
+
         break;
     case MOVER_STATE::STATE_IDLE:
         pAnimator->SubstitutePlayAnimation(L"PlayerJump", L"PlayerLeg");
+        pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmRun", L"PlayerFrontArm");
+        pAnimator->SubstitutePlayAnimation(L"PlayerBackArmRun", L"PlayerBackArm");
+        pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerLeg");
+
         break;
     case MOVER_STATE::STATE_LEFTRUN:
         pAnimator->SetFilp(true);
+        pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmRun");
+        pAnimator->SubstitutePlayAnimation(L"PlayerBackArm", L"PlayerBackArmRun");
+        pAnimator->SubstitutePlayAnimation(L"PlayerLeg", L"PlayerRunLeg");
+
         break;
     case MOVER_STATE::STATE_RIGHTRUN:
         pAnimator->SetFilp(false);
+        pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmRun");
+        pAnimator->SubstitutePlayAnimation(L"PlayerBackArm", L"PlayerBackArmRun");
+        pAnimator->SubstitutePlayAnimation(L"PlayerLeg", L"PlayerRunLeg");
+
         break;
     }
     return 0;

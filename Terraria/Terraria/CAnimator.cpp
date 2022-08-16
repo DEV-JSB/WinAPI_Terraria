@@ -1,11 +1,10 @@
 #include "pch.h"
 #include "CAnimator.h"
-#include"CAnimation.h"
-#include"CTransform2D.h"
-#include"CPathMgr.h"
-#include"CResourceMgr.h"
-#include"CCamera.h"
-#include<iostream>
+#include "CAnimation.h"
+#include "CTransform2D.h"
+#include "CPathMgr.h"
+#include "CResourceMgr.h"
+#include "CCamera.h"
 
 
 CAnimator::CAnimator(const bool _willRender)
@@ -72,8 +71,12 @@ int CAnimator::SettingPlayAnimation(const vector<wstring>& _vecName)
 int CAnimator::SubstitutePlayAnimation(const wstring& _deleteAni, const wstring& _substitute)
 {
 	// If Delete Success then Push BackAnimation
-	if(CutCurFrame(_deleteAni))
-		m_vecCurAnimation.push_back((*m_mapAnimation.find(_substitute)).second);
+	if (CutCurFrame(_deleteAni))
+	{
+		CAnimation* pAni = (*m_mapAnimation.find(_substitute)).second;
+		pAni->ResetFrame();
+		m_vecCurAnimation.push_back(pAni);
+	}
 	return 0;
 }
 
@@ -93,11 +96,16 @@ int CAnimator::Render(const HDC _dc)const
 
 int CAnimator::Update()
 {
+	for (size_t i = 0; i < m_vecCurAnimation.size(); ++i)
+	{
+		m_vecCurAnimation[i]->Update();
+	}
 	return 0;
 }
 
 int CAnimator::FinalUpdate()
 {
+
 	return 0;
 }
 

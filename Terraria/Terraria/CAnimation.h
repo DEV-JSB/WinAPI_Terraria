@@ -10,11 +10,13 @@ public:
 	// SaveAnimation
 	int SaveFile()const;
 	int Render(const HDC _dc, const Vector2& _Pos, const bool _xFlip);
-public: // Get Set
+public: // Get
 	// GetFrame Offset
 	Vector2 GetOffset(const int _frameIdx)const { return m_vecFrame[_frameIdx].vOffset; }
 	// Get Frame Count
 	int GetFrameCount()const { return m_vecFrame.size(); }
+public: // Set
+	int ResetFrame();
 	// SetFrameOffset
 	int ReposOffset(const int _frameIdx, const Vector2& _off);
 	// SetAnimationFrame

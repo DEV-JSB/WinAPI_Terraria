@@ -20,29 +20,6 @@ CUIManager::~CUIManager()
 	
 }
 
-// Only OneAnimation UI 
-//int CUIManager::SettingAnimation(CAnimation* pAni)
-//{
-//	CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
-//	vector<CObject*> vecUI = pCurScene->GetObjectGroup(OBJECT::OBJECT_UI);
-//
-//
-//	vector<CUI*> pAniUI = dynamic_cast<CUI*>(vecUI[0])->GetUIGroup(UI_TYPE::UI_ANIMTAION);
-//	CAnimationUI* aniUI = dynamic_cast<CAnimationUI*>(pAniUI[0]);
-//	// Excaption Handling
-//	if (1 != pAniUI.size())
-//		return FUNC_ERROR;
-//	// Excaption Handling
-//	assert(aniUI);
-//
-//	if( 0 != aniUI->GetAnimationCount())
-//	{
-//		aniUI->AddAnimationIndex();
-//	}
-//	aniUI->SetAnimation(pAni);
-//	return 0;
-//}
-
 int CUIManager::Release()
 {
 	//Get UI Objcet Group

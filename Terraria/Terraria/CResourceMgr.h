@@ -6,6 +6,7 @@ class CTexture;
 class CResourceMgr
 {
 public:
+	BITMAP GetTextureSize(const wstring& _strKey);
 	CTexture* LoadTexture(const wstring& _strKey,const wstring& _strRelativePath);
 	CTexture* FindTexture(const wstring& _strKey);
 private:

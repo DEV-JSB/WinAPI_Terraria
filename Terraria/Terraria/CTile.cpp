@@ -36,21 +36,21 @@ int CTile::Setting(TILE _eType, const Vector2 _pos)
 		pSkin->SetTexture(L"Tiles_Ground.bmp");
 		// Hard Coding Setting LT 
 		SkinInfo.vLT = Vector2({ 18.f,0.f });
-		pSkin->SetSkinInfo(SkinInfo);
+		pSkin->CustomSkinInfo(SkinInfo);
 		break;
 	case TILE::TILE_GROUNDDOWN:
 		CObject::CreateTransform(Pos, Vector3({ 0.f,0.f,0.f }), SkinInfo.vSliceSize);
 		pSkin->SetTexture(L"Tiles_Ground.bmp");
 		// Hard Coding Setting LT 
 		SkinInfo.vLT = Vector2({ 18.f,18.f });
-		pSkin->SetSkinInfo(SkinInfo);
+		pSkin->CustomSkinInfo(SkinInfo);
 		break;
 	case TILE::TILE_ROCK:
 		CObject::CreateTransform(Pos, Vector3({ 0.f,0.f,0.f }), SkinInfo.vSliceSize);
 		pSkin->SetTexture(L"Rock.bmp");
 		// Hard Coding Setting LT 
 		SkinInfo.vLT = Vector2({ 18.f,18.f });
-		pSkin->SetSkinInfo(SkinInfo);
+		pSkin->CustomSkinInfo(SkinInfo);
 		break;
 
 	}

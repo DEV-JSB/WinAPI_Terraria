@@ -157,6 +157,9 @@
     <ClInclude Include="CFactory.h" />
     <ClInclude Include="CFactory2.h" />
     <ClInclude Include="CInputMgr.h" />
+    <ClInclude Include="CInventoryUI.h" />
+    <ClInclude Include="CItem.h" />
+    <ClInclude Include="CItemPocketUI.h" />
     <ClInclude Include="CMover.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CPathMgr.h" />
@@ -200,6 +203,9 @@
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CFactory2.cpp" />
     <ClCompile Include="CInputMgr.cpp" />
+    <ClCompile Include="CInventoryUI.cpp" />
+    <ClCompile Include="CItem.cpp" />
+    <ClCompile Include="CItemPocketUI.cpp" />
     <ClCompile Include="CMover.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CPathMgr.cpp" />

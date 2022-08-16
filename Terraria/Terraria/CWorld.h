@@ -12,6 +12,8 @@ public:
 	virtual int Enter()					override;
 private:
 	int LoadResource()const;
+	int CreateBackGround();
+	int CreateUI();
 private:
 	HIDE_CONSTRUCTOR(CWorld);
 public:

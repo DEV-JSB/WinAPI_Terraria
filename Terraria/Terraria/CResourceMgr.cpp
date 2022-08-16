@@ -13,6 +13,14 @@ CResourceMgr::~CResourceMgr()
 
 }
 
+BITMAP CResourceMgr::GetTextureSize(const wstring& _strKey)
+{
+    BITMAP btInfo;
+    CTexture* pTex = FindTexture(_strKey);
+    btInfo = pTex->GetBitInfo();
+    return btInfo;
+}
+
 CTexture* CResourceMgr::LoadTexture(const wstring& _strKey, const wstring& _strRelativePath)
 {
     // If this Texture loaded then don't reload

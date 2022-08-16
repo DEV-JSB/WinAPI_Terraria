@@ -14,7 +14,6 @@ int CBackGround::Setting(const wstring& _str)
 	CComponent* pComponent = CFactory2::CreateComponent(COMPONENT::COMPONENT_SKIN);
 	CSkin* pSkin = RTTI_DYNAMIC_CAST(pComponent, CSkin);
 	pSkin->SetTexture(_str);
-	pSkin->SetSkinInfoTexture();
 	pSkin->SetOwner(this);
 	
 	// InsertComponent

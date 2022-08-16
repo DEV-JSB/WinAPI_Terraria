@@ -8,7 +8,9 @@
 #include "CInputMgr.h"
 #include "CPathMgr.h"
 #include "CFactory.h"
+#include "CInventoryUI.h"
 #include "CTileMgr.h"
+#include "CUIManager.h"
 
 
 
@@ -40,6 +42,7 @@ int CWorld::Render(const HDC _dc)
         }
     }
     CTileMgr::GetInstance()->Render(_dc);
+    CUIManager::GetInstance()->Render(_dc);
     return 0;
 }
 int CWorld::Update()
@@ -52,6 +55,7 @@ int CWorld::Update()
         }
     }
 
+    CUIManager::GetInstance()->Update();
     return 0;
 }
 int CWorld::Enter()
@@ -68,12 +72,9 @@ int CWorld::Enter()
     // Setting Collider CheckBox
     CCollisionMgr::GetInstance()->CheckingGroupBox(OBJECT::OBJECT_TILE, OBJECT::OBJECT_PLAYER);
 
-    // CreateBackground    
-    CObject* pBackG = CFactory2::CreateObject(OBJECT::OBJECT_BACKGROUND);
-    RTTI_DYNAMIC_CAST(pBackG, CBackGround)->Setting(L"BackGround.bmp");
-    m_arrObjectVec[(int)OBJECT::OBJECT_BACKGROUND].push_back(pBackG);
+    CreateBackGround();
+    CreateUI();
 
-    
     return 0;
 }
 
@@ -81,14 +82,38 @@ int CWorld::LoadResource()const
 {
     wstring TexPath = CPathMgr::GetInstance()->GetContentPath();
     TexPath += L"Texture\\";
+    // PlayerTexture
     CResourceMgr::GetInstance()->LoadTexture(L"Player_Cloth.bmp", TexPath);
     CResourceMgr::GetInstance()->LoadTexture(L"Player_Head.bmp" , TexPath);
     CResourceMgr::GetInstance()->LoadTexture(L"Player_Hair.bmp" , TexPath);
     CResourceMgr::GetInstance()->LoadTexture(L"Player_Arm.bmp"  , TexPath);
     CResourceMgr::GetInstance()->LoadTexture(L"Player_Leg.bmp"  , TexPath);
-    
+    CResourceMgr::GetInstance()->LoadTexture(L"Player_RunLeg.bmp", TexPath);
+
+    // BackGroundTexture
     CResourceMgr::GetInstance()->LoadTexture(L"BackGround.bmp", TexPath);
 
+    // UI Texture
+    CResourceMgr::GetInstance()->LoadTexture(L"Inventory_Back.bmp", TexPath);
+    CResourceMgr::GetInstance()->LoadTexture(L"Inventory_Select.bmp", TexPath);
+
+    return 0;
+}
+
+int CWorld::CreateBackGround()
+{    // CreateBackground    
+    CObject* pBackG = CFactory2::CreateObject(OBJECT::OBJECT_BACKGROUND);
+    RTTI_DYNAMIC_CAST(pBackG, CBackGround)->Setting(L"BackGround.bmp");
+    m_arrObjectVec[(int)OBJECT::OBJECT_BACKGROUND].push_back(pBackG);
+    return 0;
+}
+
+int CWorld::CreateUI()
+{
+    CUI* pInvenUI= CFactory2::CreateUI(UI_TYPE::UI_INVENTORY);
+    pInvenUI = RTTI_DYNAMIC_CAST(pInvenUI, CInventoryUI);
+
+    m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pInvenUI);
 
     return 0;
 }

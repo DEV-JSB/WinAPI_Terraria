@@ -37,6 +37,16 @@ int CAnimation::SaveFile()const
 	return 0;
 }
 
+int CAnimation::ResetFrame()
+{
+	for (size_t i = 0; i < m_vecFrame.size(); ++i)
+	{
+		m_vecFrame[i].fDuration = 1.f;
+	}
+	m_iFrameIndex = 0;
+	return 0;
+}
+
 int CAnimation::ReposOffset(const int _frameIdx, const Vector2& _off)
 {
 	m_vecFrame[_frameIdx].vOffset = _off;
@@ -111,8 +121,17 @@ int CAnimation::Render(const HDC _dc, const Vector2& _Pos,const bool _xFlip)
 
 int CAnimation::Update()
 {
+	if (m_vecFrame.size() <= 1)
+		return 0;
 	// 1ÃÊ  0.0018  1 
 	m_fAccumulateTime += (float)CTimeMgr::GetInstance()->GetDT();
+
+	// Setting accelerando duration
+	for (size_t i = 0; i < m_vecFrame.size(); ++i)
+	{
+		if (m_vecFrame[i].fDuration > 0.07f)
+			m_vecFrame[i].fDuration -= (float)CTimeMgr::GetInstance()->GetDT();;
+	}
 
 	if (m_vecFrame[m_iFrameIndex].fDuration <= m_fAccumulateTime)
 	{

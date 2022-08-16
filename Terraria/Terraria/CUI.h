@@ -33,7 +33,8 @@ private: // Child Update Logic
     int Update_Child();
     int Render_Child(const HDC _dc);
     int FinalUpdate_Child();
-
+protected:
+    int SetParent(CUI* _pParent) { m_pParent = _pParent; return 0; }
 protected:
     // IsFocusing
     bool m_bIsFocus;
