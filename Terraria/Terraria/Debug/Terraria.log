@@ -1,4 +1,47 @@
-﻿  CItemPocketUI.cpp
+﻿  CAnimation.cpp
+  CAnimationTool.cpp
+  CAnimationUI.cpp
+  CAnimator.cpp
+  CBackGround.cpp
+  CButtonUI.cpp
+  CBoxCollider.cpp
+  CCamera.cpp
+  CCircleCollider.cpp
+  CCollider.cpp
+  CCollisionMgr.cpp
+  CComponent.cpp
+  CEngine.cpp
+  CFactory2.cpp
+  CFrameMgr.cpp
+  CGun.cpp
+  CInputMgr.cpp
+  CInventoryUI.cpp
+  CItem.cpp
+  CItemPocketUI.cpp
+C:\Users\Admin\Documents\GitHub\WinAPI_Terraria\Terraria\Terraria\CItemPocketUI.cpp(35,64): error C2679: binary '[': no operator found which takes a right-hand operand of type 'int' (or there is no acceptable conversion)
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\map(324,18): message : could be 'CComponent *&std::map<COMPONENT,CComponent *,std::less<COMPONENT>,std::allocator<std::pair<const COMPONENT,CComponent *>>>::operator [](const COMPONENT &)'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\map(153,18): message : or       'CComponent *&std::map<COMPONENT,CComponent *,std::less<COMPONENT>,std::allocator<std::pair<const COMPONENT,CComponent *>>>::operator [](COMPONENT &&)'
+C:\Users\Admin\Documents\GitHub\WinAPI_Terraria\Terraria\Terraria\CItemPocketUI.cpp(35,64): message : while trying to match the argument list '(std::map<COMPONENT,CComponent *,std::less<COMPONENT>,std::allocator<std::pair<const COMPONENT,CComponent *>>>, int)'
+C:\Users\Admin\Documents\GitHub\WinAPI_Terraria\Terraria\Terraria\CItemPocketUI.cpp(35,65): error C2059: syntax error: ';'
+  CMover.cpp
+  CObject.cpp
+  CPathMgr.cpp
+  CPlayer.cpp
+  CResource.cpp
+  CResourceMgr.cpp
+  CRigidbody.cpp
+  CScene.cpp
   CSceneMgr.cpp
+  CSkin.cpp
+  CSword.cpp
+  CTexture.cpp
+  CTile.cpp
+  CTileBlock.cpp
+  CTileMgr.cpp
+  CTimeMgr.cpp
+  CTool.cpp
+  CTransform2D.cpp
+  CUI.cpp
+  CUIManager.cpp
   CWorld.cpp
-  Terraria.vcxproj -> C:\Users\Admin\Documents\GitHub\WinAPI_Terraria\Terraria\Debug\Terraria.exe
+  Terraria.cpp

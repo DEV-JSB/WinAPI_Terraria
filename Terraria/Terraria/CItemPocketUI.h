@@ -13,6 +13,7 @@ public:// Set
     int DeleteItemTexture() { m_strItemTexture = L""; return 0; }
     int SetItemTexture(const wstring& _strTexture) { m_strItemTexture = _strTexture; return 0; }
     int SetIndex(const int _i) { m_iIndex = _i; return 0; }
+    int SetIsSelect(const bool _b) { m_bIsPlayerSelect = _b; return 0; }
 public: // Logic
     virtual int Update()                override;
     virtual int Render(const HDC _dc)   override;
@@ -24,13 +25,13 @@ private:
     BITMAP CreateSkinComponent();
 private:
     // bool Is Focusing
-    bool m_bIsFocusing;
+    bool m_bIsPlayerSelect;
     // Item Texture Str
     wstring m_strItemTexture;
     // PocketIndex
     int m_iIndex;
     // Focus UI Skin
-    CSkin* m_pSkintmp;
+    CComponent* m_pSkinTmp;
 private:// Constructor
     friend class CInventoryUI;
     CItemPocketUI();

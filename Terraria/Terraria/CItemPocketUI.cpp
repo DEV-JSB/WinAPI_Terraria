@@ -10,8 +10,8 @@
 CItemPocketUI::CItemPocketUI()
 	:CUI(true)
 	,m_iIndex(0)
-	,m_bIsFocusing(false)
-	,m_pSkintmp(nullptr)
+	, m_bIsPlayerSelect(false)
+	, m_pSkinTmp(nullptr)
 {
 }
 
@@ -30,7 +30,12 @@ int CItemPocketUI::Setting(const int _x, const int _y)
 
 int CItemPocketUI::Update()
 {
-	
+	if (m_bIsPlayerSelect)
+	{
+		CComponent* pTemp = m_mapComponent[COMPONENT::COMPONENT_SKIN];
+		m_mapComponent[COMPONENT::COMPONENT_SKIN] = m_pSkinTmp;
+		m_pSkinTmp = pTemp;
+	}
 	return 0;
 }
 
@@ -80,7 +85,6 @@ int CItemPocketUI::RenderingItem(const HDC _dc)
 		, (int)bitInfo.bmHeight
 		, RGB(255, 255, 255));
 
-
 	return 0;
 }
 
@@ -96,16 +100,17 @@ BITMAP CItemPocketUI::CreateSkinComponent()
 
 
 	// Create Another FocusState Skin
-	pComponent = CFactory2::CreateComponent(COMPONENT::COMPONENT_SKIN);
-	m_pSkintmp = RTTI_DYNAMIC_CAST(pComponent, CSkin);
-	m_pSkintmp->SetTexture(L"Inventory_Select.bmp");
-	m_pSkintmp->SetOwner(this);
+	CSkin* pTemp;
+	m_pSkinTmp = CFactory2::CreateComponent(COMPONENT::COMPONENT_SKIN);
+	pTemp = RTTI_DYNAMIC_CAST(pComponent, CSkin);
+	pTemp->SetTexture(L"Inventory_Select.bmp");
+	pTemp->SetOwner(this);
 
 	return bmInfo;
 }
 
 CItemPocketUI::~CItemPocketUI()
 {
-	delete m_pSkintmp;
+	delete m_pSkinTmp;
 }
 

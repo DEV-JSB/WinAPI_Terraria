@@ -19,13 +19,7 @@ int CInventoryUI::Update()
 	{
 		m_bHidden = !m_bHidden;
 	}
-	MonitorPlayerInventory();
-	
-	
-	for (auto iter = m_mapPocket.begin(); iter != m_mapPocket.end(); ++iter)
-	{
-		(*iter).second->Update();
-	}
+	PocketUI_Update();
 	return 0;
 }
 
@@ -47,6 +41,26 @@ int CInventoryUI::Render(const HDC _dc)
 
 int CInventoryUI::FinalUpdate()
 {
+	return 0;
+}
+
+int CInventoryUI::PocketUI_Update()
+{
+	MonitorPlayerInventory();
+	for (auto iter = m_mapPocket.begin(); iter != m_mapPocket.end(); ++iter)
+		(*iter).second->Update();
+
+	int iPlayerSelectIndex = m_pOwner->GetFocusingIndex();
+	if (iPlayerSelectIndex != (int)EQUIP_INVENTORY::EQUIP_INVENTORY_END)
+	{
+		for (int i = 0; i < (int)EQUIP_INVENTORY::EQUIP_INVENTORY_END; ++i)
+		{
+			if(i == iPlayerSelectIndex)
+				m_mapPocket[(int)iPlayerSelectIndex]->SetIsSelect(true);
+			else
+				m_mapPocket[(int)iPlayerSelectIndex]->SetIsSelect(false);
+		}
+	}
 	return 0;
 }
 
@@ -82,8 +96,6 @@ int CInventoryUI::Setting()
 			pPocket->SetIndex(PocketIndex++);
 			
 			m_mapPocket.insert({ pPocket->GetIndex(),pPocket });
-
-
 		}
 	}
 

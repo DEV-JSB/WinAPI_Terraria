@@ -8,7 +8,8 @@ class CPlayer : public CMover
 {
 public: // Inventory Function
 	int AcquireItem(CItem* _pItem) { m_vecInventory.push_back(_pItem); return 0; }
-	const vector<CItem*> GetPlayerItem() { return m_vecInventory; }
+	const vector<CItem*> GetPlayerItem() const { return m_vecInventory; }
+	int GetFocusingIndex()const { return (int)m_eFocusInventoryIdx; }
 public: // Collision Event
 	// On Collision
 	virtual int OnCollision(const CObject* _pOther)			override;
