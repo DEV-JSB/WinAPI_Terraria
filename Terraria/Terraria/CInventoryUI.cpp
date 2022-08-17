@@ -7,6 +7,12 @@
 #include "CInputMgr.h"
 #include "CPlayer.h"
 
+CInventoryUI::CInventoryUI()
+	:CUI(false)
+	, m_bHidden(true)
+{
+	Setting();
+}
 int CInventoryUI::Update()
 {
 	if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_ESC) == INPUTSTATE::INPUTSTATE_TAP)
@@ -14,6 +20,12 @@ int CInventoryUI::Update()
 		m_bHidden = !m_bHidden;
 	}
 	MonitorPlayerInventory();
+	
+	
+	for (auto iter = m_mapPocket.begin(); iter != m_mapPocket.end(); ++iter)
+	{
+		(*iter).second->Update();
+	}
 	return 0;
 }
 
@@ -53,17 +65,12 @@ int CInventoryUI::MonitorPlayerInventory()
 	return 0;
 }
 
-CInventoryUI::CInventoryUI()
-	:CUI(false)
-	,m_bHidden(true)
-{
-	Setting();
-	
-	
-}
+
 
 int CInventoryUI::Setting()
 {
+	CUI::m_eUI_Type = UI_TYPE::UI_INVENTORY;
+
 	int PocketIndex = 0;
 	for (int y = 0; y < INVEN_COLUM ; ++y)
 	{
@@ -73,7 +80,10 @@ int CInventoryUI::Setting()
 			pPocket->Setting(x, y);
 			pPocket->SetParent(this);
 			pPocket->SetIndex(PocketIndex++);
+			
 			m_mapPocket.insert({ pPocket->GetIndex(),pPocket });
+
+
 		}
 	}
 

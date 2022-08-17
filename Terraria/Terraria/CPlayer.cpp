@@ -20,6 +20,8 @@ CPlayer::CPlayer()
     , m_eState(MOVER_STATE::STATE_IDLE)
     , m_eWillState(MOVER_STATE::STATE_IDLE)
     , m_bIsOnGround(false)
+    , m_pEquipItem(nullptr)
+    , m_eFocusInventoryIdx(EQUIP_INVENTORY::EQUIP_INVENTORY_END)
 {
     CreateAnimator();
     CreateCollider(Vector2({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) }));
@@ -230,6 +232,19 @@ int CPlayer::Update_State()
     return 0;
 }
 
+int CPlayer::Update_Inventory()
+{
+    int eKey = (int)KEY::KEY_1;
+    for (size_t i = 0; i < m_vecInventory.size(); ++i , ++eKey)
+    {
+        m_eFocusInventoryIdx = (EQUIP_INVENTORY)i;
+        if (CInputMgr::GetInstance()->GetKeyState((KEY)eKey) == INPUTSTATE::INPUTSTATE_TAP)
+        {
+            m_pEquipItem = m_vecInventory[i];
+        }
+    }
+    return 0;
+}
 
 
 int CPlayer::CreateCollider(const Vector2 _pos)

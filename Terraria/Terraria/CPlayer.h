@@ -6,7 +6,6 @@ class CItem;
 
 class CPlayer : public CMover
 {
-
 public: // Inventory Function
 	int AcquireItem(CItem* _pItem) { m_vecInventory.push_back(_pItem); return 0; }
 	const vector<CItem*> GetPlayerItem() { return m_vecInventory; }
@@ -21,25 +20,27 @@ public:
 	virtual int FinalUpdate() override;
 	virtual int Update() override;
 	virtual int Render(const HDC _dc) override;
-
 private:
-
 	virtual int CreateAnimator() override;
-
-private:
-
-	// Update Logic 
+private:// Mover Update Logic 
 	virtual int Update_Move()								override;
 	virtual int Update_Animation()							override;
 	virtual int Update_State()								override;
 	virtual int Update_Gravity()							override;
-
-	int CreateCollider(const Vector2 _pos)					override;
+private:
+	virtual int CreateCollider(const Vector2 _pos)			override;
+private:
+	int Update_Inventory();
 private:
 	enum class PLAYER_STATE { STATE_IDLE, STATE_LEFTRUN, STATE_RIGHTRUN, STATE_END };
 private: // Member
+
 	// Inventory
 	vector<CItem*> m_vecInventory;
+	// EquipWeapon
+	CItem* m_pEquipItem;
+	// FocusInventoryType
+	EQUIP_INVENTORY m_eFocusInventoryIdx;
 
 	// For State
 	bool m_bIsOnGround;

@@ -150,7 +150,10 @@ int CWorld::CreateUI()
     CInventoryUI* pInvenUI = RTTI_DYNAMIC_CAST(pUI, CInventoryUI);
 
     pInvenUI->SetOwner(CScene::GetPlayer());
-    m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pInvenUI);
+    
+    pUI->AddChild(pInvenUI);
+
+    m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pUI);
 
 
     return 0;

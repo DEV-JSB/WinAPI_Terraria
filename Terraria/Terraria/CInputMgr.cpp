@@ -19,6 +19,16 @@ int KeyInfo[(int)KEY::KEY_LAST] = {
 	'D',
 	'F',
 
+	'1',
+	'2',
+	'3',
+	'4',
+	'5',
+	'6',
+	'7',
+	'8',
+	'9',
+
 	VK_CONTROL,
 	VK_SPACE,
 	VK_RETURN,

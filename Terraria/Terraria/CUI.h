@@ -29,7 +29,7 @@ public:
     virtual int MouseButtonClicked() { return 0; };
 public:
     int Release();
-private: // Child Update Logic
+protected: // Child Update Logic
     int Update_Child();
     int Render_Child(const HDC _dc);
     int FinalUpdate_Child();
@@ -46,7 +46,7 @@ protected:
     bool m_bCamAffected;
     // UI Type
     UI_TYPE m_eUI_Type;
-private:
+protected:
     // Have Many Child UI  
     vector<CUI*> m_vecChildUI[(int)UI_TYPE::UI_END];
 protected: //Construct
