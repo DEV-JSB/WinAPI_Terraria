@@ -7,7 +7,7 @@ public: // GetFunction
 public: // Logic
 	virtual int Render(const HDC _dc)	 = 0;
 	virtual int Update()				 = 0;
-protected:
+public:
 	// Setting Texture
 	virtual int SetTexture(const wstring& _str);
 protected:

@@ -9,7 +9,7 @@ public:
 
 public: // Logic
 	virtual int Render(const HDC _dc) override;
-
+	virtual int Update();
 private:
 	friend class CFactory2;
 	CBackGround();

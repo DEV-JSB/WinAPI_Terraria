@@ -3,12 +3,14 @@
 #include "CSkin.h"
 #include "CCamera.h"
 #include "CComponent.h"
+#include "CTexture.h"
 #include "CBackGround.h"
 
 int CBackGround::Setting(const wstring& _str)
 {
-	CResourceMgr::GetInstance()->FindTexture(_str);
-	CObject::CreateTransform(Vector3({ CLIENT_WIDTH * 0.5f, 0 ,0.f }), Vector3({ 0.f,0.f,0.f }), Vector2({ 0.f,0.f }));
+	CTexture* pTex = CResourceMgr::GetInstance()->FindTexture(_str);
+	BITMAP bitInfo = pTex->GetBitInfo();
+	CObject::CreateTransform(Vector3({ (float)CLIENT_WIDTH * 0.5f, (float)CLIENT_HEIGHT * 0.5f ,0.f }), Vector3({ 0.f,0.f,0.f }), Vector2({ (float)bitInfo.bmWidth,(float)bitInfo.bmHeight }));
 	
 	// Create Skin and Setting
 	CComponent* pComponent = CFactory2::CreateComponent(COMPONENT::COMPONENT_SKIN);
@@ -26,6 +28,11 @@ int CBackGround::Setting(const wstring& _str)
 int CBackGround::Render(const HDC _dc)
 {
 	m_mapComponent[COMPONENT::COMPONENT_SKIN]->Render(_dc);
+	return 0;
+}
+
+int CBackGround::Update()
+{
 	return 0;
 }
 

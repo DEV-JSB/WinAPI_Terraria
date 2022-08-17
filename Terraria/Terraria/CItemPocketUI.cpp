@@ -2,6 +2,8 @@
 #include "CItemPocketUI.h"
 #include "CSkin.h"
 #include "CFactory2.h"
+#include "CTexture.h"
+#include "CTransform2D.h"
 #include "CResourceMgr.h"
 
 
@@ -32,6 +34,38 @@ int CItemPocketUI::Update()
 int CItemPocketUI::Render(const HDC _dc)
 {
 	m_mapComponent[COMPONENT::COMPONENT_SKIN]->RenderLocalSpace(_dc);
+	if (m_strItemTexture != L"")
+	{
+		// Load Item Texture
+		CTexture* pTex = CResourceMgr::GetInstance()->FindTexture(m_strItemTexture);
+		
+		// Get UI Pos
+		CTransform2D* pMyTrans = CObject::GetTransform();
+		Vector2 vPos;
+		vPos.x = pMyTrans->GetPosition().x;
+		vPos.y = pMyTrans->GetPosition().y;
+
+		Vector2 vScale = pMyTrans->GetScale();
+
+		//Get Item Info
+		BITMAP bitInfo = pTex->GetBitInfo();
+		
+		TransparentBlt(_dc
+			, (int)(vPos.x - vScale.x * 0.5f)
+			, (int)(vPos.y - vScale.y * 0.5f)
+			, (int)bitInfo.bmWidth
+			, (int)bitInfo.bmHeight
+			, pTex->GetTextureDC()
+			, (int)0
+			, (int)0
+			, (int)bitInfo.bmWidth
+			, (int)bitInfo.bmHeight
+			, RGB(255, 255, 255));
+		
+
+
+	}
+
 	return 0;
 }
 

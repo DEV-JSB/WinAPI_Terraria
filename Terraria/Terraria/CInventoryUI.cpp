@@ -14,6 +14,7 @@ int CInventoryUI::Update()
 		printf("ESC!\n");
 		m_bHidden = !m_bHidden;
 	}
+	MonitorPlayerInventory();
 	return 0;
 }
 
@@ -48,7 +49,8 @@ int CInventoryUI::MonitorPlayerInventory()
 		m_mapPocket[i]->SetItemTexture(strTexture);
 	}
 	
-	
+
+
 	return 0;
 }
 

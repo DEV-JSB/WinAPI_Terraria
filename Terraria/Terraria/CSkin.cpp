@@ -51,18 +51,39 @@ int CSkin::Render(const HDC _dc)const
 {
 	Vector3 Pos = m_pOwner->GetTransform()->GetPosition();
 	Vector2 vDiff = CCamera::GetInstance()->GetDifference();
-	Pos.x += vDiff.x;
-	Pos.y += vDiff.y;
+
+	Vector2 SliceSize = m_stSkinInfo.vSliceSize;
+
+	Vector2 LeftTop = m_stSkinInfo.vLT;
+	
+	Vector2 PrintLT;
+	PrintLT.x = Pos.x + vDiff.x;
+	PrintLT.y = Pos.y + vDiff.y;
+
+	// BackGround Culing
+	if (m_stSkinInfo.vSliceSize.x > CLIENT_WIDTH)
+	{
+		SliceSize.x = (float)CLIENT_WIDTH;
+		PrintLT.x = 0.f + (float)CLIENT_WIDTH * 0.5f;
+		LeftTop.x = Pos.x - vDiff.x * 0.5f;
+	}
+	if (m_stSkinInfo.vSliceSize.y > CLIENT_HEIGHT)
+	{
+		SliceSize.y = (float)CLIENT_HEIGHT;
+		PrintLT.y = SliceSize.y * 0.5f;
+		LeftTop.y = Pos.y - SliceSize.y * 0.5f;
+	}
+
 	TransparentBlt(_dc
-		, (int)(Pos.x - m_stSkinInfo.vSliceSize.x * 0.5f)
-		, (int)(Pos.y - m_stSkinInfo.vSliceSize.y * 0.5f)
-		, (int)m_stSkinInfo.vSliceSize.x
-		, (int)m_stSkinInfo.vSliceSize.y
+		, (int)(PrintLT.x - SliceSize.x * 0.5f)
+		, (int)(PrintLT.y - SliceSize.y * 0.5f)
+		, (int)SliceSize.x
+		, (int)SliceSize.y
 		, m_pTex->GetTextureDC()
-		, (int)m_stSkinInfo.vLT.x
-		, (int)m_stSkinInfo.vLT.y
-		, (int)m_stSkinInfo.vSliceSize.x
-		, (int)m_stSkinInfo.vSliceSize.y
+		, (int)LeftTop.x
+		, (int)LeftTop.y
+		, (int)SliceSize.x
+		, (int)SliceSize.y
 		, RGB(255, 255, 255));
 
 	return 0;

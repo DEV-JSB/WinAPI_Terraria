@@ -73,22 +73,26 @@ int CWorld::Enter()
     // Setting Collider CheckBox
     CCollisionMgr::GetInstance()->CheckingGroupBox(OBJECT::OBJECT_TILE, OBJECT::OBJECT_PLAYER);
 
+    // Setting Backgound
     CreateBackGround();
+    // Setting UI
     CreateUI();
+
+    // Setting Item
+    LoadItem();
+    // Setting Player Item
+    SetPlayerItem();
 
     return 0;
 }
 
 int CWorld::SetPlayerItem()
 {
-    CObject* pObj = CScene::GetObjectGroup(OBJECT::OBJECT_ITEM)[0];
-    CPlayer* pPlayer = RTTI_DYNAMIC_CAST(pObj, CPlayer);
-
     const vector<CObject*> vecItem = CScene::GetObjectGroup(OBJECT::OBJECT_ITEM);
 
     for (size_t i = 0; i < vecItem.size(); ++i)
     {
-        pPlayer->AcquireItem(RTTI_DYNAMIC_CAST(vecItem[i], CItem));
+        CScene::GetPlayer()->AcquireItem(RTTI_DYNAMIC_CAST(vecItem[i], CItem));
     }
     
     return 0;
@@ -97,9 +101,8 @@ int CWorld::SetPlayerItem()
 int CWorld::LoadItem()
 {
     CItem* pSword = CFactory2::CreateItem(ITEM::ITEM_SWORD);
+    pSword->SetTexture(L"ItemSword.bmp");
     m_arrObjectVec[(int)OBJECT::OBJECT_ITEM].push_back(pSword);
-
-
 
 
     return 0;
@@ -124,6 +127,10 @@ int CWorld::LoadResource()const
     CResourceMgr::GetInstance()->LoadTexture(L"Inventory_Back.bmp", TexPath);
     CResourceMgr::GetInstance()->LoadTexture(L"Inventory_Select.bmp", TexPath);
 
+    // Item Texture
+    CResourceMgr::GetInstance()->LoadTexture(L"ItemSword.bmp", TexPath);
+
+
     return 0;
 }
 
@@ -140,7 +147,7 @@ int CWorld::CreateUI()
 {
     CUI* pUI= CFactory2::CreateUI(UI_TYPE::UI_INVENTORY);
     
-    CInventoryUI* pInvenUI = RTTI_DYNAMIC_CAST(pInvenUI, CInventoryUI);
+    CInventoryUI* pInvenUI = RTTI_DYNAMIC_CAST(pUI, CInventoryUI);
 
     pInvenUI->SetOwner(CScene::GetPlayer());
     m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pInvenUI);

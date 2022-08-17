@@ -1,13 +1,2 @@
-﻿  CAnimationTool.cpp
-  CCamera.cpp
-  CCollisionMgr.cpp
-  CEngine.cpp
-  CFactory2.cpp
-  CInventoryUI.cpp
-  CItemPocketUI.cpp
-  CPlayer.cpp
-  CSceneMgr.cpp
-  CTool.cpp
-  CUIManager.cpp
-  CWorld.cpp
+﻿  CSkin.cpp
   Terraria.vcxproj -> C:\Users\Admin\Documents\GitHub\WinAPI_Terraria\Terraria\Debug\Terraria.exe
