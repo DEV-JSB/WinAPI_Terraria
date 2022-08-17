@@ -8,7 +8,6 @@
 CRigidbody::CRigidbody()
     :CComponent(false)
     , m_fJumpingPower   (0.f)
-    , m_fJumpDoesValue  (0.f)
     , m_fGravityPower   (DEFAULT_GRAVITYPOWER)
     , m_fMaxSpeed       (DEFAULT_MAXSPEED)
     , m_fMass           (DEFAULT_MASS)
@@ -55,8 +54,6 @@ int CRigidbody::MoveLogic()
     {
         // Direction
         m_vForce = m_vForce.Normalize();
-
-
         // Acceleration Power = Force / Mass
         float m_fAcceleration = fForce / m_fMass;
         m_fAcceleration *= (float)GET_DT;
@@ -94,19 +91,13 @@ int CRigidbody::GravityLogic()
 
 int CRigidbody::JumpLogic()
 {
-    if (m_fJumpDoesValue < 0.f)
-    {
-        m_fJumpDoesValue = 0.f;
-        m_fJumpingPower = 0.f;
-        return 0;
-    }
     if (m_fJumpingPower != 0.f)
     {
         Vector2 vUp = Vector2({ 0, -1 });
         float fJump = m_fJumpingPower * (float)GET_DT;
         //printf("Poewr : %f\n", fJump);
-        m_fJumpDoesValue -= fJump;
-        //printf("%f\n", m_fJumpDoesValue);
+        m_fJumpingPower -= fJump;
+        //printf("%f\n", m_fJumpingPower);
         vUp *= fJump;
         m_vVelocity += vUp;
     }

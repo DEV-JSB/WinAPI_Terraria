@@ -10,7 +10,7 @@ public:
 public:// Get
     float GetMass()const { return m_fMass; }
 public:// Set
-    int SetJumpPower(const float _f) { m_fJumpingPower = _f; m_fJumpDoesValue = _f;  return 0; }
+    int SetJumpPower(const float _f) { m_fJumpingPower = _f; return 0; }
     int SetGravityPower(const float _f);
     int SetFriction(const float _f) { m_fFriction = _f; return 0; }
     int SetMaxSpeed(const float _f) { m_fMaxSpeed = _f; return 0; }
@@ -26,7 +26,6 @@ public:// Logic
 private:
     // For Jump
     float m_fJumpingPower;
-    float m_fJumpDoesValue;
     // For Gravity
     Vector2 m_vGravity;
     float m_fGravityPower;

@@ -13,7 +13,7 @@
 //////////////////////////
 #define MOVE_FORCE 45.f
 #define MAX_SPEED 15.f
-#define JUMP_POWER 30.f
+#define JUMP_POWER 160.f
 /// ////////////////////////
 CPlayer::CPlayer()
     : CMover(OBJECT::OBJECT_PLAYER,Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) + 110, 0.f }), Vector3(), Vector2())
@@ -144,7 +144,6 @@ int CPlayer::Update_Move()
         if (m_bIsOnGround == true)
         {
             CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_JUMPPOWER, JUMP_POWER);
-            m_eWillState = MOVER_STATE::STATE_JUMP;
         }
     }
     return 0;
