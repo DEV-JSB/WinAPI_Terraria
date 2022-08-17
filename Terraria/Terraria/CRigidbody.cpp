@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CRigidbody.h"
-#include "CTimeMgr.h"
+#include "CFrameMgr.h"
 #include "CObject.h"
 #include"CTransform2D.h"
 
@@ -80,9 +80,6 @@ int CRigidbody::MoveLogic()
 
 int CRigidbody::GravityLogic()
 {
-    // If Jumping then Do not effect Gravity
-    if (m_fJumpingPower != 0.f)
-        return 0;
     // Gravity Logic
     if (m_fGravityPower != 0.f)
     {
@@ -107,8 +104,9 @@ int CRigidbody::JumpLogic()
     {
         Vector2 vUp = Vector2({ 0, -1 });
         float fJump = m_fJumpingPower * (float)GET_DT;
+        //printf("Poewr : %f\n", fJump);
         m_fJumpDoesValue -= fJump;
-        printf("점프로직 \n");
+        //printf("%f\n", m_fJumpDoesValue);
         vUp *= fJump;
         m_vVelocity += vUp;
     }
@@ -154,12 +152,13 @@ int CRigidbody::Move()
 
     // Speed Setting ?? Delete
     fSpeed *= (float)GET_DT;
-
+    //printf("Speed : %f\n", fSpeed);
     //Final Position
     Vector3 vOwnerPos = m_pOwner->GetTransform()->GetPosition();
-    printf("PlayerPos : %f,%f\n", vOwnerPos.x, vOwnerPos.y);
     vOwnerPos.x += m_vVelocity.x * fSpeed;
     vOwnerPos.y += m_vVelocity.y * fSpeed;
+
+    //printf("플레이어 위치 : Y %f\n", vOwnerPos.y);
     m_pOwner->SetPosition(vOwnerPos);
     return 0;
 }

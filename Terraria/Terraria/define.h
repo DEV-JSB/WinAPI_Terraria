@@ -9,7 +9,7 @@
 									friend class CFactory<classname>;\
 									classname();\
 
-#define GET_DT CTimeMgr::GetInstance()->GetDT();
+#define GET_DT CFrameMgr::GetInstance()->GetFrameDelta();
 
 #define CLIENT_WIDTH 1280
 // 80

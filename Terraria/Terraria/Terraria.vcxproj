@@ -156,6 +156,7 @@
     <ClInclude Include="CEngine.h" />
     <ClInclude Include="CFactory.h" />
     <ClInclude Include="CFactory2.h" />
+    <ClInclude Include="CFrameMgr.h" />
     <ClInclude Include="CGun.h" />
     <ClInclude Include="CInputMgr.h" />
     <ClInclude Include="CInventoryUI.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CFactory2.cpp" />
+    <ClCompile Include="CFrameMgr.cpp" />
     <ClCompile Include="CGun.cpp" />
     <ClCompile Include="CInputMgr.cpp" />
     <ClCompile Include="CInventoryUI.cpp" />

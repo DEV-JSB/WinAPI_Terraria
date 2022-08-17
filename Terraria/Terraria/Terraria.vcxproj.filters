@@ -151,6 +151,9 @@
     <Filter Include="Framework\06.Object\Item\CTool\CWeapon\CGun">
       <UniqueIdentifier>{04295a3e-e0c9-48c3-a133-9ca3226a4d02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\02.Manager\CFrameManager">
+      <UniqueIdentifier>{b59920c7-6cac-4d27-ba6d-09aa035e7778}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -292,6 +295,9 @@
     <ClInclude Include="CSword.h">
       <Filter>Framework\06.Object\Item\CTool\CWeapon\CSword</Filter>
     </ClInclude>
+    <ClInclude Include="CFrameMgr.h">
+      <Filter>Framework\02.Manager\CFrameManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -416,6 +422,9 @@
     </ClCompile>
     <ClCompile Include="CSword.cpp">
       <Filter>Framework\06.Object\Item\CTool\CWeapon\CSword</Filter>
+    </ClCompile>
+    <ClCompile Include="CFrameMgr.cpp">
+      <Filter>Framework\02.Manager\CFrameManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

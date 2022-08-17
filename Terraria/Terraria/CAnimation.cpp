@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CAnimation.h"
 #include "CResourceMgr.h"
-#include "CTimeMgr.h"
+#include "CFrameMgr.h"
 #include"CTexture.h"
 #include"CPathMgr.h"
 
@@ -124,13 +124,13 @@ int CAnimation::Update()
 	if (m_vecFrame.size() <= 1)
 		return 0;
 	// 1ÃÊ  0.0018  1 
-	m_fAccumulateTime += (float)CTimeMgr::GetInstance()->GetDT();
+	m_fAccumulateTime += GET_DT;
 
 	// Setting accelerando duration
 	for (size_t i = 0; i < m_vecFrame.size(); ++i)
 	{
 		if (m_vecFrame[i].fDuration > 0.07f)
-			m_vecFrame[i].fDuration -= (float)CTimeMgr::GetInstance()->GetDT();;
+			m_vecFrame[i].fDuration -= GET_DT;
 	}
 
 	if (m_vecFrame[m_iFrameIndex].fDuration <= m_fAccumulateTime)

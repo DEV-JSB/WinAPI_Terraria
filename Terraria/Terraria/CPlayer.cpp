@@ -13,7 +13,7 @@
 //////////////////////////
 #define MOVE_FORCE 45.f
 #define MAX_SPEED 15.f
-#define JUMP_POWER 50.f
+#define JUMP_POWER 30.f
 /// ////////////////////////
 CPlayer::CPlayer()
     : CMover(OBJECT::OBJECT_PLAYER,Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) + 110, 0.f }), Vector3(), Vector2())

@@ -5,8 +5,8 @@
 #include"CResourceMgr.h"
 #include "CSceneMgr.h"
 #include "CCollisionMgr.h"
+#include "CFrameMgr.h"
 #include"CCamera.h"
-#include"CTimeMgr.h"
 
 #define WINDOWSTART_X 100
 #define WINDOWSTART_Y 100
@@ -32,10 +32,14 @@ CEngine::~CEngine()
 
 int CEngine::Progress()
 {
-	// Update
-	Update();
-	// Rendering
-	Render();
+	if (CFrameMgr::GetInstance()->Update())
+	{
+		// Update
+		Update();
+		// Rendering
+		Render();
+	}
+
 	return 0;
 }
 
@@ -74,12 +78,11 @@ int CEngine::Init(HWND _hwnd, POINT _resoulution)
 
 
 	// Initialize Manager
-	CTimeMgr::	GetInstance()->	Init();
 	CPathMgr::	GetInstance()->	Init();
 	CInputMgr::	GetInstance()->	Init();
 	CSceneMgr::	GetInstance()->	Init();
 	CCamera::	GetInstance()->	Init();
-
+	CFrameMgr::GetInstance()->Init();
 	return 0;
 }
 
@@ -93,7 +96,6 @@ int CEngine::Release()
 int CEngine::Update()
 {
 	// UpdateManager
-	CTimeMgr::GetInstance()->Update();
 	CInputMgr::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
 	CCollisionMgr::GetInstance()->Update();
@@ -105,7 +107,6 @@ int CEngine::Update()
 int CEngine::Render()
 {
 	// RenderingManager
-	CTimeMgr::GetInstance()->Render();
 	CSceneMgr::GetInstance()->Render(m_bufferDC);
 
 	BitBlt(m_dc, 0, 0, m_ptResolution.x, m_ptResolution.y,
@@ -118,7 +119,6 @@ int CEngine::Render()
 int CEngine::RenderExceptDoubleBuffer()
 {
 	CSceneMgr::GetInstance()->Render(m_dc);
-	CTimeMgr::GetInstance()->Render();
 
 	BitBlt(m_dc, 0, 0, m_ptResolution.x, m_ptResolution.y,
 		m_bufferDC, 0, 0, SRCCOPY);
