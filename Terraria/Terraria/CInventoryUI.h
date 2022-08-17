@@ -7,11 +7,14 @@ class CPlayer;
 
 class CInventoryUI : public CUI
 {
-public:
+public: // Logic
 	virtual int Update()				override;
 	virtual int Render(const HDC _dc)	override;
 	virtual int FinalUpdate()			override;
-
+public: // Set
+	int SetOwner(CPlayer* _pPlayer) { m_pOwner = _pPlayer; return 0; }
+private:
+	int MonitorPlayerInventory();
 private:
 	CPlayer* m_pOwner;
 	bool m_bHidden;

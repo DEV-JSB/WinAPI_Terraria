@@ -138,11 +138,13 @@ int CWorld::CreateBackGround()
 
 int CWorld::CreateUI()
 {
-    CUI* pInvenUI= CFactory2::CreateUI(UI_TYPE::UI_INVENTORY);
+    CUI* pUI= CFactory2::CreateUI(UI_TYPE::UI_INVENTORY);
     
-    pInvenUI = RTTI_DYNAMIC_CAST(pInvenUI, CInventoryUI);
+    CInventoryUI* pInvenUI = RTTI_DYNAMIC_CAST(pInvenUI, CInventoryUI);
 
+    pInvenUI->SetOwner(CScene::GetPlayer());
     m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pInvenUI);
+
 
     return 0;
 }

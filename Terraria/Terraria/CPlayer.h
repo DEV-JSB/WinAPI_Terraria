@@ -7,8 +7,9 @@ class CItem;
 class CPlayer : public CMover
 {
 
-public: // Inventory
+public: // Inventory Function
 	int AcquireItem(CItem* _pItem) { m_vecInventory.push_back(_pItem); return 0; }
+	const vector<CItem*> GetPlayerItem() { return m_vecInventory; }
 public: // Collision Event
 	// On Collision
 	virtual int OnCollision(const CObject* _pOther)			override;

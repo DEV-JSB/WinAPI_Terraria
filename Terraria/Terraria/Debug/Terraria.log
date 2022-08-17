@@ -1,42 +1,13 @@
-﻿  CAnimation.cpp
-  CAnimationTool.cpp
-  CAnimationUI.cpp
-  CAnimator.cpp
-  CBackGround.cpp
-  CBoxCollider.cpp
-  CButtonUI.cpp
+﻿  CAnimationTool.cpp
   CCamera.cpp
-  CCircleCollider.cpp
-  CCollider.cpp
   CCollisionMgr.cpp
-  CComponent.cpp
   CEngine.cpp
   CFactory2.cpp
-  CGun.cpp
-  CInputMgr.cpp
   CInventoryUI.cpp
-  CItem.cpp
   CItemPocketUI.cpp
-  CMover.cpp
-  CObject.cpp
-  CPathMgr.cpp
   CPlayer.cpp
-  CResource.cpp
-  CResourceMgr.cpp
-  CRigidbody.cpp
-  CScene.cpp
   CSceneMgr.cpp
-  CSkin.cpp
-  CSword.cpp
-  CTexture.cpp
-  CTile.cpp
-  CTileBlock.cpp
-  CTileMgr.cpp
-  CTimeMgr.cpp
   CTool.cpp
-  CTransform2D.cpp
-  CUI.cpp
   CUIManager.cpp
   CWorld.cpp
-  Terraria.cpp
   Terraria.vcxproj -> C:\Users\Admin\Documents\GitHub\WinAPI_Terraria\Terraria\Debug\Terraria.exe

@@ -3,8 +3,9 @@
 #include "CItemPocketUI.h"
 #include "CFactory2.h"
 #include "CTransform2D.h"
+#include "CItem.h"
 #include "CInputMgr.h"
-
+#include "CPlayer.h"
 
 int CInventoryUI::Update()
 {
@@ -34,6 +35,20 @@ int CInventoryUI::Render(const HDC _dc)
 
 int CInventoryUI::FinalUpdate()
 {
+	return 0;
+}
+
+int CInventoryUI::MonitorPlayerInventory()
+{
+	const vector<CItem*> vecItem = m_pOwner->GetPlayerItem();
+
+	for (size_t i = 0; i < vecItem.size(); ++i)
+	{
+		const wstring strTexture = vecItem[i]->GetTextureName();
+		m_mapPocket[i]->SetItemTexture(strTexture);
+	}
+	
+	
 	return 0;
 }
 

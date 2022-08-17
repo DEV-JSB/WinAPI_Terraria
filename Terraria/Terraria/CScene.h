@@ -1,15 +1,16 @@
 #pragma once
 
 class CObject;
-
+class CPlayer;
 
 class CScene
 {
-public:
+public: // Get
 	// Return Type
 	SCENE GetSceneType()const { return m_eType; }
 	// Return ObjectGroup
 	const vector<CObject*> GetObjectGroup(const OBJECT _type) { return m_arrObjectVec[(int)_type]; }
+	CPlayer* GetPlayer()const;
 public:
 	virtual int FinalUpdate()			= 0;
 	virtual int Release()				= 0;
