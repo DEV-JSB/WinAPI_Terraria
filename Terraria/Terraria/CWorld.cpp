@@ -50,17 +50,15 @@ int CWorld::Render(const HDC _dc)
 }
 int CWorld::Update()
 {
-    for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
+    for (int i = 0; i < (int)OBJECT::OBJECT_UI; ++i)
     {
         for (size_t j = 0; j < m_arrObjectVec[i].size(); ++j)
-        {
             m_arrObjectVec[i][j]->Update();
-        }
     }
-
     CUIManager::GetInstance()->Update();
     return 0;
 }
+
 int CWorld::Enter()
 {
     LoadResource();
@@ -81,8 +79,18 @@ int CWorld::Enter()
     return 0;
 }
 
-int CWorld::PlayerDropItem()
+int CWorld::SetPlayerItem()
 {
+    CObject* pObj = CScene::GetObjectGroup(OBJECT::OBJECT_ITEM)[0];
+    CPlayer* pPlayer = RTTI_DYNAMIC_CAST(pObj, CPlayer);
+
+    const vector<CObject*> vecItem = CScene::GetObjectGroup(OBJECT::OBJECT_ITEM);
+
+    for (size_t i = 0; i < vecItem.size(); ++i)
+    {
+        pPlayer->AcquireItem(RTTI_DYNAMIC_CAST(vecItem[i], CItem));
+    }
+    
     return 0;
 }
 
@@ -131,6 +139,7 @@ int CWorld::CreateBackGround()
 int CWorld::CreateUI()
 {
     CUI* pInvenUI= CFactory2::CreateUI(UI_TYPE::UI_INVENTORY);
+    
     pInvenUI = RTTI_DYNAMIC_CAST(pInvenUI, CInventoryUI);
 
     m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pInvenUI);

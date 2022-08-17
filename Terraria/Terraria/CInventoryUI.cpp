@@ -3,11 +3,16 @@
 #include "CItemPocketUI.h"
 #include "CFactory2.h"
 #include "CTransform2D.h"
-
+#include "CInputMgr.h"
 
 
 int CInventoryUI::Update()
 {
+	if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_ESC) == INPUTSTATE::INPUTSTATE_TAP)
+	{
+		printf("ESC!\n");
+		m_bHidden = !m_bHidden;
+	}
 	return 0;
 }
 
@@ -37,17 +42,7 @@ CInventoryUI::CInventoryUI()
 	,m_bHidden(true)
 {
 	Setting();
-	Vector2 m_vPos1;
-	Vector2 m_vPos2;
-	m_vPos1.x = m_mapPocket[0]->GetTransform()->GetPosition_X() - m_mapPocket[0]->GetTransform()->GetScale_Width()  * 0.5f;
-	m_vPos1.y = m_mapPocket[0]->GetTransform()->GetPosition_Y() - m_mapPocket[0]->GetTransform()->GetScale_Height() * 0.5f;
-	m_vPos2.x = m_mapPocket[8]->GetTransform()->GetPosition_X() + m_mapPocket[8]->GetTransform()->GetScale_Width() * 0.5f;
-	m_vPos2.y = m_mapPocket[8]->GetTransform()->GetPosition_Y() + m_mapPocket[8]->GetTransform()->GetScale_Height() * 0.5f;
-
-
-	CObject::CreateTransform(Vector3({ (m_vPos1.x + m_vPos2.x) * 0.5f , (m_vPos1.y + m_vPos2.y) * 0.5f ,0.f })
-							, Vector3({})
-							, Vector2({ m_vPos2.x - m_vPos1.x,m_vPos2.y - m_vPos1.y }));
+	
 	
 }
 
@@ -65,6 +60,25 @@ int CInventoryUI::Setting()
 			m_mapPocket.insert({ pPocket->GetIndex(),pPocket });
 		}
 	}
+
+	SettingTransform();
+
+	return 0;
+}
+
+int CInventoryUI::SettingTransform()
+{
+	Vector2 m_vPos1;
+	Vector2 m_vPos2;
+	m_vPos1.x = m_mapPocket[0]->GetTransform()->GetPosition_X() - m_mapPocket[0]->GetTransform()->GetScale_Width() * 0.5f;
+	m_vPos1.y = m_mapPocket[0]->GetTransform()->GetPosition_Y() - m_mapPocket[0]->GetTransform()->GetScale_Height() * 0.5f;
+	m_vPos2.x = m_mapPocket[8]->GetTransform()->GetPosition_X() + m_mapPocket[8]->GetTransform()->GetScale_Width() * 0.5f;
+	m_vPos2.y = m_mapPocket[8]->GetTransform()->GetPosition_Y() + m_mapPocket[8]->GetTransform()->GetScale_Height() * 0.5f;
+
+
+	CObject::CreateTransform(Vector3({ (m_vPos1.x + m_vPos2.x) * 0.5f , (m_vPos1.y + m_vPos2.y) * 0.5f ,0.f })
+		, Vector3({})
+		, Vector2({ m_vPos2.x - m_vPos1.x,m_vPos2.y - m_vPos1.y }));
 	return 0;
 }
 

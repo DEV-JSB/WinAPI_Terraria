@@ -141,6 +141,7 @@ int CPlayer::Update_Move()
     }
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_SPACE) == INPUTSTATE::INPUTSTATE_TAP)
     {
+        printf("SPACE!\n");
         if (m_bIsOnGround == true)
         {
             CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_JUMPPOWER, JUMP_POWER);

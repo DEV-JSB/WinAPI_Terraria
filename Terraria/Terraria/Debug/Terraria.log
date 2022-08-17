@@ -3,8 +3,8 @@
   CAnimationUI.cpp
   CAnimator.cpp
   CBackGround.cpp
-  CButtonUI.cpp
   CBoxCollider.cpp
+  CButtonUI.cpp
   CCamera.cpp
   CCircleCollider.cpp
   CCollider.cpp
@@ -39,4 +39,4 @@
   CUIManager.cpp
   CWorld.cpp
   Terraria.cpp
-  Terraria.vcxproj -> D:\UNITY\JK_MU\WinAPI_Terraria\Terraria\Debug\Terraria.exe
+  Terraria.vcxproj -> C:\Users\Admin\Documents\GitHub\WinAPI_Terraria\Terraria\Debug\Terraria.exe

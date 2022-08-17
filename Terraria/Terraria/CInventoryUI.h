@@ -20,6 +20,7 @@ private:
 	friend class CFactory2;
 	CInventoryUI();
 	int Setting();
+	int SettingTransform();
 public:
 	virtual ~CInventoryUI();
 

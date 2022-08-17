@@ -4,7 +4,6 @@
 #include "CFactory2.h"
 #include "CResourceMgr.h"
 
-#define SPACE 10.f
 
 CItemPocketUI::CItemPocketUI()
 	:CUI(true)
@@ -26,6 +25,7 @@ int CItemPocketUI::Setting(const int _x, const int _y)
 
 int CItemPocketUI::Update()
 {
+		
 	return 0;
 }
 
