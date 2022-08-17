@@ -8,6 +8,7 @@
 CRigidbody::CRigidbody()
     :CComponent(false)
     , m_fJumpingPower   (0.f)
+    , m_fJumpDoesValue  (0.f)
     , m_fGravityPower   (DEFAULT_GRAVITYPOWER)
     , m_fMaxSpeed       (DEFAULT_MAXSPEED)
     , m_fMass           (DEFAULT_MASS)
@@ -79,7 +80,9 @@ int CRigidbody::MoveLogic()
 
 int CRigidbody::GravityLogic()
 {
-
+    // If Jumping then Do not effect Gravity
+    if (m_fJumpingPower != 0.f)
+        return 0;
     // Gravity Logic
     if (m_fGravityPower != 0.f)
     {
@@ -94,13 +97,18 @@ int CRigidbody::GravityLogic()
 
 int CRigidbody::JumpLogic()
 {
+    if (m_fJumpDoesValue < 0.f)
+    {
+        m_fJumpDoesValue = 0.f;
+        m_fJumpingPower = 0.f;
+        return 0;
+    }
     if (m_fJumpingPower != 0.f)
     {
         Vector2 vUp = Vector2({ 0, -1 });
         float fJump = m_fJumpingPower * (float)GET_DT;
-        m_fJumpingPower -= fJump;
-        if (m_fJumpingPower < 0.f)
-            m_fJumpingPower = 0.f;
+        m_fJumpDoesValue -= fJump;
+        printf("점프로직 \n");
         vUp *= fJump;
         m_vVelocity += vUp;
     }
@@ -149,7 +157,7 @@ int CRigidbody::Move()
 
     //Final Position
     Vector3 vOwnerPos = m_pOwner->GetTransform()->GetPosition();
-
+    printf("PlayerPos : %f,%f\n", vOwnerPos.x, vOwnerPos.y);
     vOwnerPos.x += m_vVelocity.x * fSpeed;
     vOwnerPos.y += m_vVelocity.y * fSpeed;
     m_pOwner->SetPosition(vOwnerPos);

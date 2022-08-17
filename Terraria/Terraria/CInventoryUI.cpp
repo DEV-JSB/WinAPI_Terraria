@@ -11,7 +11,6 @@ int CInventoryUI::Update()
 {
 	if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_ESC) == INPUTSTATE::INPUTSTATE_TAP)
 	{
-		printf("ESC!\n");
 		m_bHidden = !m_bHidden;
 	}
 	MonitorPlayerInventory();

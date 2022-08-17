@@ -15,17 +15,24 @@ CTimeMgr::CTimeMgr()
 
 int CTimeMgr::Update()
 {
-	QueryPerformanceCounter(&m_llCurCount);
+	m_dDT = 0.;
+	float m_fVsync = 1.f / 60.f;
+	while (0.f < m_fVsync)
+	{
+		QueryPerformanceCounter(&m_llCurCount);
 
-	// Cululate Delta Time
-	m_dDT = (double)(m_llCurCount.QuadPart - m_llPrevCount.QuadPart) / (double)m_llFrequency.QuadPart;
+		// Cululate Delta Time
+		double m_dAcc = (double)(m_llCurCount.QuadPart - m_llPrevCount.QuadPart) / (double)m_llFrequency.QuadPart;
 
-	// ResetPrevTime
-	m_llPrevCount = m_llCurCount;
-	// Add DT Accum
-	m_dAccumulate += m_dDT;
+		// ResetPrevTime
+		m_llPrevCount = m_llCurCount;
+		// Add DT Accum
+		m_dAccumulate += m_dDT;
 
-
+		// Vsync
+		m_fVsync -= (float)m_dDT;
+		m_dDT += m_dAcc;
+	}
 	return 0;
 }
 
