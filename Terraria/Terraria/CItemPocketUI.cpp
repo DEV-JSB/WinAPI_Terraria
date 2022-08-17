@@ -102,7 +102,7 @@ BITMAP CItemPocketUI::CreateSkinComponent()
 	// Create Another FocusState Skin
 	CSkin* pTemp;
 	m_pSkinTmp = CFactory2::CreateComponent(COMPONENT::COMPONENT_SKIN);
-	pTemp = RTTI_DYNAMIC_CAST(pComponent, CSkin);
+	pTemp = RTTI_DYNAMIC_CAST(m_pSkinTmp, CSkin);
 	pTemp->SetTexture(L"Inventory_Select.bmp");
 	pTemp->SetOwner(this);
 
