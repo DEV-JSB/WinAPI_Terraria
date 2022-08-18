@@ -10,6 +10,7 @@ CItem::CItem()
 	:CObject(OBJECT::OBJECT_ITEM)
 	,m_iItemIndex(m_iIdxKey++)
 	,m_strItemTexture(L"")
+	,m_pOwner(nullptr)
 {
 }
 

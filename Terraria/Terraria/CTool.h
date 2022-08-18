@@ -8,6 +8,7 @@ class CTool :
 private:
     // Tool Have Damage
     int m_iAttackDamage;
+    int CreateCollider();
 protected:
     CTool();
     virtual ~CTool();

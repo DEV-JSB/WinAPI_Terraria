@@ -7,6 +7,7 @@
 #include "CBoxCollider.h"
 #include "CInputMgr.h"
 #include "CTransform2D.h"
+#include "CItem.h"
 
 #define PLAYER_WIDTH 32.f
 #define PLAYER_HEIGHT 40.f
@@ -51,6 +52,7 @@ int CPlayer::AcquireItem(CItem* _pItem)
     {
         if (m_vecInventory[i] == nullptr)
         {
+            _pItem->SetOwner(this);
             m_vecInventory[i] = _pItem;
             return 0;
         }

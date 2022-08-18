@@ -16,6 +16,9 @@
 
 #define BIT_BOUNDARY_LINE 50
 #define BIT_BOUNDRAY_LINE 61
+
+#define WHITEBACK 255
+
 #define SAMPLE_ANIMATION_DURATION 0.5f
 
 #define ANI_UI_WIDTH 300.f
@@ -55,9 +58,22 @@ bool CAnimationTool::CheckCutBitmap(const HDC _dc)
         for (int y = m_stSelectRect.top; y <= m_stSelectRect.bottom; ++y)
         {
             rgb = GetPixel(_dc, x, y);
-            if (BIT_BOUNDARY_LINE == GetRValue(rgb)
+            /*if (BIT_BOUNDARY_LINE == GetRValue(rgb)
                 && BIT_BOUNDARY_LINE == GetGValue(rgb)
                 && BIT_BOUNDARY_LINE == GetBValue(rgb))
+            {
+                if (CuttingRect.left > x)
+                    CuttingRect.left = x;
+                else if (CuttingRect.right < x)
+                    CuttingRect.right = x;
+                if (CuttingRect.top > y)
+                    CuttingRect.top = y;
+                else if (CuttingRect.bottom < y)
+                    CuttingRect.bottom = y;
+            }*/
+            if (WHITEBACK != GetRValue(rgb)
+                && WHITEBACK != GetGValue(rgb)
+                && WHITEBACK != GetBValue(rgb))
             {
                 if (CuttingRect.left > x)
                     CuttingRect.left = x;
