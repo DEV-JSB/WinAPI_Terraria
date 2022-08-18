@@ -30,12 +30,6 @@ int CItemPocketUI::Setting(const int _x, const int _y)
 
 int CItemPocketUI::Update()
 {
-	if (m_bIsPlayerSelect)
-	{
-		CComponent* pTemp = m_mapComponent[COMPONENT::COMPONENT_SKIN];
-		m_mapComponent[COMPONENT::COMPONENT_SKIN] = m_pSkinTmp;
-		m_pSkinTmp = pTemp;
-	}
 	return 0;
 }
 
@@ -43,7 +37,10 @@ int CItemPocketUI::Update()
 
 int CItemPocketUI::Render(const HDC _dc)
 {
-	m_mapComponent[COMPONENT::COMPONENT_SKIN]->RenderLocalSpace(_dc);
+	if (m_bIsPlayerSelect)
+		m_pSkinTmp->RenderLocalSpace(_dc);
+	else
+		m_mapComponent[COMPONENT::COMPONENT_SKIN]->RenderLocalSpace(_dc);
 	if (m_strItemTexture != L"")
 	{
 		RenderingItem(_dc);

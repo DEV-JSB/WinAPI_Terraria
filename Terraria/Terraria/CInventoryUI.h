@@ -17,6 +17,7 @@ private:
 	int SetParentUITransform();
 	int PocketUI_Update();
 	int MonitorPlayerInventory();
+	CItemPocketUI* FindSelectPocket();
 private:
 	CPlayer* m_pOwner;
 	bool m_bHidden;

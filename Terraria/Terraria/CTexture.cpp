@@ -3,6 +3,13 @@
 #include"CEngine.h"
 
 
+CTexture::CTexture()
+	:m_DC(0)
+	, m_hBit(0)
+	, m_bitInfo{}
+{
+}
+
 
 int CTexture::LoadTexture(const wstring& _strfilepath)
 {
@@ -26,12 +33,7 @@ int CTexture::LoadTexture(const wstring& _strfilepath)
 	return 0;
 }
 
-CTexture::CTexture()
-	:m_DC(0)
-	,m_hBit(0)
-	,m_bitInfo{}
-{
-}
+
 
 CTexture::~CTexture()
 {

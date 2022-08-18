@@ -26,6 +26,10 @@ CPlayer::CPlayer()
     CreateAnimator();
     CreateCollider(Vector2({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) }));
     CObject::CreateRigidbody(MAX_SPEED);
+    for (int i = 0; i < INVEN_COLUM * INVEN_ROW; ++i)
+    {
+        m_vecInventory.push_back(nullptr);
+    }
 }
 
 int CPlayer::Update_Gravity()
@@ -37,6 +41,19 @@ int CPlayer::Update_Gravity()
     else
     {
         CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_GRAVITY, 0.f);
+    }
+    return 0;
+}
+
+int CPlayer::AcquireItem(CItem* _pItem)
+{ 
+    for (size_t i = 0; i < m_vecInventory.size(); ++i)
+    {
+        if (m_vecInventory[i] == nullptr)
+        {
+            m_vecInventory[i] = _pItem;
+            return 0;
+        }
     }
     return 0;
 }
@@ -236,7 +253,7 @@ int CPlayer::Update_State()
 int CPlayer::Update_Inventory()
 {
     int eKey = (int)KEY::KEY_1;
-    for (size_t i = 0; i < m_vecInventory.size(); ++i , ++eKey)
+    for (size_t i = 0; i < INVEN_ROW; ++i , ++eKey)
     {
         if (CInputMgr::GetInstance()->GetKeyState((KEY)eKey) == INPUTSTATE::INPUTSTATE_TAP)
         {

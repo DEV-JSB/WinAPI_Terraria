@@ -7,7 +7,7 @@ class CItem;
 class CPlayer : public CMover
 {
 public: // Inventory Function
-	int AcquireItem(CItem* _pItem) { m_vecInventory.push_back(_pItem); return 0; }
+	int AcquireItem(CItem* _pItem);
 	const vector<CItem*> GetPlayerItem() const { return m_vecInventory; }
 	int GetFocusingIndex()const { return (int)m_eFocusInventoryIdx; }
 public: // Collision Event

@@ -56,17 +56,33 @@ int CInventoryUI::PocketUI_Update()
 		(*iter).second->Update();
 
 	int iPlayerSelectIndex = m_pOwner->GetFocusingIndex();
+	printf("%d\n", iPlayerSelectIndex);
 	if (iPlayerSelectIndex != (int)EQUIP_INVENTORY::EQUIP_INVENTORY_END)
 	{
-		for (int i = 0; i < (int)EQUIP_INVENTORY::EQUIP_INVENTORY_END; ++i)
+		CItemPocketUI* pPocket = FindSelectPocket();
+		// Prev SelectPocket state Change
+		if (pPocket != nullptr && pPocket != m_mapPocket[(int)iPlayerSelectIndex])
 		{
-			if(i == iPlayerSelectIndex)
-				m_mapPocket[(int)iPlayerSelectIndex]->SetIsSelect(true);
-			else
-				m_mapPocket[(int)iPlayerSelectIndex]->SetIsSelect(false);
+			pPocket->m_bIsPlayerSelect = false;
+			m_mapPocket[(int)iPlayerSelectIndex]->m_bIsPlayerSelect = true;
 		}
+		else if (pPocket != nullptr && pPocket == m_mapPocket[(int)iPlayerSelectIndex])
+		{
+			return 0;
+		}
+		else
+			m_mapPocket[(int)iPlayerSelectIndex]->m_bIsPlayerSelect = true;
 	}
 	return 0;
+}
+CItemPocketUI* CInventoryUI::FindSelectPocket()
+{
+	for (auto iter = m_mapPocket.begin(); iter != m_mapPocket.end(); ++iter)
+	{
+		if (true == (*iter).second->m_bIsPlayerSelect)
+			return (*iter).second;
+	}
+	return nullptr;
 }
 
 int CInventoryUI::MonitorPlayerInventory()
@@ -75,14 +91,18 @@ int CInventoryUI::MonitorPlayerInventory()
 
 	for (size_t i = 0; i < vecItem.size(); ++i)
 	{
-		const wstring strTexture = vecItem[i]->GetTextureName();
-		m_mapPocket[i]->SetItemTexture(strTexture);
+		if (vecItem[i] != nullptr)
+		{
+			const wstring strTexture = vecItem[i]->GetTextureName();
+			m_mapPocket[i]->SetItemTexture(strTexture);
+		}
 	}
 	
 
 
 	return 0;
 }
+
 
 
 
