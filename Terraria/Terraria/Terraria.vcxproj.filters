@@ -154,6 +154,9 @@
     <Filter Include="Framework\02.Manager\CFrameManager">
       <UniqueIdentifier>{b59920c7-6cac-4d27-ba6d-09aa035e7778}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\06.Object\UI\UI_Health">
+      <UniqueIdentifier>{ac438c00-8f8f-4d92-b4c1-1ec302dfea70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -298,6 +301,9 @@
     <ClInclude Include="CFrameMgr.h">
       <Filter>Framework\02.Manager\CFrameManager</Filter>
     </ClInclude>
+    <ClInclude Include="CHealthUI.h">
+      <Filter>Framework\06.Object\UI\UI_Health</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -425,6 +431,9 @@
     </ClCompile>
     <ClCompile Include="CFrameMgr.cpp">
       <Filter>Framework\02.Manager\CFrameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CHealthUI.cpp">
+      <Filter>Framework\06.Object\UI\UI_Health</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

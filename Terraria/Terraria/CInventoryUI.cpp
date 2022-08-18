@@ -56,7 +56,6 @@ int CInventoryUI::PocketUI_Update()
 		(*iter).second->Update();
 
 	int iPlayerSelectIndex = m_pOwner->GetFocusingIndex();
-	printf("%d\n", iPlayerSelectIndex);
 	if (iPlayerSelectIndex != (int)EQUIP_INVENTORY::EQUIP_INVENTORY_END)
 	{
 		CItemPocketUI* pPocket = FindSelectPocket();

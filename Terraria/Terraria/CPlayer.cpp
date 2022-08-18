@@ -129,7 +129,9 @@ int CPlayer::CreateAnimator()
     pAnimator->LoadAnimation(L"PlayerFrontArmRun", L"Player_Arm.bmp");
     pAnimator->LoadAnimation(L"PlayerBackArmRun", L"Player_Arm.bmp");
     pAnimator->LoadAnimation(L"PlayerRunLeg", L"Player_RunLeg.bmp");
+    pAnimator->LoadAnimation(L"PlayerFrontArmUse", L"Player_Arm.bmp");
 
+    
     // ArmJump
     pAnimator->LoadAnimation(L"PlayerFrontArmJump", L"Player_Arm.bmp");
     pAnimator->LoadAnimation(L"PlayerBackArmJump", L"Player_Arm.bmp");
@@ -162,10 +164,14 @@ int CPlayer::Update_Move()
     if (CInputMgr::GetInstance()->GetKeyState(KEY::KEY_SPACE) == INPUTSTATE::INPUTSTATE_TAP)
     {
         if (m_bIsOnGround == true)
-        {
             CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_JUMPPOWER, JUMP_POWER);
-        }
     }
+
+    if (CInputMgr::GetInstance()->GetMouseState(MOUSE::MOUSE_LBTN) == INPUTSTATE::INPUTSTATE_TAP)
+    {
+        printf("Clicked\n");
+    }
+
     return 0;
 }
 
