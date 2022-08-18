@@ -7,7 +7,8 @@
 int CItem::m_iIdxKey = 0;
 
 CItem::CItem()
-	:m_iItemIndex(m_iIdxKey++)
+	:CObject(OBJECT::OBJECT_ITEM)
+	,m_iItemIndex(m_iIdxKey++)
 	,m_strItemTexture(L"")
 {
 }
@@ -28,6 +29,8 @@ int CItem::SetTexture(const wstring& _str)
 	CSkin* pSkin = RTTI_DYNAMIC_CAST(pComponent, CSkin);
 	m_strItemTexture = _str;
 	pSkin->SetTexture(_str);
+
+	m_mapComponent.insert({ COMPONENT::COMPONENT_SKIN,pSkin });
 	return 0;
 }
 

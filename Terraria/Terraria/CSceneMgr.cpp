@@ -3,6 +3,7 @@
 #include "CAnimationTool.h"
 #include "CCollisionMgr.h"
 #include "CWorld.h"
+#include "CResourceMgr.h"
 #include "CFactory.h"
 CSceneMgr::CSceneMgr()
 	:m_pCurScene(nullptr)
@@ -67,6 +68,8 @@ int CSceneMgr::Init()
 
 int CSceneMgr::Release()
 {
+	
+
 	m_pCurScene->Release();
 	delete m_pCurScene;
 	return 0;

@@ -12,6 +12,7 @@ public:
 	int Render(const HDC _dc);
 	//Tile Setting
 	int Enter();
+	int Release();
 private:	
 	vector<CObject*> m_vecTile;
 private:

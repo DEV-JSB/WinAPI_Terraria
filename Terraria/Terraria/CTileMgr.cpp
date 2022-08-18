@@ -54,8 +54,13 @@ int CTileMgr::Enter()
 	return 0;
 }
 
+int CTileMgr::Release()
+{
+	Delete_Vec(m_vecTile);
+	return 0;
+}
+
 
 CTileMgr::~CTileMgr()
 {
-
 }

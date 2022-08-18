@@ -14,6 +14,7 @@ public: // Logic
 public: // Set
 	int SetOwner(CPlayer* _pPlayer) { m_pOwner = _pPlayer; return 0; }
 private:
+	int SetParentUITransform();
 	int PocketUI_Update();
 	int MonitorPlayerInventory();
 private:

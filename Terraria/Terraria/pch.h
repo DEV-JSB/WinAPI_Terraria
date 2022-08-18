@@ -12,6 +12,8 @@
 // For Flip Rotator
 #include<wincodec.h>
 
+
+#include <crtdbg.h>
 #pragma comment(lib,"msimg32.lib")
 
 using std::wstring;

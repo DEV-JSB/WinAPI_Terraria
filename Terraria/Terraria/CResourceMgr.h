@@ -9,6 +9,8 @@ public:
 	BITMAP GetTextureSize(const wstring& _strKey);
 	CTexture* LoadTexture(const wstring& _strKey,const wstring& _strRelativePath);
 	CTexture* FindTexture(const wstring& _strKey);
+public:
+	int Release();
 private:
 	SINGLE(CResourceMgr);
 private:

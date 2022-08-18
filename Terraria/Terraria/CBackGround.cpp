@@ -6,6 +6,12 @@
 #include "CTexture.h"
 #include "CBackGround.h"
 
+CBackGround::CBackGround()
+	:CObject(OBJECT::OBJECT_BACKGROUND)
+
+{
+}
+
 int CBackGround::Setting(const wstring& _str)
 {
 	CTexture* pTex = CResourceMgr::GetInstance()->FindTexture(_str);
@@ -36,9 +42,6 @@ int CBackGround::Update()
 	return 0;
 }
 
-CBackGround::CBackGround()
-{
-}
 
 CBackGround::~CBackGround()
 {

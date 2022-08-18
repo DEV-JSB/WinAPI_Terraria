@@ -89,6 +89,7 @@ int CEngine::Init(HWND _hwnd, POINT _resoulution)
 int CEngine::Release()
 {
 	CSceneMgr::GetInstance()->Release();
+
 	return 0;
 }
 

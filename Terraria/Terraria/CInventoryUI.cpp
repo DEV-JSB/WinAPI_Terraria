@@ -8,7 +8,7 @@
 #include "CPlayer.h"
 
 CInventoryUI::CInventoryUI()
-	:CUI(false)
+	:CUI(UI_TYPE::UI_INVENTORY,false)
 	, m_bHidden(true)
 {
 	Setting();
@@ -40,6 +40,11 @@ int CInventoryUI::Render(const HDC _dc)
 }
 
 int CInventoryUI::FinalUpdate()
+{
+	return 0;
+}
+
+int CInventoryUI::SetParentUITransform()
 {
 	return 0;
 }
@@ -122,4 +127,5 @@ int CInventoryUI::SettingTransform()
 
 CInventoryUI::~CInventoryUI()
 {
+	Delete_Map(m_mapPocket);
 }

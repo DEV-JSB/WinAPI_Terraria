@@ -83,6 +83,7 @@ int CPlayer::Update()
     Update_Gravity();
     Update_State();
     Update_Animation();
+    Update_Inventory();
 
     return 0;
 }
@@ -237,9 +238,10 @@ int CPlayer::Update_Inventory()
     int eKey = (int)KEY::KEY_1;
     for (size_t i = 0; i < m_vecInventory.size(); ++i , ++eKey)
     {
-        m_eFocusInventoryIdx = (EQUIP_INVENTORY)i;
         if (CInputMgr::GetInstance()->GetKeyState((KEY)eKey) == INPUTSTATE::INPUTSTATE_TAP)
         {
+            m_eFocusInventoryIdx = (EQUIP_INVENTORY)i;
+            printf("ÀåÂø!\n");
             m_pEquipItem = m_vecInventory[i];
         }
     }

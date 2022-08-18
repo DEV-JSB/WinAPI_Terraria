@@ -41,7 +41,6 @@ bool CFrameMgr::Update()
 		}
 		m_dOneFrameDelta = m_dAccumDelta;
 		m_dAccumDelta = 0.;
-		printf("%f\n", m_dOneFrameDelta);
 
 		return true;
 	}

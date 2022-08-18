@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "CPlayer.h"
 #include "CScene.h"
-
-
+#include"CUIManager.h"
+#include"CResourceMgr.h"
+#include"CTileMgr.h"
 CScene::CScene()
 {
 	// InputList
@@ -21,9 +22,12 @@ CPlayer* CScene::GetPlayer() const
 
 CScene::~CScene()
 {
-	for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
+	for (int i = 0; i < (int)OBJECT::OBJECT_UI; ++i)
 	{
 		Delete_Vec<CObject*>(m_arrObjectVec[i]);
 	}
+	CResourceMgr::GetInstance()->Release();
+	CUIManager::GetInstance()->Release();
+	CTileMgr::GetInstance()->Release();
 }
 

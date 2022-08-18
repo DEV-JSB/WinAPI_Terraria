@@ -53,7 +53,7 @@ protected:
 	OBJECT m_eType;
 protected:
 	// Normal Constructor
-	CObject();
+	CObject(const OBJECT _eTpye);
 	// Set Transform Constructor
 	CObject(const OBJECT _eType, const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
 public:

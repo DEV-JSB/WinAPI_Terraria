@@ -2,16 +2,13 @@
 #include "CResourceMgr.h"
 #include "CPathMgr.h"
 #include"CTexture.h"
+#include "CResource.h"
 
 CResourceMgr::CResourceMgr()
 {
 
 }
 
-CResourceMgr::~CResourceMgr()
-{
-
-}
 
 BITMAP CResourceMgr::GetTextureSize(const wstring& _strKey)
 {
@@ -55,4 +52,20 @@ CTexture* CResourceMgr::FindTexture(const wstring& _strKey)
         return nullptr;
     // Return Texture
     return (CTexture*)(iter->second);
+}
+
+int CResourceMgr::Release()
+{
+    for (auto iter = m_mapResource.begin(); iter != m_mapResource.end(); ++iter)
+    {
+        if (iter->second != nullptr)
+        {
+            delete iter->second;
+        }
+    }
+    return 0;
+}
+
+CResourceMgr::~CResourceMgr()
+{
 }

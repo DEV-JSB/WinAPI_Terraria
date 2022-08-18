@@ -1,5 +1,5 @@
 #pragma once
-
+#include "CResourceMgr.h"
 
 class CResource
 {
@@ -17,5 +17,11 @@ private:
 	wstring m_strKey;
 	// Resource Path
 	wstring m_strRelativePath;
+protected:
+	friend class CResourceMgr;
+	CResource();
+public:
+	virtual ~CResource();
+
 };
 

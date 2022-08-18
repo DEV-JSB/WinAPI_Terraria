@@ -9,7 +9,7 @@
 #define TILE_SIZE 16.f
 
 CTile::CTile()
-	:CObject()
+	:CObject(OBJECT::OBJECT_TILE)
 {
 }
 

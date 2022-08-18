@@ -6,9 +6,8 @@
 #include "CTransform2D.h"
 #include "CRigidbody.h"
 
-
-
-CObject::CObject()
+CObject::CObject(const OBJECT _eTpye)
+	:m_eType(_eTpye)
 {
 }
 
@@ -144,7 +143,9 @@ CObject::~CObject()
 	for (auto iter = m_mapComponent.begin(); iter != m_mapComponent.end(); ++iter)
 	{
 		if (nullptr != (*iter).second)
+		{
 			delete (*iter).second;
+		}
 	}
-	
+	m_mapComponent.clear();
 }

@@ -3,6 +3,7 @@
 #include "CTile.h"
 #include "CBoxCollider.h"
 #include "CSword.h"
+#include "CUI.h"
 #include "CBackGround.h"
 #include "CInventoryUI.h"
 #include "CItemPocketUI.h"
@@ -66,6 +67,11 @@ CUI* CFactory2::CreateUI(const UI_TYPE _eType)
 {
     switch (_eType)
     {
+    case UI_TYPE::UI_PARENT:
+        {
+            CUI* pUI = new CUI(UI_TYPE::UI_PARENT,false);
+            return pUI;
+        }
     case UI_TYPE::UI_INVENTORY:
         {
             CInventoryUI* pPocket = new CInventoryUI();

@@ -14,15 +14,17 @@ CUI::CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAf
 {
 }
 
-CUI::CUI(const bool _bAffected)
-	:CObject()
+// Need Setting Transform
+CUI::CUI(const UI_TYPE _eUI_Type, const bool _bAffected)
+	:CObject(OBJECT::OBJECT_UI)
 	, m_pParent(nullptr)
 	, m_vOffsetPos({ 0.f,0.f,0.f })
 	, m_bCamAffected(_bAffected)
-	, m_eUI_Type(UI_TYPE::UI_PARENT)
+	, m_eUI_Type(_eUI_Type)
 	, m_bIsFocus(false)
 {
 }
+
 
 int CUI::AddChild(CUI* _pChild)
 {

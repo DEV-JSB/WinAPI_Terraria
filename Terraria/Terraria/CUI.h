@@ -1,6 +1,6 @@
 #pragma once
 #include "CObject.h"
-
+#include "CFactory2.h"
 class CUI : public CObject
 {
 public:
@@ -51,8 +51,10 @@ protected:
     vector<CUI*> m_vecChildUI[(int)UI_TYPE::UI_END];
 protected: //Construct
     friend class CFactory<CUI>;
+    friend class CFactory2;
+
     CUI(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale, bool _bAffected);
-    CUI(const bool _bAffected);
+    CUI(const UI_TYPE _eUI_Type,const bool _bAffected);
 public:
     virtual ~CUI();
 };

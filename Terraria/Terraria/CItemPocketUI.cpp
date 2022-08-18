@@ -8,7 +8,7 @@
 
 
 CItemPocketUI::CItemPocketUI()
-	:CUI(true)
+	:CUI(UI_TYPE::UI_ITEMPOCKET,true)
 	,m_iIndex(0)
 	, m_bIsPlayerSelect(false)
 	, m_pSkinTmp(nullptr)
