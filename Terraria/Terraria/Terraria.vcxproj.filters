@@ -22,9 +22,6 @@
     <Filter Include="Framework\02.Manager\InputManager">
       <UniqueIdentifier>{9acc1b6f-db0d-4fbf-8edd-600839bf2196}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Framework\02.Manager\SceneManager">
-      <UniqueIdentifier>{49973472-2200-493a-a392-fa24279c1c64}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\02.Manager\PathManager">
       <UniqueIdentifier>{5568d24d-6b70-4c3e-9a57-3a93e92adb27}</UniqueIdentifier>
     </Filter>
@@ -156,6 +153,9 @@
     </Filter>
     <Filter Include="Framework\06.Object\UI\UI_Health">
       <UniqueIdentifier>{ac438c00-8f8f-4d92-b4c1-1ec302dfea70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\02.Manager\SceneManager">
+      <UniqueIdentifier>{49973472-2200-493a-a392-fa24279c1c64}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
