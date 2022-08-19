@@ -23,6 +23,7 @@ CPlayer::CPlayer()
     , m_bIsOnGround(false)
     , m_pEquipItem(nullptr)
     , m_eFocusInventoryIdx(EQUIP_INVENTORY::EQUIP_INVENTORY_END)
+    , m_bToolUsingState(false)
 {
     CreateAnimator();
     CreateCollider(Vector2({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) }));
@@ -90,7 +91,11 @@ int CPlayer::OnCollisionExit(const CObject* _pOther)
 int CPlayer::FinalUpdate()
 {
     CObject::FinalUpdate();
- 
+    if (m_pEquipItem != nullptr && m_bToolUsingState)
+    {
+        if(FINISH == m_pEquipItem->FinalUpdate())
+            m_bToolUsingState = false;
+    }
     return 0;
 }
 
@@ -104,6 +109,11 @@ int CPlayer::Update()
     Update_Animation();
     Update_Inventory();
 
+    if (m_pEquipItem != nullptr && m_bToolUsingState)
+    {
+        m_pEquipItem->Update();
+    }
+
     return 0;
 }
 
@@ -113,6 +123,10 @@ int CPlayer::Render(const HDC _dc)
     {
         (*iter).second->Render(_dc);
     }
+    if (m_pEquipItem != nullptr && m_bToolUsingState)
+    {
+        m_pEquipItem->Render(_dc);
+    }
     return 0;
 }
 
@@ -121,22 +135,23 @@ int CPlayer::CreateAnimator()
     // SetAnimator
     CAnimator* pAnimator = CFactory<CAnimator>::Create(true);
 
-    pAnimator->LoadAnimation(L"PlayerCloth", L"Player_Cloth.bmp");
-    pAnimator->LoadAnimation(L"PlayerHead", L"Player_Head.bmp");
-    pAnimator->LoadAnimation(L"PlayerHair", L"Player_Hair.bmp");
-    pAnimator->LoadAnimation(L"PlayerFrontArm", L"Player_Arm.bmp");
-    pAnimator->LoadAnimation(L"PlayerBackArm", L"Player_Arm.bmp");
-    pAnimator->LoadAnimation(L"PlayerLeg", L"Player_Leg.bmp");
-    pAnimator->LoadAnimation(L"PlayerJump", L"Player_Leg.bmp");
-    pAnimator->LoadAnimation(L"PlayerFrontArmRun", L"Player_Arm.bmp");
-    pAnimator->LoadAnimation(L"PlayerBackArmRun", L"Player_Arm.bmp");
-    pAnimator->LoadAnimation(L"PlayerRunLeg", L"Player_RunLeg.bmp");
-    pAnimator->LoadAnimation(L"PlayerFrontArmUse", L"Player_Arm.bmp");
+    pAnimator->LoadAnimation(L"PlayerCloth", L"Player_Cloth.bmp",true);
+    pAnimator->LoadAnimation(L"PlayerHead", L"Player_Head.bmp", true);
+    pAnimator->LoadAnimation(L"PlayerHair", L"Player_Hair.bmp", true);
+    pAnimator->LoadAnimation(L"PlayerFrontArm", L"Player_Arm.bmp", true);
+    pAnimator->LoadAnimation(L"PlayerBackArm", L"Player_Arm.bmp", true);
+    pAnimator->LoadAnimation(L"PlayerLeg", L"Player_Leg.bmp", true);
+    pAnimator->LoadAnimation(L"PlayerJump", L"Player_Leg.bmp", true);
+    pAnimator->LoadAnimation(L"PlayerFrontArmRun", L"Player_Arm.bmp", true);
+    pAnimator->LoadAnimation(L"PlayerBackArmRun", L"Player_Arm.bmp", true);
+    pAnimator->LoadAnimation(L"PlayerRunLeg", L"Player_RunLeg.bmp", true);
 
     
     // ArmJump
-    pAnimator->LoadAnimation(L"PlayerFrontArmJump", L"Player_Arm.bmp");
-    pAnimator->LoadAnimation(L"PlayerBackArmJump", L"Player_Arm.bmp");
+    pAnimator->LoadAnimation(L"PlayerFrontArmJump", L"Player_Arm.bmp",false);
+    pAnimator->LoadAnimation(L"PlayerBackArmJump", L"Player_Arm.bmp", false);
+    pAnimator->LoadAnimation(L"PlayerFrontArmUse", L"Player_Arm.bmp", false);
+
 
 
     pAnimator->SettingPlayAnimation(vector<wstring>({ L"PlayerCloth"
@@ -145,6 +160,7 @@ int CPlayer::CreateAnimator()
                                                      ,L"PlayerFrontArm"
                                                      ,L"PlayerBackArm"
                                                      ,L"PlayerLeg"}));
+
     pAnimator->SetOwner(this);
 
     m_mapComponent.insert({ COMPONENT::COMPONENT_ANIMATOR,pAnimator });
@@ -171,66 +187,128 @@ int CPlayer::Update_Move()
 
     if (CInputMgr::GetInstance()->GetMouseState(MOUSE::MOUSE_LBTN) == INPUTSTATE::INPUTSTATE_TAP)
     {
-        printf("Clicked\n");
+        if(m_pEquipItem)
+            m_bToolUsingState = true;
     }
 
     return 0;
 }
 
-int CPlayer::Update_Animation()
+
+int CPlayer::Update_Arm(CAnimator* _pAnimator)
 {
-    CAnimator* pAnimator = RTTI_DYNAMIC_CAST_MAP(CAnimator, m_mapComponent, COMPONENT::COMPONENT_ANIMATOR);
+    if (m_bToolUsingState)
+    {
+        _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmUse");
+        _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmRun", L"PlayerFrontArmUse");
+        _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmJump", L"PlayerFrontArmUse");
+        
+    }
     switch (m_eState)
     {
     case MOVER_STATE::STATE_JUMP:
-        pAnimator->SubstitutePlayAnimation(L"PlayerLeg", L"PlayerJump");
-        pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerJump");
-        pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmJump");
-        pAnimator->SubstitutePlayAnimation(L"PlayerBackArm", L"PlayerBackArmJump");
+        _pAnimator->SubstitutePlayAnimation(L"PlayerBackArm", L"PlayerBackArmJump");
+        if (false == m_bToolUsingState)
+        {
+            _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmJump");
+            _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmUse", L"PlayerFrontArmJump");
+        }
         break;
     case MOVER_STATE::STATE_IDLE:
-        pAnimator->SubstitutePlayAnimation(L"PlayerJump", L"PlayerLeg");
-
-        pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmRun", L"PlayerFrontArm");
-        pAnimator->SubstitutePlayAnimation(L"PlayerBackArmRun", L"PlayerBackArm");
-        pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerLeg");
-
-        pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmJump", L"PlayerFrontArm");
-        pAnimator->SubstitutePlayAnimation(L"PlayerBackArmJump", L"PlayerBackArm");
+        _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmRun", L"PlayerFrontArm");
+        _pAnimator->SubstitutePlayAnimation(L"PlayerBackArmRun", L"PlayerBackArm");
+        _pAnimator->SubstitutePlayAnimation(L"PlayerBackArmJump", L"PlayerBackArm");
+        if (false == m_bToolUsingState)
+        {
+            _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmJump", L"PlayerFrontArm");
+            _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmUse", L"PlayerFrontArm");
+        }
         break;
     case MOVER_STATE::STATE_LEFTRUN:
-        pAnimator->SetFilp(true);
+        _pAnimator->SubstitutePlayAnimation(L"PlayerBackArm", L"PlayerBackArmRun");
         if (!m_bIsOnGround)
         {
-            pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerJump");
-            pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmRun", L"PlayerFrontArmJump");
-            pAnimator->SubstitutePlayAnimation(L"PlayerBackArmRun", L"PlayerBackArmJump");
+            _pAnimator->SubstitutePlayAnimation(L"PlayerBackArmRun", L"PlayerBackArmJump");
+            _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmRun", L"PlayerFrontArmJump");
+            if (false == m_bToolUsingState)
+                _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmUse", L"PlayerFrontArmJump");
             break;
         }
-        pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmRun");
-        pAnimator->SubstitutePlayAnimation(L"PlayerBackArm", L"PlayerBackArmRun");
-        pAnimator->SubstitutePlayAnimation(L"PlayerLeg", L"PlayerRunLeg");
-        pAnimator->SubstitutePlayAnimation(L"PlayerJump", L"PlayerRunLeg");
-
+        if (false == m_bToolUsingState)
+        {
+            _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmRun");
+            _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmUse", L"PlayerFrontArmRun");
+        }
         break;
     case MOVER_STATE::STATE_RIGHTRUN:
         if (!m_bIsOnGround)
         {
-            pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerJump");
-            pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmRun", L"PlayerFrontArmJump");
-            pAnimator->SubstitutePlayAnimation(L"PlayerBackArmRun", L"PlayerBackArmJump");
+            _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmRun", L"PlayerFrontArmJump");
+            _pAnimator->SubstitutePlayAnimation(L"PlayerBackArmRun", L"PlayerBackArmJump");
+            if (false == m_bToolUsingState)
+                _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmUse", L"PlayerFrontArmJump");
             break;
         }
-        pAnimator->SetFilp(false);
         // ArmAnimation Setting
-        pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmRun");
-        pAnimator->SubstitutePlayAnimation(L"PlayerBackArm", L"PlayerBackArmRun");
-        // LegAnimation Setting
-        pAnimator->SubstitutePlayAnimation(L"PlayerLeg", L"PlayerRunLeg");
-        pAnimator->SubstitutePlayAnimation(L"PlayerJump", L"PlayerRunLeg");
-
+        _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmRun");
+        _pAnimator->SubstitutePlayAnimation(L"PlayerBackArm", L"PlayerBackArmRun");
+        if (false == m_bToolUsingState)
+        {
+            _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArm", L"PlayerFrontArmRun");
+            _pAnimator->SubstitutePlayAnimation(L"PlayerFrontArmUse", L"PlayerFrontArmRun");
+        }
         break;
     }
+    return 0;
+}
+
+int CPlayer::Update_Leg(CAnimator* _pAnimator)
+{
+
+    switch (m_eState)
+    {
+    case MOVER_STATE::STATE_JUMP:
+        _pAnimator->SubstitutePlayAnimation(L"PlayerLeg", L"PlayerJump");
+        _pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerJump");
+        break;
+    case MOVER_STATE::STATE_IDLE:
+        _pAnimator->SubstitutePlayAnimation(L"PlayerJump", L"PlayerLeg");
+        _pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerLeg");
+        break;
+    case MOVER_STATE::STATE_LEFTRUN:
+        _pAnimator->SetFilp(true);
+        Update_ItemFlip(true);
+        _pAnimator->SubstitutePlayAnimation(L"PlayerLeg", L"PlayerRunLeg");
+        _pAnimator->SubstitutePlayAnimation(L"PlayerJump", L"PlayerRunLeg");
+        if (!m_bIsOnGround)
+        {
+            _pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerJump");
+            break;
+        }
+        break;
+    case MOVER_STATE::STATE_RIGHTRUN:
+        if (!m_bIsOnGround)
+        {
+            _pAnimator->SubstitutePlayAnimation(L"PlayerRunLeg", L"PlayerJump");
+            break;
+        }
+        _pAnimator->SetFilp(false);
+        Update_ItemFlip(false);
+        // LegAnimation Setting
+        _pAnimator->SubstitutePlayAnimation(L"PlayerLeg", L"PlayerRunLeg");
+        _pAnimator->SubstitutePlayAnimation(L"PlayerJump", L"PlayerRunLeg");
+        break;
+    }
+    return 0;
+}
+
+
+
+int CPlayer::Update_Animation()
+{
+    CAnimator* pAnimator = RTTI_DYNAMIC_CAST_MAP(CAnimator, m_mapComponent, COMPONENT::COMPONENT_ANIMATOR);
+    Update_Leg(pAnimator);
+    Update_Arm(pAnimator);
     return 0;
 }
 
@@ -266,13 +344,23 @@ int CPlayer::Update_Inventory()
         if (CInputMgr::GetInstance()->GetKeyState((KEY)eKey) == INPUTSTATE::INPUTSTATE_TAP)
         {
             m_eFocusInventoryIdx = (EQUIP_INVENTORY)i;
-            printf("ÀåÂø!\n");
             m_pEquipItem = m_vecInventory[i];
+            if (nullptr != m_pEquipItem)
+            {
+                CAnimator* pAnimator = RTTI_DYNAMIC_CAST_MAP(CAnimator, m_mapComponent, COMPONENT::COMPONENT_ANIMATOR);
+                pAnimator->SetAnimationDurationRegular(L"PlayerFrontArmUse", m_pEquipItem->GetCoolTime());
+            }
         }
     }
     return 0;
 }
 
+int CPlayer::Update_ItemFlip(const bool _b)
+{
+    if(m_pEquipItem != nullptr && m_bToolUsingState == false)
+        m_pEquipItem->SetAnimatorFlip(_b);
+    return 0;
+}
 
 int CPlayer::CreateCollider(const Vector2 _pos)
 {

@@ -7,6 +7,8 @@ public: // Logic
 	virtual int Render(const HDC _dc)	override;
 	virtual int Update()				override;
 private:
+	int CreateAnimator();
+private:
 	friend class CFactory2;
 	CSword();
 public:

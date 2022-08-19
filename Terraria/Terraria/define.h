@@ -11,6 +11,8 @@
 
 #define GET_DT CFrameMgr::GetInstance()->GetFrameDelta();
 
+#define FINISH 1
+
 #define CLIENT_WIDTH 1280
 // 80
 #define CLIENT_HEIGHT 720
@@ -133,9 +135,9 @@ enum class OBJECT
 {
 	OBJECT_BACKGROUND,
 	OBJECT_PLAYER,
+	OBJECT_UI,
 	OBJECT_ITEM,
 	OBJECT_TILE,
-	OBJECT_UI,
 	OBJECT_END
 };
 

@@ -9,8 +9,10 @@ CAnimation::CAnimation()
 	: m_strName()
 	, m_pTex(nullptr)
 	, m_bIsFinish(false)
+	, m_fDefaultDuration(1.f)
 	, m_fAccumulateTime(0.f)
 	, m_iFrameIndex(0)
+	, m_bAccelerando(false)
 {
 }
 
@@ -37,13 +39,26 @@ int CAnimation::SaveFile()const
 	return 0;
 }
 
+int CAnimation::SetDurationRegular(const float _fDuration)
+{
+	float fRegular = _fDuration / m_vecFrame.size();
+	m_fDefaultDuration = fRegular;
+	for (size_t i = 0; i < m_vecFrame.size(); ++i)
+	{
+		m_vecFrame[i].fDuration = fRegular;
+	}
+	return 0;
+}
+
 int CAnimation::ResetFrame()
 {
 	for (size_t i = 0; i < m_vecFrame.size(); ++i)
 	{
-		m_vecFrame[i].fDuration = 1.f;
+		m_vecFrame[i].fDuration = m_fDefaultDuration;
 	}
 	m_iFrameIndex = 0;
+	m_fAccumulateTime = 0;
+	m_bIsFinish = false;
 	return 0;
 }
 
@@ -55,6 +70,11 @@ int CAnimation::ReposOffset(const int _frameIdx, const Vector2& _off)
 
 int CAnimation::Render(const HDC _dc, const Vector2& _Pos,const bool _xFlip)
 {
+	if (m_strName == L"SwordUseAni")
+	{
+		printf("%d ∞À ∑ª¥ı∏µ\n",m_iFrameIndex);
+		
+	}
 	Vector2 Pos;
 
 	if (false == _xFlip)
@@ -83,14 +103,14 @@ int CAnimation::Render(const HDC _dc, const Vector2& _Pos,const bool _xFlip)
 		// Y Pivot Don't tocuh
 		Pos.x = _Pos.x - m_vecFrame[m_iFrameIndex].vOffset.x;
 
-
+		
 
 		HDC StretchDC = CreateCompatibleDC(m_pTex->GetTextureDC());
-		HBITMAP StretchBit = CreateCompatibleBitmap(_dc, CLIENT_WIDTH, CLIENT_HEIGHT);
+		HBITMAP StretchBit = CreateCompatibleBitmap(_dc, CLIENT_WIDTH, CLIENT_HEIGHT + (int)floorf(m_vecFrame[m_iFrameIndex].vSliceSize.y));
 		DeleteObject(SelectObject(StretchDC, StretchBit));
 
 		StretchBlt(StretchDC
-			, (int)(Pos.x + m_vecFrame[m_iFrameIndex].vSliceSize.x * 0.5f) -1
+			, (int)(Pos.x + m_vecFrame[m_iFrameIndex].vSliceSize.x * 0.5f) - 1
 			, (int)(Pos.y - m_vecFrame[m_iFrameIndex].vSliceSize.y * 0.5f)
 			, -(int)m_vecFrame[m_iFrameIndex].vSliceSize.x
 			, (int)m_vecFrame[m_iFrameIndex].vSliceSize.y
@@ -126,12 +146,16 @@ int CAnimation::Update()
 	// 1√   0.0018  1 
 	m_fAccumulateTime += GET_DT;
 
-	// Setting accelerando duration
-	for (size_t i = 0; i < m_vecFrame.size(); ++i)
+	if (m_bAccelerando)
 	{
-		if (m_vecFrame[i].fDuration > 0.07f)
-			m_vecFrame[i].fDuration -= GET_DT;
+		// Setting accelerando duration
+		for (size_t i = 0; i < m_vecFrame.size(); ++i)
+		{
+			if (m_vecFrame[i].fDuration > 0.07f)
+				m_vecFrame[i].fDuration -= GET_DT;
+		}
 	}
+	
 
 	if (m_vecFrame[m_iFrameIndex].fDuration <= m_fAccumulateTime)
 	{
@@ -140,7 +164,10 @@ int CAnimation::Update()
 	}
 
 	if (m_vecFrame.size() == m_iFrameIndex)
+	{
+		m_bIsFinish = true;
 		m_iFrameIndex = 0;
+	}
 	return 0;
 }
 

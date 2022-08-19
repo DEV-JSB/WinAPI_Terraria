@@ -35,6 +35,7 @@ private: // Member
 	Vector2 m_vScale;
 private:
 	FRIEND_FACTORY(CTransform2D);
+	CTransform2D();
 	CTransform2D(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
 
 };

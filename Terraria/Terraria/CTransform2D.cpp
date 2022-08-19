@@ -4,6 +4,14 @@
 
 
 
+CTransform2D::CTransform2D()
+	:CComponent(false)
+	, m_vPosition({})
+	, m_vRotation({})
+	, m_vScale({})
+{
+}
+
 CTransform2D::CTransform2D(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale)
 	:CComponent(false)
 	,m_vPosition(_pos)

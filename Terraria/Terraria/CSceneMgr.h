@@ -12,7 +12,6 @@ public: // Logic
 	int FinalUpdate();
 	int Update();
 	int Render(HDC _dc);
-	int Enter();
 	int Init();
 	int Release();
 public:

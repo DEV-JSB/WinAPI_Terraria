@@ -46,23 +46,16 @@ int CSceneMgr::Render(HDC _dc)
 	return 0;
 }
 
-int CSceneMgr::Enter()
-{
-	// Setting Scene
-	m_pCurScene->Enter();
-
-	return 0;
-}
 
 int CSceneMgr::Init()
 {
 	
 	// CreateWorld
-	//m_pCurScene = CFactory<CWorld>::Create();
+	m_pCurScene = CFactory<CWorld>::Create();
 	// Create Tool
-	m_pCurScene = CFactory<CAnimationTool>::Create();
+	//m_pCurScene = CFactory<CAnimationTool>::Create();
 	
-	Enter();
+	m_pCurScene->Enter();
 	return 0;
 }
 

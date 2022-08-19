@@ -3,6 +3,7 @@
 #include"CMover.h"
 
 class CItem;
+class CAnimator;
 
 class CPlayer : public CMover
 {
@@ -31,7 +32,10 @@ private:// Mover Update Logic
 private:
 	virtual int CreateCollider(const Vector2 _pos)			override;
 private:
+	int Update_Arm(CAnimator* _pAnimator);
+	int Update_Leg(CAnimator* _pAnimator);
 	int Update_Inventory();
+	int Update_ItemFlip(const bool _b);
 private:
 	enum class PLAYER_STATE { STATE_IDLE, STATE_LEFTRUN, STATE_RIGHTRUN, STATE_END };
 private: // Member
@@ -42,6 +46,9 @@ private: // Member
 	CItem* m_pEquipItem;
 	// FocusInventoryType
 	EQUIP_INVENTORY m_eFocusInventoryIdx;
+
+	// For Using State
+	bool m_bToolUsingState;
 
 	// For State
 	bool m_bIsOnGround;

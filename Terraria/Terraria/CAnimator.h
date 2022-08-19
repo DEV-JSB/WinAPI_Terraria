@@ -4,17 +4,24 @@
 class CObject;
 class CAnimation;
 class CTexture;
+class CPlayer;
 
 class CAnimator : public CComponent
 {
+public:
+
+	bool IsEndAnimation(const wstring& _strAniname);
+
 public:// Set Func
 	int SetOwner(CObject* _p) { m_pOwner = _p; return 0; }
+	int CurPlayAnimationReset();
 	int SetFilp(const bool _bFlip);
+	int SetAnimationDurationRegular(const wstring& _strAniname, const float _fDuration);
 public:
 	// Only One Time Use , ObjectCreate
 	int SettingPlayAnimation(const vector<wstring>& _vecName);
 
-	int LoadAnimation(const wstring& _filename, const wstring& _texture);
+	int LoadAnimation(const wstring& _filename, const wstring& _texture , const bool _bAccelerando);
 	int SubstitutePlayAnimation(const wstring& _deleteAni,const wstring& _substitute);
 
 public://Logic

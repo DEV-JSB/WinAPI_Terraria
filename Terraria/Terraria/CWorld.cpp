@@ -25,7 +25,7 @@ CWorld::CWorld()
 
 int CWorld::FinalUpdate()
 {
-    for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
+    for (int i = 0; i < (int)OBJECT::OBJECT_UI; ++i)
     {
         for (size_t j = 0; j < m_arrObjectVec[i].size(); ++j)
         {
@@ -37,14 +37,19 @@ int CWorld::FinalUpdate()
 
 int CWorld::Render(const HDC _dc)
 {
-    for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
+    for (int i = 0; i < (int)OBJECT::OBJECT_UI; ++i)
     {
         for (size_t j = 0; j < m_arrObjectVec[i].size(); ++j)
         {
-            m_arrObjectVec[i][j]->Render(_dc);
+            if (i == (int)OBJECT::OBJECT_BACKGROUND)
+            {
+                m_arrObjectVec[i][j]->Render(_dc);
+                CTileMgr::GetInstance()->Render(_dc);
+            }
+            else
+                m_arrObjectVec[i][j]->Render(_dc);
         }
     }
-    CTileMgr::GetInstance()->Render(_dc);
     CUIManager::GetInstance()->Render(_dc);
     return 0;
 }
@@ -104,7 +109,6 @@ int CWorld::LoadItem()
     pSword->SetTexture(L"ItemSword.bmp");
     m_arrObjectVec[(int)OBJECT::OBJECT_ITEM].push_back(pSword);
 
-
     return 0;
 }
 
@@ -130,6 +134,8 @@ int CWorld::LoadResource()const
     // Item Texture
     CResourceMgr::GetInstance()->LoadTexture(L"ItemSword.bmp", TexPath);
 
+    // Item Animation
+    CResourceMgr::GetInstance()->LoadTexture(L"SwordUse.bmp", TexPath);
 
     return 0;
 }

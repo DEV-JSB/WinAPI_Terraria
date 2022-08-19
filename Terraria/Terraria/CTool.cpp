@@ -1,13 +1,20 @@
 #include "pch.h"
 #include "CTool.h"
+#include "CFrameMgr.h"
 
-int CTool::CreateCollider()
+CTool::CTool()
+	:m_iAttackDamage(0)
+{
+}
+int CTool::Update()
 {
 	return 0;
 }
 
-CTool::CTool()
+
+int CTool::CreateCollider()
 {
+	return 0;
 }
 
 CTool::~CTool()

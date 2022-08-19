@@ -15,7 +15,13 @@ public: // Get
 	Vector2 GetOffset(const int _frameIdx)const { return m_vecFrame[_frameIdx].vOffset; }
 	// Get Frame Count
 	int GetFrameCount()const { return m_vecFrame.size(); }
+	// Get Bool
+	bool IsFinish()const { return m_bIsFinish; }
 public: // Set
+
+	int SetDefaultDuration(const float _fDuration) {m_fDefaultDuration = _fDuration; return 0;}
+	int SetDurationRegular(const float _fDuration);
+
 	int ResetFrame();
 	// SetFrameOffset
 	int ReposOffset(const int _frameIdx, const Vector2& _off);
@@ -25,6 +31,8 @@ public: // Set
 	int SetTexture(CTexture* _pTexture) { m_pTex = _pTexture; return 0; }
 	// SetAnimationName
 	int SetAnimationName(const wstring& _name) { m_strName = _name; return 0; }
+	// Set Will Accelerando Duration
+	int SetAccelerando(const bool _b) { m_bAccelerando = _b; return 0; }
 public:
 	int Update();
 private:
@@ -34,11 +42,16 @@ private:
 	wstring m_strName;
 	// Using Texture
 	CTexture* m_pTex;
-	// All Of Frame Information
+	
+
+	// accelerando
+	bool m_bAccelerando;
 
 	vector<stAnimFrame> m_vecFrame;
 	// Is Play Finish
 	bool m_bIsFinish;
+	// Default Duration
+	float m_fDefaultDuration;
 	// Time accumulate
 	float m_fAccumulateTime;
 	// FrameIndex

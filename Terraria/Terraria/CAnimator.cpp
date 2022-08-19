@@ -17,7 +17,7 @@ CAnimator::CAnimator(const bool _willRender)
 
 
 
-int CAnimator::LoadAnimation(const wstring& _filename,const wstring& _texture)
+int CAnimator::LoadAnimation(const wstring& _filename,const wstring& _texture, const bool _bAccelerando)
 {
 	wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
 	strFilePath += L"Animation\\" + _filename;
@@ -35,6 +35,7 @@ int CAnimator::LoadAnimation(const wstring& _filename,const wstring& _texture)
 	bool IsTrash;
 	stAnimFrame stFrame;
 
+	pAnimation->SetAccelerando(_bAccelerando);
 
 	while (feof(pFile) == 0)
 	{
@@ -53,9 +54,30 @@ int CAnimator::LoadAnimation(const wstring& _filename,const wstring& _texture)
 	return 0;
 }
 
+bool CAnimator::IsEndAnimation(const wstring& _strAniname)
+{
+	return m_mapAnimation[_strAniname]->IsFinish();
+}
+
+int CAnimator::CurPlayAnimationReset()
+{
+	for (size_t i = 0; i < m_vecCurAnimation.size(); ++i)
+	{
+		m_vecCurAnimation[i]->ResetFrame();
+	}
+	return 0;
+}
+
 int CAnimator::SetFilp(const bool _bFlip)
 {
 	m_bXflip = _bFlip;
+	return 0;
+}
+
+int CAnimator::SetAnimationDurationRegular(const wstring& _strAniname, const float _fDuration)
+{
+	m_mapAnimation[_strAniname]->ResetFrame();
+	m_mapAnimation[_strAniname]->SetDurationRegular(_fDuration);
 	return 0;
 }
 
@@ -74,6 +96,7 @@ int CAnimator::SubstitutePlayAnimation(const wstring& _deleteAni, const wstring&
 	if (CutCurFrame(_deleteAni))
 	{
 		CAnimation* pAni = (*m_mapAnimation.find(_substitute)).second;
+		
 		pAni->ResetFrame();
 		m_vecCurAnimation.push_back(pAni);
 	}
