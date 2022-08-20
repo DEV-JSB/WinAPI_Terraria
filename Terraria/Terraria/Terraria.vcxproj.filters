@@ -157,6 +157,9 @@
     <Filter Include="Framework\02.Manager\SceneManager">
       <UniqueIdentifier>{49973472-2200-493a-a392-fa24279c1c64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\06.Object\Mover\Moster">
+      <UniqueIdentifier>{d82474e4-18e8-4723-a6a0-2cac208bb19e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -304,6 +307,9 @@
     <ClInclude Include="CHealthUI.h">
       <Filter>Framework\06.Object\UI\UI_Health</Filter>
     </ClInclude>
+    <ClInclude Include="CZombie.h">
+      <Filter>Framework\06.Object\Mover\Moster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terraria.cpp">
@@ -434,6 +440,9 @@
     </ClCompile>
     <ClCompile Include="CHealthUI.cpp">
       <Filter>Framework\06.Object\UI\UI_Health</Filter>
+    </ClCompile>
+    <ClCompile Include="CZombie.cpp">
+      <Filter>Framework\06.Object\Mover\Moster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

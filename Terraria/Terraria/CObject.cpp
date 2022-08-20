@@ -57,8 +57,10 @@ int CObject::FinalUpdate()
 int CObject::Render(HDC _dc)
 {
 	// Component Rendering Test
-	CCollider* p = RTTI_DYNAMIC_CAST_MAP(CCollider, m_mapComponent, COMPONENT::COMPONENT_COLLIDER);
-	p->Render(_dc);
+	for (auto iter = m_mapComponent.begin(); iter != m_mapComponent.end(); ++iter)
+	{
+		(*iter).second->Render(_dc);
+	}
 	return 0;
 }
 

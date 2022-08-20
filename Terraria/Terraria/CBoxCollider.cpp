@@ -22,7 +22,7 @@ int CBoxCollider::SetInformation(CObject* _pObj, const Vector2& _pos, const Vect
 
 int CBoxCollider::Render(const HDC _dc) const
 {
-	if (m_bRender)
+	if (true)
 	{
 		Vector2 RenderPos = CCamera::GetInstance()->GetDifference();
 		Rectangle(_dc
@@ -45,6 +45,7 @@ int CBoxCollider::FinalUpdate()
 
 int CBoxCollider::Update()
 {
+	
 	return 0;
 }
 

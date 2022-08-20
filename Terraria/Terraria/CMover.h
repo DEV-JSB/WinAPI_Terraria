@@ -2,34 +2,31 @@
 #include "CObject.h"
 
 
-class CMover :
-    public CObject
+class CMover : public CObject
 {
-public: // Collision Event
-// On Collision
-	virtual int OnCollision(const CObject* _pOther)			= 0;
-	// Enter Collsiion
-	virtual int OnCollisionEnter(const CObject* _pOther)	= 0;
-	// Exit Collision
-	virtual int OnCollisionExit(const CObject* _pOther)		= 0;
-
 protected: 
-
 	// RayCast
 	bool FootRayCast();
-
-	// Setting Animator
-	virtual int CreateAnimator() = 0;
 	// Setting RigidBody Function
 	int SetRigidbody(const RIGIDBODY _eType, float _f);
 
+public: // Collision Event
+	// On Collision
+	virtual int OnCollision(const CObject* _pOther) = 0;
+	// Enter Collsiion
+	virtual int OnCollisionEnter(const CObject* _pOther) = 0;
+	// Exit Collision
+	virtual int OnCollisionExit(const CObject* _pOther) = 0;
 public: // Update Logic
 	virtual int FinalUpdate()								= 0;
 	virtual int Update()									= 0;
 	virtual int Render(const HDC _dc)						= 0;
 
-private: // MoverMust Have Collider 
-	virtual int CreateCollider(const Vector2 _pos)			= 0;
+private: // MoverMust Have Collider and Animator
+	// Setting Collider
+	virtual int CreateCollider()							= 0;
+	// Setting Animator
+	virtual int CreateAnimator()							= 0;
 
 private:// Mover Update Logic
 	virtual int Update_Move()								= 0;

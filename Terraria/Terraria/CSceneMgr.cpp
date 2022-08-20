@@ -49,7 +49,6 @@ int CSceneMgr::Render(HDC _dc)
 
 int CSceneMgr::Init()
 {
-	
 	// CreateWorld
 	m_pCurScene = CFactory<CWorld>::Create();
 	// Create Tool

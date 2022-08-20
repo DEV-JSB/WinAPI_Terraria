@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CMover.h"
+#include "CAnimator.h"
 #include "CCollider.h"
 #include "CBoxCollider.h"
 #include "CRigidbody.h"
@@ -56,5 +57,3 @@ int CMover::SetRigidbody(const RIGIDBODY _eType, float _f)
 	}
 	return 0;
 }
-
-

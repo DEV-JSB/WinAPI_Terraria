@@ -163,6 +163,7 @@
     <ClInclude Include="CInventoryUI.h" />
     <ClInclude Include="CItem.h" />
     <ClInclude Include="CItemPocketUI.h" />
+    <ClInclude Include="CZombie.h" />
     <ClInclude Include="CMover.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CPathMgr.h" />
@@ -215,6 +216,7 @@
     <ClCompile Include="CInventoryUI.cpp" />
     <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CItemPocketUI.cpp" />
+    <ClCompile Include="CZombie.cpp" />
     <ClCompile Include="CMover.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CPathMgr.cpp" />

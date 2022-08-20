@@ -30,7 +30,7 @@ private:// Mover Update Logic
 	virtual int Update_State()								override;
 	virtual int Update_Gravity()							override;
 private:
-	virtual int CreateCollider(const Vector2 _pos)			override;
+	virtual int CreateCollider()							override;
 private:
 	int Update_Arm(CAnimator* _pAnimator);
 	int Update_Leg(CAnimator* _pAnimator);

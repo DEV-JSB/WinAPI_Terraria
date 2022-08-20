@@ -17,7 +17,7 @@
 #define JUMP_POWER 160.f
 /// ////////////////////////
 CPlayer::CPlayer()
-    : CMover(OBJECT::OBJECT_PLAYER,Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) + 110, 0.f }), Vector3(), Vector2())
+    : CMover(OBJECT::OBJECT_PLAYER,Vector3({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) + 50, 0.f }), Vector3(), Vector2())
     , m_eState(MOVER_STATE::STATE_IDLE)
     , m_eWillState(MOVER_STATE::STATE_IDLE)
     , m_bIsOnGround(false)
@@ -26,7 +26,7 @@ CPlayer::CPlayer()
     , m_bToolUsingState(false)
 {
     CreateAnimator();
-    CreateCollider(Vector2({ (float)(CLIENT_WIDTH * 0.5), (float)(CLIENT_HEIGHT * 0.5) }));
+    CreateCollider();
     CObject::CreateRigidbody(MAX_SPEED);
     for (int i = 0; i < INVEN_COLUM * INVEN_ROW; ++i)
     {
@@ -119,10 +119,8 @@ int CPlayer::Update()
 
 int CPlayer::Render(const HDC _dc)
 {
-    for (auto iter = m_mapComponent.begin(); iter != m_mapComponent.end(); ++iter)
-    {
-        (*iter).second->Render(_dc);
-    }
+    CObject::Render(_dc);
+
     if (m_pEquipItem != nullptr && m_bToolUsingState)
     {
         m_pEquipItem->Render(_dc);
@@ -362,12 +360,13 @@ int CPlayer::Update_ItemFlip(const bool _b)
     return 0;
 }
 
-int CPlayer::CreateCollider(const Vector2 _pos)
+int CPlayer::CreateCollider()
 {
     CComponent* pBoxCollider = CFactory2::CreateComponent(COMPONENT::COMPONENT_BOXCOLLIDER);
-    RTTI_DYNAMIC_CAST(pBoxCollider, CBoxCollider)->SetInformation(this,_pos
+    CTransform2D* pTransform = RTTI_DYNAMIC_CAST_MAP(CTransform2D, m_mapComponent, COMPONENT::COMPONENT_TRANSFORM2D);
+    RTTI_DYNAMIC_CAST(pBoxCollider, CBoxCollider)->SetInformation(this,Vector2({pTransform->GetPosition_X(),pTransform->GetPosition_Y()})
         , Vector2({ PLAYER_WIDTH , PLAYER_HEIGHT })
-        , Vector2({ 0.f,-2.f }));
+        , Vector2({ 0.f, 0.f }));
     
     m_mapComponent.insert({ COMPONENT::COMPONENT_COLLIDER , pBoxCollider });
     return 0;
