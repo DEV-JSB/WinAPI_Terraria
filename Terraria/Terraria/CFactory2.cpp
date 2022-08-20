@@ -8,6 +8,7 @@
 #include "CInventoryUI.h"
 #include "CItemPocketUI.h"
 #include "CSkin.h"
+#include "CZombie.h"
 
 CFactory2::CFactory2()
 {
@@ -29,6 +30,12 @@ CObject* CFactory2::CreateObject(const OBJECT _eType)
 {
     switch (_eType)
     {
+    case OBJECT::OBJECT_ZOMBIE:
+        {
+            CZombie* pObject = new CZombie();
+            return pObject;
+        }
+        break;
     case OBJECT::OBJECT_BACKGROUND:
         {
             CBackGround* pObject = new CBackGround();

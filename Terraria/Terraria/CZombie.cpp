@@ -20,6 +20,7 @@ int CZombie::Setting(const float _x, const float _y)
 {
 	CObject::SetPosition(Vector2({ _x,_y }));
 	CreateCollider();
+	CreateAnimator();
 	return 0;
 }
 
@@ -75,6 +76,9 @@ int CZombie::CreateAnimator()
 	pAnimator->LoadAnimation(L"ZombieAni", L"Zombie.bmp", false);
 
 	pAnimator->SettingPlayAnimation(vector<wstring>({ L"ZombieAni"}));
+
+	m_mapComponent.insert({ COMPONENT::COMPONENT_ANIMATOR,pAnimator });
+	pAnimator->SetOwner(this);
 
 
 	return 0;

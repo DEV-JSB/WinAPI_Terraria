@@ -14,7 +14,10 @@
 #include "CInventoryUI.h"
 #include "CTileMgr.h"
 #include "CUIManager.h"
+#include "CZombie.h"
 
+
+#define ZOMBIE_COUNT 3
 
 
 CWorld::CWorld()
@@ -125,7 +128,11 @@ int CWorld::LoadResource()const
     CResourceMgr::GetInstance()->LoadTexture(L"ItemSword.bmp", TexPath);
 
     // Item Animation
-    CResourceMgr::GetInstance()->LoadTexture(L"SwordUse.bmp", TexPath);
+    CResourceMgr::GetInstance()->LoadTexture(L"SwordUse.bmp", TexPath);\
+
+    // MonsterTexture
+    CResourceMgr::GetInstance()->LoadTexture(L"Zombie.bmp", TexPath);
+
 
     return 0;
 }
@@ -158,8 +165,20 @@ int CWorld::CreateObject()
 {
 
     // CreatePlayer
-    CPlayer* Player = CFactory<CPlayer>::Create();
-    m_arrObjectVec[(int)OBJECT::OBJECT_PLAYER].push_back(Player);
+    CPlayer* pPlayer = CFactory<CPlayer>::Create();
+    m_arrObjectVec[(int)OBJECT::OBJECT_PLAYER].push_back(pPlayer);
+
+    CObject* pZombie;
+    float x = (float)CLIENT_WIDTH * 0.3f;
+    float y = (float)CLIENT_HEIGHT * 0.5f;
+
+    for (int i = 0 ; i < ZOMBIE_COUNT; ++i)
+    {
+        pZombie = CFactory2::CreateObject(OBJECT::OBJECT_ZOMBIE);
+        RTTI_DYNAMIC_CAST(pZombie, CZombie)->Setting(x,y);
+        m_arrObjectVec[(int)OBJECT::OBJECT_ZOMBIE].push_back(pZombie);
+        x += 60.f;
+    }
 
     // CreateTile
     CTileMgr::GetInstance()->Enter();

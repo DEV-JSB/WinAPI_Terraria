@@ -1,6 +1,3 @@
-﻿  CAnimationTool.cpp
-  CAnimationUI.cpp
-  CSceneMgr.cpp
-  CUIManager.cpp
-  CWorld.cpp
+﻿  CPlayer.cpp
+  CZombie.cpp
   Terraria.vcxproj -> C:\Users\Admin\Documents\WinAPI_Terraria\Terraria\Debug\Terraria.exe
