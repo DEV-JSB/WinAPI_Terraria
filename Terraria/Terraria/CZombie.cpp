@@ -10,9 +10,13 @@
 #define MONSTER_HEIGHT 40.f
 
 
+
 CZombie::CZombie()
 	:CMover(OBJECT::OBJECT_ZOMBIE, Vector3({}), Vector3({}), Vector2({}))
 {
+	CObject::CreateRigidbody(10.f);
+
+	m_vecMoveDirection = Vector2({ -100.f, 0.f });
 
 }
 
@@ -27,12 +31,19 @@ int CZombie::Setting(const float _x, const float _y)
 
 int CZombie::FinalUpdate()
 {
+	CObject::FinalUpdate();
+
 	return 0;
 }
 
 int CZombie::Update()
 {
 	CObject::Update();
+
+	Update_Move();
+	Update_Gravity();
+	Update_State();
+	Update_Animation();
 	return 0;
 }
 
@@ -86,12 +97,21 @@ int CZombie::CreateAnimator()
 
 int CZombie::Update_Move()
 {
+	if (CMover::FootRayCast())
+	{
+		m_bIsOnGround = true;
+		printf("¶¥¿¡ÀÖÀ½\n");
+	}
+	else
+		m_bIsOnGround = false;
+	if(m_bIsOnGround == true)
+		CMover::AddForce(m_vecMoveDirection);
+
 	return 0;
 }
 
 int CZombie::Update_Animation()
 {
-	m_mapComponent[COMPONENT::COMPONENT_ANIMATOR]->Update();
 	return 0;
 }
 
@@ -102,6 +122,14 @@ int CZombie::Update_State()
 
 int CZombie::Update_Gravity()
 {
+	if (!m_bIsOnGround)
+	{
+		CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_GRAVITY, 90.f);
+	}
+	else
+	{
+		CMover::SetRigidbody(RIGIDBODY::RIGIDBODY_GRAVITY, 0.f);
+	}
 	return 0;
 }
 

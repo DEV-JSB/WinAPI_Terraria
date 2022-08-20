@@ -26,6 +26,12 @@ private:// Mover Update Logic
 	virtual int Update_Animation()							override;
 	virtual int Update_State()								override;
 	virtual int Update_Gravity()							override;
+
+
+private:
+	bool m_bIsOnGround;
+
+	Vector2 m_vecMoveDirection;
 private:
 	friend class CFactory2;
 	CZombie();

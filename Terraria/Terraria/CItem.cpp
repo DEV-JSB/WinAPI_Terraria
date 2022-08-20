@@ -35,7 +35,6 @@ int CItem::FinalUpdate()
 		auto iter = m_mapComponent.find(COMPONENT::COMPONENT_ANIMATOR);
 		if (iter != m_mapComponent.end())
 		{
-			printf("¸®¼Â!\n");
 			RTTI_DYNAMIC_CAST((*iter).second, CAnimator)->CurPlayAnimationReset();
 		}
 		

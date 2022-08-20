@@ -77,7 +77,8 @@ int CWorld::Enter()
     // Setting Collider CheckBox
     CCollisionMgr::GetInstance()->CheckingGroupBox(OBJECT::OBJECT_TILE, OBJECT::OBJECT_PLAYER);
 
-    
+    CCollisionMgr::GetInstance()->CheckingGroupBox(OBJECT::OBJECT_TILE, OBJECT::OBJECT_ZOMBIE);
+
     // Setting Player Item
     SetPlayerItem();
 
@@ -169,15 +170,17 @@ int CWorld::CreateObject()
     m_arrObjectVec[(int)OBJECT::OBJECT_PLAYER].push_back(pPlayer);
 
     CObject* pZombie;
-    float x = (float)CLIENT_WIDTH * 0.3f;
-    float y = (float)CLIENT_HEIGHT * 0.5f;
+    float x = (float)CLIENT_WIDTH * 0.9f;
+    float y = (float)CLIENT_HEIGHT * 0.6f;
+
+
 
     for (int i = 0 ; i < ZOMBIE_COUNT; ++i)
     {
         pZombie = CFactory2::CreateObject(OBJECT::OBJECT_ZOMBIE);
         RTTI_DYNAMIC_CAST(pZombie, CZombie)->Setting(x,y);
         m_arrObjectVec[(int)OBJECT::OBJECT_ZOMBIE].push_back(pZombie);
-        x += 60.f;
+        x -= 60.f;
     }
 
     // CreateTile

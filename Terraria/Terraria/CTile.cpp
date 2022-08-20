@@ -85,8 +85,10 @@ int CTile::OnCollision(const CObject* _pOther)
 
 int CTile::OnCollisionEnter(const CObject* _pOther)
 {
-	if (OBJECT::OBJECT_PLAYER == _pOther->GetType())
+	if (OBJECT::OBJECT_PLAYER == _pOther->GetType() || OBJECT::OBJECT_ZOMBIE == _pOther->GetType())
 	{
+		if (OBJECT::OBJECT_ZOMBIE == _pOther->GetType())
+			int i = 0;
 		// For Collider Bottom
 		Vector2 vColliderPos = _pOther->GetCollider()->GetPos();
 		Vector2 vColliderScale = RTTI_DYNAMIC_CAST(_pOther->GetCollider(), CBoxCollider)->GetScale();

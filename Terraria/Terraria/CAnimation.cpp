@@ -70,11 +70,6 @@ int CAnimation::ReposOffset(const int _frameIdx, const Vector2& _off)
 
 int CAnimation::Render(const HDC _dc, const Vector2& _Pos,const bool _xFlip)
 {
-	if (m_strName == L"SwordUseAni")
-	{
-		printf("%d °Ë ·»´õ¸µ\n",m_iFrameIndex);
-		
-	}
 	Vector2 Pos;
 
 	if (false == _xFlip)
