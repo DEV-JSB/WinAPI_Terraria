@@ -13,11 +13,11 @@ public: // Inventory Function
 	int GetFocusingIndex()const { return (int)m_eFocusInventoryIdx; }
 public: // Collision Event
 	// On Collision
-	virtual int OnCollision(const CObject* _pOther)			override;
+	virtual int OnCollision(CObject* _pOther)			override;
 	// Enter Collsiion
-	virtual int OnCollisionEnter(const CObject* _pOther)	override;
+	virtual int OnCollisionEnter(CObject* _pOther)		override;
 	// Exit Collision
-	virtual int OnCollisionExit(const CObject* _pOther)		override;
+	virtual int OnCollisionExit(CObject* _pOther)		override;
 public:
 	virtual int FinalUpdate() override;
 	virtual int Update() override;

@@ -61,7 +61,7 @@ int CPlayer::AcquireItem(CItem* _pItem)
     return 0;
 }
 
-int CPlayer::OnCollision(const CObject* _pOther)
+int CPlayer::OnCollision(CObject* _pOther)
 {
     // Set True Object Still On Ground
     if (OBJECT::OBJECT_TILE == _pOther->GetType())
@@ -70,7 +70,7 @@ int CPlayer::OnCollision(const CObject* _pOther)
     return 0;
 }
 
-int CPlayer::OnCollisionEnter(const CObject* _pOther)
+int CPlayer::OnCollisionEnter(CObject* _pOther)
 {
 
     if (OBJECT::OBJECT_TILE == _pOther->GetType())
@@ -79,7 +79,7 @@ int CPlayer::OnCollisionEnter(const CObject* _pOther)
     return 0;
 }
 
-int CPlayer::OnCollisionExit(const CObject* _pOther)
+int CPlayer::OnCollisionExit(CObject* _pOther)
 {
     // Tile Overlap
     if (OBJECT::OBJECT_TILE == _pOther->GetType())

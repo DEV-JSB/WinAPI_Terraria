@@ -12,11 +12,11 @@ protected:
 
 public: // Collision Event
 	// On Collision
-	virtual int OnCollision(const CObject* _pOther) = 0;
+	virtual int OnCollision(CObject* _pOther) = 0;
 	// Enter Collsiion
-	virtual int OnCollisionEnter(const CObject* _pOther) = 0;
+	virtual int OnCollisionEnter(CObject* _pOther) = 0;
 	// Exit Collision
-	virtual int OnCollisionExit(const CObject* _pOther) = 0;
+	virtual int OnCollisionExit(CObject* _pOther) = 0;
 public: // Update Logic
 	virtual int FinalUpdate()								= 0;
 	virtual int Update()									= 0;

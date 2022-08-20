@@ -3,6 +3,7 @@
 #include "CZombie.h"
 #include "CBoxCollider.h"
 #include "CTransform2D.h"
+#include "CItem.h"
 // Type , Pos , Scale , Rot 지정
 
 
@@ -13,6 +14,7 @@
 
 CZombie::CZombie()
 	:CMover(OBJECT::OBJECT_ZOMBIE, Vector3({}), Vector3({}), Vector2({}))
+	,m_iHealth(10)
 {
 	CObject::CreateRigidbody(10.f);
 
@@ -54,17 +56,28 @@ int CZombie::Render(const HDC _dc)
 	return 0;
 }
 
-int CZombie::OnCollision(const CObject* _pOther)
+int CZombie::OnCollision(CObject* _pOther)
 {
 	return 0;
 }
 
-int CZombie::OnCollisionEnter(const CObject* _pOther)
+int CZombie::OnCollisionEnter(CObject* _pOther)
 {
+	if (OBJECT::OBJECT_ITEM == _pOther->GetType())
+	{
+		switch (RTTI_DYNAMIC_CAST(_pOther, CItem)->GetItemCategory())
+		{
+
+		}
+
+
+	}
+
+
 	return 0;
 }
 
-int CZombie::OnCollisionExit(const CObject* _pOther)
+int CZombie::OnCollisionExit(CObject* _pOther)
 {
 	return 0;
 }
@@ -98,12 +111,10 @@ int CZombie::CreateAnimator()
 int CZombie::Update_Move()
 {
 	if (CMover::FootRayCast())
-	{
 		m_bIsOnGround = true;
-		printf("땅에있음\n");
-	}
 	else
 		m_bIsOnGround = false;
+
 	if(m_bIsOnGround == true)
 		CMover::AddForce(m_vecMoveDirection);
 

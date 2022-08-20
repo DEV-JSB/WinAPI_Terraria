@@ -15,11 +15,11 @@ public: // Logic
 	virtual int FinalUpdate();
 public: // Collision Function
 	// On Collision
-	virtual int OnCollision(const CObject* _pOther)			{ return 0; };
+	virtual int OnCollision(CObject* _pOther)			{ return 0; };
 	// Enter Collsiion
-	virtual int OnCollisionEnter(const CObject* _pOther)	{ return 0; };
+	virtual int OnCollisionEnter(CObject* _pOther)	{ return 0; };
 	// Exit Collision
-	virtual int OnCollisionExit(const CObject* _pOther)		{ return 0; };
+	virtual int OnCollisionExit(CObject* _pOther)		{ return 0; };
 public:
 	// GetCollider
 	CCollider* GetCollider()const;

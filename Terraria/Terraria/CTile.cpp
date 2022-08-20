@@ -62,7 +62,7 @@ int CTile::Setting(TILE _eType, const Vector2 _pos)
 	return 0;
 }
 
-int CTile::OnCollision(const CObject* _pOther)
+int CTile::OnCollision(CObject* _pOther)
 {
 	if (OBJECT::OBJECT_PLAYER == _pOther->GetType())
 	{
@@ -83,7 +83,7 @@ int CTile::OnCollision(const CObject* _pOther)
 	return 0;
 }
 
-int CTile::OnCollisionEnter(const CObject* _pOther)
+int CTile::OnCollisionEnter(CObject* _pOther)
 {
 	if (OBJECT::OBJECT_PLAYER == _pOther->GetType() || OBJECT::OBJECT_ZOMBIE == _pOther->GetType())
 	{
@@ -106,7 +106,7 @@ int CTile::OnCollisionEnter(const CObject* _pOther)
 	return 0;
 }
 
-int CTile::OnCollisionExit(const CObject* _pOther)
+int CTile::OnCollisionExit(CObject* _pOther)
 {
 	return 0;
 }

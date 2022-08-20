@@ -1,6 +1,9 @@
 #pragma once
 #include "CTool.h"
 #include "CFactory2.h"
+
+class CCollider;
+
 class CSword : public CTool
 {
 public: // Logic
@@ -8,6 +11,13 @@ public: // Logic
 	virtual int Update()				override;
 private:
 	int CreateAnimator();
+	int UpdateCollider();
+	int CreateCollider();
+private:
+	int m_iFrameMaxCount;
+	int m_iColliderIndex;
+	vector<CCollider*> m_vecCollider;
+
 private:
 	friend class CFactory2;
 	CSword();

@@ -12,6 +12,7 @@ public: // SetFunction
 public: // GetFunction
 	const wstring GetTextureName()const { return m_strItemTexture; }
 	const float GetCoolTime()const { return m_fCoolTime; }
+	const ITEM_NAME GetItemCategory()const { return m_eItemCategory; }
 public: // Logic
 	virtual int Render(const HDC _dc)	 = 0;
 	virtual int Update()				 override;
@@ -25,16 +26,14 @@ protected:
 	// Item CoolTime
 	float m_fCoolTime;
 	float m_fAccumTime;
-	// ItemIndex
-	int m_iItemIndex;
-	// Making through this Menber variable
-	static int m_iIdxKey;
 	// Item Texture
 	wstring m_strItemTexture;
 	// Item Animation Name
 	wstring m_strItemAnimation;
+	// Item Type
+	ITEM_NAME m_eItemCategory;
 protected:
-	CItem();
+	CItem(const ITEM_NAME _eType);
 public:
 	virtual ~CItem();
 };

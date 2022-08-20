@@ -12,7 +12,7 @@ private:
     // Tool Have Damage
     int m_iAttackDamage;
 protected:
-    CTool();
+    CTool(const ITEM_NAME _eItemType);
     virtual ~CTool();
 };
 

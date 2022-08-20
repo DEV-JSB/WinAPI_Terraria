@@ -2,8 +2,9 @@
 #include "CTool.h"
 #include "CFrameMgr.h"
 
-CTool::CTool()
-	:m_iAttackDamage(0)
+CTool::CTool(const ITEM_NAME _eItemType)
+	:CItem(_eItemType)
+	,m_iAttackDamage(0)
 {
 }
 int CTool::Update()
@@ -16,6 +17,8 @@ int CTool::CreateCollider()
 {
 	return 0;
 }
+
+
 
 CTool::~CTool()
 {

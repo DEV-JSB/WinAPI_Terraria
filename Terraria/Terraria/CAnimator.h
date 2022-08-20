@@ -9,6 +9,8 @@ class CPlayer;
 class CAnimator : public CComponent
 {
 public:
+	int GetCurrentAnimationCount(const wstring& _strname);
+public:
 
 	bool IsEndAnimation(const wstring& _strAniname);
 

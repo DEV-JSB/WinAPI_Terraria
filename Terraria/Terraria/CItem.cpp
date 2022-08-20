@@ -8,11 +8,10 @@
 #include "CFrameMgr.h"
 #include "CAnimator.h"
 
-int CItem::m_iIdxKey = 0;
 
-CItem::CItem()
+CItem::CItem(const ITEM_NAME _eType)
 	:CObject(OBJECT::OBJECT_ITEM)
-	,m_iItemIndex(m_iIdxKey++)
+	, m_eItemCategory(_eType)
 	,m_strItemTexture(L"")
 	,m_strItemAnimation(L"")
 	,m_pOwner(nullptr)

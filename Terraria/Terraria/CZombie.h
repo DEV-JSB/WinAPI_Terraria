@@ -12,11 +12,11 @@ public: // Update Logic
 	virtual int Render(const HDC _dc)						override;
 public: // Collision Event
 // On Collision
-	virtual int OnCollision(const CObject* _pOther)			override;
+	virtual int OnCollision(CObject* _pOther)			override;
 	// Enter Collsiion
-	virtual int OnCollisionEnter(const CObject* _pOther)	override;
+	virtual int OnCollisionEnter(CObject* _pOther)	override;
 	// Exit Collision
-	virtual int OnCollisionExit(const CObject* _pOther)		override;
+	virtual int OnCollisionExit(CObject* _pOther)		override;
 private:
 	virtual int CreateCollider()							override;
 	virtual int CreateAnimator()							override;
@@ -30,7 +30,7 @@ private:// Mover Update Logic
 
 private:
 	bool m_bIsOnGround;
-
+	int m_iHealth;
 	Vector2 m_vecMoveDirection;
 private:
 	friend class CFactory2;

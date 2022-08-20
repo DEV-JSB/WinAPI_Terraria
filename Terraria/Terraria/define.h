@@ -130,6 +130,14 @@ enum class ITEM
 	ITEM_SWORD,
 	ITEM_END
 };
+
+// Item Name
+enum class ITEM_NAME
+{
+	ITEM_NAME_MASERSWORD,
+	ITEM_NAME_END
+};
+
 // Object
 enum class OBJECT
 {
