@@ -2,7 +2,7 @@
 #include "CAnimator.h"
 #include "CZombie.h"
 #include "CBoxCollider.h"
-
+#include "CTransform2D.h"
 // Type , Pos , Scale , Rot ÁöÁ¤
 
 
@@ -10,11 +10,20 @@
 #define MONSTER_HEIGHT 40.f
 
 
-CZombie::CZombie(const Vector3 _pos, const Vector3 _rot, const Vector2 _scale)
-	:CMover(OBJECT::OBJECT_ZOMBIE, _pos, _rot, _scale)
+CZombie::CZombie()
+	:CMover(OBJECT::OBJECT_ZOMBIE, Vector3({}), Vector3({}), Vector2({}))
 {
 
 }
+
+int CZombie::Setting(const float _x, const float _y)
+{
+	CObject::SetPosition(Vector2({ _x,_y }));
+	CreateCollider();
+	return 0;
+}
+
+
 int CZombie::FinalUpdate()
 {
 	return 0;
@@ -51,9 +60,10 @@ int CZombie::OnCollisionExit(const CObject* _pOther)
 int CZombie::CreateCollider()
 {
 	CComponent* pBoxCollider = CFactory2::CreateComponent(COMPONENT::COMPONENT_BOXCOLLIDER);
-	/*RTTI_DYNAMIC_CAST(pBoxCollider, CBoxCollider)->SetInformation(this, _pos
-		, Vector2({ MONSTER_WIDTH , MONSTER_HEIGHT})
-		, Vector2({ 0.f,0.f }));*/
+	CTransform2D* pTransform = RTTI_DYNAMIC_CAST_MAP(CTransform2D, m_mapComponent, COMPONENT::COMPONENT_TRANSFORM2D);
+	RTTI_DYNAMIC_CAST(pBoxCollider, CBoxCollider)->SetInformation(this, Vector2({ pTransform->GetPosition_X(),pTransform->GetPosition_Y() })
+		, Vector2({ MONSTER_WIDTH , MONSTER_HEIGHT })
+		, Vector2({ 0.f, 0.f }));
 
 	m_mapComponent.insert({ COMPONENT::COMPONENT_COLLIDER , pBoxCollider });
 	return 0;

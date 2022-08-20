@@ -38,6 +38,7 @@ protected:
 	enum class MOVER_STATE { STATE_IDLE , STATE_LEFTRUN , STATE_RIGHTRUN , STATE_JUMP , STATE_END };
 protected:
 	CMover(const OBJECT _eType, const Vector3 _pos, const Vector3 _rot, const Vector2 _scale);
+	CMover(const OBJECT _eType);
 public:
 	virtual ~CMover();
 };

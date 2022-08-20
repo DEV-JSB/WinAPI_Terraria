@@ -4,6 +4,8 @@
 
 class CZombie : public CMover
 {
+public:
+	int Setting(const float _x,const float _y);
 public: // Update Logic
 	virtual int FinalUpdate()								override;
 	virtual int Update()									override;
@@ -26,7 +28,7 @@ private:// Mover Update Logic
 	virtual int Update_Gravity()							override;
 private:
 	friend class CFactory2;
-	CZombie(const Vector3 _pos,const Vector3 _rot ,const Vector2 _scale);
+	CZombie();
 public:
 	virtual ~CZombie();
 

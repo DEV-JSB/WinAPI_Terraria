@@ -68,23 +68,13 @@ int CWorld::Enter()
 {
     LoadResource();
 
-    // CreatePlayer
-    CPlayer* Player = CFactory<CPlayer>::Create();
-    m_arrObjectVec[(int)OBJECT::OBJECT_PLAYER].push_back(Player);
-    
-    // CreateTile
-    CTileMgr::GetInstance()->Enter();
-    
+    CreateObject();
+
+
     // Setting Collider CheckBox
     CCollisionMgr::GetInstance()->CheckingGroupBox(OBJECT::OBJECT_TILE, OBJECT::OBJECT_PLAYER);
 
-    // Setting Backgound
-    CreateBackGround();
-    // Setting UI
-    CreateUI();
-
-    // Setting Item
-    LoadItem();
+    
     // Setting Player Item
     SetPlayerItem();
 
@@ -161,6 +151,27 @@ int CWorld::CreateUI()
     m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pUI2);
 
 
+    return 0;
+}
+
+int CWorld::CreateObject()
+{
+
+    // CreatePlayer
+    CPlayer* Player = CFactory<CPlayer>::Create();
+    m_arrObjectVec[(int)OBJECT::OBJECT_PLAYER].push_back(Player);
+
+    // CreateTile
+    CTileMgr::GetInstance()->Enter();
+
+    // Setting Backgound
+    CreateBackGround();
+    // Setting UI
+    CreateUI();
+
+    // Setting Item
+    LoadItem();
+    
     return 0;
 }
 

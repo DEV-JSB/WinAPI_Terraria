@@ -1,2 +1,6 @@
-﻿  CTile.cpp
-  Terraria.vcxproj -> C:\Users\Admin\Documents\GitHub\WinAPI_Terraria\Terraria\Debug\Terraria.exe
+﻿  CAnimationTool.cpp
+  CAnimationUI.cpp
+  CSceneMgr.cpp
+  CUIManager.cpp
+  CWorld.cpp
+  Terraria.vcxproj -> C:\Users\Admin\Documents\WinAPI_Terraria\Terraria\Debug\Terraria.exe

@@ -16,6 +16,7 @@ private:
 	int LoadResource()const;
 	int CreateBackGround();
 	int CreateUI();
+	int CreateObject();
 private:
 	HIDE_CONSTRUCTOR(CWorld);
 public:

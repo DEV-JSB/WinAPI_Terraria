@@ -11,6 +11,11 @@ CMover::CMover(const OBJECT _eType, const Vector3 _pos, const Vector3 _rot, cons
 {
 }
 
+CMover::CMover(const OBJECT _eType)
+	: CObject(_eType)
+{
+}
+
 CMover::~CMover()
 {
 }
