@@ -79,6 +79,9 @@ int CWorld::Enter()
 
     CCollisionMgr::GetInstance()->CheckingGroupBox(OBJECT::OBJECT_TILE, OBJECT::OBJECT_ZOMBIE);
 
+    CCollisionMgr::GetInstance()->CheckingGroupBox(OBJECT::OBJECT_ITEM, OBJECT::OBJECT_ZOMBIE);
+
+
     // Setting Player Item
     SetPlayerItem();
 

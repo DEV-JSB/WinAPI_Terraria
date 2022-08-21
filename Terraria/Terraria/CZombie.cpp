@@ -68,6 +68,9 @@ int CZombie::OnCollisionEnter(CObject* _pOther)
 	{
 		switch (RTTI_DYNAMIC_CAST(_pOther, CItem)->GetItemCategory())
 		{
+		case ITEM_NAME::ITEM_NAME_MASERSWORD:
+			CMover::AddForce(Vector2({500,-500}));
+			break;
 
 		}
 

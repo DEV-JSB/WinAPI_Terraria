@@ -43,8 +43,11 @@ int CSword::SetOwner(CPlayer* _pPlayer)
 
 int CSword::FinalUpdate()
 {
-	
-	return CItem::FinalUpdate();
+	if (CItem::FinalUpdate() == FINISH)
+		m_mapComponent.erase(COMPONENT::COMPONENT_COLLIDER);
+	else
+		return 0;
+	return FINISH;
 }
 
 int CSword::UpdateTransform()

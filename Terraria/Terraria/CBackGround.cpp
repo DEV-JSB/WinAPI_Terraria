@@ -34,7 +34,7 @@ int CBackGround::Setting(const wstring& _str)
 int CBackGround::Render(const HDC _dc)
 {
 	// For FPS
-	//m_mapComponent[COMPONENT::COMPONENT_SKIN]->Render(_dc);
+	m_mapComponent[COMPONENT::COMPONENT_SKIN]->Render(_dc);
 	return 0;
 }
 

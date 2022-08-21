@@ -35,7 +35,7 @@ int CTileMgr::Enter()
 	//NormalTileSetting
 		// 45 Row Max
 		// 80 colum Max
-	for (int x = 0 ; x < 120; ++x)
+	for (int x = 0 ; x < 200; ++x)
 	{
 		for (int y = 30; y <= 31; ++y)
 		{
