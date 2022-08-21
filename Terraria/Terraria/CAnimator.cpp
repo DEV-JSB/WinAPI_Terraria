@@ -54,9 +54,19 @@ int CAnimator::LoadAnimation(const wstring& _filename,const wstring& _texture, c
 	return 0;
 }
 
+const int CAnimator::GetCurrentPlayIndex(const wstring& _strname)
+{
+	return m_mapAnimation[_strname]->GetCurrentPlayIndex();
+}
+
 int CAnimator::GetCurrentAnimationCount(const wstring& _strname)
 {
 	return m_mapAnimation[_strname]->GetFrameCount();
+}
+
+const vector<stAnimFrame> CAnimator::GetAnimationFrameInfo(const wstring& _strname)
+{
+	return m_mapAnimation[_strname]->GetFrameInfo();
 }
 
 bool CAnimator::IsEndAnimation(const wstring& _strAniname)

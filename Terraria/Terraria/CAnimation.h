@@ -13,10 +13,14 @@ public:
 public: // Get
 	// GetFrame Offset
 	Vector2 GetOffset(const int _frameIdx)const { return m_vecFrame[_frameIdx].vOffset; }
+	// Get Current Play Index
+	const int GetCurrentPlayIndex()const;
 	// Get Frame Count
 	int GetFrameCount()const { return m_vecFrame.size(); }
 	// Get Bool
 	bool IsFinish()const { return m_bIsFinish; }
+	// GetFrameIformation
+	const vector<stAnimFrame> GetFrameInfo() {	return m_vecFrame;	}
 public: // Set
 
 	int SetDefaultDuration(const float _fDuration) {m_fDefaultDuration = _fDuration; return 0;}
@@ -35,8 +39,6 @@ public: // Set
 	int SetAccelerando(const bool _b) { m_bAccelerando = _b; return 0; }
 public:
 	int Update();
-private:
-	int FlipBitmap();
 private:
 	// Animation Name
 	wstring m_strName;

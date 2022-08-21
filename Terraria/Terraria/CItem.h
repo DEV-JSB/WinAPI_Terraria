@@ -21,6 +21,10 @@ public:
 	// Setting Texture
 	virtual int SetTexture(const wstring& _str);
 protected:
+	// Flip Item -> Flip Player
+	bool m_bIsFilp;
+
+
 
 	CPlayer* m_pOwner;
 	// Item CoolTime

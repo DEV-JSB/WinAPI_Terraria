@@ -9,7 +9,9 @@ class CPlayer;
 class CAnimator : public CComponent
 {
 public:
+	const int GetCurrentPlayIndex(const wstring& _strname);
 	int GetCurrentAnimationCount(const wstring& _strname);
+	const vector<stAnimFrame> GetAnimationFrameInfo(const wstring& _strname);
 public:
 
 	bool IsEndAnimation(const wstring& _strAniname);

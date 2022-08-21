@@ -133,6 +133,11 @@ int CAnimation::Render(const HDC _dc, const Vector2& _Pos,const bool _xFlip)
 	return 0;
 }
 
+const int CAnimation::GetCurrentPlayIndex() const
+{
+	return m_iFrameIndex;
+}
+
 
 int CAnimation::Update()
 {
@@ -163,12 +168,6 @@ int CAnimation::Update()
 		m_bIsFinish = true;
 		m_iFrameIndex = 0;
 	}
-	return 0;
-}
-
-int CAnimation::FlipBitmap()
-{
-
 	return 0;
 }
 

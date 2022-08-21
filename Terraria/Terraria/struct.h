@@ -38,6 +38,10 @@ typedef struct MyVector2
 	{
 		return MyVector2({ x + _vec.x, y + _vec.y });
 	}
+	MyVector2 operator+(const MyVector2& _vec)const
+	{
+		return MyVector2({ x + _vec.x, y + _vec.y });
+	}
 	MyVector2& operator+=(const MyVector2& _vec)
 	{
 		this->x += _vec.x;
@@ -45,6 +49,10 @@ typedef struct MyVector2
 		return *this;
 	}
 	MyVector2 operator * (const float _f)
+	{
+		return MyVector2({ this->x * _f, this->y * _f });
+	}
+	MyVector2 operator * (const float _f) const
 	{
 		return MyVector2({ this->x * _f, this->y * _f });
 	}

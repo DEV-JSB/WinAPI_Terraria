@@ -6,6 +6,7 @@
 
 UINT CCollider::g_iIdValue = 0;
 
+
 int CCollider::FinalUpdate()
 {
 	Vector3 OwnerPos = m_pOwner->GetTransform()->GetPosition();

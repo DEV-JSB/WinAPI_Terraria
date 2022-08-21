@@ -3,6 +3,7 @@
 #include "CFactory2.h"
 
 class CCollider;
+class CAnimator;
 
 class CSword : public CTool
 {
@@ -12,8 +13,10 @@ public: // Logic
 private:
 	int CreateAnimator();
 	int UpdateCollider();
-	int CreateCollider();
+	// Use In Animator Create Because Collider Will make through Bit Information
+	int CreateCollider(CAnimator* _pAni, const wstring& _strAniname);
 private:
+
 	int m_iFrameMaxCount;
 	int m_iColliderIndex;
 	vector<CCollider*> m_vecCollider;

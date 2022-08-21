@@ -7,7 +7,6 @@ class CCollider :
     public CComponent
 {
 public: // Set Function
-
 	int SetOwner(CObject* _pObj) { m_pOwner = _pObj; return 0; }
 public:// Get Function
 	UINT GetID()const { return m_iID; }

@@ -17,6 +17,7 @@ CItem::CItem(const ITEM_NAME _eType)
 	,m_pOwner(nullptr)
 	,m_fCoolTime(0.f)
 	,m_fAccumTime(0.f)
+	, m_bIsFilp(true)
 
 {
 }

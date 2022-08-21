@@ -1,7 +1,3 @@
-﻿  CBoxCollider.cpp
-  CFactory2.cpp
+﻿  CItem.cpp
   CSword.cpp
-C:\Users\Admin\Documents\WinAPI_Terraria\Terraria\Terraria\CSword.cpp(56,10): warning C4101: 'vOffset': unreferenced local variable
-C:\Users\Admin\Documents\WinAPI_Terraria\Terraria\Terraria\CSword.cpp(54,10): warning C4101: 'vPos': unreferenced local variable
-C:\Users\Admin\Documents\WinAPI_Terraria\Terraria\Terraria\CSword.cpp(55,10): warning C4101: 'vScale': unreferenced local variable
-  Terraria.vcxproj -> C:\Users\Admin\Documents\WinAPI_Terraria\Terraria\Debug\Terraria.exe
+  Terraria.vcxproj -> D:\UNITY\JK_MU\WinAPI_Terraria\Terraria\Debug\Terraria.exe
