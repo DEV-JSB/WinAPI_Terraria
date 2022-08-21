@@ -26,8 +26,47 @@ int CSword::Render(const HDC _dc)
 int CSword::Update()
 {
 	CObject::Update();
+	UpdateTransform();
 	UpdateCollider();
 	return CItem::Update();
+}
+
+int CSword::SetOwner(CPlayer* _pPlayer)
+{
+	CItem::SetOwner(_pPlayer);
+
+	CAnimator* pAni = RTTI_DYNAMIC_CAST_MAP(CAnimator, m_mapComponent, COMPONENT::COMPONENT_ANIMATOR);
+	CreateCollider(pAni, L"SwordUseAni");
+
+	return 0;
+}
+
+int CSword::FinalUpdate()
+{
+	
+	return CItem::FinalUpdate();
+}
+
+int CSword::UpdateTransform()
+{
+	CAnimator* pAni = RTTI_DYNAMIC_CAST_MAP(CAnimator, m_mapComponent, COMPONENT::COMPONENT_ANIMATOR);
+	//Get Animator Frame Information
+	const vector<stAnimFrame> vecAniFrameInfo = pAni->GetAnimationFrameInfo(L"SwordUseAni");
+
+	const int iAnimationIndex = pAni->GetCurrentPlayIndex(L"SwordUseAni");
+
+	CBoxCollider* pCollider = nullptr;
+	//For Setting Collider Information
+	Vector2 vPos;
+	// Already You SetOffst in CreateCollider So don't need SetOffset
+	//vPos.x = m_pOwner->GetTransform()->GetPosition().x + vecAniFrameInfo[iAnimationIndex].vOffset.x;
+	//vPos.y = m_pOwner->GetTransform()->GetPosition().y + vecAniFrameInfo[iAnimationIndex].vOffset.y;
+	vPos.x = m_pOwner->GetTransform()->GetPosition().x;
+	vPos.y = m_pOwner->GetTransform()->GetPosition().y;
+	CObject::GetTransform()->SetPosition(Vector3({ vPos.x,vPos.y,0.f }));
+
+
+	return 0;
 }
 
 int CSword::CreateAnimator()
@@ -46,7 +85,6 @@ int CSword::CreateAnimator()
 	
 	m_iFrameMaxCount = pAnimator->GetCurrentAnimationCount(strAnimatorName);
 
-	CreateCollider(pAnimator, strAnimatorName);
 
 	return 0;
 } 
@@ -68,7 +106,10 @@ int CSword::CreateCollider(CAnimator* _pAni,const wstring& _strAniname)
 
 	CBoxCollider* pCollider = nullptr;
 	//For Setting Collider Information
-	Vector2 vPos = {0};
+	Vector2 vPos;
+	vPos.x = m_pOwner->GetTransform()->GetPosition().x;
+	vPos.y = m_pOwner->GetTransform()->GetPosition().y;
+
 	Vector2 vScale;
 	Vector2 vOffset;
 
@@ -79,6 +120,7 @@ int CSword::CreateCollider(CAnimator* _pAni,const wstring& _strAniname)
 	{	
 		vScale = vecAniFrameInfo[i].vSliceSize;
 		vOffset = vecAniFrameInfo[i].vOffset;
+		
 		pCollider = RTTI_DYNAMIC_CAST(CFactory2::CreateComponent(COMPONENT::COMPONENT_BOXCOLLIDER), CBoxCollider);
 		pCollider->SetInformation(this, vPos, vScale, vOffset);
 		m_vecCollider.push_back(pCollider);

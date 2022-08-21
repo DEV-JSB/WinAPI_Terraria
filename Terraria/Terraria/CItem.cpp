@@ -30,6 +30,7 @@ int CItem::Update()
 
 int CItem::FinalUpdate()
 {
+	CObject::FinalUpdate();
 	if (m_fAccumTime >= m_fCoolTime)
 	{
 		auto iter = m_mapComponent.find(COMPONENT::COMPONENT_ANIMATOR);
@@ -41,6 +42,7 @@ int CItem::FinalUpdate()
 		m_fAccumTime = 0.f;
 		return FINISH;
 	}
+
 	return 0;
 }
 

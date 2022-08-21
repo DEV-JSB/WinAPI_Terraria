@@ -8,9 +8,14 @@ class CAnimator;
 class CSword : public CTool
 {
 public: // Logic
-	virtual int Render(const HDC _dc)	override;
-	virtual int Update()				override;
+	virtual int Render(const HDC _dc)		override;
+	virtual int Update()					override;
+	virtual int SetOwner(CPlayer* _pPlayer)	override;
+	virtual int FinalUpdate() 				override;
+
+
 private:
+	int UpdateTransform();
 	int CreateAnimator();
 	int UpdateCollider();
 	// Use In Animator Create Because Collider Will make through Bit Information

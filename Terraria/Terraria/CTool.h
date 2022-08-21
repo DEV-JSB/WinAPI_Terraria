@@ -6,6 +6,9 @@ class CTool :
 public:
     virtual int Render(const HDC _dc)= 0;
     virtual int Update()                override;
+    virtual int SetOwner(CPlayer* _pPlayer)override = 0;
+    virtual int FinalUpdate()			override    = 0;
+
 private:
     int CreateCollider();
 private:

@@ -7,7 +7,7 @@ class CItem : public CObject
 {
 public: // SetFunction
 	int SetAnimatorFlip(const bool _b);
-	int SetOwner(CPlayer* _pPlayer); 
+	virtual int SetOwner(CPlayer* _pPlayer); 
 	int SetCoolTime(const float _fTime) { m_fCoolTime = _fTime; return 0; }
 public: // GetFunction
 	const wstring GetTextureName()const { return m_strItemTexture; }
