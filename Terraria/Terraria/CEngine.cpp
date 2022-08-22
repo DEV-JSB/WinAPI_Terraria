@@ -117,6 +117,13 @@ int CEngine::Render()
 	return 0;
 }
 
+int CEngine::FinalUpdate()
+{
+	CSceneMgr::GetInstance()->FinalUpdate();
+
+	return 0;
+}
+
 int CEngine::RenderExceptDoubleBuffer()
 {
 	CSceneMgr::GetInstance()->Render(m_dc);

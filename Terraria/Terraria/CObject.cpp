@@ -8,6 +8,7 @@
 
 CObject::CObject(const OBJECT _eTpye)
 	:m_eType(_eTpye)
+	,m_bIsDead(false)
 {
 }
 

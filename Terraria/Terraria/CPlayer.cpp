@@ -24,6 +24,7 @@ CPlayer::CPlayer()
     , m_pEquipItem(nullptr)
     , m_eFocusInventoryIdx(EQUIP_INVENTORY::EQUIP_INVENTORY_END)
     , m_bToolUsingState(false)
+    , m_iHealth(5)
 {
     CreateAnimator();
     CreateCollider();
@@ -72,9 +73,11 @@ int CPlayer::OnCollision(CObject* _pOther)
 
 int CPlayer::OnCollisionEnter(CObject* _pOther)
 {
-
-    if (OBJECT::OBJECT_TILE == _pOther->GetType())
+    if (OBJECT::OBJECT_ZOMBIE == _pOther->GetType())
     {
+        CMover::AddForce(Vector2({ -1000,-10000}));
+        --m_iHealth;
+        printf("데미지 입음 \n");
     }
     return 0;
 }

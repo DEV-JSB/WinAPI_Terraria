@@ -8,6 +8,8 @@
 #include "CInventoryUI.h"
 #include "CItemPocketUI.h"
 #include "CSkin.h"
+#include "CHealthUI.h"
+#include "CHeartUI.h"
 #include "CZombie.h"
 
 CFactory2::CFactory2()
@@ -74,6 +76,17 @@ CUI* CFactory2::CreateUI(const UI_TYPE _eType)
 {
     switch (_eType)
     {
+    case UI_TYPE::UI_HEART:
+        {
+            CHeartUI* pUI = new CHeartUI();
+            return pUI;
+        }
+    case UI_TYPE::UI_HEALTH:
+        {
+            CHealthUI* pUI = new CHealthUI();
+            return pUI;
+        }
+        break;
     case UI_TYPE::UI_PARENT:
         {
             CUI* pUI = new CUI(UI_TYPE::UI_PARENT,false);

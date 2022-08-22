@@ -7,6 +7,8 @@ class CAnimator;
 
 class CPlayer : public CMover
 {
+public:
+	int GetHealth()const { return m_iHealth; }
 public: // Inventory Function
 	int AcquireItem(CItem* _pItem);
 	const vector<CItem*> GetPlayerItem() const { return m_vecInventory; }
@@ -39,7 +41,8 @@ private:
 private:
 	enum class PLAYER_STATE { STATE_IDLE, STATE_LEFTRUN, STATE_RIGHTRUN, STATE_END };
 private: // Member
-
+	// Health
+	int m_iHealth;
 	// Inventory
 	vector<CItem*> m_vecInventory;
 	// EquipWeapon

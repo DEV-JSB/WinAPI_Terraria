@@ -159,6 +159,7 @@
     <ClInclude Include="CFrameMgr.h" />
     <ClInclude Include="CGun.h" />
     <ClInclude Include="CHealthUI.h" />
+    <ClInclude Include="CHeartUI.h" />
     <ClInclude Include="CInputMgr.h" />
     <ClInclude Include="CInventoryUI.h" />
     <ClInclude Include="CItem.h" />
@@ -212,6 +213,7 @@
     <ClCompile Include="CFrameMgr.cpp" />
     <ClCompile Include="CGun.cpp" />
     <ClCompile Include="CHealthUI.cpp" />
+    <ClCompile Include="CHeartUI.cpp" />
     <ClCompile Include="CInputMgr.cpp" />
     <ClCompile Include="CInventoryUI.cpp" />
     <ClCompile Include="CItem.cpp" />

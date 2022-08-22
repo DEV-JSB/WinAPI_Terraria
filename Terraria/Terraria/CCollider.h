@@ -9,6 +9,7 @@ class CCollider :
 public: // Set Function
 	int SetOwner(CObject* _pObj) { m_pOwner = _pObj; return 0; }
 public:// Get Function
+	OBJECT GetOwnerType()const { return m_pOwner->GetType(); }
 	UINT GetID()const { return m_iID; }
 	virtual COLLIDER GetType()const { return m_eType; }
 	Vector2 GetPos()const { return m_vPos; }

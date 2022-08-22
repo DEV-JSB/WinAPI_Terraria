@@ -14,13 +14,11 @@
 
 CZombie::CZombie()
 	:CMover(OBJECT::OBJECT_ZOMBIE, Vector3({}), Vector3({}), Vector2({}))
-	,m_iHealth(10)
+	,m_iHealth(20)
 	,m_bIsOnGround(false)
 {
 	CObject::CreateRigidbody(10.f);
-
 	m_vecMoveDirection = Vector2({ -100.f, 0.f });
-
 }
 
 int CZombie::Setting(const float _x, const float _y)
@@ -70,6 +68,10 @@ int CZombie::OnCollisionEnter(CObject* _pOther)
 		{
 		case ITEM_NAME::ITEM_NAME_MASERSWORD:
 			CMover::AddForce(Vector2({500,-500}));
+			--m_iHealth;
+			printf("ÃÄ¸ÂÀ½\n");
+			if (m_iHealth <= 0)
+				m_bIsDead = true;
 			break;
 
 		}

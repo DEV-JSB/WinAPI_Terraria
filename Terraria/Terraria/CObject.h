@@ -21,6 +21,8 @@ public: // Collision Function
 	// Exit Collision
 	virtual int OnCollisionExit(CObject* _pOther)		{ return 0; };
 public:
+	// Dead Check
+	bool IsDead()const { return m_bIsDead; }
 	// GetCollider
 	CCollider* GetCollider()const;
 	// GetTransform
@@ -51,6 +53,7 @@ protected: // CreateComponent
 	int CreateRigidbody(const float _fMaxSpeed);
 protected:
 	OBJECT m_eType;
+	bool m_bIsDead;
 protected:
 	// Normal Constructor
 	CObject(const OBJECT _eTpye);

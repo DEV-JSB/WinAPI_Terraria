@@ -17,6 +17,7 @@ private:
 	int CreateBackGround();
 	int CreateUI();
 	int CreateObject();
+	int DeadCheck();
 private:
 	HIDE_CONSTRUCTOR(CWorld);
 public:

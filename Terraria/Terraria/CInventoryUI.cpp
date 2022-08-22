@@ -107,8 +107,6 @@ int CInventoryUI::MonitorPlayerInventory()
 
 int CInventoryUI::Setting()
 {
-	CUI::m_eUI_Type = UI_TYPE::UI_INVENTORY;
-
 	int PocketIndex = 0;
 	for (int y = 0; y < INVEN_COLUM ; ++y)
 	{

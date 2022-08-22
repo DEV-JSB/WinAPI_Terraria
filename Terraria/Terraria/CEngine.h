@@ -15,7 +15,9 @@ public: // Get
 private: // Cycle
 	int Update();
 	int Render();
+	int FinalUpdate();
 	int RenderExceptDoubleBuffer();
+
 private:
 	// Main global HWND
 	HWND m_hWnd;

@@ -77,9 +77,17 @@ int CCollisionMgr::CollisionCheck(const OBJECT _eLeft, const OBJECT _eRight)
 				}
 				else
 				{
+					
 					vecLeft[i]->OnCollisionEnter(vecRight[j]);
 					vecRight[j]->OnCollisionEnter(vecLeft[i]);
 					iter->second = true;
+					// Exception Handling
+					if (pLeftCollider->GetOwnerType() == OBJECT::OBJECT_ITEM && pRightCollider->GetOwnerType() == OBJECT::OBJECT_ZOMBIE)
+						iter->second = false;
+					else if (pLeftCollider->GetOwnerType() == OBJECT::OBJECT_ZOMBIE && pRightCollider->GetOwnerType() == OBJECT::OBJECT_ITEM)
+						iter->second = false;
+					/////////////////////
+
 				}
 			}
 			else
@@ -103,6 +111,7 @@ bool CCollisionMgr::IsCollision(CCollider* _left, CCollider* _right)
 	if (COLLIDER::COLLIDER_RECT == _left->GetType()
 		&& COLLIDER::COLLIDER_RECT == _right->GetType())
 	{
+		
 		Vector2 vLeftPos = _left->GetPos();
 		Vector2 vLeftScale = RTTI_DYNAMIC_CAST(_left,CBoxCollider)->GetScale();
 		Vector2 vRightPos = _right->GetPos();
@@ -111,6 +120,8 @@ bool CCollisionMgr::IsCollision(CCollider* _left, CCollider* _right)
 		if ((int)abs(vLeftPos.x - vRightPos.x) < (int)(vLeftScale.x * 0.5f + vRightScale.x * 0.5f)
 			&& (int)abs(vLeftPos.y - vRightPos.y) < (int)(vLeftScale.y * 0.5f + vRightScale.y * 0.5f))
 		{
+			if (_right->GetOwnerType() == OBJECT::OBJECT_ITEM && _left->GetOwnerType() == OBJECT::OBJECT_ZOMBIE)
+				printf("Ãæµ¹!\n");
 			return true;
 		}
 		else

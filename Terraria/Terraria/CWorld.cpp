@@ -12,12 +12,13 @@
 #include "CFactory.h"
 #include "CFactory2.h"
 #include "CInventoryUI.h"
+#include "CHealthUI.h"
 #include "CTileMgr.h"
 #include "CUIManager.h"
 #include "CZombie.h"
 
 
-#define ZOMBIE_COUNT 3
+#define ZOMBIE_COUNT 10
 
 
 CWorld::CWorld()
@@ -26,8 +27,28 @@ CWorld::CWorld()
 }
 
 
+int CWorld::DeadCheck()
+{
+    for (auto iter = m_arrObjectVec[(int)OBJECT::OBJECT_ZOMBIE].begin(); iter != m_arrObjectVec[(int)OBJECT::OBJECT_ZOMBIE].end();)
+    {
+        if ((*iter)->IsDead() == true)
+        {
+            delete (*iter);
+            iter = m_arrObjectVec[(int)OBJECT::OBJECT_ZOMBIE].erase(iter);
+        }
+        else
+        {
+            iter++;
+        }
+    }
+    return 0;
+}
+
 int CWorld::FinalUpdate()
 {
+    DeadCheck();
+
+
     for (int i = 0; i < (int)OBJECT::OBJECT_UI; ++i)
     {
         for (size_t j = 0; j < m_arrObjectVec[i].size(); ++j)
@@ -81,6 +102,7 @@ int CWorld::Enter()
 
     CCollisionMgr::GetInstance()->CheckingGroupBox(OBJECT::OBJECT_ITEM, OBJECT::OBJECT_ZOMBIE);
 
+    CCollisionMgr::GetInstance()->CheckingGroupBox(OBJECT::OBJECT_PLAYER, OBJECT::OBJECT_ZOMBIE);
 
     // Setting Player Item
     SetPlayerItem();
@@ -127,6 +149,7 @@ int CWorld::LoadResource()const
     // UI Texture
     CResourceMgr::GetInstance()->LoadTexture(L"Inventory_Back.bmp", TexPath);
     CResourceMgr::GetInstance()->LoadTexture(L"Inventory_Select.bmp", TexPath);
+    CResourceMgr::GetInstance()->LoadTexture(L"Heart.bmp", TexPath);
 
     // Item Texture
     CResourceMgr::GetInstance()->LoadTexture(L"ItemSword.bmp", TexPath);
@@ -161,6 +184,15 @@ int CWorld::CreateUI()
 
     m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pUI2);
 
+    pUI2 = CFactory2::CreateUI(UI_TYPE::UI_HEALTH);
+    CHealthUI* pHealthUI = RTTI_DYNAMIC_CAST(pUI2, CHealthUI);
+
+    pHealthUI->SetOwner(CScene::GetPlayer());
+
+
+    m_arrObjectVec[(int)OBJECT::OBJECT_UI].push_back(pUI2);
+
+
 
     return 0;
 }
@@ -173,7 +205,7 @@ int CWorld::CreateObject()
     m_arrObjectVec[(int)OBJECT::OBJECT_PLAYER].push_back(pPlayer);
 
     CObject* pZombie;
-    float x = (float)CLIENT_WIDTH * 0.9f;
+    float x = CLIENT_WIDTH + 400;
     float y = (float)CLIENT_HEIGHT * 0.6f;
 
 
@@ -199,6 +231,7 @@ int CWorld::CreateObject()
     
     return 0;
 }
+
 
 int CWorld::Release()
 {
