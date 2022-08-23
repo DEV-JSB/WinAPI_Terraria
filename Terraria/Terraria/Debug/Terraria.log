@@ -1,6 +1,2 @@
-﻿  CFactory2.cpp
-  CHealthUI.cpp
-  CHeartUI.cpp
-  CPlayer.cpp
-  CWorld.cpp
+﻿  CSceneMgr.cpp
   Terraria.vcxproj -> D:\UNITY\JK_MU\WinAPI_Terraria\Terraria\Debug\Terraria.exe
